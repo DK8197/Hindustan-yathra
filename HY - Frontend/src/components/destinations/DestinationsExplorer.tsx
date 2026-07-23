@@ -49,6 +49,7 @@ type Props = {
 
 const INITIAL_COUNT = 8;
 
+
 const categoryIcons: Record<string, any> = {
   honeymoon: Heart,
   adventure: Mountain,
@@ -215,26 +216,32 @@ const [region, setRegion] = useState<
           </button>
 
           <button
-            onClick={() => {setTourType('domestic');setRegion('all');}}
-            className={`rounded-full px-5 py-2 text-sm font-medium transition ${
-              region === 'domestic'
-                ? 'bg-orange-600 text-white'
-                : 'bg-orange-100 text-orange-800 hover:bg-orange-200'
-            }`}
-          >
-            🇮🇳 Domestic
-          </button>
+          onClick={() => {
+            setTourType('domestic');
+            setRegion('all');
+          }}
+          className={`rounded-full px-5 py-2 text-sm font-medium transition ${
+            tourType === 'domestic'
+              ? 'bg-orange-600 text-white'
+              : 'bg-orange-100 text-orange-800 hover:bg-orange-200'
+          }`}
+        >
+          🇮🇳 Domestic
+        </button>
 
-          <button
-            onClick={() => {setTourType('international'); setRegion('all');}}
-            className={`rounded-full px-5 py-2 text-sm font-medium transition ${
-              region === 'international'
-                ? 'bg-orange-600 text-white'
-                : 'bg-orange-100 text-orange-800 hover:bg-orange-200'
-            }`}
-          >
-            🌎 International
-          </button>
+            <button
+              onClick={() => {
+                setTourType('international');
+                setRegion('all');
+              }}
+              className={`rounded-full px-5 py-2 text-sm font-medium transition ${
+                tourType === 'international'
+                  ? 'bg-orange-600 text-white'
+                  : 'bg-orange-100 text-orange-800 hover:bg-orange-200'
+              }`}
+            >
+              🌎 International
+            </button>
         </div>
         {tourType === 'domestic' && (
             <div className="mt-4 flex flex-wrap gap-3">
