@@ -3,6 +3,7 @@ import {
   Plus_Jakarta_Sans,
   Playfair_Display,
 } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
 
 import './globals.css';
 
@@ -95,6 +96,7 @@ export default function RootLayout({
         "
       >
         {children}
+        <Analytics />
       </body>
     </html>
   );
