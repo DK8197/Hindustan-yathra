@@ -1,0 +1,86 @@
+[
+  {
+    "id": "chardham-yatra",
+    "slug": "chardham-yatra",
+    "category": "pilgrimage",
+    "title": { "en": "Chardham Yatra", "kn": "ಚಾರ್‌ಧಾಮ್ ಯಾತ್ರೆ" },
+    "summary": {
+      "en": "A sacred journey to Yamunotri, Gangotri, Kedarnath and Badrinath through the Garhwal Himalayas.",
+      "kn": "ಗಢ್ವಾಲ್ ಹಿಮಾಲಯದ ಮೂಲಕ ಯಮುನೋತ್ರಿ, ಗಂಗೋತ್ರಿ, ಕೇದಾರನಾಥ ಮತ್ತು ಬದರಿನಾಥಕ್ಕೆ ಪವಿತ್ರ ಯಾತ್ರೆ."
+    },
+    "heroImage": "/images/tours/chardham-hero.svg",
+    "gallery": [
+      { "url": "/images/tours/chardham-1.svg", "alt": "Kedarnath temple at dawn", "width": 1600, "height": 1067 },
+      { "url": "/images/tours/chardham-2.svg", "alt": "Mountain road to Badrinath", "width": 1600, "height": 1067 }
+    ],
+    "durationDays": 11,
+    "durationNights": 10,
+    "destinations": ["kedarnath", "badrinath"],
+    "priceFrom": 24999,
+    "currency": "INR",
+    "highlights": {
+      "en": ["All four dhams covered", "Comfortable hill-station stays", "Helicopter option for Kedarnath"],
+      "kn": ["ನಾಲ್ಕೂ ಧಾಮಗಳ ಭೇಟಿ", "ಆರಾಮದಾಯಕ ಬೆಟ್ಟ ವಾಸ", "ಕೇದಾರನಾಥಕ್ಕೆ ಹೆಲಿಕಾಪ್ಟರ್ ಆಯ್ಕೆ"]
+    },
+    "inclusions": { "en": ["Hotel stay", "Breakfast & Dinner", "AC transport"], "kn": ["ಹೋಟೆಲ್ ವಾಸ", "ಬೆಳಗಿನ ಉಪಾಹಾರ ಮತ್ತು ಊಟ", "AC ಸಾರಿಗೆ"] },
+    "exclusions": { "en": ["Airfare", "Personal expenses"], "kn": ["ವಿಮಾನ ದರ", "ವೈಯಕ್ತಿಕ ಖರ್ಚು"] },
+    "itinerary": [
+      { "day": 1, "title": "Arrival at Haridwar", "description": "Pickup and transfer to hotel, evening Ganga Aarti.", "meals": ["Dinner"], "stayLocation": "Haridwar" },
+      { "day": 2, "title": "Haridwar to Barkot", "description": "Drive through the Shivalik range towards Yamunotri base.", "meals": ["Breakfast", "Dinner"], "stayLocation": "Barkot" }
+    ],
+    "faqs": [
+      { "question": "Is the Chardham Yatra suitable for senior citizens?", "answer": "Yes, with our helicopter and palanquin options for Kedarnath, senior citizens complete the yatra comfortably every year." }
+    ],
+    "reviews": [
+      { "id": "r1", "author": "Suresh K.", "rating": 5, "comment": "Extremely well organized, our parents had a smooth darshan.", "date": "2026-05-12" }
+    ],
+    "mapCenter": { "lat": 30.7346, "lng": 79.0669 },
+    "seo": {
+      "title": { "en": "Chardham Yatra Package | Hindustan Yathra", "kn": "ಚಾರ್‌ಧಾಮ್ ಯಾತ್ರೆ ಪ್ಯಾಕೇಜ್ | ಹಿಂದೂಸ್ತಾನ್ ಯಾತ್ರಾ" },
+      "description": { "en": "Book the 11-day Chardham Yatra with Hindustan Yathra — Yamunotri, Gangotri, Kedarnath, Badrinath.", "kn": "ಹಿಂದೂಸ್ತಾನ್ ಯಾತ್ರಾ ಜೊತೆ 11 ದಿನಗಳ ಚಾರ್‌ಧಾಮ್ ಯಾತ್ರೆ ಬುಕ್ ಮಾಡಿ." },
+      "ogImage": "/images/tours/chardham-hero.svg"
+    },
+    "featured": true,
+    "isDomestic": true,
+    "active": true
+  },
+  
+  
+  
+  
+  
+  {
+    "id": "bali-honeymoon-escape",
+    "slug": "bali-honeymoon-escape",
+    "category": "honeymoon",
+    "title": { "en": "Bali Honeymoon Escape", "kn": "ಬಾಲಿ ಹನಿಮೂನ್ ಎಸ್ಕೇಪ್" },
+    "summary": {
+      "en": "6 days of private villas, sunset cruises and temple hopping across Bali for newlyweds.",
+      "kn": "ನವವಿವಾಹಿತರಿಗಾಗಿ ಬಾಲಿಯಾದ್ಯಂತ ಖಾಸಗಿ ವಿಲ್ಲಾ, ಸೂರ್ಯಾಸ್ತ ಪ್ರವಾಸ ಮತ್ತು ದೇವಾಲಯ ಭೇಟಿಯ 6 ದಿನಗಳು."
+    },
+    "heroImage": "/images/tours/bali-hero.svg",
+    "gallery": [{ "url": "/images/tours/bali-1.svg", "alt": "Uluwatu cliff temple at sunset", "width": 1600, "height": 1067 }],
+    "durationDays": 6,
+    "durationNights": 5,
+    "destinations": ["bali"],
+    "priceFrom": 68999,
+    "currency": "INR",
+    "highlights": { "en": ["Private pool villa", "Sunset dinner cruise", "Uluwatu & Tanah Lot temples"], "kn": ["ಖಾಸಗಿ ಪೂಲ್ ವಿಲ್ಲಾ", "ಸೂರ್ಯಾಸ್ತ ಡಿನ್ನರ್ ಕ್ರೂಸ್", "ಉಲುವಾಟು ಮತ್ತು ತನಾ ಲಾಟ್ ದೇವಾಲಯಗಳು"] },
+    "inclusions": { "en": ["Return flights", "Villa stay", "Airport transfers"], "kn": ["ಹಿಂತಿರುಗುವ ವಿಮಾನ", "ವಿಲ್ಲಾ ವಾಸ", "ವಿಮಾನ ನಿಲ್ದಾಣ ವರ್ಗಾವಣೆ"] },
+    "exclusions": { "en": ["Visa fee", "Travel insurance"], "kn": ["ವೀಸಾ ಶುಲ್ಕ", "ಪ್ರಯಾಣ ವಿಮೆ"] },
+    "itinerary": [
+      { "day": 1, "title": "Arrival in Bali", "description": "Private transfer to villa, welcome dinner.", "meals": ["Dinner"], "stayLocation": "Seminyak" }
+    ],
+    "faqs": [{ "question": "Do Indian citizens need a visa for Bali?", "answer": "Indonesia offers visa-on-arrival for Indian passport holders for short stays; we assist with the process." }],
+    "reviews": [{ "id": "r2", "author": "Anitha & Rakesh", "rating": 5, "comment": "Best honeymoon planning we could have asked for.", "date": "2026-04-02" }],
+    "mapCenter": { "lat": -8.4095, "lng": 115.1889 },
+    "seo": {
+      "title": { "en": "Bali Honeymoon Package | Hindustan Yathra", "kn": "ಬಾಲಿ ಹನಿಮೂನ್ ಪ್ಯಾಕೇಜ್ | ಹಿಂದೂಸ್ತಾನ್ ಯಾತ್ರಾ" },
+      "description": { "en": "6-day Bali honeymoon package with private villas and sunset cruises.", "kn": "ಖಾಸಗಿ ವಿಲ್ಲಾ ಮತ್ತು ಸೂರ್ಯಾಸ್ತ ಕ್ರೂಸ್‌ನೊಂದಿಗೆ 6-ದಿನದ ಬಾಲಿ ಹನಿಮೂನ್ ಪ್ಯಾಕೇಜ್." },
+      "ogImage": "/images/tours/bali-hero.svg"
+    },
+    "featured": true,
+    "isDomestic": false,
+    "active": true
+  }
+]

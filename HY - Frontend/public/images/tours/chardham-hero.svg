@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1067" viewBox="0 0 1600 1067">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f4a4d" />
+      <stop offset="50%" stop-color="#3f6f63" />
+      <stop offset="100%" stop-color="#f0b45c" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1067" fill="url(#bg)" />
+  <rect x="80" y="80" width="1440" height="907" rx="30" fill="rgba(255,255,255,0.12)" stroke="rgba(255,255,255,0.3)" stroke-width="3" />
+  <path d="M90 780 C350 640, 500 610, 700 700 C860 780, 1050 820, 1510 650" fill="none" stroke="#f7d8a3" stroke-width="18" stroke-linecap="round" />
+  <path d="M150 840 C360 710, 510 690, 720 780 C910 860, 1110 900, 1450 760" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="8" stroke-linecap="round" />
+  <text x="800" y="420" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="82" font-weight="700">Chardham Yatra</text>
+  <text x="800" y="500" text-anchor="middle" fill="#f8e8c4" font-family="Arial, sans-serif" font-size="34">Sacred routes through the Garhwal Himalayas</text>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1067" viewBox="0 0 1600 1067">
+  <rect width="1600" height="1067" fill="#4f2f4d" />
+  <rect x="90" y="90" width="1420" height="887" rx="28" fill="#6c3f63" />
+  <path d="M200 820 C390 620, 640 560, 820 660 C980 748, 1250 780, 1400 620" fill="none" stroke="#fbd0bb" stroke-width="26" stroke-linecap="round" />
+  <circle cx="556" cy="430" r="120" fill="#ffcf6d" opacity="0.9" />
+  <path d="M350 860 C520 720, 740 720, 930 824 C1060 900, 1240 916, 1420 820" fill="#7cb7a3" />
+  <text x="800" y="240" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="70" font-weight="700">Bali Honeymoon Escape</text>
+</svg>

@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Respect motion preferences — disables scroll-linked 3D camera easing */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  @apply bg-white text-gray-900;
+}
+
+
+
+@keyframes marquee {
+  from {
+    transform: translateX(-100);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
+.instagram-scroll {
+  width: max-content;
+  animation: scrollRight 35s linear infinite;
+}
+
+.youtube-scroll {
+  width: max-content;
+  animation: scrollLeft 50s linear infinite;
+}
+
+@keyframes scrollRight {
+  from {
+    transform: translateX(-50%);
+  }
+
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes scrollLeft {
+  from {
+    transform: translateX(0%);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.instagram-scroll:hover,
+.youtube-scroll:hover {
+  animation-play-state: paused;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&family=Noto+Sans+Kannada:wght@300;400;500;600;700&display=swap');
+
+html {
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.font-display {
+  font-family: 'Playfair Display', serif;
+}
+
+.font-kannada {
+  font-family: 'Noto Sans Kannada', sans-serif;
+}
+
+body {
+  @apply bg-white text-gray-800 antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Playfair Display', serif;
+}
+
+
+.social-marquee {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: social-scroll 45s linear infinite;
+  will-change: transform;
+}
+
+@keyframes social-scroll-left {
+  from {
+    transform: translate3d(
+      0,
+      0,
+      0
+    );
+  }
+
+  to {
+    transform: translate3d(
+      -50%,
+      0,
+      0
+    );
+  }
+}
+
+@keyframes social-scroll {
+  from {
+    transform: translate3d(
+      0,
+      0,
+      0
+    );
+  }
+
+  to {
+    transform: translate3d(
+      -50%,
+      0,
+      0
+    );
+  }
+}
+
+.hero-bg {
+  background-color: #0b1220;
+  background-image: url("https://cdn.instabotai.online/images-confidential/hero-mobile.webp");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (min-width: 768px) {
+  .hero-bg {
+    background-image: url("https://cdn.instabotai.online/images-confidential/hero-desktop.webp");
+  }
+}
+

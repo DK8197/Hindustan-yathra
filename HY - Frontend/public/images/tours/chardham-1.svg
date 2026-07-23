@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1067" viewBox="0 0 1600 1067">
+  <rect width="1600" height="1067" fill="#1d4f4f" />
+  <rect x="90" y="90" width="1420" height="887" rx="28" fill="#2b6558" />
+  <path d="M180 850 L620 420 L860 620 L1290 320 L1440 480 L1440 880 L180 880 Z" fill="#5a8f6d" />
+  <path d="M220 860 L620 470 L840 650 L1210 390 L1360 520 L1360 880 L220 880 Z" fill="#89b57f" opacity="0.7" />
+  <rect x="340" y="260" width="250" height="220" rx="18" fill="#f5d3a0" />
+  <rect x="360" y="290" width="208" height="160" rx="12" fill="#ffffff" opacity="0.7" />
+  <text x="800" y="220" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="58" font-weight="700">Kedarnath at Dawn</text>
+</svg>

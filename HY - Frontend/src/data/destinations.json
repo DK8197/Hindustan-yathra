@@ -1,0 +1,22 @@
+[
+  { "slug": "chardham", "name": { "en": "Chardham", "kn": "ಚಾರ್‌ಧಾಮ್" }, "isDomestic": true, "region": "Uttarakhand" },
+  { "slug": "kedarnath", "name": { "en": "Kedarnath", "kn": "ಕೇದಾರನಾಥ" }, "isDomestic": true, "region": "Uttarakhand" },
+  { "slug": "badrinath", "name": { "en": "Badrinath", "kn": "ಬದರಿನಾಥ" }, "isDomestic": true, "region": "Uttarakhand" },
+  { "slug": "kashmir", "name": { "en": "Kashmir", "kn": "ಕಾಶ್ಮೀರ" }, "isDomestic": true, "region": "Jammu & Kashmir" },
+  { "slug": "leh-ladakh", "name": { "en": "Leh Ladakh", "kn": "ಲೇಹ್ ಲಡಾಖ್" }, "isDomestic": true, "region": "Ladakh" },
+  { "slug": "kerala", "name": { "en": "Kerala", "kn": "ಕೇರಳ" }, "isDomestic": true, "region": "Kerala" },
+  { "slug": "andaman", "name": { "en": "Andaman", "kn": "ಅಂಡಮಾನ್" }, "isDomestic": true, "region": "Andaman & Nicobar" },
+  { "slug": "assam-meghalaya", "name": { "en": "Assam & Meghalaya", "kn": "ಅಸ್ಸಾಂ ಮತ್ತು ಮೇಘಾಲಯ" }, "isDomestic": true, "region": "Northeast India" },
+  { "slug": "rajasthan", "name": { "en": "Rajasthan", "kn": "ರಾಜಸ್ಥಾನ" }, "isDomestic": true, "region": "Rajasthan" },
+  { "slug": "gujarat", "name": { "en": "Gujarat", "kn": "ಗುಜರಾತ್" }, "isDomestic": true, "region": "Gujarat" },
+  { "slug": "himachal", "name": { "en": "Himachal Pradesh", "kn": "ಹಿಮಾಚಲ ಪ್ರದೇಶ" }, "isDomestic": true, "region": "Himachal Pradesh" },
+  { "slug": "bali", "name": { "en": "Bali", "kn": "ಬಾಲಿ" }, "isDomestic": false, "region": "Indonesia" },
+  { "slug": "dubai", "name": { "en": "Dubai", "kn": "ದುಬೈ" }, "isDomestic": false, "region": "UAE" },
+  { "slug": "thailand", "name": { "en": "Thailand", "kn": "ಥೈಲ್ಯಾಂಡ್" }, "isDomestic": false, "region": "Thailand" },
+  { "slug": "nepal", "name": { "en": "Nepal", "kn": "ನೇಪಾಳ" }, "isDomestic": false, "region": "Nepal" },
+  { "slug": "bhutan", "name": { "en": "Bhutan", "kn": "ಭೂತಾನ್" }, "isDomestic": false, "region": "Bhutan" },
+  { "slug": "maldives", "name": { "en": "Maldives", "kn": "ಮಾಲ್ದೀವ್ಸ್" }, "isDomestic": false, "region": "Maldives" },
+  { "slug": "sri-lanka", "name": { "en": "Sri Lanka", "kn": "ಶ್ರೀಲಂಕಾ" }, "isDomestic": false, "region": "Sri Lanka" },
+  { "slug": "singapore", "name": { "en": "Singapore", "kn": "ಸಿಂಗಾಪುರ" }, "isDomestic": false, "region": "Singapore" },
+  { "slug": "malaysia", "name": { "en": "Malaysia", "kn": "ಮಲೇಷ್ಯಾ" }, "isDomestic": false, "region": "Malaysia" }
+]
