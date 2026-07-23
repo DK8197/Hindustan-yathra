@@ -68,14 +68,21 @@ function Earth({
     useTexture([
       EARTH_DAY_TEXTURE_URL,
       EARTH_CLOUDS_TEXTURE_URL,
-    ]);
+    ]) as [
+      THREE.Texture,
+      THREE.Texture
+    ];
 
   useEffect(() => {
-    earthMap.colorSpace =
-      THREE.SRGBColorSpace;
+    if (earthMap) {
+      earthMap.colorSpace =
+        THREE.SRGBColorSpace;
+    }
 
-   cloudMap.colorSpace =
-      THREE.SRGBColorSpace;
+    if (cloudMap) {
+      cloudMap.colorSpace =
+        THREE.SRGBColorSpace;
+    }
   }, [earthMap, cloudMap]);
 
   const earthMaterial =
