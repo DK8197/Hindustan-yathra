@@ -19,7 +19,7 @@ export default function middleware(request: NextRequest) {
     const token =
       request.cookies.get('access_token_cookie')?.value ||
       request.cookies.get('admin_token')?.value;
-      console.log(token)
+      // console.log(token)
 
     if (!token) {
       return NextResponse.redirect(

@@ -31,12 +31,18 @@ export async function generateMetadata({
 
 async function getTours() {
   try {
-    const res = await fetch(
-      `${API_URL}/api/v1/tours?limit=100`,
-      {
-        cache: 'no-store',
-      }
-    );
+          const res = await fetch(
+          `${API_URL}/api/v1/tours?limit=100`,
+          {
+            cache: 'force-cache',
+            next: {
+              revalidate: 86400,
+            },
+          headers: {
+          'X-App-Key': process.env.API_SECRET!,
+            },
+          }
+        );
 
     if (!res.ok) {
       return [];

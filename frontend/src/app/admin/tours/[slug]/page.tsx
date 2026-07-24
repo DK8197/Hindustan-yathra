@@ -19,6 +19,9 @@ export default async function TourEditPage({
     `${API_URL}/api/v1/admin/tours/${slug}`,
     {
       cache: 'no-store',
+      headers: {
+          'X-App-Key': process.env.API_SECRET!,
+            },
     }
   );
 

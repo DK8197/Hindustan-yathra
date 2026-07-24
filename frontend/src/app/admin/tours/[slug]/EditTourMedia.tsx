@@ -150,6 +150,7 @@ export default function EditTourMedia({
             headers: {
               'Content-Type':
                 'application/json',
+                'X-App-Key': process.env.API_SECRET!,
             },
             body: JSON.stringify({
               path: image.path,
@@ -236,10 +237,10 @@ export default function EditTourMedia({
         'Itinerary uploaded successfully'
       );
 
-      console.log(
-        'Itinerary URL:',
-        data.url
-      );
+      // console.log(
+      //   'Itinerary URL:',
+      //   data.url
+      // );
     } catch (error) {
       console.error(error);
 

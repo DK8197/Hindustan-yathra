@@ -15,6 +15,8 @@ import { Footer } from '@/components/ui/Footer';
 export const dynamic = 'force-static';
 export const revalidate = 86400;
 
+
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({
     locale,

@@ -31,6 +31,7 @@ export async function POST(req: NextRequest) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'X-App-Key': process.env.API_SECRET!,
       },
       body: JSON.stringify(parsed.data),
     });

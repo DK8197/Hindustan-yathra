@@ -33,7 +33,17 @@ export default function AdminSocialMediaPage() {
       setLoading(true);
 
       const response = await fetch(
-        `${API_URL}/api/v1/social/admin/`
+        `${API_URL}/api/v1/social/admin/`,
+        {
+          cache: 'force-cache',
+          next: {
+            revalidate: 86400,
+          },
+          headers: {
+            'X-App-Key': process.env.API_SECRET!,
+          },
+        }
+        
       );
 
       const data = await response.json();
@@ -69,6 +79,7 @@ export default function AdminSocialMediaPage() {
         {
           method: 'POST',
           headers: {
+            'X-App-Key': process.env.API_SECRET!,
             'Content-Type':
               'application/json',
           },
@@ -100,9 +111,11 @@ export default function AdminSocialMediaPage() {
       `${API_URL}/api/v1/social/admin/${id}`,
       {
         method: 'DELETE',
+        headers: {
+          'X-App-Key': process.env.API_SECRET!,
+        },
       }
     );
-
     fetchLinks();
   }
 
@@ -117,6 +130,7 @@ export default function AdminSocialMediaPage() {
         headers: {
           'Content-Type':
             'application/json',
+          'X-App-Key': process.env.API_SECRET!,
         },
         body: JSON.stringify({
           active: !active,

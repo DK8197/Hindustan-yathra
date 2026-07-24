@@ -1,7 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { getAllTourSlugs } from '@/lib/tours-repository';
 import { routing } from '@/i18n/routing';
-import destinations from '@/data/destinations.json';
 
 const BASE_URL = 'https://hindustanyatra.com';
 
@@ -9,7 +8,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const slugs = await getAllTourSlugs();
   const entries: MetadataRoute.Sitemap = [];
 
-  const staticPaths = ['', '/destinations', '/gallery', '/contact'];
+  const staticPaths = ['', '/destinations', '/gallery', '/contact','/about'];
 
   for (const locale of routing.locales) {
     for (const path of staticPaths) {
@@ -37,9 +36,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  // Destinations JSON currently has no dedicated detail route in this scaffold;
-  // once /destinations/[slug] exists, mirror the tour loop above for it.
-  void destinations;
 
   return entries;
 }

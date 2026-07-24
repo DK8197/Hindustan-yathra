@@ -14,15 +14,15 @@ export function LanguageSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
   const params = useParams();
-console.log({
-  locale,
-  pathname,
-  params,
-  href:
-    typeof window !== 'undefined'
-      ? window.location.pathname
-      : 'server',
-});
+// console.log({
+//   locale,
+//   pathname,
+//   params,
+//   href:
+//     typeof window !== 'undefined'
+//       ? window.location.pathname
+//       : 'server',
+// });
   const switchLocale = (newLocale: 'en' | 'kn') => {
     if (newLocale === locale) return;
 

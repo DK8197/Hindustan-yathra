@@ -11,12 +11,23 @@
     "gallery": "Gallery",
     "contact": "Contact",
     "login": "Login",
-    "dashboard": "Dashboard"
+    "dashboard": "Dashboard",
+    "about": "About"
   },
   "hero": {
     "headline": "India, the way it was meant to be seen.",
-    "subheadline": "Hyper-real journeys across the Himalayas, the coasts and beyond — curated by Hindustan Yatra.",
+    "subheadline": "Trusted travel company in Hubballi, Karnataka, offering expertly curated pilgrimage, holiday, honeymoon, family, and customized tour packages across India.",
     "cta_explore": "Explore Tours",
+    "cta_customize": "Build My Trip",
+    "scroll_hint": "Scroll to fly over"
+  },
+    "about": {
+    "hero-title": "About Hindustan Yatra - Hubballi's best Travel partner",
+    "hero-subheadline": "Creating memorable journeys across India with trusted travel\nexperiences, personalized itineraries and exceptional customer\nservice.",
+    "hero-cta": "Explore Tours",
+    "story": "Hindustan Yatra is a trusted Travel Agency in Hubballi, Karnataka, offering reliable and customized domestic and international tour packages for families, couples, solo travelers, and corporate clients. We specialize in holiday packages, flight ticket booking, hotel reservations, passport and visa assistance, honeymoon packages, pilgrimage tours, group tours, and personalized travel planning to suit every budget. As a leading Tour Operator in Hubli, our mission is to make every journey seamless, affordable, and memorable through exceptional customer service and carefully planned itineraries. Whether you want to explore the beaches of Goa, the beauty of Kashmir, the heritage of Rajasthan, or international destinations, we ensure a hassle-free travel experience from start to finish. Our experienced travel experts provide transparent pricing, dependable support, and end-to-end travel solutions, helping you travel with confidence. At Hindustan Yatra, we believe every trip should create lasting memories, and we are committed to delivering quality, comfort, and value in every journey. If you're searching for the best travel agency in Hubli for tour packages, visa services, or complete travel management, Hindustan Yatra is your trusted partner for unforgettable travel experiences.",
+    "mission": "At Hindustan Yatra, our mission is to make travel simple, affordable, and unforgettable by providing personalized tour packages, transparent pricing, expert guidance, and end-to-end travel solutions with unwavering commitment to quality, safety, and customer satisfaction.",
+    "vision": "To become Karnataka's most trusted travel partner by creating inspiring, seamless, and memorable journeys that connect people with destinations, cultures, and experiences across the world.",
     "cta_customize": "Build My Trip",
     "scroll_hint": "Scroll to fly over the mountains"
   },
@@ -59,13 +70,6 @@
     "honeymoon": "Honeymoon Tours",
     "international": "International Tours"
   },
-  "auth": {
-    "enter_mobile": "Enter your mobile number",
-    "mobile_placeholder": "10-digit mobile number",
-    "enter_password": "Enter your password",
-    "password_placeholder": "Password",
-    "login": "Login"
-  },
   "dashboard": {
     "my_bookings": "My Bookings",
     "saved_tours": "Saved Tours",
@@ -87,7 +91,7 @@
     "address": "#123, 3rd Floor,Satellite complex, Koppikar Road \n Hubballi, Karnataka, India"
   },
   "footer": {
-    "about": "At Hindustan Yatra, we are committed to creating memorable travel experiences through carefully planned pilgrimage, cultural, leisure, and customized tour packages. Our experienced travel professionals ensure every journey is comfortable, safe, and enriching with quality accommodations, air-conditioned transportation, professional guidance, and excellent customer service. We also provide authentic South Indian cuisine, with Jain and Brahmin meal options available on request. Along with scheduled group tours, we offer tailor-made domestic and international travel packages to suit individual needs. Our mission is to provide complete travel solutions, while our vision is to make world-class travel experiences accessible to every traveler.",
+    "about": "Hindustan Yatra is a trusted travel company based in Hubballi, Karnataka, offering pilgrimage, cultural, leisure, and customized tour packages across India and international destinations. We deliver safe, comfortable, and memorable travel experiences with premium accommodations, expert guidance, quality transportation, and personalized customer service.",
     "quick_links": "Quick Links",
     "tour_categories": "Tour Categories",
     "contact_us": "Contact Us",

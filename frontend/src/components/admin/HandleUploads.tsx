@@ -32,6 +32,9 @@ export default function AddTourButton() {
         {
           method: 'POST',
           body: formData,
+          headers: {
+          'X-App-Key': process.env.API_SECRET!,
+            },
         }
       );
 

@@ -40,6 +40,10 @@ export function Navbar() {
       href: '/contact',
       label: t('contact'),
     },
+    {
+      href: '/about',
+      label: t('about'),
+    },
   ] as const;
 
   useEffect(() => {

@@ -6,11 +6,16 @@ const API_URL =
 export async function getSocialLinks() {
   try {
     const response = await fetch(
-      `${API_URL}/api/v1/social/links`,
-      {
-        cache: 'no-store',
-      }
-    );
+  `${API_URL}/api/v1/social/links`,
+  {
+    headers: {
+      "X-App-Key": process.env.API_SECRET!,
+    },
+    next: {
+      revalidate: 60 * 60 * 24 * 30, // 30 days
+    },
+  }
+);
 
     if (!response.ok) {
       throw new Error(

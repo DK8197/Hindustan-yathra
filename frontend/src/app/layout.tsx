@@ -22,19 +22,34 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL(
-    'https://hindustanyathra.com'
+    'https://hindustanyatra.com'
   ),
 
   title: {
     default:
-      'Hindustan Yathra | Travel with New Experience',
+      "Hindustan Yatra | Best Travel Agency in Hubballi | Domestic & International Tours",
     template:
-      '%s | Hindustan Yathra',
+      '%s | Hindustan Yatra',
   },
 
   description:
-    'Discover curated travel experiences across India and international destinations with Hindustan Yatra.',
+    "Hindustan Yatra is a trusted travel agency in Hubballi offering pilgrimage tours, customized holidays, family vacations, honeymoon packages, visa assistance, and international tour packages.",
 
+  keywords: [
+  "Travel Agency Hubballi",
+  "Travel Agency Hubli",
+  "Hindustan Yatra",
+  "Hindusthan Yathra",
+  "Hindustan Yathra",
+  "Pilgrimage Tours",
+  "Chardham Yatra",
+  "Kashi Tour",
+  "Nepal Tour",
+  "Bhutan Tour",
+  "Sri Lanka Ramayana Tour",
+  "Family Tour Packages",
+  "International Tours",
+],
   openGraph: {
     title: 'Hindustan Yatra',
     description:
@@ -42,15 +57,40 @@ export const metadata: Metadata = {
     url: 'https://hindustanyatra.com',
     siteName: 'Hindustan Yatra',
     type: 'website',
+    images: [
+    {
+      url: "/textures/hindustan-yatra-image.png",
+      width: 1200,
+      height: 630,
+      alt: "Hindustan Yatra",
+    },
+  ],
   },
 
   twitter: {
-    card: 'summary_large_image',
-  },
+  card: "summary_large_image",
+  title: "Hindustan Yatra",
+  description:
+    "Trusted Travel Agency in Hubballi for Domestic & International Tours.",
+  images: ["/textures/hindustan-yatra-image.png"],
+    },
 
+    authors: [
+  {
+    name: "Hindustan Yatra",
+    url: "https://hindustanyatra.com",
+  },
+],
   robots: {
     index: true,
     follow: true,
+  },
+  icons: {
+  icon: "/textures/favicon.ico",
+  apple: "/textures/apple-touch-icon.png",
+},
+  other: {
+    'theme-color': '#0b1220',
   },
 };
 
@@ -69,19 +109,19 @@ export default function RootLayout({
         {/* Hero CDN warmup */}
         <link
           rel="preconnect"
-          href="https://cdn.instabotai.online"
+          href="https://cdn.hindustanyatra.com"
         />
 
         <link
           rel="dns-prefetch"
-          href="//cdn.instabotai.online"
+          href="//cdn.hindustanyatra.com"
         />
 
         {/* Desktop hero preload */}
         <link
           rel="preload"
           as="image"
-          href="https://cdn.instabotai.online/images-confidential/hero-desktop.webp"
+          href="https://cdn.hindustanyatra.com/images-confidential/hero-desktop.webp"
         />
       </head>
 

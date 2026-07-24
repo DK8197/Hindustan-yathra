@@ -15,6 +15,9 @@ export async function searchTours(
   const response = await fetch(
     `${API_URL}/api/v1/search?q=${encodeURIComponent(query)}`,
     {
+      headers: {
+        'X-App-Key': process.env.API_SECRET!,
+        },
       cache: "no-store"
     }
   );

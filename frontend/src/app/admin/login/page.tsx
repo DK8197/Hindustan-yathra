@@ -31,6 +31,7 @@ export default function AdminLoginPage() {
           headers: {
             'Content-Type':
               'application/json',
+              'X-App-Key': process.env.API_SECRET!,
           },
           body: JSON.stringify({
             mobile,

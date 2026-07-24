@@ -21,6 +21,9 @@ async function getLeads(): Promise<Lead[]> {
     `${API_URL}/api/v1/admin/leads`,
     {
       cache: 'no-store',
+      headers: {
+          'X-App-Key': process.env.API_SECRET!,
+      },
     }
   );
 

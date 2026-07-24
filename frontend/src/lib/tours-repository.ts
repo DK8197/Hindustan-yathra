@@ -18,7 +18,10 @@ export async function getAllTours(): Promise<Tour[]> {
   const response = await fetch(
     `${API_URL}/api/v1/tours`,
     {
-      next: { revalidate: 3600 }
+      next: { revalidate: 3600 },
+      headers: {
+        'X-App-Key': process.env.API_SECRET!,
+      },
     }
   );
 
@@ -29,6 +32,9 @@ export async function getAllToursAdmin() {
   const response = await fetch(
     `${API_URL}/api/v1/admin/tours`,
     {
+      headers: {
+        'X-App-Key': process.env.API_SECRET!,
+        },
       cache: 'no-store',
     }
   );
@@ -44,6 +50,9 @@ export async function getFeaturedTours(): Promise<Tour[]> {
   const response = await fetch(
     `${API_URL}/api/v1/tours/featured`,
     {
+       headers: {
+          'X-App-Key': process.env.API_SECRET!,
+        },
       next: { revalidate: 3600 }
     }
   );
@@ -61,6 +70,9 @@ export async function getToursByCategory(
   const response = await fetch(
     `${API_URL}/api/v1/tours/category/${category}`,
     {
+      headers: {
+          'X-App-Key': process.env.API_SECRET!,
+        },
       next: { revalidate: 3600 }
     }
   );
@@ -79,7 +91,10 @@ export async function getTourBySlug(
   const response = await fetch(
     `${API_URL}/api/v1/details/${slug}`,
     {
-      next: { revalidate: 3600 }
+      next: { revalidate: 3600 },
+      headers: {
+          'X-App-Key': process.env.API_SECRET!,
+        },
     }
   );
 
@@ -94,6 +109,9 @@ export async function getAllTours_details(): Promise<Tour[]> {
   const response = await fetch(
     `${API_URL}/api/v1/details`,
     {
+      headers: {
+          'X-App-Key': process.env.API_SECRET!,
+        },
       next: { revalidate: 3600 }
     }
   );

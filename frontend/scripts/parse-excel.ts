@@ -127,7 +127,7 @@ function main() {
   const tours = buildTours();
   fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
   fs.writeFileSync(OUTPUT_PATH, JSON.stringify(tours, null, 2));
-  console.log(`✅ Parsed ${tours.length} tours -> ${OUTPUT_PATH}`);
+  // console.log(`✅ Parsed ${tours.length} tours -> ${OUTPUT_PATH}`);
 }
 
 main();

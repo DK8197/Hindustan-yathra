@@ -34,6 +34,7 @@ export default function TourStatusButton({
                 method: 'PATCH',
                 headers: {
                   'Content-Type': 'application/json',
+                  'X-App-Key': process.env.API_SECRET!,
                 },
                 body: JSON.stringify({
                   tourId,
@@ -77,6 +78,9 @@ export default function TourStatusButton({
             {
               method: 'POST',
               body: formData,
+                        headers: {
+                  'X-App-Key': process.env.API_SECRET!,
+            },
             }
           );
 
@@ -90,6 +94,7 @@ export default function TourStatusButton({
               method: 'PATCH',
               headers: {
                 'Content-Type': 'application/json',
+                'X-App-Key': process.env.API_SECRET!,
               },
               body: JSON.stringify({
                 tourId,

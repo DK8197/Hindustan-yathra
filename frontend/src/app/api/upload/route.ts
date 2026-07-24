@@ -57,10 +57,10 @@ export async function POST(
 
     const key = `tours/${slug}/${fileName}`;
 
-    console.log(
-      'Uploading to:',
-      key
-    );
+    // console.log(
+    //   'Uploading to:',
+    //   key
+    // );
 
     await s3.send(
       new PutObjectCommand({
