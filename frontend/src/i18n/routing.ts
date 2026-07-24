@@ -15,6 +15,7 @@ export const routing = defineRouting({
     '/gallery': { en: '/gallery', kn: '/ಗ್ಯಾಲರಿ' },
     '/contact': { en: '/contact', kn: '/ಸಂಪರ್ಕ' },
     '/login': { en: '/login', kn: '/ಲಾಗಿನ್' },
+    '/about': { en: '/about', kn: '/ನಮ್ಮ-ಬಗ್ಗೆ' },
     '/dashboard': { en: '/dashboard', kn: '/ಡ್ಯಾಶ್‌ಬೋರ್ಡ್' },
     '/dashboard/bookings': { en: '/dashboard/bookings', kn: '/ಡ್ಯಾಶ್‌ಬೋರ್ಡ್/ಬುಕಿಂಗ್‌ಗಳು' },
     '/dashboard/saved': { en: '/dashboard/saved', kn: '/ಡ್ಯಾಶ್‌ಬೋರ್ಡ್/ಉಳಿಸಿದವು' },
