@@ -11,86 +11,77 @@ export default function AdminLoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const API_URL =
-    process.env.NEXT_PUBLIC_API_URL ??
-    'http://localhost:5000';
+ const handleLogin = async (
+  e: FormEvent<HTMLFormElement>
+) => {
+  e.preventDefault();
 
-  const handleLogin = async (
-    e: FormEvent<HTMLFormElement>
-  ) => {
-    e.preventDefault();
+  setLoading(true);
+  setError("");
 
-    setLoading(true);
-    setError('');
-
-    try {
-      const response = await fetch(
-        `${API_URL}/api/v1/adminauth/login`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type':
-              'application/json',
-              'X-App-Key': process.env.API_SECRET!,
-          },
-          body: JSON.stringify({
-            mobile,
-            password,
-          }),
-        }
-      );
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(
-          data?.message ||
-            'Invalid mobile number or password'
-        );
+  try {
+    const response = await fetch(
+      "/api/admin/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          mobile,
+          password,
+        }),
       }
+    );
 
-      if (!data?.access_token) {
-        throw new Error(
-          'Access token not received'
-        );
-      }
+    const data = await response.json();
 
-      const cookieResponse = await fetch(
-        '/api/admin/session',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type':
-              'application/json',
-          },
-          body: JSON.stringify({
-            accessToken:
-              data.access_token,
-            refreshToken:
-              data.refresh_token,
-            user: data.user,
-          }),
-        }
+    if (!response.ok) {
+      throw new Error(
+        data?.message ??
+          "Invalid mobile number or password"
       );
-
-      if (!cookieResponse.ok) {
-        throw new Error(
-          'Failed to create session'
-        );
-      }
-
-      router.replace('/admin');
-      router.refresh();
-    } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : 'Login failed'
-      );
-    } finally {
-      setLoading(false);
     }
-  };
+
+    if (!data?.access_token) {
+      throw new Error(
+        "Access token not received"
+      );
+    }
+
+    const cookieResponse = await fetch(
+      "/api/admin/session",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          accessToken: data.access_token,
+          refreshToken: data.refresh_token,
+          user: data.user,
+        }),
+      }
+    );
+
+    if (!cookieResponse.ok) {
+      throw new Error(
+        "Failed to create session"
+      );
+    }
+
+    router.replace("/admin");
+    router.refresh();
+  } catch (err) {
+    setError(
+      err instanceof Error
+        ? err.message
+        : "Login failed"
+    );
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4">

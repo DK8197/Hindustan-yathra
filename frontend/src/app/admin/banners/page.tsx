@@ -3,10 +3,6 @@
 import { useEffect, useState } from 'react';
 import { Trash2 } from 'lucide-react';
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  'http://localhost:5000';
-
 interface SocialLink {
   id: number;
   platform: string;
@@ -33,21 +29,19 @@ export default function AdminSocialMediaPage() {
       setLoading(true);
 
       const response = await fetch(
-        `${API_URL}/api/v1/social/admin/`,
+        '/api/admin/social',
         {
-          cache: 'force-cache',
-          next: {
-            revalidate: 86400,
-          },
-          headers: {
-            'X-App-Key': process.env.API_SECRET!,
-          },
+          cache: 'no-store',
         }
-        
       );
 
-      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(
+          'Failed to fetch videos'
+        );
+      }
 
+      const data = await response.json();
       setLinks(data);
     } catch (error) {
       console.error(error);
@@ -74,12 +68,11 @@ export default function AdminSocialMediaPage() {
     }
 
     try {
-      await fetch(
-        `${API_URL}/api/v1/social/admin/`,
+      const response = await fetch(
+        '/api/admin/social',
         {
           method: 'POST',
           headers: {
-            'X-App-Key': process.env.API_SECRET!,
             'Content-Type':
               'application/json',
           },
@@ -93,6 +86,12 @@ export default function AdminSocialMediaPage() {
         }
       );
 
+      if (!response.ok) {
+        throw new Error(
+          'Failed to add video'
+        );
+      }
+
       setUrl('');
       setThumbnail('');
       setDisplayOrder(1);
@@ -103,42 +102,61 @@ export default function AdminSocialMediaPage() {
     }
   }
 
-  async function handleDelete(id: number) {
+  async function handleDelete(
+    id: number
+  ) {
     if (!confirm('Delete this link?'))
       return;
 
-    await fetch(
-      `${API_URL}/api/v1/social/admin/${id}`,
-      {
-        method: 'DELETE',
-        headers: {
-          'X-App-Key': process.env.API_SECRET!,
-        },
+    try {
+      const response = await fetch(
+        `/api/admin/social/${id}`,
+        {
+          method: 'DELETE',
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(
+          'Failed to delete video'
+        );
       }
-    );
-    fetchLinks();
+
+      fetchLinks();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async function toggleActive(
     id: number,
     active: boolean
   ) {
-    await fetch(
-      `${API_URL}/api/v1/social/admin/${id}`,
-      {
-        method: 'PUT',
-        headers: {
-          'Content-Type':
-            'application/json',
-          'X-App-Key': process.env.API_SECRET!,
-        },
-        body: JSON.stringify({
-          active: !active,
-        }),
-      }
-    );
+    try {
+      const response = await fetch(
+        `/api/admin/social/${id}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type':
+              'application/json',
+          },
+          body: JSON.stringify({
+            active: !active,
+          }),
+        }
+      );
 
-    fetchLinks();
+      if (!response.ok) {
+        throw new Error(
+          'Failed to update'
+        );
+      }
+
+      fetchLinks();
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -154,7 +172,7 @@ export default function AdminSocialMediaPage() {
         </p>
       </div>
 
-      <div className="rounded-lg border bg-white p-5 space-y-5">
+      <div className="space-y-5 rounded-lg border bg-white p-5">
         <h2 className="font-medium">
           Add New Video
         </h2>
@@ -170,7 +188,6 @@ export default function AdminSocialMediaPage() {
             <option value="youtube">
               YouTube
             </option>
-
             <option value="instagram">
               Instagram
             </option>
@@ -192,7 +209,9 @@ export default function AdminSocialMediaPage() {
           <input
             value={thumbnail}
             onChange={(e) =>
-              setThumbnail(e.target.value)
+              setThumbnail(
+                e.target.value
+              )
             }
             placeholder="Thumbnail CDN URL"
             className="rounded border px-3 py-2"
@@ -222,7 +241,7 @@ export default function AdminSocialMediaPage() {
             <img
               src={thumbnail}
               alt="Preview"
-              className="mt-4 h-40 rounded-lg object-cover border"
+              className="mt-4 h-40 rounded-lg border object-cover"
             />
           )}
         </div>
@@ -242,23 +261,18 @@ export default function AdminSocialMediaPage() {
               <th className="p-3">
                 Platform
               </th>
-
               <th className="p-3">
                 Thumbnail
               </th>
-
               <th className="p-3">
                 URL
               </th>
-
               <th className="p-3">
                 Order
               </th>
-
               <th className="p-3">
                 Active
               </th>
-
               <th className="p-3">
                 Actions
               </th>
@@ -314,7 +328,9 @@ export default function AdminSocialMediaPage() {
                 <td className="p-3">
                   <button
                     onClick={() =>
-                      handleDelete(link.id)
+                      handleDelete(
+                        link.id
+                      )
                     }
                     className="text-red-600 hover:text-red-700"
                   >

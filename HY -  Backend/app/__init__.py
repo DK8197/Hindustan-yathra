@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask,request,abort
 from flask_cors import CORS
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -49,7 +49,27 @@ def create_app():
         JSON_SORT_KEYS=False,
     )
 
-    CORS(app, resources={r"/api/*": {"origins": "*"}})
+    SECRET=os.environ.get('API_SECRET')
+    
+    @app.before_request
+    def verify_app():
+        print(
+        request.method,
+        request.path,
+        request.headers.get("X-App-Key")
+        )
+
+        if request.method == "OPTIONS":
+            return "",204
+
+
+        if request.headers.get("X-App-Key") != SECRET:
+            abort(403)
+
+    CORS(app,resources={r"/api/*": {"origins": ['*'],"allow_headers": ["Content-Type","Authorization","X-App-Key",],}},)
+
+    # CORS(app, resources={r"/api/*": {"origins": "*"}})
+    # CORS(app,resources={r"/api/*": {"origins": ["https://hindustanyatra.com","https://www.hindustanyatra.com","https://hindustan-yathra.vercel.app","http://localhost:3000",],"allow_headers": ["Content-Type","Authorization","X-App-Key",],}},)
     db.init_app(app)
     migrate.init_app(app, db)
     limiter.init_app(app)
@@ -61,7 +81,7 @@ def create_app():
 
     with app.app_context():
         db.create_all()
-
+    
 
     app.config["JWT_TOKEN_LOCATION"] = ["cookies"]
     app.config["JWT_COOKIE_SECURE"] = False

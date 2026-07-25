@@ -82,3 +82,28 @@ def delete_link(link_id):
     db.session.commit()
 
     return jsonify({"message": "Deleted"})
+
+@social_bp.put("/admin/<int:link_id>")
+def update_link(link_id):
+    link = SocialMediaLink.query.get_or_404(link_id)
+
+    data = request.get_json()
+
+    if "active" in data:
+        link.active = data["active"]
+
+    if "display_order" in data:
+        link.display_order = data["display_order"]
+
+    if "thumbnail" in data:
+        link.thumbnail = data["thumbnail"]
+
+    if "url" in data:
+        link.url = data["url"]
+
+    if "platform" in data:
+        link.platform = data["platform"]
+
+    db.session.commit()
+
+    return jsonify(link.to_dict())

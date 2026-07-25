@@ -1,24 +1,31 @@
 import { NextResponse } from 'next/server';
 
 const API_URL =
-  process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+  process.env.NEXT_PUBLIC_API_URL! || "http://localhost:5000";
 
-export async function POST(
-  request: Request
+export async function PATCH(
+  request: Request,
+  {
+    params,
+  }: {
+    params: Promise<{ slug: string }>;
+  }
 ) {
-  try {
-    const formData =
-      await request.formData();
+  const { slug } = await params;
+  const body = await request.json();
 
+  try {
     const response = await fetch(
-      `${API_URL}/api/v1/admin/upload-excel`,
+      `${API_URL}/api/v1/admin/tours/${slug}/media`,
       {
-        method: 'POST',
+        method: 'PATCH',
         headers: {
+          'Content-Type':
+            'application/json',
           'X-App-Key':
             process.env.API_SECRET!,
         },
-        body: formData,
+        body: JSON.stringify(body),
       }
     );
 

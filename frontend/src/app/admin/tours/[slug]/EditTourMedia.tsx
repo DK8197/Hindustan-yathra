@@ -3,9 +3,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  'http://localhost:5000';
 
 interface Props {
   slug: string;
@@ -142,23 +139,20 @@ export default function EditTourMedia({
         );
       }
 
-      const updateResponse =
-        await fetch(
-          `${API_URL}/api/v1/admin/tours/${slug}/media`,
-          {
-            method: 'PATCH',
-            headers: {
-              'Content-Type':
-                'application/json',
-                'X-App-Key': process.env.API_SECRET!,
-            },
-            body: JSON.stringify({
-              path: image.path,
-              value:
-                uploadData.url,
-            }),
-          }
-        );
+      const updateResponse = await fetch(
+        `/api/admin/tours/${slug}/media`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type':
+              'application/json',
+          },
+          body: JSON.stringify({
+            path: image.path,
+            value: uploadData.url,
+          }),
+        }
+      );
 
       if (!updateResponse.ok) {
         const errorText =

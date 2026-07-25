@@ -3,10 +3,6 @@
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-const API_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
-  'http://localhost:5000';
-
 interface Props {
   leadId: number;
   handled: boolean;
@@ -25,13 +21,12 @@ export default function LeadStatusButton({
       setLoading(true);
 
       const response = await fetch(
-        `${API_URL}/api/v1/admin/leads/${leadId}/handled`,
+        `/api/admin/leads/${leadId}/handled`,
         {
           method: 'PATCH',
           headers: {
             'Content-Type':
               'application/json',
-            'X-App-Key': process.env.API_SECRET!,
           },
           body: JSON.stringify({
             handled: !handled,
@@ -40,9 +35,9 @@ export default function LeadStatusButton({
       );
 
       if (!response.ok) {
-        throw new Error(
-          'Failed to update lead'
-        );
+        const error =
+          await response.text();
+        throw new Error(error);
       }
 
       router.refresh();
