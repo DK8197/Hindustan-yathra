@@ -91,16 +91,17 @@ export function Navbar() {
     >
         <div
           className="
-            mx-auto
-            flex
-            h-25
-            max-w-[1800px]
-            items-center
-            justify-between
-            px-5
-            lg:px-10
-          "
-        >
+              mx-auto
+              flex
+              h-14
+              md:h-20
+              lg:h-24
+              max-w-[1800px]
+              items-center
+              justify-between
+              px-4
+              lg:px-10
+            ">
  {/* LEFT */}
 <div className="flex items-center gap-5">
   <Link
@@ -114,25 +115,23 @@ export function Navbar() {
         gap-4
         rounded-2xl
         border
-        border-amber-400/20
+        border-black
         bg-slate-900/80
-        px-4
-        py-2
+        px-2 md:px-4
+        py-1 md:py-2
         backdrop-blur-md
         transition-all
         duration-300
         hover:border-amber-400/50
       "
     >
-      <Image
-        src="/images/hindustan-yathra-logo.png"
-        alt="Hindustan Yatra"
-        width={220}
-        height={80}
-        priority
-        className="text-2xl font-serif font-bold text-white tracking-normal leading-tight
-        "
-      />
+        <Image
+          src="/images/hindustan-yathra-logo.png"
+          alt="Hindustan Yatra"
+          width={220}
+          height={80}
+          className="w-32 md:w-44 lg:w-56 h-auto"
+        />
 
         <div className="hidden xl:block">
           <h1
@@ -203,8 +202,8 @@ export function Navbar() {
       border
       border-white/10
       bg-white/[0.04]
-      px-4
-      py-2
+      px-2 md:px-4
+      py-1 md:py-2
       backdrop-blur-md
     "
   >
@@ -410,7 +409,7 @@ export function Navbar() {
         >
           <LanguageSwitcher />
 
-          <Link
+          {/* <Link
             href={
               user
                 ? '/dashboard'
@@ -443,7 +442,7 @@ export function Navbar() {
               : t(
                   'login'
                 )}
-          </Link>
+          </Link> */}
         </div>
 
         {/* MOBILE MENU BUTTON */}
@@ -533,7 +532,7 @@ export function Navbar() {
             >
               <LanguageSwitcher />
 
-              <Link
+              {/* <Link
                 href={
                   user
                     ? '/dashboard'
@@ -570,7 +569,7 @@ export function Navbar() {
                   : t(
                       'login'
                     )}
-              </Link>
+              </Link> */}
             </div>
 
             <div
