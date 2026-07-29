@@ -5,6 +5,8 @@ import Leadership from "@/components/about/Leadership";
 import Stats from "@/components/about/Stats";
 import Reviews from "@/components/about/Reviews";
 import CTA from "@/components/about/CTA";
+import { ContactSection } from '@/components/sections/ContactSection';
+
 
 export default function AboutPage() {
   return (
@@ -16,6 +18,7 @@ export default function AboutPage() {
       <Leadership />
       <Reviews />
       <CTA />
+      <ContactSection />
     </main>
   );
 }

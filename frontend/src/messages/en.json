@@ -29,7 +29,23 @@
     "mission": "At Hindustan Yatra, our mission is to make travel simple, affordable, and unforgettable by providing personalized tour packages, transparent pricing, expert guidance, and end-to-end travel solutions with unwavering commitment to quality, safety, and customer satisfaction.",
     "vision": "To become Karnataka's most trusted travel partner by creating inspiring, seamless, and memorable journeys that connect people with destinations, cultures, and experiences across the world.",
     "cta_customize": "Build My Trip",
-    "scroll_hint": "Scroll to fly over the mountains"
+    "scroll_hint": "Scroll to fly over the mountains",
+    "leadership": {
+      "title": "Leadership Team",
+      "subtitle": "Visionary leaders committed to creating memorable travel experiences across India with innovation, trust, and excellence.",
+
+      "founder": {
+        "name": "Mr. Vilaskumar Desai",
+        "role": "CEO & Founder",
+        "description": "Founder of Hindustan Yatra with a vision to make exploring India easy, affordable, and memorable through technology-driven travel experiences and exceptional customer service."
+      },
+
+      "managing_director": {
+        "name": "Mrs. Arpita Vilaskumar Desai",
+        "role": "Managing Director",
+        "description": "Passionate about building customer-first travel experiences while driving innovation, strategic partnerships, and sustainable growth across India's tourism ecosystem."
+      }
+    }
   },
   "sections": {
     "featured_tours": "Featured Tours",
@@ -96,5 +112,17 @@
     "tour_categories": "Tour Categories",
     "contact_us": "Contact Us",
     "rights": "All rights reserved."
+  },
+  "destinations": {
+    "title": "Popular Destinations",
+    "description": "Explore domestic and international tour packages with Hindustan Yatra.",
+    "heading": "Explore",
+    "headingHighlight": "Destinations",
+    "subheading": "Discover hand-crafted journeys across India and around the world.",
+    "stats": {
+      "tours": "Tours",
+      "destinations": "Destinations",
+      "travellers": "Happy Travellers"
+    }
   }
 }

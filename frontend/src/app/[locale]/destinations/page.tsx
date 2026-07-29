@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import DestinationsExplorer from '@/components/destinations/DestinationsExplorer';
 
 const API_URL =
-  process.env.NEXT_PUBLIC_API_URL ||
+  process.env.NEXT_PUBLIC_API_URL ??
   'http://localhost:5000';
 
 type Params = {
@@ -19,38 +19,36 @@ export async function generateMetadata({
 
   const t = await getTranslations({
     locale,
-    namespace: 'sections',
+    namespace: 'destinations',
   });
 
   return {
-    title: t('popular_destinations'),
-    description:
-      'Explore domestic and international tours with Hindustan Yatra',
+    title: t('title'),
+    description: t('description'),
   };
 }
 
 async function getTours() {
   try {
-          const res = await fetch(
-          `${API_URL}/api/v1/tours?limit=100`,
-          {
-            cache: 'force-cache',
-            next: {
-              revalidate: 86400,
-            },
-          headers: {
+    const res = await fetch(
+      `${API_URL}/api/v1/tours?limit=100`,
+      {
+        cache: 'force-cache',
+        next: {
+          revalidate: 86400,
+        },
+        headers: {
           'X-App-Key': process.env.API_SECRET!,
-            },
-          }
-        );
+        },
+      }
+    );
 
     if (!res.ok) {
       return [];
     }
 
     const data = await res.json();
-
-    return data.items || [];
+    return data.items ?? [];
   } catch {
     return [];
   }
@@ -65,28 +63,27 @@ export default async function DestinationsPage({
 
   const tours = await getTours();
 
+  const t = await getTranslations({
+    locale,
+    namespace: 'destinations',
+  });
+
   return (
     <div className="pb-20">
-      {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-950 via-blue-900">
         <div className="absolute inset-0 bg-[url('/textures/hero-background-desktop.jpg')] opacity-10" />
 
         <div className="relative mx-auto max-w-7xl px-6 py-28">
           <div className="max-w-3xl">
-            {/* <span className="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm text-white backdrop-blur">
-              Hindustan Yathra
-            </span> */}
-
             <h1 className="mt-8 text-5xl font-bold text-white md:text-7xl">
-              Explore
+              {t('heading')}
               <span className="block text-cyan-300">
-                Destinations
+                {t('headingHighlight')}
               </span>
             </h1>
 
             <p className="mt-6 text-lg text-blue-100 md:text-xl">
-              Discover hand-crafted journeys
-              across India and around the world.
+              {t('subheading')}
             </p>
 
             <div className="mt-10 flex flex-wrap gap-8">
@@ -96,7 +93,7 @@ export default async function DestinationsPage({
                 </div>
 
                 <div className="text-blue-200">
-                  Tours
+                  {t('stats.tours')}
                 </div>
               </div>
 
@@ -106,7 +103,7 @@ export default async function DestinationsPage({
                 </div>
 
                 <div className="text-blue-200">
-                  Destinations
+                  {t('stats.destinations')}
                 </div>
               </div>
 
@@ -116,7 +113,7 @@ export default async function DestinationsPage({
                 </div>
 
                 <div className="text-blue-200">
-                  Happy Travellers
+                  {t('stats.travellers')}
                 </div>
               </div>
             </div>

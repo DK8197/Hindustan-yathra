@@ -1,30 +1,69 @@
-import Link from "next/link";
-import { useTranslations } from 'next-intl';
+'use client';
 
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 
 export default function Hero() {
   const t = useTranslations('about');
+  console.log(t('hero-title'));
 
   return (
-    <section className="relative overflow-hidden">
-      <div className="absolute inset-0 bg-[url('/textures/hero-background-desktop.jpg')] bg-cover bg-center" />
-      <div className="absolute inset-0 bg-black/60" />
+    <section className="relative isolate overflow-hidden">
+      {/* Background */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('/textures/hero-background-desktop.jpg')",
+        }}
+      />
 
-      <div className="relative container mx-auto px-6 py-32 text-center text-white">
-        <h1 className="text-5xl font-bold">
-          {t('hero-title')}
-        </h1>
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
 
-        <p className="mx-auto mt-6 max-w-3xl text-xl text-gray-200">
-          {t('hero-subheadline')}
-        </p>
+      {/* Decorative glow */}
+      <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-orange-500/10 blur-3xl" />
 
-        <Link
-          href="/destinations"
-          className="mt-10 inline-flex rounded-full bg-orange-500 px-8 py-4 font-semibold text-white transition hover:bg-orange-600"
-        >
-          {t('hero-cta')}
-        </Link>
+      {/* Content */}
+      <div className="relative mx-auto flex min-h-[75vh] max-w-7xl items-center justify-center px-6 py-24 text-center md:min-h-[85vh]">
+        <div className="max-w-4xl">
+
+          <h1 className="font-display text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+            {t('hero-title')}
+          </h1>
+
+          <p className="mx-auto mt-8 max-w-3xl text-lg leading-relaxed text-white/90 md:text-xl">
+            {t('hero-subheadline')}
+          </p>
+
+          <div className="mt-10">
+            <Link
+              href="/destinations"
+              className="
+                inline-flex
+                items-center
+                justify-center
+                rounded-full
+                bg-saffron-500
+                px-8
+                py-4
+                text-base
+                font-semibold
+                text-white
+                shadow-xl
+                shadow-saffron-500/30
+                transition-all
+                duration-300
+                hover:-translate-y-1
+                hover:bg-saffron-600
+                hover:shadow-2xl
+              "
+            >
+              {t('hero-cta')}
+            </Link>
+          </div>
+
+        </div>
       </div>
     </section>
   );

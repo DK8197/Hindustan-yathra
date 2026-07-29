@@ -98,7 +98,7 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  const messages = await getMessages();
+const messages = (await import(`@/messages/${locale}.json`)).default;
 
   return (
         <NextIntlClientProvider

@@ -1,35 +1,36 @@
-import Image from "next/image";
+'use client';
 
-const leaders = [
-  {
-    name: "Mr. Vilaskumar Desai",
-    role: "CEO & Founder",
-    image: "/textures/founder.jpeg",
-    description:
-      "Founder of Hindustan Yatra with a vision to make exploring India easy, affordable, and memorable through technology-driven travel experiences and exceptional customer service.",
-  },
-  {
-    name: "Mrs. Arpita Vilaskumar Desai",
-    role: "Managing Director",
-    image: "/textures/co-founder.jpeg",
-    description:
-      "Passionate about building customer-first travel experiences while driving innovation, strategic partnerships, and sustainable growth across India's tourism ecosystem.",
-  },
-];
+import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 export default function Leadership() {
+  const t = useTranslations('about.leadership');
+
+  const leaders = [
+    {
+      name: t('founder.name'),
+      role: t('founder.role'),
+      image: '/textures/founder.jpeg',
+      description: t('founder.description'),
+    },
+    {
+      name: t('managing_director.name'),
+      role: t('managing_director.role'),
+      image: '/textures/co-founder.jpeg',
+      description: t('managing_director.description'),
+    },
+  ];
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-white via-orange-50/30 to-white py-24">
       <div className="container mx-auto px-6">
         <div className="mb-16 text-center">
-
           <h2 className="text-4xl font-bold text-gray-900 md:text-5xl">
-            Leadership Team
+            {t('title')}
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-lg text-gray-600">
-            Visionary leaders committed to creating memorable travel
-            experiences across India with innovation, trust, and excellence.
+            {t('subtitle')}
           </p>
         </div>
 
@@ -39,12 +40,11 @@ export default function Leadership() {
               key={leader.name}
               className="group relative overflow-hidden rounded-3xl border border-gray-100 bg-white p-10 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
             >
-              {/* Gradient Accent */}
               <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-orange-500 via-amber-400 to-orange-500" />
 
               <div className="flex flex-col items-center">
                 <div className="relative">
-                  <div className="absolute inset-0 rounded-full bg-orange-200 blur-xl opacity-40 group-hover:opacity-70 transition" />
+                  <div className="absolute inset-0 rounded-full bg-orange-200 opacity-40 blur-xl transition group-hover:opacity-70" />
 
                   <Image
                     src={leader.image}
@@ -59,7 +59,7 @@ export default function Leadership() {
                   {leader.name}
                 </h3>
 
-                <p className="mt-2 font-semibold tracking-wide text-orange-500 uppercase">
+                <p className="mt-2 uppercase tracking-wide font-semibold text-orange-500">
                   {leader.role}
                 </p>
 
