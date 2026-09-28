@@ -12,7 +12,7 @@
  *
  * Expected sheet structure (one row per tour):
  *   slug | category | title_en | title_kn | summary_en | summary_kn |
- *   duration_days | duration_nights | price_from | destinations |
+ *   duration_days | duration_nights | price_from (optional) | destinations |
  *   hero_image | featured | is_domestic | active
  *
  * Itinerary, FAQs, gallery and reviews live on separate sheets
@@ -48,6 +48,14 @@ function splitList(value: string | number | boolean | undefined): string[] {
 function toBool(value: string | number | boolean | undefined): boolean {
   if (typeof value === 'boolean') return value;
   return String(value).trim().toUpperCase() === 'TRUE' || value === 1;
+}
+
+function parseOptionalPrice(value: string | number | boolean | undefined): number | undefined {
+  if (value === undefined || value === '') return undefined;
+  if (typeof value === 'boolean') throw new Error('price_from must be a number');
+  const price = Number(value);
+  if (!Number.isFinite(price)) throw new Error(`Invalid price_from value: ${value}`);
+  return price > 0 ? price : undefined;
 }
 
 function buildTours(): Tour[] {
@@ -100,7 +108,7 @@ function buildTours(): Tour[] {
       durationDays: Number(row.duration_days ?? 0),
       durationNights: Number(row.duration_nights ?? 0),
       destinations: splitList(row.destinations),
-      priceFrom: Number(row.price_from ?? 0),
+      priceFrom: parseOptionalPrice(row.price_from),
       currency: 'INR',
       highlights: { en: splitList(row.highlights_en), kn: splitList(row.highlights_kn) },
       inclusions: { en: splitList(row.inclusions_en), kn: splitList(row.inclusions_kn) },

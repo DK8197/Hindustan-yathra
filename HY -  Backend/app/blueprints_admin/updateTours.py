@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify,request
+from flask import Blueprint, current_app, jsonify, request
 from app import db
 from app.models.tour import Tour
 from app.models.leads import Lead
@@ -82,9 +82,25 @@ def upload_tour():
             "error": "No file uploaded"
         }, 400
 
-    result = import_tour_excel(
-        request.files["file"],request.form.get("slug")
-    )
+    try:
+        result = import_tour_excel(
+            request.files["file"], request.form.get("slug")
+        )
+    except (ValueError, KeyError, IndexError) as error:
+        db.session.rollback()
+        current_app.logger.warning("Invalid tour workbook: %s", error)
+        return {
+            "ok": False,
+            "error": f"Invalid tour workbook: {error}"
+        }, 400
+    except Exception:
+        db.session.rollback()
+        current_app.logger.exception("Tour Excel import failed")
+        return {
+            "ok": False,
+            "error": "Excel import failed. Check the backend logs for details."
+        }, 500
+
     if result['action'] == 'not created':
         return {
             "ok": False,

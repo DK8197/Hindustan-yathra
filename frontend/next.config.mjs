@@ -25,6 +25,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'cdn.hindustanyatra.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'cdn.instabotai.online',
       },
     ],

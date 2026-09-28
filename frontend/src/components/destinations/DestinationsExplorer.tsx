@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -22,7 +23,7 @@ type Tour = {
   featured: boolean;
   active: boolean;
   isDomestic: boolean;
-  priceFrom: number;
+  priceFrom?: number | null;
   currency: string;
   region?: string;
   durationDays: number;
@@ -58,6 +59,7 @@ export default function DestinationsExplorer({
   tours,
   locale,
 }: Props) {
+  const tTour = useTranslations('tour');
   const [search, setSearch] = useState('');
   const [tourType, setTourType] = useState<
     'all' | 'domestic' | 'international'
@@ -363,7 +365,9 @@ const [region, setRegion] = useState<
                       </p>
                       <div className="mt-4 flex flex-wrap gap-2">
                         <span className="rounded-full bg-white/20 px-3 py-1 text-xs backdrop-blur">
-                          ₹{tour.priceFrom?.toLocaleString()}
+                            {typeof tour.priceFrom === 'number' && tour.priceFrom > 0
+                              ? `₹${tour.priceFrom.toLocaleString()}`
+                              : tTour('contact_for_price')}
                         </span>
 
                         <span className="rounded-full bg-white/20 px-3 py-1 text-xs backdrop-blur">
@@ -447,7 +451,9 @@ const [region, setRegion] = useState<
                   <div className="absolute bottom-0 w-full p-5 text-white">
                     <div className="mb-2 flex flex-wrap gap-2">
                       <span className="rounded-full bg-white/20 px-2 py-1 text-[11px] backdrop-blur">
-                        ₹{tour.priceFrom?.toLocaleString()}
+                          {typeof tour.priceFrom === 'number' && tour.priceFrom > 0
+                            ? `₹${tour.priceFrom.toLocaleString()}`
+                            : tTour('contact_for_price')}
                       </span>
 
                       <span className="rounded-full bg-white/20 px-2 py-1 text-[11px] backdrop-blur">

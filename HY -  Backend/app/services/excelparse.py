@@ -21,6 +21,13 @@ def safe_list(value):
     ]
 
 
+def optional_price(value):
+    if pd.isna(value) or (isinstance(value, str) and not value.strip()):
+        return None
+    price = int(float(value))
+    return price if price > 0 else None
+
+
 def import_tour_excel(file, slug_request):
 
     workbook = pd.ExcelFile(file)
@@ -54,6 +61,10 @@ def import_tour_excel(file, slug_request):
 
     slug = safe_str(
         tour["slug"]
+    )
+
+    price_from = optional_price(
+        tour.get("price_from")
     )
 
     if (
@@ -318,9 +329,7 @@ def import_tour_excel(file, slug_request):
             )
         ),
 
-        "priceFrom": int(
-            tour["price_from"]
-        ),
+        "priceFrom": price_from,
 
         "durationDays": int(
             tour["duration_days"]

@@ -47,7 +47,7 @@ export interface Tour {
   durationDays: number;
   durationNights: number;
   destinations: string[]; // destination slugs covered
-  priceFrom: number; // INR, per person
+  priceFrom?: number | null; // INR, per person; omitted when quoted on request
   currency: 'INR';
   highlights: { en: string[]; kn: string[] };
   inclusions: { en: string[]; kn: string[] };

@@ -103,10 +103,9 @@ export default async function AdminToursPage() {
                   </td>
 
                   <td className="px-4 py-3">
-                    ₹
-                    {(tour.priceFrom ?? 0).toLocaleString(
-                      'en-IN'
-                    )}
+                    {typeof tour.priceFrom === 'number' && tour.priceFrom > 0
+                      ? `₹${tour.priceFrom.toLocaleString('en-IN')}`
+                      : 'Contact for price'}
                   </td>
 
                   <td className="px-4 py-3">

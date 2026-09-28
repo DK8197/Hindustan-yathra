@@ -22,8 +22,20 @@ export async function POST(
       }
     );
 
-    const data =
-      await response.json();
+    const responseText = await response.text();
+    let data: unknown;
+
+    try {
+      data = responseText ? JSON.parse(responseText) : {};
+    } catch {
+      const isHtml = /<\s*!doctype\s+html|<\s*html/i.test(responseText);
+      data = {
+        success: false,
+        message: isHtml
+          ? `Backend upload failed with HTTP ${response.status}. Check the backend logs for the import error.`
+          : responseText.slice(0, 500) || `Backend upload failed with HTTP ${response.status}.`,
+      };
+    }
 
     return NextResponse.json(data, {
       status: response.status,

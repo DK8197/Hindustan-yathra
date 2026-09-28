@@ -39,9 +39,17 @@ export default function AddTourButton() {
       );
 
       if (!response.ok) {
-        const error =
-          await response.text();
-        throw new Error(error);
+        const responseText = await response.text();
+        let errorMessage = responseText;
+
+        try {
+          const data = JSON.parse(responseText);
+          errorMessage = data.error || data.message || responseText;
+        } catch {
+          // Keep the raw response text when the server did not return JSON.
+        }
+
+        throw new Error(errorMessage || `Upload failed with HTTP ${response.status}`);
       }
 
       alert(
@@ -53,7 +61,9 @@ export default function AddTourButton() {
       console.error(err);
 
       alert(
-        'Failed to upload Excel'
+        err instanceof Error
+          ? `Failed to upload Excel: ${err.message}`
+          : 'Failed to upload Excel'
       );
     } finally {
       setLoading(false);

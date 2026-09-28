@@ -56,6 +56,11 @@ export default async function TourDetailPage({
     notFound();
   }
 
+  const hasPrice = typeof tour.priceFrom === 'number' && Number.isFinite(tour.priceFrom) && tour.priceFrom > 0;
+  const heroImage = typeof tour.heroImage === 'string' && tour.heroImage.trim()
+    ? tour.heroImage.trim()
+    : null;
+
   return (
     <>
       <script
@@ -72,27 +77,29 @@ export default async function TourDetailPage({
               tour.summary[locale],
             touristType:
               tour.category,
-            offers: {
+            offers: hasPrice ? {
               '@type': 'Offer',
               priceCurrency:
                 tour.currency ??
                 'INR',
               price:
                 tour.priceFrom,
-            },
+            } : undefined,
           }),
         }}
       />
 
       {/* Hero */}
-      <section className="relative h-[65vh] w-full overflow-hidden">
-        <Image
-          src={tour.heroImage}
-          alt={tour.title[locale]}
-          fill
-          priority
-          className="object-cover"
-        />
+      <section className="relative h-[65vh] w-full overflow-hidden bg-gradient-to-br from-himalaya-800 via-himalaya-700 to-saffron-700">
+        {heroImage && (
+          <Image
+            src={heroImage}
+            alt={tour.title[locale]}
+            fill
+            priority
+            className="object-cover"
+          />
+        )}
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 

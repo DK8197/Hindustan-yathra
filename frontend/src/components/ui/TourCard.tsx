@@ -12,6 +12,7 @@ import { useAppStore } from '@/store/useAppStore';
 export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
   const locale = useLocale() as AppLocale;
   const t = useTranslations('tour');
+  const hasPrice = typeof tour.priceFrom === 'number' && Number.isFinite(tour.priceFrom) && tour.priceFrom > 0;
   const saved = useAppStore((s) => s.savedTourSlugs.includes(tour.slug));
   const toggleSaved = useAppStore((s) => s.toggleSavedTour);
 
@@ -47,10 +48,16 @@ export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
               <Clock size={14} /> {tour.durationDays}D/{tour.durationNights}N
             </span>
             <div className="text-right">
-              <div className="text-xs text-gray-400">{t('starting_from')}</div>
-              <div className="font-semibold text-saffron-600">
-                ₹{tour.priceFrom.toLocaleString('en-IN')} <span className="text-xs font-normal text-gray-400">{t('per_person')}</span>
-              </div>
+              {hasPrice ? (
+                <>
+                  <div className="text-xs text-gray-400">{t('starting_from')}</div>
+                  <div className="font-semibold text-saffron-600">
+                    ₹{tour.priceFrom!.toLocaleString('en-IN')} <span className="text-xs font-normal text-gray-400">{t('per_person')}</span>
+                  </div>
+                </>
+              ) : (
+                <div className="font-semibold text-saffron-600">{t('contact_for_price')}</div>
+              )}
             </div>
           </div>
         </div>
