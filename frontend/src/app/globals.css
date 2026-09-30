@@ -150,7 +150,7 @@ h6 {
 
 .hero-bg {
   background-color: #0b1220;
-  background-image: url("https://cdn.instabotai.online/images-confidential/hero-mobile.webp");
+  background-image: var(--hero-bg-mobile);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -158,7 +158,7 @@ h6 {
 
 @media (min-width: 768px) {
   .hero-bg {
-    background-image: url("https://cdn.instabotai.online/images-confidential/hero-desktop.webp");
+    background-image: var(--hero-bg-desktop);
   }
 }
 

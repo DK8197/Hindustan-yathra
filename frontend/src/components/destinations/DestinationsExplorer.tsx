@@ -14,6 +14,7 @@ import {
   Users,
   Building2,
 } from 'lucide-react';
+import { normalizeImageUrl } from '@/lib/image-cdn';
 
 
 type Tour = {
@@ -343,7 +344,7 @@ const [region, setRegion] = useState<
                     className="group relative h-[420px] overflow-hidden rounded-[32px]"
                   >
                     <Image
-                      src={image}
+                      src={normalizeImageUrl(image)}
                       alt={getTitle(tour)}
                       fill
                       className="object-cover transition duration-700 group-hover:scale-110"
@@ -428,7 +429,7 @@ const [region, setRegion] = useState<
               const cardContent = (
                 <>
                   <Image
-                    src={image}
+                    src={normalizeImageUrl(image)}
                     alt={getTitle(tour)}
                     fill
                     className="object-cover transition duration-700 group-hover:scale-110"

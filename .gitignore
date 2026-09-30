@@ -10,3 +10,6 @@ build/
 *.log
 Artifacts/
 .github/
+!.github/
+!.github/workflows/
+!.github/workflows/backend-cloud-run.yml

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import type { GalleryImage } from '@/types/tour';
+import { normalizeImageUrl } from '@/lib/image-cdn';
 
 export function TourGallery({
   gallery,
@@ -68,7 +69,7 @@ export function TourGallery({
             className="group relative aspect-[4/3] overflow-hidden rounded-2xl bg-gray-100"
           >
             <Image
-              src={img.url}
+              src={normalizeImageUrl(img.url)}
               alt={
                 img.alt ||
                 `Gallery Image ${index + 1}`

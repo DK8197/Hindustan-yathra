@@ -8,6 +8,7 @@ import { Link } from '@/i18n/routing';
 import type { Tour } from '@/types/tour';
 import type { AppLocale } from '@/i18n/routing';
 import { useAppStore } from '@/store/useAppStore';
+import { normalizeImageUrl } from '@/lib/image-cdn';
 
 export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
   const locale = useLocale() as AppLocale;
@@ -27,7 +28,7 @@ export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
       <Link href={{ pathname: '/tour/[slug]', params: { slug: tour.slug } }} className="block">
         <div className="relative h-56 w-full overflow-hidden">
           <Image
-            src={tour.heroImage}
+            src={normalizeImageUrl(tour.heroImage)}
             alt={tour.title[locale]}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"

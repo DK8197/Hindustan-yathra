@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { getTourBySlug, getAllTourSlugs } from '@/lib/tours-repository';
+import { normalizeImageUrl } from '@/lib/image-cdn';
 import { TourItineraryTimeline } from '@/components/sections/TourItineraryTimeline';
 import { TourFAQ } from '@/components/sections/TourFAQ';
 import { TourReviews } from '@/components/sections/TourReviews';
@@ -93,7 +94,7 @@ export default async function TourDetailPage({
       <section className="relative h-[65vh] w-full overflow-hidden bg-gradient-to-br from-himalaya-800 via-himalaya-700 to-saffron-700">
         {heroImage && (
           <Image
-            src={heroImage}
+            src={normalizeImageUrl(heroImage)}
             alt={tour.title[locale]}
             fill
             priority

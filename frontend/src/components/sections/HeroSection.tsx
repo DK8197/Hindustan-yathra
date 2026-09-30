@@ -1,12 +1,13 @@
 'use client';
 
-import { memo } from 'react';
+import { memo, type CSSProperties } from 'react';
 import dynamic from 'next/dynamic';
 import { m } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Link } from '@/i18n/routing';
+import { getCdnImageUrl } from '@/lib/image-cdn';
 import { useHeroScrollProgress } from '@/lib/hooks/useHeroScrollProgress';
 
 const Hero3D = dynamic(
@@ -42,6 +43,10 @@ function HeroSectionComponent() {
       >
         {/* Background Image */}
         <div
+          style={{
+            '--hero-bg-mobile': `url("${getCdnImageUrl('images-confidential/hero-mobile.webp')}")`,
+            '--hero-bg-desktop': `url("${getCdnImageUrl('images-confidential/hero-desktop.webp')}")`,
+          } as CSSProperties}
           className="
             hero-bg
             absolute

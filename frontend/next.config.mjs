@@ -1,5 +1,10 @@
 import createNextIntlPlugin from 'next-intl/plugin';
 
+const imageCdnUrl =
+  process.env.NEXT_PUBLIC_R2_PUBLIC_URL ||
+  'https://cdn.hindustanyatra.com';
+const imageCdnHostname = new URL(imageCdnUrl).hostname;
+
 const withNextIntl =
   createNextIntlPlugin(
     './src/i18n/request.ts'
@@ -21,15 +26,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'cdn.hindustanyathra.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.hindustanyatra.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.instabotai.online',
+        hostname: imageCdnHostname,
       },
     ],
     formats: [

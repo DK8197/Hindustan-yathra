@@ -5,6 +5,7 @@ import {
 } from 'next/font/google';
 
 import './globals.css';
+import { getCdnImageUrl, IMAGE_CDN_BASE_URL } from '@/lib/image-cdn';
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -109,19 +110,19 @@ export default function RootLayout({
         {/* Hero CDN warmup */}
         <link
           rel="preconnect"
-          href="https://cdn.hindustanyatra.com"
+          href={IMAGE_CDN_BASE_URL}
         />
 
         <link
           rel="dns-prefetch"
-          href="//cdn.hindustanyatra.com"
+          href={`//${new URL(IMAGE_CDN_BASE_URL).host}`}
         />
 
         {/* Desktop hero preload */}
         <link
           rel="preload"
           as="image"
-          href="https://cdn.hindustanyatra.com/images-confidential/hero-desktop.webp"
+          href={getCdnImageUrl('images-confidential/hero-desktop.webp')}
         />
       </head>
 
