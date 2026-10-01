@@ -12,6 +12,9 @@ import { TourInclusionsExclusions } from '@/components/sections/TourInclusionsEx
 
 type Params = { locale: 'en' | 'kn'; slug: string };
 
+export const dynamicParams = true;
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   const slugs = await getAllTourSlugs();
   // console.log(slugs)

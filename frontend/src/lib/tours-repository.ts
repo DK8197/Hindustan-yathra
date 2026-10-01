@@ -87,22 +87,45 @@ export async function getToursByCategory(
 export async function getTourBySlug(
   slug: string
 ): Promise<Tour | undefined> {
+  const headers = {
+    'X-App-Key': process.env.API_SECRET!,
+  };
 
-  const response = await fetch(
-    `${API_URL}/api/v1/details/${slug}`,
-    {
-      next: { revalidate: 3600 },
-      headers: {
-          'X-App-Key': process.env.API_SECRET!,
-        },
+  try {
+    const response = await fetch(
+      `${API_URL}/api/v1/details/${encodeURIComponent(slug)}`,
+      {
+        next: { revalidate: 60 },
+        headers,
+      }
+    );
+
+    if (response.ok) {
+      return response.json();
     }
-  );
-
-  if (!response.ok) {
-    return undefined;
+  } catch {
+    // Try the active-tour index below; transient detail-endpoint failures
+    // should not immediately turn a known tour URL into a permanent 404.
   }
 
-  return response.json();
+  try {
+    const response = await fetch(
+      `${API_URL}/api/v1/details`,
+      {
+        next: { revalidate: 60 },
+        headers,
+      }
+    );
+
+    if (!response.ok) {
+      return undefined;
+    }
+
+    const tours = (await response.json()) as Tour[];
+    return tours.find((tour) => tour.slug === slug);
+  } catch {
+    return undefined;
+  }
 }
 
 export async function getAllTours_details(): Promise<Tour[]> {
