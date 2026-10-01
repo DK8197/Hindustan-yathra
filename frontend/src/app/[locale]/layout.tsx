@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
-import {
-  getMessages,
-  getTranslations,
-} from 'next-intl/server';
+import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
 import { routing } from '@/i18n/routing';
@@ -98,6 +95,8 @@ export default async function LocaleLayout({
     notFound();
   }
 
+  const tAccessibility = await getTranslations({ locale, namespace: 'accessibility' });
+
 const messages = (await import(`@/messages/${locale}.json`)).default;
 
   return (
@@ -113,9 +112,15 @@ const messages = (await import(`@/messages/${locale}.json`)).default;
               : 'font-sans min-h-screen flex flex-col'
           }
         >
+          <a
+            href="#main-content"
+            className="sr-only z-[100] rounded-md bg-white px-4 py-3 text-himalaya-900 focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:ring-2 focus:ring-saffron-600"
+          >
+            {tAccessibility('skip_to_content')}
+          </a>
           <Navbar />
 
-          <main className="flex-1">
+          <main id="main-content" tabIndex={-1} className="flex-1 pt-16 outline-none md:pt-20">
             {children}
           </main>
 

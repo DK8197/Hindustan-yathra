@@ -3,6 +3,7 @@
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/i18n/routing';
 import { useParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 const locales = [
   { code: 'en', label: 'EN' },
@@ -10,6 +11,7 @@ const locales = [
 ] as const;
 
 export function LanguageSwitcher() {
+  const t = useTranslations('nav');
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -40,7 +42,7 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <div className="flex items-center gap-1 rounded-full border border-white/20 bg-white/10 p-1 backdrop-blur-sm">
+    <div aria-label={t('language')} role="group" className="flex items-center gap-1 rounded-full border border-white/20 bg-white/10 p-1">
       {locales.map(({ code, label }) => {
         const isActive = locale === code;
 
@@ -49,12 +51,12 @@ export function LanguageSwitcher() {
             key={code}
             type="button"
             disabled={isActive}
-            aria-current={isActive}
+            aria-current={isActive ? 'page' : undefined}
             onClick={() => switchLocale(code)}
             className={`rounded-full px-3 py-1 text-sm font-medium transition ${
               isActive
-                ? 'bg-white text-himalaya-800 cursor-default'
-                : 'text-white/80 hover:text-white'
+                ? 'min-h-11 cursor-default bg-white px-3 text-himalaya-800'
+                : 'min-h-11 px-3 text-white/90 hover:bg-white/10 hover:text-white'
             } disabled:pointer-events-none`}
           >
             {label}

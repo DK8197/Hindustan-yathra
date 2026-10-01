@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import { getLocale } from 'next-intl/server';
 import {
+  Noto_Sans_Kannada,
   Plus_Jakarta_Sans,
   Playfair_Display,
 } from 'next/font/google';
@@ -21,6 +23,14 @@ const playfair = Playfair_Display({
   preload: true,
 });
 
+const kannada = Noto_Sans_Kannada({
+  subsets: ['kannada'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-kannada',
+  preload: false,
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(
     'https://hindustanyatra.com'
@@ -28,7 +38,7 @@ export const metadata: Metadata = {
 
   title: {
     default:
-      "Hindustan Yatra | Best Travel Agency in Hubballi | Domestic & International Tours",
+      "Hindustan Yatra | Travel Company in Hubballi | India & International Journeys",
     template:
       '%s | Hindustan Yatra',
   },
@@ -95,16 +105,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const locale = await getLocale();
+
   return (
     <html
-      lang="en"
+      lang={locale}
       suppressHydrationWarning
-      className={`${jakarta.variable} ${playfair.variable}`}
+      className={`${jakarta.variable} ${playfair.variable} ${kannada.variable}`}
     >
       <head>
         {/* Hero CDN warmup */}
@@ -118,11 +130,18 @@ export default function RootLayout({
           href={`//${new URL(IMAGE_CDN_BASE_URL).host}`}
         />
 
-        {/* Desktop hero preload */}
+        {/* Preload the right hero crop for each viewport. */}
         <link
           rel="preload"
           as="image"
           href={getCdnImageUrl('images-confidential/hero-desktop.webp')}
+          media="(min-width: 768px)"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href={getCdnImageUrl('images-confidential/hero-mobile.webp')}
+          media="(max-width: 767px)"
         />
       </head>
 

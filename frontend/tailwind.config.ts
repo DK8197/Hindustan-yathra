@@ -41,18 +41,18 @@ const config: Config = {
 
       fontFamily: {
         sans: [
-          'Inter',
+          'var(--font-jakarta)',
           'system-ui',
           'sans-serif',
         ],
 
         display: [
-          'Playfair Display',
+          'var(--font-playfair)',
           'serif',
         ],
 
         kannada: [
-          'Noto Sans Kannada',
+          'var(--font-kannada)',
           'sans-serif',
         ],
       },

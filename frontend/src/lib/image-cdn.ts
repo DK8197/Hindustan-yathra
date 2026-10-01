@@ -16,9 +16,13 @@ export function getCdnImageUrl(path: string): string {
 
 /** Normalize HY-owned CDN URLs while leaving bundled and third-party images intact. */
 export function normalizeImageUrl(src: string): string {
-  if (!src) {
-    return src;
+  const normalizedSrc = src?.trim();
+
+  if (!normalizedSrc) {
+    return '';
   }
+
+  src = normalizedSrc;
 
   if (src.startsWith('/tours/') || src.startsWith('tours/')) {
     return getCdnImageUrl(src);

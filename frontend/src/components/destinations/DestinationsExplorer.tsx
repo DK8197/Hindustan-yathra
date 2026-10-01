@@ -3,7 +3,7 @@
 import { useMemo, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import {
   Search,
   MapPin,
@@ -17,35 +17,13 @@ import {
   ChevronRight,
 } from 'lucide-react';
 import { normalizeImageUrl } from '@/lib/image-cdn';
-
-
-type Tour = {
-  id: number;
-  slug: string;
-  category: string;
-  featured: boolean;
-  active: boolean;
-  isDomestic: boolean;
-  priceFrom?: number | null;
-  currency: string;
-  region?: string;
-  durationDays: number;
-  durationNights: number;
-  heroImage?: string;
-  destinations: string[];
-  title: {
-    en?: string;
-    kn?: string;
-  };
-  summary: {
-    en?: string;
-    kn?: string;
-  };
-};
+import type { Tour } from '@/types/tour';
 
 type Props = {
   tours: Tour[];
   locale: 'en' | 'kn';
+  initialQuery?: string;
+  loadFailed?: boolean;
 };
 
 const INITIAL_COUNT = 8;
@@ -61,9 +39,13 @@ const categoryIcons: Record<string, any> = {
 export default function DestinationsExplorer({
   tours,
   locale,
+  initialQuery = '',
+  loadFailed = false,
 }: Props) {
+  const t = useTranslations('destinations');
   const tTour = useTranslations('tour');
-  const [search, setSearch] = useState('');
+  const tCategory = useTranslations('categories');
+  const [search, setSearch] = useState(initialQuery);
   const [tourType, setTourType] = useState<
     'all' | 'domestic' | 'international'
   >('all');
@@ -112,6 +94,13 @@ const [region, setRegion] = useState<
     ];
   }, [tours]);
 
+  const regionStates = {
+    north: ['jammu', 'kashmir', 'ladakh', 'himachal', 'uttarakhand', 'punjab', 'haryana', 'delhi', 'uttar pradesh'],
+    south: ['andhra', 'telangana', 'karnataka', 'kerala', 'tamil nadu', 'puducherry'],
+    east: ['bihar', 'jharkhand', 'odisha', 'orissa', 'west bengal', 'sikkim'],
+    west: ['rajasthan', 'gujarat', 'maharashtra', 'goa', 'madhya pradesh', 'chhattisgarh'],
+  } as const;
+
     const filteredTours = useMemo(() => {
       let filtered = [...tours];
 
@@ -120,10 +109,17 @@ const [region, setRegion] = useState<
 
         filtered = filtered.filter((tour) => {
           const title = getTitle(tour).toLowerCase();
+          const summary = getSummary(tour).toLowerCase();
+          const destinations = (tour.destinations || [])
+            .join(' ')
+            .toLowerCase();
 
           return (
             title.includes(q) ||
-            tour.category.toLowerCase().includes(q)
+            summary.includes(q) ||
+            destinations.includes(q) ||
+            tour.category.toLowerCase().includes(q) ||
+            (tour.region || '').toLowerCase().includes(q)
           );
         });
       }
@@ -147,8 +143,12 @@ const [region, setRegion] = useState<
         region !== 'all'
       ) {
         filtered = filtered.filter(
-          (tour) =>
-            tour.region?.toLowerCase() === region
+          (tour) => {
+            const tourRegion = tour.region?.toLowerCase() || '';
+            return tourRegion === region || regionStates[region].some(
+              (state) => tourRegion.includes(state)
+            );
+          }
         );
       }
 
@@ -200,77 +200,92 @@ const [region, setRegion] = useState<
 
           <div>
             <h3 className="text-xl font-bold text-orange-900">
-              Search Destinations
+              {t('search_title')}
             </h3>
 
             <p className="text-sm text-orange-700">
-              Find your next adventure
+              {t('search_subtitle')}
             </p>
           </div>
         </div>
 
+        <label htmlFor="destination-search" className="sr-only">
+          {t('search_label')}
+        </label>
         <input
+          id="destination-search"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search destination, category..."
+          placeholder={t('search_placeholder')}
           className="mb-6 w-full rounded-2xl border border-orange-200 bg-white px-5 py-4 text-slate-900 outline-none transition focus:border-orange-500 focus:ring-4 focus:ring-orange-100"
         />
 
         <div className="flex flex-wrap gap-3">
           <button
-            onClick={() => setRegion('all')}
-            className={`rounded-full px-5 py-2 text-sm font-medium transition ${
-              region === 'all'
-                ? 'bg-orange-600 text-white'
+            type="button"
+            aria-pressed={tourType === 'all'}
+            onClick={() => {
+              setTourType('all');
+              setRegion('all');
+            }}
+            className={`min-h-11 rounded-full px-5 py-3 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2 ${
+                region === 'all'
+                ? 'bg-orange-700 text-white'
                 : 'bg-orange-100 text-orange-800 hover:bg-orange-200'
             }`}
           >
-            All Tours
+            {t('filter_all')}
           </button>
 
           <button
+          type="button"
+          aria-pressed={tourType === 'domestic'}
           onClick={() => {
             setTourType('domestic');
             setRegion('all');
           }}
-          className={`rounded-full px-5 py-2 text-sm font-medium transition ${
-            tourType === 'domestic'
-              ? 'bg-orange-600 text-white'
+          className={`min-h-11 rounded-full px-5 py-3 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2 ${
+              tourType === 'domestic'
+              ? 'bg-orange-700 text-white'
               : 'bg-orange-100 text-orange-800 hover:bg-orange-200'
           }`}
         >
-          🇮🇳 Domestic
+          {t('filter_domestic')}
         </button>
 
             <button
+              type="button"
+              aria-pressed={tourType === 'international'}
               onClick={() => {
                 setTourType('international');
                 setRegion('all');
               }}
-              className={`rounded-full px-5 py-2 text-sm font-medium transition ${
-                tourType === 'international'
-                  ? 'bg-orange-600 text-white'
+              className={`min-h-11 rounded-full px-5 py-3 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2 ${
+                  tourType === 'international'
+                  ? 'bg-orange-700 text-white'
                   : 'bg-orange-100 text-orange-800 hover:bg-orange-200'
               }`}
             >
-              🌎 International
+              {t('filter_international')}
             </button>
         </div>
         {tourType === 'domestic' && (
             <div className="mt-4 flex flex-wrap gap-3">
               {[
-                { value: 'all', label: '🇮🇳 All India' },
-                { value: 'north', label: '🏔️ North' },
-                { value: 'south', label: '🌴 South' },
-                { value: 'east', label: '🌅 East' },
-                { value: 'west', label: '🏜️ West' },
+                { value: 'all', label: t('regions.all') },
+                { value: 'north', label: t('regions.north') },
+                { value: 'south', label: t('regions.south') },
+                { value: 'east', label: t('regions.east') },
+                { value: 'west', label: t('regions.west') },
               ].map((item) => (
                 <button
                   key={item.value}
+                  type="button"
+                  aria-pressed={region === item.value}
                   onClick={() =>
                     setRegion(item.value as typeof region)
                   }
-                  className={`rounded-full px-5 py-2 text-sm font-medium transition ${
+                  className={`min-h-11 rounded-full px-5 py-3 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2 ${
                     region === item.value
                       ? 'bg-blue-600 text-white'
                       : 'bg-blue-50 text-blue-800 hover:bg-blue-100'
@@ -290,11 +305,11 @@ const [region, setRegion] = useState<
       <section>
         <div className="mb-8">
           <h2 className="text-3xl font-bold tracking-tight text-transparent bg-gradient-to-r from-himalaya-800 via-saffron-600 to-himalaya-800 bg-clip-text md:text-5xl">
-            Popular Categories
+            {t('categories_title')}
           </h2>
 
           <p className="mt-2 text-slate-500">
-            Explore tours by interest
+            {t('categories_subtitle')}
           </p>
         </div>
 
@@ -303,7 +318,7 @@ const [region, setRegion] = useState<
             type="button"
             aria-label="Scroll categories left"
             onClick={() => scrollCategories(-1)}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-blue-300 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-blue-300 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -332,7 +347,7 @@ const [region, setRegion] = useState<
                     inline: 'center',
                   });
                 }}
-                className={`flex shrink-0 snap-start items-center gap-2 whitespace-nowrap rounded-2xl border px-4 py-3 transition-all sm:gap-3 sm:px-5 ${
+                className={`flex min-h-11 shrink-0 snap-start items-center gap-2 whitespace-nowrap rounded-2xl border px-4 py-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2 sm:gap-3 sm:px-5 ${
                   selectedCategory ===
                   category
                     ? 'border-blue-600 bg-blue-600 text-white shadow-lg'
@@ -341,8 +356,12 @@ const [region, setRegion] = useState<
               >
                 <Icon className="h-4 w-4" />
 
-                <span className="capitalize">
-                  {category}
+                <span>
+                  {category === 'all'
+                    ? t('filter_all')
+                    : tCategory.has(category)
+                      ? tCategory(category)
+                      : category}
                 </span>
               </button>
             );
@@ -353,7 +372,7 @@ const [region, setRegion] = useState<
             type="button"
             aria-label="Scroll categories right"
             onClick={() => scrollCategories(1)}
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-blue-300 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-blue-300 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -367,7 +386,7 @@ const [region, setRegion] = useState<
             <Star className="h-6 w-6 fill-amber-400 text-amber-400" />
 
             <h2 className="text-3xl font-bold tracking-tight text-transparent bg-gradient-to-r from-himalaya-800 via-saffron-600 to-himalaya-800 bg-clip-text md:text-5xl">
-              Featured Experiences
+              {t('featured_title')}
             </h2>
           </div>
 
@@ -376,26 +395,26 @@ const [region, setRegion] = useState<
               .slice(0, 3)
               .map((tour) => {
                     const image =
-                      tour.heroImage ||
-                      '/images/placeholders/destination.jpg';
+                          normalizeImageUrl(tour.heroImage || '');
 
                 return (
                   <Link
                     key={tour.id}
-                    href={`/${locale}/tour/${tour.slug}`}
-                    className="group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[32px]"
+                    href={{ pathname: '/tour/[slug]', params: { slug: tour.slug } }}
+                    className="group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[32px] bg-himalaya-800"
                   >
-                    <Image
-                      src={normalizeImageUrl(image)}
+                    {image && <Image
+                      src={image}
                       alt={getTitle(tour)}
                       fill
+                      sizes="(max-width: 1023px) 100vw, 33vw"
                       className="object-cover transition duration-700 group-hover:scale-110"
-                    />
+                    />}
 
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
 
                     <div className="absolute left-5 top-5 rounded-full bg-amber-400 px-4 py-2 text-xs font-semibold text-slate-900">
-                      Featured
+                      {t('featured_badge')}
                     </div>
 
                     <div className="absolute bottom-0 p-6 text-white">
@@ -419,8 +438,8 @@ const [region, setRegion] = useState<
 
                         <span className="rounded-full bg-white/20 px-3 py-1 text-xs backdrop-blur">
                           {tour.isDomestic
-                            ? 'Domestic'
-                            : 'International'}
+                            ? t('filter_domestic')
+                            : t('filter_international')}
                         </span>
                       </div>
                     </div>
@@ -436,57 +455,82 @@ const [region, setRegion] = useState<
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h2 className="text-3xl font-bold tracking-tight text-transparent bg-gradient-to-r from-himalaya-800 via-saffron-600 to-himalaya-800 bg-clip-text md:text-5xl">
-              Explore Tours
+              {t('explore_title')}
             </h2>
 
             <p className="mt-2 text-slate-500">
-              Showing {displayedTours.length} of{' '}
-              {filteredTours.length} tours
+              {t('results_count', {
+                shown: displayedTours.length,
+                total: filteredTours.length,
+              })}
             </p>
           </div>
 
           <div className="hidden md:flex items-center gap-2 rounded-full bg-slate-100 px-4 py-2 text-sm text-slate-600">
             <MapPin className="h-4 w-4" />
-            Curated Experiences
+            {t('curated_experiences')}
           </div>
         </div>
 
         {displayedTours.length === 0 ? (
           <div className="rounded-[32px] border border-slate-200 bg-white py-20 text-center">
             <h3 className="text-2xl font-bold text-slate-900">
-              No destinations found
+              {loadFailed ? t('load_error_title') : t('empty_title')}
             </h3>
 
             <p className="mt-3 text-slate-500">
-              Try changing search criteria or category.
+              {loadFailed ? t('load_error_description') : t('empty_description')}
             </p>
+            {loadFailed && (
+              <button
+                type="button"
+                onClick={() => window.location.reload()}
+                className="mt-5 rounded-full bg-himalaya-900 px-5 py-3 font-medium text-white transition hover:bg-himalaya-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-500"
+              >
+                {t('retry')}
+              </button>
+            )}
+            {(search || tourType !== 'all' || region !== 'all' || selectedCategory !== 'all') && (
+              <button
+                type="button"
+                onClick={() => {
+                  setSearch('');
+                  setTourType('all');
+                  setRegion('all');
+                  setSelectedCategory('all');
+                }}
+                className="mt-5 rounded-full bg-himalaya-900 px-5 py-3 font-medium text-white transition hover:bg-himalaya-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-500"
+              >
+                {t('clear_filters')}
+              </button>
+            )}
           </div>
         ) : (
           <div className="grid min-w-0 grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
             {displayedTours.map((tour) => {
                 const image =
-                  tour.heroImage ||
-                  '/images/placeholders/destination.jpg';
+                  normalizeImageUrl(tour.heroImage || '');
 
               const cardContent = (
                 <>
-                  <Image
-                    src={normalizeImageUrl(image)}
+                  {image && <Image
+                    src={image}
                     alt={getTitle(tour)}
                     fill
+                    sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw"
                     className="object-cover transition duration-700 group-hover:scale-110"
-                  />
+                  />}
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
 
                   {tour.featured && (
                     <div className="absolute left-4 top-4 rounded-full bg-amber-400 px-3 py-1 text-xs font-semibold text-slate-900">
-                      ⭐ Featured
+                      ⭐ {t('featured_badge')}
                     </div>
                   )}
 
                   {!tour.active && (
-                    <div className="absolute right-4 top-4 rounded-full bg-orange-500 px-3 py-1 text-xs font-semibold text-white">
+                    <div className="absolute right-4 top-4 rounded-full bg-orange-700 px-3 py-1 text-xs font-semibold text-white">
                       Coming Soon
                     </div>
                   )}
@@ -519,7 +563,7 @@ const [region, setRegion] = useState<
                       </span>
 
                       <span className="text-sm font-medium">
-                        Explore →
+                        {t('view_journey')} →
                       </span>
                     </div>
                   </div>
@@ -530,8 +574,8 @@ const [region, setRegion] = useState<
                 return (
                   <Link
                     key={tour.id}
-                    href={`/${locale}/tour/${tour.slug}`}
-                    className="group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[32px] bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                    href={{ pathname: '/tour/[slug]', params: { slug: tour.slug } }}
+                    className="group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[32px] bg-himalaya-800 shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
                   >
                     {cardContent}
                   </Link>
@@ -541,7 +585,7 @@ const [region, setRegion] = useState<
               return (
                 <div
                   key={tour.id}
-                  className="group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[32px] bg-white opacity-80 shadow-lg"
+                  className="group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[32px] bg-himalaya-800 opacity-90 shadow-lg"
                 >
                   {cardContent}
                 </div>
@@ -559,7 +603,7 @@ const [region, setRegion] = useState<
               }
               className="rounded-full bg-blue-600 px-8 py-4 font-semibold text-white shadow-lg transition hover:bg-blue-700 hover:shadow-xl"
             >
-              View More Tours
+              {t('view_more')}
             </button>
           </div>
         )}
@@ -573,21 +617,21 @@ const [region, setRegion] = useState<
               }
               className="rounded-full border border-slate-300 bg-white px-8 py-4 font-semibold text-slate-700 transition hover:bg-slate-50"
             >
-              Show Less
+              {t('show_less')}
             </button>
           </div>
         )}
       </section>
 
       {/* Travel Stats */}
-      <section className="rounded-[40px] bg-gradient-to-r from-blue-900 via-blue-800 to-cyan-700 p-8 text-white md:p-12">
-        <div className="grid gap-8 md:grid-cols-4">
+      <section className="rounded-3xl bg-himalaya-900 p-6 text-white sm:p-8 md:p-10">
+        <div className="grid gap-6 sm:grid-cols-2">
           <div>
             <div className="text-4xl font-bold">
-              {tours.length}+
+              {tours.length}
             </div>
             <div className="mt-2 text-white/80">
-              Curated Tours
+              {t('stats.tours')}
             </div>
           </div>
 
@@ -600,31 +644,11 @@ const [region, setRegion] = useState<
                       tour.destinations || []
                   )
                 ).size
-              }+
+              }
             </div>
 
             <div className="mt-2 text-white/80">
-              Destinations
-            </div>
-          </div>
-
-          <div>
-            <div className="text-4xl font-bold">
-              10K+
-            </div>
-
-            <div className="mt-2 text-white/80">
-              Happy Travellers
-            </div>
-          </div>
-
-          <div>
-            <div className="text-4xl font-bold">
-              4.9★
-            </div>
-
-            <div className="mt-2 text-white/80">
-              Customer Rating
+              {t('stats.destinations')}
             </div>
           </div>
         </div>

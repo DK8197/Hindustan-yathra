@@ -1,18 +1,20 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Menu, X } from 'lucide-react';
-import { Link } from '@/i18n/routing';
+import { Link, usePathname } from '@/i18n/routing';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useAppStore } from '@/store/useAppStore';
 
 export function Navbar() {
   const t = useTranslations('nav');
+  const pathname = usePathname();
 
   const [open, setOpen] =
     useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const setUser =
     useAppStore(
@@ -70,6 +72,20 @@ export function Navbar() {
 
     void syncSession();
   }, [setUser]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [open]);
 
   return (
     <header
@@ -165,6 +181,8 @@ export function Navbar() {
                 href={
                   link.href
                 }
+                aria-current={pathname === link.href ? 'page' : undefined}
+                onClick={() => setOpen(false)}
                 className="
                   relative
                   whitespace-nowrap
@@ -178,6 +196,8 @@ export function Navbar() {
                   duration-300
                   hover:bg-white/10
                   hover:text-amber-300
+                  aria-[current=page]:bg-white/10
+                  aria-[current=page]:text-amber-300
                   focus-visible:outline-none
                   focus-visible:ring-2
                   focus-visible:ring-amber-400
@@ -241,7 +261,13 @@ export function Navbar() {
 
         {/* MOBILE MENU BUTTON */}
         <button
+          ref={menuButtonRef}
           className="
+            flex
+            h-11
+            w-11
+            items-center
+            justify-center
             rounded-lg
             border
             border-white/20
@@ -255,7 +281,9 @@ export function Navbar() {
               !open
             )
           }
-          aria-label="Toggle menu"
+          aria-expanded={open}
+          aria-controls="mobile-primary-navigation"
+          aria-label={open ? t('close_menu') : t('open_menu')}
         >
           {open ? (
             <X
@@ -272,6 +300,9 @@ export function Navbar() {
       {/* MOBILE MENU */}
       {open && (
         <div
+          id="mobile-primary-navigation"
+          aria-label={t('primary_navigation')}
+          role="navigation"
           className="
             border-t
             border-white/10

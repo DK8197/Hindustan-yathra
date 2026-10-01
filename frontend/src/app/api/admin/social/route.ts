@@ -4,9 +4,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
 export async function GET() {
   try {
-    console.log("API_URL:", API_URL);
-    console.log("API_SECRET:", process.env.API_SECRET);
-
     const response = await fetch(
       `${API_URL}/api/v1/social/admin/`,
       {

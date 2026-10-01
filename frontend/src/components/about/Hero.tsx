@@ -1,21 +1,22 @@
 'use client';
 
+import type { CSSProperties } from 'react';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
+import { getCdnImageUrl } from '@/lib/image-cdn';
 
 export default function Hero() {
   const t = useTranslations('about');
-  console.log(t('hero-title'));
 
   return (
     <section className="relative isolate overflow-hidden">
       {/* Background */}
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className="hero-bg absolute inset-0"
         style={{
-          backgroundImage:
-            "url('/textures/hero-background-desktop.jpg')",
-        }}
+          '--hero-bg-mobile': `url("${getCdnImageUrl('images-confidential/hero-mobile.webp')}")`,
+          '--hero-bg-desktop': `url("${getCdnImageUrl('images-confidential/hero-desktop.webp')}")`,
+        } as CSSProperties}
       />
 
       {/* Dark overlay */}
@@ -44,7 +45,7 @@ export default function Hero() {
                 items-center
                 justify-center
                 rounded-full
-                bg-saffron-500
+                bg-saffron-700
                 px-8
                 py-4
                 text-base
@@ -55,7 +56,7 @@ export default function Hero() {
                 transition-all
                 duration-300
                 hover:-translate-y-1
-                hover:bg-saffron-600
+                hover:bg-saffron-700
                 hover:shadow-2xl
               "
             >

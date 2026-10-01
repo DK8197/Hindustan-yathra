@@ -63,6 +63,7 @@ export interface Tour {
   };
   featured: boolean;
   isDomestic: boolean;
+  region?: string;
   active: boolean; // toggled from admin without deleting the record
 }
 

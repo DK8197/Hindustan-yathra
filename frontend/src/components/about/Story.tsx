@@ -11,8 +11,8 @@ export default function Story() {
       <div className="container mx-auto grid gap-16 px-6 lg:grid-cols-2">
 
         <div>
-          <h2 className="mb-6 text-4xl font-bold">
-            Our Story
+          <h2 className="mb-6 font-display text-3xl font-bold text-himalaya-900 sm:text-4xl">
+            {t('story_title')}
           </h2>
 
           <p className="text-lg leading-8 text-gray-600">
@@ -20,17 +20,17 @@ export default function Story() {
           </p>
         </div>
 
-        <div className="rounded-3xl bg-orange-50 p-10">
-          <h3 className="text-3xl font-bold">
-            Our Mission
+        <div className="rounded-2xl border border-slate-200 bg-[#fbf8f2] p-6 sm:p-8">
+          <h3 className="font-display text-2xl font-bold text-himalaya-900 sm:text-3xl">
+            {t('mission_title')}
           </h3>
 
           <p className="mt-5 text-gray-600 leading-8">
             {t('mission')}
           </p>
 
-          <h3 className="mt-10 text-3xl font-bold">
-            Our Vision
+          <h3 className="mt-8 font-display text-2xl font-bold text-himalaya-900 sm:mt-10 sm:text-3xl">
+            {t('vision_title')}
           </h3>
 
           <p className="mt-5 text-gray-600 leading-8">

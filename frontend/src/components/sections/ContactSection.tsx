@@ -1,136 +1,61 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { motion, AnimatePresence } from 'framer-motion';
 import {
   MessageCircle,
-  Plane,
   CheckCircle2,
   AlertCircle,
+  LoaderCircle,
+  Send,
 } from 'lucide-react';
 
 const WHATSAPP_NUMBER = '919060085635';
 
 type Status = 'idle' | 'submitting' | 'done' | 'error';
 
-function FormStatus({ status }: { status: Status }) {
+function FormStatus({ status, message }: { status: Status; message: string }) {
+  if (status === 'idle') return null;
+
+  const Icon = status === 'submitting'
+    ? LoaderCircle
+    : status === 'done'
+      ? CheckCircle2
+      : AlertCircle;
+  const style = status === 'done'
+    ? 'border-emerald-200 bg-emerald-50 text-emerald-900'
+    : status === 'error'
+      ? 'border-red-200 bg-red-50 text-red-900'
+      : 'border-sky-200 bg-sky-50 text-sky-900';
+
   return (
-    <AnimatePresence mode="wait">
-      {status === 'submitting' && (
-        <motion.div
-          key="submitting"
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0 }}
-          className="relative overflow-hidden rounded-2xl border border-sky-100 bg-sky-50 p-4"
-        >
-          <motion.div
-            className="absolute left-0 top-1/2"
-            animate={{ x: ['-10%', '110%'] }}
-            transition={{
-              repeat: Infinity,
-              duration: 3,
-              ease: 'linear',
-            }}
-          >
-            <Plane size={16} className="text-sky-500" />
-          </motion.div>
-
-          <div className="flex items-center gap-3">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{
-                repeat: Infinity,
-                duration: 2,
-                ease: 'linear',
-              }}
-            >
-              <Plane className="text-sky-600" size={20} />
-            </motion.div>
-
-            <div>
-              <p className="font-medium text-sky-900">
-                Sending your travel enquiry...
-              </p>
-              <p className="text-sm text-sky-700">
-                Our travel experts are preparing your next adventure.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      )}
-
-      {status === 'done' && (
-        <motion.div
-          key="success"
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          className="rounded-2xl border border-emerald-100 bg-emerald-50 p-4"
-        >
-          <div className="flex items-center gap-3">
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ type: 'spring', stiffness: 250 }}
-            >
-              <CheckCircle2 className="text-emerald-600" size={24} />
-            </motion.div>
-
-            <div>
-              <p className="font-semibold text-emerald-900">
-                Enquiry Sent Successfully!
-              </p>
-              <p className="text-sm text-emerald-700">
-                Your journey starts here. Our team will contact you shortly.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      )}
-
-      {status === 'error' && (
-        <motion.div
-          key="error"
-          initial={{ opacity: 0, x: -15 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0 }}
-          className="rounded-2xl border border-red-100 bg-red-50 p-4"
-        >
-          <div className="flex items-center gap-3">
-            <AlertCircle className="text-red-600" size={22} />
-
-            <div>
-              <p className="font-medium text-red-900">
-                Couldn't send your enquiry
-              </p>
-              <p className="text-sm text-red-700">
-                Please try again or contact us via WhatsApp.
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <div
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+      className={`flex items-start gap-3 rounded-xl border p-4 text-sm ${style}`}
+    >
+      <Icon
+        aria-hidden="true"
+        className={`mt-0.5 h-5 w-5 shrink-0 ${status === 'submitting' ? 'animate-spin' : ''}`}
+      />
+      <p>{message}</p>
+    </div>
   );
 }
 
-export function ContactSection() {
+export function ContactSection({
+  initialDestination = '',
+  headingLevel = 'h2',
+}: {
+  initialDestination?: string;
+  headingLevel?: 'h1' | 'h2';
+}) {
   const t = useTranslations('contact');
   const tSections = useTranslations('sections');
 
   const [status, setStatus] = useState<Status>('idle');
-
-  useEffect(() => {
-    if (status === 'done' || status === 'error') {
-      const timer = setTimeout(() => {
-        setStatus('idle');
-      }, 6000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [status]);
+  const Heading = headingLevel;
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -164,142 +89,77 @@ export function ContactSection() {
   return (
     <section
       id="contact"
-      className="mx-auto max-w-7xl px-6 py-24 md:px-12"
+      className="mx-auto max-w-7xl scroll-mt-20 px-4 py-16 sm:px-6 sm:py-20 md:px-12"
     >
       <div className="mb-12 text-center">
 
-        <motion.h2
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-4 font-display text-4xl font-bold tracking-tight text-transparent bg-gradient-to-r from-himalaya-800 via-saffron-600 to-himalaya-800 bg-clip-text md:text-5xl"
-        >
+        <Heading className="mt-4 font-display text-3xl font-bold tracking-tight text-himalaya-900 sm:text-4xl md:text-5xl">
           {tSections('contact')}
-        </motion.h2>
+        </Heading>
 
         <p className="mx-auto mt-4 max-w-2xl text-gray-600">
-          Tell us where you want to go and we'll craft the perfect journey
-          tailored just for you.
+          {t('intro')}
         </p>
       </div>
 
       <div className="grid gap-10 lg:grid-cols-2">
         {/* FORM */}
-        <motion.form
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+        <form
           onSubmit={handleSubmit}
-          className="space-y-4 rounded-3xl bg-white p-8 shadow-xl ring-1 ring-black/5"
+          className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8"
         >
-          <input
-            name="name"
-            required
-            placeholder={t('name')}
-            className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
-          />
+          <div>
+            <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium text-slate-800">{t('name')}</label>
+            <input id="contact-name" name="name" autoComplete="name" required minLength={2} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
+          </div>
 
-          <input
-            name="phone"
-            required
-            placeholder={t('phone')}
-            className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
-          />
+          <div>
+            <label htmlFor="contact-phone" className="mb-1.5 block text-sm font-medium text-slate-800">{t('phone')}</label>
+            <input id="contact-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" required minLength={10} maxLength={20} pattern="[0-9+(). -]{10,20}" title={t('phone_format_hint')} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
+          </div>
 
-          <input
-            name="email"
-            type="email"
-            placeholder={t('email')}
-            className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
-          />
+          <div>
+            <label htmlFor="contact-email" className="mb-1.5 block text-sm font-medium text-slate-800">{t('email')} <span className="font-normal text-slate-500">({t('optional')})</span></label>
+            <input id="contact-email" name="email" type="email" autoComplete="email" className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
+          </div>
 
-          <input
-            name="destination"
-            placeholder={t('destination')}
-            className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
-          />
+          <div>
+            <label htmlFor="contact-destination" className="mb-1.5 block text-sm font-medium text-slate-800">{t('destination')} <span className="font-normal text-slate-500">({t('optional')})</span></label>
+            <input id="contact-destination" name="destination" autoComplete="off" defaultValue={initialDestination} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
+          </div>
 
-          <textarea
-            name="message"
-            rows={5}
-            placeholder={t('message')}
-            className="w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none transition focus:border-orange-400"
-          />
+          <div>
+            <label htmlFor="contact-message" className="mb-1.5 block text-sm font-medium text-slate-800">{t('message')} <span className="font-normal text-slate-500">({t('optional')})</span></label>
+            <textarea id="contact-message" name="message" rows={4} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
+          </div>
 
-          <motion.button
-            whileHover={{
-              scale: status === 'submitting' ? 1 : 1.02,
-            }}
-            whileTap={{
-              scale: status === 'submitting' ? 1 : 0.98,
-            }}
+          <button
             disabled={status === 'submitting'}
             type="submit"
-            className="relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-gradient-to-r from-orange-500 via-amber-500 to-orange-600 py-4 font-semibold text-white shadow-lg disabled:cursor-not-allowed"
+            className="flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-saffron-700 px-5 py-3 font-semibold text-white transition hover:bg-saffron-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
           >
-            {status === 'submitting' && (
-              <motion.div
-                className="absolute left-0"
-                animate={{
-                  x: ['-10%', '700%'],
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 2,
-                  ease: 'linear',
-                }}
-              >
-                <Plane size={18} />
-              </motion.div>
-            )}
+            {status === 'submitting' ? <LoaderCircle aria-hidden="true" className="h-5 w-5 animate-spin" /> : <Send aria-hidden="true" className="h-5 w-5" />}
+            {status === 'submitting' ? t('sending') : t('submit')}
+          </button>
 
-            {status === 'submitting' ? (
-              <>
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{
-                    repeat: Infinity,
-                    duration: 1,
-                    ease: 'linear',
-                  }}
-                >
-                  <Plane size={18} />
-                </motion.div>
-                Sending Enquiry...
-              </>
-            ) : status === 'done' ? (
-              <>
-                <CheckCircle2 size={18} />
-                Journey Requested
-              </>
-            ) : (
-              <>
-                <Plane size={18} />
-                Start My Journey
-              </>
-            )}
-          </motion.button>
-
-          <FormStatus status={status} />
-        </motion.form>
+          <FormStatus
+            status={status}
+            message={status === 'submitting' ? t('status_sending') : status === 'done' ? t('status_success') : t('status_error')}
+          />
+        </form>
 
         {/* RIGHT PANEL */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-col gap-6"
-        >
+        <div className="flex flex-col gap-6">
           <a
             href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
               'Hi Hindustan Yathra, I would like to plan a trip.'
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center justify-center gap-3 rounded-3xl bg-green-500 py-5 font-semibold text-white shadow-lg transition-all hover:bg-green-600"
+            className="group flex min-h-14 items-center justify-center gap-3 rounded-2xl bg-emerald-700 py-4 font-semibold text-white transition-colors hover:bg-emerald-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-700 focus-visible:ring-offset-2"
           >
             <MessageCircle size={22} />
-            Chat on WhatsApp
+            {t('whatsapp')}
           </a>
 
           
@@ -313,7 +173,7 @@ export function ContactSection() {
               referrerPolicy="no-referrer-when-downgrade"
             />
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

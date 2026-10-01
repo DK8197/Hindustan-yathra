@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
+import { getPathname } from '@/i18n/routing';
 
 import { HeroSection } from '@/components/sections/HeroSection';
 import { FeaturedTours } from '@/components/sections/FeaturedTours';
@@ -20,14 +21,28 @@ export async function generateMetadata({
     locale,
     namespace: 'hero',
   });
+  const href = '/';
 
   return {
     title: t('headline'),
     description: t('subheadline'),
+    alternates: {
+      canonical: getPathname({ locale, href }),
+      languages: {
+        en: getPathname({ locale: 'en', href }),
+        kn: getPathname({ locale: 'kn', href }),
+      },
+    },
     openGraph: {
       title: t('headline'),
       description: t('subheadline'),
       type: 'website',
+      images: [{
+        url: '/textures/hindustan-yatra-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Hindustan Yatra',
+      }],
     },
     twitter: {
       card: 'summary_large_image',

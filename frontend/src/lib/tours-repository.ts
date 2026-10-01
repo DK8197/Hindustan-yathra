@@ -47,16 +47,36 @@ export async function getAllToursAdmin() {
 // }
 
 export async function getFeaturedTours(): Promise<Tour[]> {
-  const response = await fetch(
-    `${API_URL}/api/v1/tours/featured`,
-    {
-       headers: {
+  const result = await getFeaturedToursResult();
+  return result.tours;
+}
+
+export async function getFeaturedToursResult(): Promise<{
+  tours: Tour[];
+  loadFailed: boolean;
+}> {
+  try {
+    const response = await fetch(
+      `${API_URL}/api/v1/tours/featured`,
+      {
+        headers: {
           'X-App-Key': process.env.API_SECRET!,
         },
-      next: { revalidate: 3600 }
+        next: { revalidate: 3600 },
+      }
+    );
+
+    if (!response.ok) {
+      return { tours: [], loadFailed: true };
     }
-  );
-  return response.json();
+
+    const data: unknown = await response.json();
+    return Array.isArray(data)
+      ? { tours: data as Tour[], loadFailed: false }
+      : { tours: [], loadFailed: true };
+  } catch {
+    return { tours: [], loadFailed: true };
+  }
 }
 
 // export async function getToursByCategory(category: TourCategory): Promise<Tour[]> {
@@ -84,9 +104,14 @@ export async function getToursByCategory(
 //   return tours.find((t) => t.slug === slug && t.active);
 // }
 
-export async function getTourBySlug(
+export type TourLookupResult =
+  | { status: 'found'; tour: Tour }
+  | { status: 'not-found' }
+  | { status: 'unavailable' };
+
+export async function lookupTourBySlug(
   slug: string
-): Promise<Tour | undefined> {
+): Promise<TourLookupResult> {
   const headers = {
     'X-App-Key': process.env.API_SECRET!,
   };
@@ -101,7 +126,10 @@ export async function getTourBySlug(
     );
 
     if (response.ok) {
-      return response.json();
+      const data: unknown = await response.json();
+      if (data && typeof data === 'object' && 'slug' in data) {
+        return { status: 'found', tour: data as Tour };
+      }
     }
   } catch {
     // Try the active-tour index below; transient detail-endpoint failures
@@ -118,28 +146,37 @@ export async function getTourBySlug(
     );
 
     if (!response.ok) {
-      return undefined;
+      return { status: 'unavailable' };
     }
 
-    const tours = (await response.json()) as Tour[];
-    return tours.find((tour) => tour.slug === slug);
+    const data: unknown = await response.json();
+    if (!Array.isArray(data)) return { status: 'unavailable' };
+
+    const tour = (data as Tour[]).find((item) => item.slug === slug);
+    return tour ? { status: 'found', tour } : { status: 'not-found' };
   } catch {
-    return undefined;
+    return { status: 'unavailable' };
   }
 }
 
 export async function getAllTours_details(): Promise<Tour[]> {
-  const response = await fetch(
-    `${API_URL}/api/v1/details`,
-    {
-      headers: {
+  try {
+    const response = await fetch(
+      `${API_URL}/api/v1/details`,
+      {
+        headers: {
           'X-App-Key': process.env.API_SECRET!,
         },
-      next: { revalidate: 3600 }
-    }
-  );
+        next: { revalidate: 3600 },
+      }
+    );
 
-  return response.json();
+    if (!response.ok) return [];
+    const data: unknown = await response.json();
+    return Array.isArray(data) ? data as Tour[] : [];
+  } catch {
+    return [];
+  }
 }
 
 export async function getAllTourSlugs(): Promise<string[]> {

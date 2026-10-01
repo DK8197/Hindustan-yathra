@@ -1,7 +1,8 @@
 import type { Tour } from '@/types/tour';
 
 export async function searchTours(
-  query: string
+  query: string,
+  signal?: AbortSignal
 ): Promise<Tour[]> {
   if (!query.trim()) {
     return [];
@@ -11,11 +12,12 @@ export async function searchTours(
     `/api/search?q=${encodeURIComponent(query)}`,
     {
       cache: 'no-store',
+      signal,
     }
   );
 
   if (!response.ok) {
-    return [];
+    throw new Error(`Tour search failed with status ${response.status}`);
   }
 
   return response.json();

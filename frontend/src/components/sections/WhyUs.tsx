@@ -51,8 +51,8 @@ const copy = {
   },
 
   safe_travel: {
-    en: 'Reliable transportation, verified accommodations, and carefully planned itineraries for a worry-free experience.',
-    kn: 'ವಿಶ್ವಾಸಾರ್ಹ ಸಾರಿಗೆ, ಪರಿಶೀಲಿತ ವಸತಿ ಮತ್ತು ಸೂಕ್ತವಾಗಿ ಯೋಜಿತ ಪ್ರವಾಸ ಕಾರ್ಯಕ್ರಮಗಳು.'
+    en: 'Carefully planned itineraries with clear information about the arrangements for your journey.',
+    kn: 'ನಿಮ್ಮ ಪ್ರಯಾಣದ ವ್ಯವಸ್ಥೆಗಳ ಬಗ್ಗೆ ಸ್ಪಷ್ಟ ಮಾಹಿತಿಯೊಂದಿಗೆ ಸೂಕ್ತವಾಗಿ ಯೋಜಿಸಿದ ಪ್ರವಾಸ ಕಾರ್ಯಕ್ರಮಗಳು.'
   },
 
   customized: {
@@ -61,8 +61,8 @@ const copy = {
   },
 
   support: {
-    en: 'Dedicated 24×7 travel assistance before, during, and after your journey.',
-    kn: 'ಪ್ರಯಾಣದ ಮೊದಲು, ವೇಳೆ ಮತ್ತು ನಂತರವೂ 24×7 ಸಹಾಯ ಮತ್ತು ಬೆಂಬಲ.'
+    en: 'Speak with our team for guidance while planning your journey and arranging the details.',
+    kn: 'ನಿಮ್ಮ ಪ್ರಯಾಣವನ್ನು ಯೋಜಿಸಲು ಮತ್ತು ವಿವರಗಳನ್ನು ಸಿದ್ಧಪಡಿಸಲು ನಮ್ಮ ತಂಡದ ಮಾರ್ಗದರ್ಶನ ಪಡೆಯಿರಿ.'
   }
 };
 

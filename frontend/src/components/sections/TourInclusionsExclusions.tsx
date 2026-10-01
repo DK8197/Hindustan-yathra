@@ -1,11 +1,13 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
+
 type Props = {
-  inclusions: {
+  inclusions?: {
     en: string[];
     kn: string[];
   };
-  exclusions: {
+  exclusions?: {
     en: string[];
     kn: string[];
   };
@@ -17,19 +19,23 @@ export function TourInclusionsExclusions({
   exclusions,
   locale,
 }: Props) {
+  const t = useTranslations('tour');
+  const includedItems = inclusions?.[locale] ?? [];
+  const excludedItems = exclusions?.[locale] ?? [];
+
+  if (includedItems.length === 0 && excludedItems.length === 0) return null;
+
   return (
     <section className="rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
       <div className="grid gap-8 md:grid-cols-2">
         {/* Inclusions */}
         <div>
-          <h2 className="mb-4 text-xl font-semibold text-emerald-700">
-            {locale === 'kn'
-              ? 'ಒಳಗೊಂಡಿರುವವು'
-              : 'Inclusions'}
+          <h2 className="mb-4 text-xl font-semibold text-emerald-800">
+            {t('inclusions')}
           </h2>
 
           <ul className="space-y-3">
-            {inclusions[locale].map(
+            {includedItems.map(
               (item, index) => (
                 <li
                   key={index}
@@ -48,14 +54,12 @@ export function TourInclusionsExclusions({
 
         {/* Exclusions */}
         <div>
-          <h2 className="mb-4 text-xl font-semibold text-red-700">
-            {locale === 'kn'
-              ? 'ಒಳಗೊಂಡಿಲ್ಲ'
-              : 'Exclusions'}
+          <h2 className="mb-4 text-xl font-semibold text-himalaya-900">
+            {t('exclusions')}
           </h2>
 
           <ul className="space-y-3">
-            {exclusions[locale].map(
+            {excludedItems.map(
               (item, index) => (
                 <li
                   key={index}

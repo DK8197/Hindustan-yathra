@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface Props {
   images: string[];
@@ -12,6 +13,7 @@ const PAGE_SIZE = 40;
 export function InfiniteGallery({
   images,
 }: Props) {
+  const t = useTranslations('sections');
   const [visible, setVisible] =
     useState(PAGE_SIZE);
 
@@ -55,7 +57,7 @@ export function InfiniteGallery({
           >
             <Image
               src={url}
-              alt=""
+              alt={t('gallery_image_alt', { index: i + 1 })}
               width={1200}
               height={800}
               className="w-full rounded-xl"
