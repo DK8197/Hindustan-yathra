@@ -29,7 +29,8 @@ function HeroSectionComponent() {
       ref={scrollRef}
       className="
         relative
-        h-[100vh]
+        h-[100svh]
+        min-h-[34rem]
         overflow-hidden
       "
     >
@@ -37,7 +38,8 @@ function HeroSectionComponent() {
         className="
           sticky
           top-0
-          h-screen
+          h-[100svh]
+          min-h-[34rem]
           overflow-hidden
         "
       >
@@ -89,9 +91,11 @@ function HeroSectionComponent() {
             h-full
             items-center
             justify-center
-            px-6
+            px-4
+            py-20
+            sm:px-6
           "
-           >
+        >
             <div
               className="
                 mx-auto
@@ -104,11 +108,12 @@ function HeroSectionComponent() {
                 mx-auto
                 max-w-6xl
                 font-display
-                text-5xl
+                text-[clamp(2.25rem,8vw,4rem)]
                 font-semibold
-                leading-[0.9]
+                leading-[0.98]
                 tracking-tight
                 text-white
+                [text-wrap:balance]
                 [text-shadow:0_8px_40px_rgba(0,0,0,0.8)]
                 sm:text-6xl
                 md:text-7xl
@@ -122,11 +127,12 @@ function HeroSectionComponent() {
             <p
               className="
                 mx-auto
-                mt-8
+                mt-5
                 max-w-3xl
-                text-lg
+                text-base
                 leading-relaxed
                 text-white/90
+                sm:mt-8
                 sm:text-xl
                 md:text-2xl
               "
@@ -136,11 +142,13 @@ function HeroSectionComponent() {
 
             <div
               className="
-                mt-12
+                mt-7
                 flex
                 flex-wrap
                 justify-center
-                gap-4
+                gap-3
+                sm:mt-12
+                sm:gap-4
               "
             >
               <Link
@@ -150,14 +158,18 @@ function HeroSectionComponent() {
                   border
                   border-white/20
                   bg-white/15
-                  px-8
-                  py-4
+                  px-6
+                  py-3
+                  text-sm
                   font-medium
                   text-white
                   backdrop-blur-xl
                   transition-all
                   duration-300
                   hover:bg-white/25
+                  sm:px-8
+                  sm:py-4
+                  sm:text-base
                 "
               >
                 {t('cta_explore')}
@@ -170,14 +182,18 @@ function HeroSectionComponent() {
                   border
                   border-white/20
                   bg-black/20
-                  px-8
-                  py-4
+                  px-6
+                  py-3
+                  text-sm
                   font-medium
                   text-white
                   backdrop-blur-xl
                   transition-all
                   duration-300
                   hover:bg-black/30
+                  sm:px-8
+                  sm:py-4
+                  sm:text-base
                 "
               >
                 {t('cta_customize')}
@@ -191,7 +207,7 @@ function HeroSectionComponent() {
           className="
             absolute
             inset-x-0
-            bottom-10
+            bottom-4
             z-40
             flex
             justify-center
@@ -211,11 +227,13 @@ function HeroSectionComponent() {
           >
             <span
               className="
-                mb-4
-                text-[11px]
+                mb-2
+                text-[10px]
                 uppercase
                 tracking-[0.4em]
                 text-white/70
+                sm:mb-4
+                sm:text-[11px]
               "
             >
               {t('scroll_hint')}
@@ -246,7 +264,7 @@ function HeroSectionComponent() {
 
             <ChevronDown
               size={16}
-              className="mt-2 text-white/70"
+                className="mt-1 text-white/70 sm:mt-2"
             />
           </m.div>
         </div>

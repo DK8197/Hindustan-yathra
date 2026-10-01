@@ -341,7 +341,7 @@ const [region, setRegion] = useState<
                   <Link
                     key={tour.id}
                     href={`/${locale}/tour/${tour.slug}`}
-                    className="group relative h-[420px] overflow-hidden rounded-[32px]"
+                    className="group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[32px]"
                   >
                     <Image
                       src={normalizeImageUrl(image)}
@@ -420,7 +420,7 @@ const [region, setRegion] = useState<
             </p>
           </div>
         ) : (
-          <div className="grid gap-8 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="grid min-w-0 grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
             {displayedTours.map((tour) => {
                 const image =
                   tour.heroImage ||
@@ -489,7 +489,7 @@ const [region, setRegion] = useState<
                   <Link
                     key={tour.id}
                     href={`/${locale}/tour/${tour.slug}`}
-                    className="group relative h-[420px] overflow-hidden rounded-[32px] bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
+                    className="group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[32px] bg-white shadow-lg transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
                   >
                     {cardContent}
                   </Link>
@@ -499,7 +499,7 @@ const [region, setRegion] = useState<
               return (
                 <div
                   key={tour.id}
-                  className="group relative h-[420px] overflow-hidden rounded-[32px] bg-white opacity-80 shadow-lg"
+                  className="group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[32px] bg-white opacity-80 shadow-lg"
                 >
                   {cardContent}
                 </div>

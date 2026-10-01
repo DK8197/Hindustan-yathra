@@ -112,7 +112,7 @@ export function FeaturedToursSearch({
         </div>
       )}
 
-      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-10 grid min-w-0 grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
         {displayedResults.map((tour, i) => (
           <TourCard
             key={tour.slug}

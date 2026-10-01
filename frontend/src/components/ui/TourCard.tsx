@@ -23,10 +23,10 @@ export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-80px' }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
-      className="group relative overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-black/5 transition hover:shadow-xl"
+      className="group relative min-w-0 overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-black/5 transition hover:shadow-xl"
     >
-      <Link href={{ pathname: '/tour/[slug]', params: { slug: tour.slug } }} className="block">
-        <div className="relative h-56 w-full overflow-hidden">
+      <Link href={{ pathname: '/tour/[slug]', params: { slug: tour.slug } }} className="block min-w-0">
+        <div className="relative aspect-[16/10] w-full overflow-hidden bg-himalaya-100 sm:aspect-[3/2]">
           <Image
             src={normalizeImageUrl(tour.heroImage)}
             alt={tour.title[locale]}
@@ -40,19 +40,19 @@ export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
           </span>
         </div>
 
-        <div className="p-5">
-          <h3 className="font-display text-lg font-semibold text-himalaya-900">{tour.title[locale]}</h3>
+        <div className="min-w-0 p-4 sm:p-5">
+          <h3 className="line-clamp-2 break-words font-display text-lg font-semibold leading-snug text-himalaya-900">{tour.title[locale]}</h3>
           <p className="mt-1 line-clamp-2 text-sm text-gray-600">{tour.summary[locale]}</p>
 
-          <div className="mt-4 flex items-center justify-between">
-            <span className="flex items-center gap-1 text-xs text-gray-500">
+          <div className="mt-4 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+            <span className="flex shrink-0 items-center gap-1 text-xs text-gray-500">
               <Clock size={14} /> {tour.durationDays}D/{tour.durationNights}N
             </span>
-            <div className="text-right">
+            <div className="min-w-0 text-right">
               {hasPrice ? (
                 <>
                   <div className="text-xs text-gray-400">{t('starting_from')}</div>
-                  <div className="font-semibold text-saffron-600">
+                  <div className="break-words font-semibold text-saffron-600">
                     ₹{tour.priceFrom!.toLocaleString('en-IN')} <span className="text-xs font-normal text-gray-400">{t('per_person')}</span>
                   </div>
                 </>
