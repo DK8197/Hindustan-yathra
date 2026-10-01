@@ -91,35 +91,35 @@ export default async function TourDetailPage({
       />
 
       {/* Hero */}
-      <section className="relative h-[65vh] w-full overflow-hidden bg-gradient-to-br from-himalaya-800 via-himalaya-700 to-saffron-700">
+      <section className="relative min-h-[70svh] w-full overflow-hidden bg-gradient-to-br from-himalaya-800 via-himalaya-700 to-saffron-700 sm:min-h-[65vh]">
         {heroImage && (
           <Image
             src={normalizeImageUrl(heroImage)}
             alt={tour.title[locale]}
             fill
             priority
+            sizes="100vw"
             className="object-cover"
           />
         )}
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
-        <div className="absolute inset-x-0 bottom-0">
-          <div className="mx-auto max-w-7xl px-6 pb-12 md:px-12">
+        <div className="relative z-10 mx-auto flex min-h-[70svh] max-w-7xl items-end px-4 pb-8 pt-24 sm:min-h-[65vh] sm:px-6 sm:pb-12 md:px-12">
             <div className="max-w-4xl">
-              <div className="mb-4 inline-flex items-center rounded-full bg-white/15 px-4 py-2 text-sm text-white backdrop-blur-md">
+              <div className="mb-3 inline-flex items-center rounded-full bg-white/15 px-4 py-2 text-sm text-white backdrop-blur-md sm:mb-4">
                 {tour.category}
               </div>
 
-              <h1 className="font-display text-4xl font-semibold text-white md:text-6xl">
+              <h1 className="break-words font-display text-3xl font-semibold leading-tight text-white [text-wrap:balance] sm:text-4xl md:text-6xl">
                 {tour.title[locale]}
               </h1>
 
-              <p className="mt-4 max-w-3xl text-lg text-white/90 md:text-xl">
+              <p className="mt-3 max-w-3xl text-base leading-relaxed text-white/90 sm:mt-4 sm:text-lg md:text-xl">
                 {tour.summary[locale]}
               </p>
 
-              <div className="mt-6 flex flex-wrap gap-3">
+              <div className="mt-4 flex flex-wrap gap-2 sm:mt-6 sm:gap-3">
                 {tour.destinations?.map(
                   (
                     destination: string
@@ -138,7 +138,6 @@ export default async function TourDetailPage({
                 )}
               </div>
             </div>
-          </div>
         </div>
       </section>
 

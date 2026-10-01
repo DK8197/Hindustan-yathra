@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,6 +13,8 @@ import {
   Heart,
   Users,
   Building2,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import { normalizeImageUrl } from '@/lib/image-cdn';
 
@@ -75,6 +77,17 @@ const [region, setRegion] = useState<
 
   const [visibleCount, setVisibleCount] =
     useState(INITIAL_COUNT);
+  const categoryRailRef = useRef<HTMLDivElement>(null);
+
+  const scrollCategories = (direction: -1 | 1) => {
+    const rail = categoryRailRef.current;
+    if (!rail) return;
+
+    rail.scrollBy({
+      left: direction * Math.max(220, rail.clientWidth * 0.75),
+      behavior: 'smooth',
+    });
+  };
 
   const getTitle = (tour: Tour) =>
     locale === 'kn'
@@ -285,7 +298,21 @@ const [region, setRegion] = useState<
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-4">
+        <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+          <button
+            type="button"
+            aria-label="Scroll categories left"
+            onClick={() => scrollCategories(-1)}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-blue-300 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+
+          <div
+            ref={categoryRailRef}
+            className="flex min-w-0 flex-1 snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth py-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-4"
+            aria-label="Popular tour categories"
+          >
           {categories.map((category) => {
             const Icon =
               categoryIcons[
@@ -295,12 +322,17 @@ const [region, setRegion] = useState<
             return (
               <button
                 key={category}
-                onClick={() =>
-                  setSelectedCategory(
-                    category
-                  )
-                }
-                className={`flex items-center gap-3 rounded-2xl border px-5 py-3 transition-all ${
+                type="button"
+                aria-pressed={selectedCategory === category}
+                onClick={(event) => {
+                  setSelectedCategory(category);
+                  event.currentTarget.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center',
+                  });
+                }}
+                className={`flex shrink-0 snap-start items-center gap-2 whitespace-nowrap rounded-2xl border px-4 py-3 transition-all sm:gap-3 sm:px-5 ${
                   selectedCategory ===
                   category
                     ? 'border-blue-600 bg-blue-600 text-white shadow-lg'
@@ -315,6 +347,16 @@ const [region, setRegion] = useState<
               </button>
             );
           })}
+          </div>
+
+          <button
+            type="button"
+            aria-label="Scroll categories right"
+            onClick={() => scrollCategories(1)}
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-blue-300 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
         </div>
       </section>
 
