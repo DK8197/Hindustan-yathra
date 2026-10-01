@@ -23,10 +23,12 @@ function HeroSectionComponent() {
   const locale = useLocale() as 'en' | 'kn';
   const isKannada = locale === 'kn';
   const shouldReduceMotion = useReducedMotion();
+
   const destinationsPath = getPathname({
     locale,
     href: '/destinations',
   });
+
   const scrollRef = useHeroScrollProgress();
 
   return (
@@ -36,6 +38,7 @@ function HeroSectionComponent() {
         relative
         min-h-[calc(100svh-4rem)]
         md:min-h-[calc(100svh-5rem)]
+        lg:min-h-[100svh]
         overflow-hidden
       "
     >
@@ -44,14 +47,19 @@ function HeroSectionComponent() {
           relative
           min-h-[calc(100svh-4rem)]
           md:min-h-[calc(100svh-5rem)]
+          lg:min-h-[100svh]
           overflow-hidden
         "
       >
         {/* Background Image */}
         <div
           style={{
-            '--hero-bg-mobile': `url("${getCdnImageUrl('images-confidential/hero-mobile.webp')}")`,
-            '--hero-bg-desktop': `url("${getCdnImageUrl('images-confidential/hero-desktop.webp')}")`,
+            '--hero-bg-mobile': `url("${getCdnImageUrl(
+              'images-confidential/hero-mobile.webp'
+            )}")`,
+            '--hero-bg-desktop': `url("${getCdnImageUrl(
+              'images-confidential/hero-desktop.webp'
+            )}")`,
           } as CSSProperties}
           className="
             hero-bg
@@ -89,29 +97,36 @@ function HeroSectionComponent() {
         {/* Content */}
         <div
           className="
-            relative
+            absolute
+            inset-x-0
+            bottom-0
             z-30
-            flex
-            min-h-[calc(100svh-4rem)]
             px-4
+            pb-36
             sm:px-6
-            md:min-h-[calc(100svh-5rem)]
-            ${isKannada ? 'items-start justify-start pt-6 pb-12 sm:items-center sm:justify-center sm:py-14 md:py-16' : 'items-center justify-center py-10 sm:py-14 md:py-16'}
+            sm:pb-30
+            md:pb-28
+            lg:pb-23
           "
         >
-            <div
-              className="
-                mx-auto
-                w-full
-                max-w-6xl
-                text-center
-              "
-            >
+          <div
+            className="
+              mx-auto
+              w-full
+              max-w-6xl
+              text-center
+            "
+          >
+            {/* Headline */}
             <h1
               className={`
                 mx-auto
                 max-w-6xl
-                ${isKannada ? 'font-kannada text-[clamp(1.55rem,7.6vw,2.4rem)] leading-[1.3] tracking-normal sm:text-4xl md:text-5xl lg:text-6xl' : 'font-display text-[clamp(2.25rem,8vw,4rem)] leading-[0.98] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl xl:text-[7rem]'}
+                ${
+                  isKannada
+                    ? 'font-kannada text-[clamp(1.55rem,7.6vw,2.4rem)] leading-[1.3] tracking-normal sm:text-4xl md:text-5xl lg:text-6xl'
+                    : 'font-display text-[clamp(2.25rem,8vw,4rem)] leading-[0.98] tracking-tight sm:text-6xl md:text-6xl lg:text-6xl xl:text-[5.5rem]'
+                }
                 font-semibold
                 text-white
                 [text-wrap:balance]
@@ -121,44 +136,117 @@ function HeroSectionComponent() {
               {t('headline')}
             </h1>
 
+            {/* Subheadline */}
             <p
               className={`
                 mx-auto
-                mt-5
+                mt-8
                 max-w-3xl
-                ${isKannada ? 'font-kannada text-[0.95rem] leading-[1.65] sm:text-lg' : 'text-base leading-relaxed sm:text-xl md:text-2xl'}
+                ${
+                  isKannada
+                    ? 'font-kannada text-[0.95rem] leading-[1.65] sm:text-lg'
+                    : 'text-base leading-relaxed sm:text-xl md:text-2xl'
+                }
                 text-white/90
-                sm:mt-8
+                sm:mt-10
               `}
             >
               {t('subheadline')}
             </p>
 
+            {/* Search */}
             <form
               action={destinationsPath}
               method="get"
               role="search"
-              className={`mx-auto mt-5 flex w-full max-w-2xl items-center gap-1.5 rounded-2xl bg-white p-1.5 text-left shadow-xl sm:mt-8 sm:gap-2 sm:p-2 sm:rounded-full ${isKannada ? 'font-kannada' : ''}`}
+              className={`
+                mx-auto
+                mt-5
+                flex
+                w-full
+                max-w-2xl
+                items-center
+                gap-1.5
+                rounded-2xl
+                bg-white
+                p-1.5
+                text-left
+                shadow-xl
+                sm:mt-8
+                sm:gap-2
+                sm:rounded-full
+                sm:p-2
+                ${isKannada ? 'font-kannada' : ''}
+              `}
             >
-              <Search aria-hidden="true" className="ml-3 h-5 w-5 shrink-0 text-himalaya-600" />
-              <label htmlFor="hero-destination-search" className="sr-only">
+              <Search
+                aria-hidden="true"
+                className="
+                  ml-3
+                  h-5
+                  w-5
+                  shrink-0
+                  text-himalaya-600
+                "
+              />
+
+              <label
+                htmlFor="hero-destination-search"
+                className="sr-only"
+              >
                 {t('search_label')}
               </label>
+
               <input
                 id="hero-destination-search"
                 name="q"
                 type="search"
                 placeholder={t('search_placeholder')}
-                className={`min-w-0 flex-1 bg-transparent px-1.5 py-3 text-sm text-slate-900 outline-none placeholder:text-slate-600 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-saffron-700 sm:px-2 sm:text-base ${isKannada ? 'font-kannada' : ''}`}
+                className={`
+                  min-w-0
+                  flex-1
+                  bg-transparent
+                  px-1.5
+                  py-3
+                  text-sm
+                  text-slate-900
+                  outline-none
+                  placeholder:text-slate-600
+                  focus-visible:ring-2
+                  focus-visible:ring-inset
+                  focus-visible:ring-saffron-700
+                  sm:px-2
+                  sm:text-base
+                  ${isKannada ? 'font-kannada' : ''}
+                `}
               />
+
               <button
                 type="submit"
-                className={`min-h-11 shrink-0 rounded-full bg-saffron-700 px-3 text-sm font-semibold text-white transition hover:bg-saffron-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700 focus-visible:ring-offset-2 sm:px-6 ${isKannada ? 'font-kannada' : ''}`}
+                className={`
+                  min-h-11
+                  shrink-0
+                  rounded-full
+                  bg-saffron-700
+                  px-3
+                  text-sm
+                  font-semibold
+                  text-white
+                  transition
+                  hover:bg-saffron-700
+                  focus-visible:outline-none
+                  focus-visible:ring-2
+                  focus-visible:ring-saffron-700
+                  focus-visible:ring-offset-2
+                  sm:px-6
+                  ${isKannada ? 'font-kannada' : ''}
+                `}
               >
                 {t('search_cta')}
               </button>
             </form>
 
+            {/* CTAs */}
             <div
               className="
                 mt-5
@@ -224,79 +312,88 @@ function HeroSectionComponent() {
         </div>
 
         {/* Scroll Indicator */}
-        <div
-          className="
-            absolute
-            inset-x-0
-            hero-scroll-cue
-            bottom-2
-            z-40
-            flex
-            justify-center
-            pointer-events-none
-          "
-        >
-          <m.div
-            animate={shouldReduceMotion === false ? { y: [0, 8, 0] } : { y: 0}}
-            transition={{
-              duration: 2,
-              repeat: shouldReduceMotion === false ? Infinity : 0,
-              ease: 'easeInOut',
-            }}
-            className="flex flex-col items-center"
+          <div
+            className="
+              absolute
+              inset-x-0
+              z-40
+              hero-scroll-cue
+              flex
+              justify-center
+              pointer-events-none
+              bottom-[-8px]
+              sm:bottom-[-8px]
+              md:bottom-0
+              lg:bottom-0
+            "
           >
-            <span
-              className="
-                mb-2
-                text-[10px]
-                uppercase
-                tracking-[0.4em]
-                text-white/70
-                sm:mb-4
-                sm:text-[11px]
-                ${isKannada ? 'font-kannada tracking-normal' : ''}
-              "
+            <m.div
+              animate={
+                shouldReduceMotion === false
+                  ? { y: [0, 8, 0] }
+                  : { y: 0 }
+              }
+              transition={{
+                duration: 2,
+                repeat:
+                  shouldReduceMotion === false ? Infinity : 0,
+                ease: 'easeInOut',
+              }}
+              className="flex flex-col items-center"
             >
-              {t('scroll_hint')}
-            </span>
+              <span
+                className={`
+                  mb-2
+                  text-[10px]
+                  uppercase
+                  tracking-[0.4em]
+                  text-white/70
+                  sm:mb-3
+                  sm:text-[11px]
+                  ${
+                    isKannada
+                      ? 'font-kannada tracking-normal'
+                      : ''
+                  }
+                `}
+              >
+                {t('scroll_hint')}
+              </span>
 
-            <div
-              className="
-                flex
-                h-11
-                w-7
-                justify-center
-                rounded-full
-                border
-                border-white/30
-              "
-            >
               <div
                 className="
-                  mt-2
-                  h-2
-                  w-2
-                  animate-pulse
+                  flex
+                  h-10
+                  w-7
+                  justify-center
                   rounded-full
-                  bg-white
+                  border
+                  border-white/30
                 "
-              />
-            </div>
+              >
+                <div
+                  className="
+                    mt-2
+                    h-2
+                    w-2
+                    animate-pulse
+                    rounded-full
+                    bg-white
+                  "
+                />
+              </div>
 
-            <ChevronDown
-              size={16}
+              <ChevronDown
+                size={16}
                 className="mt-1 text-white/70 sm:mt-2"
-            />
-          </m.div>
-        </div>
+              />
+            </m.div>
+          </div>
       </div>
     </section>
   );
 }
 
-HeroSectionComponent.displayName =
-  'HeroSection';
+HeroSectionComponent.displayName = 'HeroSection';
 
-export const HeroSection = memo(
-  HeroSectionComponent
-);
+export const HeroSection = memo(HeroSectionComponent);
