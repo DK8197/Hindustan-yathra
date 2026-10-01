@@ -113,6 +113,36 @@ export function Navbar() {
           className="h-auto w-32 object-contain md:w-44"
         />
   </Link>
+
+  <div
+    aria-label="Tourism, ISO, and IRCTC certifications"
+    className="hidden shrink-0 items-center gap-3 rounded-full border border-white/15 bg-slate-900/80 px-3 py-2 shadow-inner xl:flex"
+  >
+    <Image
+      src="/images/karnataka-state-tourism-logo.png"
+      alt="Recognised by the Department of Tourism, Government of Karnataka"
+      title="Recognised by the Department of Tourism, Government of Karnataka"
+      width={64}
+      height={64}
+      className="h-7 w-auto object-contain"
+    />
+    <Image
+      src="/images/iso-certified-company.png"
+      alt="ISO certified"
+      title="ISO certified"
+      width={64}
+      height={64}
+      className="h-7 w-auto object-contain"
+    />
+    <Image
+      src="/images/irctc-logo.png"
+      alt="IRCTC certified"
+      title="IRCTC certified"
+      width={64}
+      height={64}
+      className="h-7 w-auto object-contain"
+    />
+  </div>
 </div>
 
         {/* DESKTOP NAV */}
