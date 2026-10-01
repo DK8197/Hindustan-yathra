@@ -29,8 +29,11 @@ function HeroSectionComponent() {
       ref={scrollRef}
       className="
         relative
-        h-[100svh]
-        min-h-[34rem]
+        mt-16
+        h-[calc(100svh-4rem)]
+        min-h-[32rem]
+        md:mt-20
+        md:h-[calc(100svh-5rem)]
         overflow-hidden
       "
     >
@@ -38,8 +41,9 @@ function HeroSectionComponent() {
         className="
           sticky
           top-0
-          h-[100svh]
-          min-h-[34rem]
+          h-[calc(100svh-4rem)]
+          min-h-[32rem]
+          md:h-[calc(100svh-5rem)]
           overflow-hidden
         "
       >
