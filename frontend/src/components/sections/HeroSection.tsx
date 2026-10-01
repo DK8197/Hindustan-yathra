@@ -102,7 +102,7 @@ function HeroSectionComponent() {
             bottom-0
             z-30
             px-4
-            pb-36
+            pb-32
             sm:px-6
             sm:pb-30
             md:pb-28
