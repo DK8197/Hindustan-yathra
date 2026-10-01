@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Menu, X, User } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Link } from '@/i18n/routing';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useAppStore } from '@/store/useAppStore';
@@ -13,10 +13,6 @@ export function Navbar() {
 
   const [open, setOpen] =
     useState(false);
-
-  const user = useAppStore(
-    (s) => s.user
-  );
 
   const setUser =
     useAppStore(
@@ -83,283 +79,51 @@ export function Navbar() {
         top-0
         z-50
         border-b
-        border-white/10
-        bg-slate-950/95
-        shadow-lg
-        backdrop-blur-md
+        border-white/15
+        bg-[#07111f]
+        shadow-[0_8px_30px_rgba(2,6,23,0.45)]
       "
     >
         <div
           className="
               mx-auto
               flex
-              h-14
+              h-16
               md:h-20
-              lg:h-24
-              max-w-[1800px]
+              max-w-[1600px]
               items-center
               justify-between
+              gap-3
               px-4
-              lg:px-10
+              sm:px-6
+              xl:px-10
             ">
  {/* LEFT */}
-<div className="flex items-center gap-5">
+<div className="flex min-w-0 shrink-0 items-center gap-3 xl:gap-5">
   <Link
     href="/"
-    className="shrink-0"
+    className="flex shrink-0 items-center rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400"
   >
-    <div
-      className="
-        flex
-        items-center
-        gap-4
-        rounded-2xl
-        border
-        border-black
-        bg-slate-900/80
-        px-2 md:px-4
-        py-1 md:py-2
-        backdrop-blur-md
-        transition-all
-        duration-300
-        hover:border-amber-400/50
-      "
-    >
         <Image
           src="/images/hindustan-yathra-logo.png"
-          alt="Hindustan Yatra"
+          alt="Hindustan Yatra — travel with new experience"
           width={220}
           height={80}
-          className="w-32 md:w-44 lg:w-56 h-auto"
+          priority
+          className="h-auto w-32 object-contain md:w-44"
         />
-
-        <div className="hidden xl:block">
-          <h1
-            className="
-              text-xl
-              font-extrabold
-              text-white
-              tracking-tight
-              leading-none
-            "
-          >
-            Hindustan Yatra
-          </h1>
-            <p
-              className="
-                mt-1
-                text-sm
-                italic
-                font-semibold
-                tracking-wide
-                text-emerald-300
-                drop-shadow-[0_0_8px_rgba(110,231,183,0.35)]
-              "
-              style={{
-                fontFamily:
-                  "'Playfair Display', 'Cormorant Garamond', serif",
-              }}
-            >
-              Travel with new experience
-            </p>
-
-          <div
-            className="
-              mt-2
-              h-px
-              w-32
-              bg-gradient-to-r
-              from-amber-400
-              via-amber-300
-              to-transparent
-            "
-          />
-
-          <p
-            className="
-              mt-2
-              text-[10px]
-              uppercase
-              tracking-[0.55em]
-              text-amber-300
-              font-semibold
-            "
-          >
-            Explore • Discover • Experience
-          </p>
-        </div>
-    </div>
   </Link>
-
-  {/* CERTIFICATIONS */}
-  <div
-    className="
-      hidden
-      lg:flex
-      items-center
-      gap-4
-      rounded-full
-      border
-      border-white/10
-      bg-white/[0.04]
-      px-2 md:px-4
-      py-1 md:py-2
-      backdrop-blur-md
-    "
-  >
-    {/* Karnataka Tourism */}
-    <div className="group relative">
-      <Image
-        src="/images/karnataka-state-tourism-logo.png"
-        alt="Karnataka Tourism"
-        width={64}
-        height={64}
-        className="
-          h-10
-          w-auto
-          cursor-pointer
-          opacity-80
-          transition-all
-          duration-300
-          group-hover:scale-125
-          group-hover:opacity-100
-          group-hover:drop-shadow-[0_0_20px_rgba(251,191,36,0.8)]
-        "
-      />
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          left-1/2
-          top-full
-          mt-2
-          -translate-x-1/2
-          whitespace-nowrap
-          rounded-lg
-          border
-          border-white/10
-          bg-slate-900
-          px-3
-          py-1.5
-          text-xs
-          text-white
-          opacity-0
-          shadow-xl
-          transition-all
-          duration-300
-          group-hover:opacity-100
-        "
-      >
-        Recognised by dept. of Karnataka Tourism
-      </div>
-    </div>
-
-    {/* ISO */}
-    <div className="group relative">
-      <Image
-        src="/images/iso-certified-company.png"
-        alt="ISO Certified"
-        width={64}
-        height={64}
-        className="
-          h-10
-          w-auto
-          cursor-pointer
-          opacity-80
-          transition-all
-          duration-300
-          group-hover:scale-125
-          group-hover:opacity-100
-          group-hover:drop-shadow-[0_0_20px_rgba(251,191,36,0.8)]
-        "
-      />
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          left-1/2
-          top-full
-          mt-2
-          -translate-x-1/2
-          whitespace-nowrap
-          rounded-lg
-          border
-          border-white/10
-          bg-slate-900
-          px-3
-          py-1.5
-          text-xs
-          text-white
-          opacity-0
-          shadow-xl
-          transition-all
-          duration-300
-          group-hover:opacity-100
-        "
-      >
-        ISO Certified
-      </div>
-    </div>
-
-    {/* IRCTC */}
-    <div className="group relative">
-      <Image
-        src="/images/irctc-logo.png"
-        alt="IRCTC"
-        width={64}
-        height={64}
-        className="
-          h-10
-          w-auto
-          cursor-pointer
-          opacity-80
-          transition-all
-          duration-300
-          group-hover:scale-125
-          group-hover:opacity-100
-          group-hover:drop-shadow-[0_0_20px_rgba(251,191,36,0.8)]
-        "
-      />
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          left-1/2
-          top-full
-          mt-2
-          -translate-x-1/2
-          whitespace-nowrap
-          rounded-lg
-          border
-          border-white/10
-          bg-slate-900
-          px-3
-          py-1.5
-          text-xs
-          text-white
-          opacity-0
-          shadow-xl
-          transition-all
-          duration-300
-          group-hover:opacity-100
-        "
-      >
-        IRCTC Partner
-      </div>
-    </div>
-  </div>
 </div>
 
         {/* DESKTOP NAV */}
         <nav
           className="
             hidden
-            md:flex
+              lg:flex
             items-center
-            gap-6
+              gap-2
+              lg:gap-3
+              xl:gap-5
           "
         >
           {links.map(
@@ -373,21 +137,20 @@ export function Navbar() {
                 }
                 className="
                   relative
+                  whitespace-nowrap
+                  rounded-lg
+                  px-2.5
+                  py-2
                   text-sm
-                  font-medium
-                  text-slate-200
+                  font-semibold
+                  text-slate-100
                   transition-all
                   duration-300
+                  hover:bg-white/10
                   hover:text-amber-300
-                  after:absolute
-                  after:-bottom-1
-                  after:left-0
-                  after:h-[2px]
-                  after:w-0
-                  after:bg-amber-400
-                  after:transition-all
-                  after:duration-300
-                  hover:after:w-full
+                  focus-visible:outline-none
+                  focus-visible:ring-2
+                  focus-visible:ring-amber-400
                 "
               >
                 {
@@ -402,9 +165,10 @@ export function Navbar() {
         <div
           className="
             hidden
-            md:flex
+            lg:flex
             items-center
-            gap-3
+            gap-2
+            xl:gap-3
           "
         >
           <LanguageSwitcher />
@@ -450,11 +214,11 @@ export function Navbar() {
           className="
             rounded-lg
             border
-            border-white/10
-            bg-white/5
+            border-white/20
+            bg-slate-800
             p-2
             text-white
-            md:hidden
+            lg:hidden
           "
           onClick={() =>
             setOpen(
@@ -482,7 +246,7 @@ export function Navbar() {
             border-t
             border-white/10
             bg-slate-950
-            md:hidden
+            lg:hidden
           "
         >
           <div className="px-5 py-5">
