@@ -133,7 +133,7 @@ function HeroSectionComponent() {
                 [text-shadow:0_8px_40px_rgba(0,0,0,0.8)]
               `}
             >
-              {t('headline')}
+              {/* {t('headline')} */}
             </h1>
 
             {/* Subheadline */}
@@ -151,7 +151,7 @@ function HeroSectionComponent() {
                 sm:mt-10
               `}
             >
-              {t('subheadline')}
+              {/* {t('subheadline')} */}
             </p>
 
             {/* Search */}
