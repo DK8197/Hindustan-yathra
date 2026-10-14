@@ -2,8 +2,8 @@
 
 import { memo, type CSSProperties } from 'react';
 import dynamic from 'next/dynamic';
-import { m, useReducedMotion } from 'framer-motion';
-import { ChevronDown, Search } from 'lucide-react';
+import { useReducedMotion } from 'framer-motion';
+import { Search } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
 import { getPathname, Link } from '@/i18n/routing';
@@ -69,11 +69,12 @@ function HeroSectionComponent() {
           "
         />
 
-        {/* Globe */}
+        {/* Globe (Shifted further upward) */}
         <div
           className="
             absolute
             inset-0
+            -translate-y-28 sm:-translate-y-24 md:-translate-y-32 lg:-translate-y-48
             z-10
             pointer-events-none
           "
@@ -102,11 +103,11 @@ function HeroSectionComponent() {
             bottom-0
             z-30
             px-4
-            pb-32
+            pb-40
             sm:px-6
-            sm:pb-30
-            md:pb-28
-            lg:pb-23
+            sm:pb-36
+            md:pb-34
+            lg:pb-28
           "
         >
           <div
@@ -154,159 +155,162 @@ function HeroSectionComponent() {
               {/* {t('subheadline')} */}
             </p>
 
-            {/* Search */}
-            <form
-              action={destinationsPath}
-              method="get"
-              role="search"
-              className={`
-                mx-auto
-                mt-5
-                flex
-                w-full
-                max-w-2xl
-                items-center
-                gap-1.5
-                rounded-2xl
-                bg-white
-                p-1.5
-                text-left
-                shadow-xl
-                sm:mt-8
-                sm:gap-2
-                sm:rounded-full
-                sm:p-2
-                ${isKannada ? 'font-kannada' : ''}
-              `}
-            >
-              <Search
-                aria-hidden="true"
+            {/* Interactive Section (Lifted slightly upward via negative translation) */}
+            <div className="flex flex-col -translate-y-20 sm:-translate-y-20 md:-translate-y-20 lg:-translate-y-8">
+              {/* Search (Order 2 on Mobile, Order 1 on Tablet/Desktop) */}
+              <form
+                action={destinationsPath}
+                method="get"
+                role="search"
+                className={`
+                  order-2 sm:order-1
+                  mx-auto
+                  mt-4 sm:mt-8
+                  flex
+                  w-full
+                  max-w-2xl
+                  items-center
+                  gap-1.5
+                  rounded-2xl
+                  bg-white
+                  p-1.5
+                  text-left
+                  shadow-xl
+                  sm:gap-2
+                  sm:rounded-full
+                  sm:p-2
+                  ${isKannada ? 'font-kannada' : ''}
+                `}
+              >
+                <Search
+                  aria-hidden="true"
+                  className="
+                    ml-3
+                    h-5
+                    w-5
+                    shrink-0
+                    text-himalaya-600
+                  "
+                />
+
+                <label
+                  htmlFor="hero-destination-search"
+                  className="sr-only"
+                >
+                  {t('search_label')}
+                </label>
+
+                <input
+                  id="hero-destination-search"
+                  name="q"
+                  type="search"
+                  placeholder={t('search_placeholder')}
+                  className={`
+                    min-w-0
+                    flex-1
+                    bg-transparent
+                    px-1.5
+                    py-3
+                    text-sm
+                    text-slate-900
+                    outline-none
+                    placeholder:text-slate-600
+                    focus-visible:ring-2
+                    focus-visible:ring-inset
+                    focus-visible:ring-saffron-700
+                    sm:px-2
+                    sm:text-base
+                    ${isKannada ? 'font-kannada' : ''}
+                  `}
+                />
+
+                <button
+                  type="submit"
+                  className={`
+                    min-h-11
+                    shrink-0
+                    rounded-full
+                    bg-saffron-700
+                    px-3
+                    text-sm
+                    font-semibold
+                    text-white
+                    transition
+                    hover:bg-saffron-700
+                    focus-visible:outline-none
+                    focus-visible:ring-2
+                    focus-visible:ring-saffron-700
+                    focus-visible:ring-offset-2
+                    sm:px-6
+                    ${isKannada ? 'font-kannada' : ''}
+                  `}
+                >
+                  {t('search_cta')}
+                </button>
+              </form>
+
+              {/* CTAs (Order 1 on Mobile, Order 2 on Tablet/Desktop) */}
+              <div
                 className="
-                  ml-3
-                  h-5
-                  w-5
-                  shrink-0
-                  text-himalaya-600
+                  order-1 sm:order-2
+                  mt-4 sm:mt-8
+                  flex
+                  flex-wrap
+                  justify-center
+                  gap-3
+                  sm:gap-4
                 "
-              />
-
-              <label
-                htmlFor="hero-destination-search"
-                className="sr-only"
               >
-                {t('search_label')}
-              </label>
+                <Link
+                  href="/destinations"
+                  className={`
+                    rounded-full
+                    border
+                    border-white/20
+                    bg-white/15
+                    px-6
+                    py-3
+                    text-sm
+                    font-medium
+                    text-white
+                    backdrop-blur-xl
+                    transition-all
+                    duration-300
+                    hover:bg-white/25
+                    sm:px-8
+                    sm:py-4
+                    sm:text-base
+                    ${isKannada ? 'font-kannada' : ''}
+                  `}
+                >
+                  {t('cta_explore')}
+                </Link>
 
-              <input
-                id="hero-destination-search"
-                name="q"
-                type="search"
-                placeholder={t('search_placeholder')}
-                className={`
-                  min-w-0
-                  flex-1
-                  bg-transparent
-                  px-1.5
-                  py-3
-                  text-sm
-                  text-slate-900
-                  outline-none
-                  placeholder:text-slate-600
-                  focus-visible:ring-2
-                  focus-visible:ring-inset
-                  focus-visible:ring-saffron-700
-                  sm:px-2
-                  sm:text-base
-                  ${isKannada ? 'font-kannada' : ''}
-                `}
-              />
-
-              <button
-                type="submit"
-                className={`
-                  min-h-11
-                  shrink-0
-                  rounded-full
-                  bg-saffron-700
-                  px-3
-                  text-sm
-                  font-semibold
-                  text-white
-                  transition
-                  hover:bg-saffron-700
-                  focus-visible:outline-none
-                  focus-visible:ring-2
-                  focus-visible:ring-saffron-700
-                  focus-visible:ring-offset-2
-                  sm:px-6
-                  ${isKannada ? 'font-kannada' : ''}
-                `}
-              >
-                {t('search_cta')}
-              </button>
-            </form>
-
-            {/* CTAs */}
-            <div
-              className="
-                mt-5
-                flex
-                flex-wrap
-                justify-center
-                gap-3
-                sm:mt-10
-                sm:gap-4
-              "
-            >
-              <Link
-                href="/destinations"
-                className={`
-                  rounded-full
-                  border
-                  border-white/20
-                  bg-white/15
-                  px-6
-                  py-3
-                  text-sm
-                  font-medium
-                  text-white
-                  backdrop-blur-xl
-                  transition-all
-                  duration-300
-                  hover:bg-white/25
-                  sm:px-8
-                  sm:py-4
-                  sm:text-base
-                  ${isKannada ? 'font-kannada' : ''}
-                `}
-              >
-                {t('cta_explore')}
-              </Link>
-
-              <Link
-                href="/contact"
-                className={`
-                  rounded-full
-                  border
-                  border-white/20
-                  bg-black/20
-                  px-6
-                  py-3
-                  text-sm
-                  font-medium
-                  text-white
-                  backdrop-blur-xl
-                  transition-all
-                  duration-300
-                  hover:bg-black/30
-                  sm:px-8
-                  sm:py-4
-                  sm:text-base
-                  ${isKannada ? 'font-kannada' : ''}
-                `}
-              >
-                {t('cta_customize')}
-              </Link>
+                <Link
+                  href="/contact"
+                  className={`
+                    rounded-full
+                    border
+                    border-white/20
+                    bg-black/20
+                    px-6
+                    py-3
+                    text-sm
+                    font-medium
+                    text-white
+                    backdrop-blur-xl
+                    transition-all
+                    duration-300
+                    hover:bg-black/30
+                    sm:px-8
+                    sm:py-4
+                    sm:text-base
+                    ${isKannada ? 'font-kannada' : ''}
+                  `}
+                >
+                  {t('cta_customize')}
+                </Link>
+              </div>
             </div>
           </div>
         </div>

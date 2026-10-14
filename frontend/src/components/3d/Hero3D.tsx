@@ -226,10 +226,10 @@ function Hero3DComponent() {
 
   const scale = useMemo(() => {
       const start =
-        isMobile ? 1.0 : 2.0;
+        isMobile ? 1.5 : 2.0;
 
       const end =
-        isMobile ? 2.0 : 6.0;
+        isMobile ? 6.0 : 6.0;
 
     return (
       start +
