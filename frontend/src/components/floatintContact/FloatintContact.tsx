@@ -2,11 +2,16 @@
 
 import { useState } from 'react';
 import { MessageCircle, Phone, X } from 'lucide-react';
+import { usePathname } from '@/i18n/routing';
 
 export function FloatingContact() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
-  const phoneNumber = '919060085635';
+  // Check if current route is a tour page
+  const isTourPage = pathname.includes('/tour');
+
+  const phoneNumber = '919876543210';
   const defaultMessage = encodeURIComponent(
     'Hello Hindustan Yatra! I would like to inquire about your tour packages.'
   );
@@ -17,13 +22,15 @@ export function FloatingContact() {
   return (
     <aside
       aria-label="Quick contact"
-      /* Lifted high on mobile (bottom-24), settled to bottom-10 on larger screens */
-      className="fixed bottom-24 right-4 z-40 flex select-none flex-col items-end gap-3 sm:bottom-16 sm:right-6 lg:bottom-10 lg:right-8"
+      className={`fixed right-4 z-40 flex select-none flex-col items-end gap-3 transition-all duration-300 sm:right-6 lg:right-8 ${
+        isTourPage
+          ? 'bottom-24 sm:bottom-16 lg:bottom-10' // Lifted position on tour pages
+          : 'bottom-6 sm:bottom-8 lg:bottom-8'   // Original previous position on home and other pages
+      }`}
     >
-      {/* Expanded Quick Options: Scaled for laptop */}
+      {/* Expanded Quick Options */}
       {open && (
         <div className="flex flex-col items-end gap-3 animate-in fade-in slide-in-from-bottom-3 duration-200">
-          {/* Direct Phone Call Option */}
           <a
             href={callUrl}
             className="flex items-center gap-3 rounded-full border border-white/10 bg-[#060c18]/95 px-4 py-2.5 text-xs font-semibold text-slate-100 shadow-[0_10px_28px_rgba(0,0,0,0.7)] backdrop-blur-xl transition-all duration-200 hover:border-amber-400/50 hover:bg-[#060c18] hover:text-amber-300 lg:px-5 lg:py-3.5 lg:text-sm"
@@ -34,7 +41,6 @@ export function FloatingContact() {
             </span>
           </a>
 
-          {/* WhatsApp Direct Option */}
           <a
             href={whatsappUrl}
             target="_blank"
@@ -49,7 +55,7 @@ export function FloatingContact() {
         </div>
       )}
 
-      {/* Main Trigger Button: Scaled from 48px on mobile up to 64px on laptop (lg:h-16 lg:w-16) */}
+      {/* Main Trigger Button */}
       <div className="group relative">
         <button
           type="button"
@@ -62,7 +68,6 @@ export function FloatingContact() {
               : 'border border-emerald-400/40 bg-emerald-600 text-white hover:bg-emerald-500 hover:shadow-[0_0_25px_rgba(16,185,129,0.55)]'
           }`}
         >
-          {/* Beacon pulse ring when closed */}
           {!open && (
             <span className="pointer-events-none absolute -inset-1.5 -z-10 animate-ping rounded-full bg-emerald-500/35" />
           )}
