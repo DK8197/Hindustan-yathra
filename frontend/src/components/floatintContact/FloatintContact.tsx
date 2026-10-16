@@ -11,7 +11,7 @@ export function FloatingContact() {
   // Check if current route is a tour page
   const isTourPage = pathname.includes('/tour');
 
-  const phoneNumber = '919876543210';
+  const phoneNumber = '919060085635';
   const defaultMessage = encodeURIComponent(
     'Hello Hindustan Yatra! I would like to inquire about your tour packages.'
   );

@@ -28,19 +28,74 @@ export async function getAllTours(): Promise<Tour[]> {
   return response.json();
 }
 
-export async function getAllToursAdmin() {
-  const response = await fetch(
-    `${API_URL}/api/v1/admin/tours`,
-    {
-      headers: {
-        'X-App-Key': process.env.API_SECRET!,
-        },
-      cache: 'no-store',
-    }
-  );
 
-  return response.json();
+export async function getAllToursAdmin() {
+  const limit = 100;
+  let page = 1;
+  const allTours: any[] = [];
+  let total: number | undefined;
+
+  while (true) {
+    const response = await fetch(
+      `${API_URL}/api/v1/admin/tours?page=${page}&limit=${limit}`,
+      {
+        headers: {
+          'X-App-Key': process.env.API_SECRET!,
+        },
+        cache: 'no-store',
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        `Failed to fetch admin tours: ${response.status}`
+      );
+    }
+
+    const data = await response.json();
+
+    // Support both paginated and array responses.
+    if (Array.isArray(data)) {
+      allTours.push(...data);
+      break;
+    }
+
+    const items = Array.isArray(data?.items)
+      ? data.items
+      : [];
+
+    if (items.length === 0) {
+      total = data?.pagination?.total;
+      break;
+    }
+
+    allTours.push(...items);
+    total = data?.pagination?.total;
+
+    // Stop when all records reported by the API are fetched.
+    if (
+      typeof total === 'number' &&
+      allTours.length >= total
+    ) {
+      break;
+    }
+
+    // If pagination metadata is missing, avoid looping forever.
+    if (typeof total !== 'number') {
+      break;
+    }
+
+    page += 1;
+  }
+
+  return {
+    items: allTours,
+    pagination: {
+      total: total ?? allTours.length,
+    },
+  };
 }
+
 
 // export async function getFeaturedTours(): Promise<Tour[]> {
 //   return tours.filter((t) => t.active && t.featured);
