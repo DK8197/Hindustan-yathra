@@ -52,14 +52,16 @@ export function InfiniteGallery({ images }: Props) {
     const sentinel = sentinelRef.current;
     if (!sentinel || !hasMore) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible((prev) =>
-            Math.min(prev + PAGE_SIZE, images.length)
-          );
-        }
-      },
+        const observer = new IntersectionObserver(
+          (entries) => {
+            const entry = entries[0];
+
+            if (entry?.isIntersecting) {
+              setVisible((prev) =>
+                Math.min(prev + PAGE_SIZE, images.length)
+              );
+            }
+          },
       {
         rootMargin: '900px 0px',
         threshold: 0,
