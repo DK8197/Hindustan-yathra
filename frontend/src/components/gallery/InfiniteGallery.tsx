@@ -227,7 +227,7 @@ export function InfiniteGallery({ images }: Props) {
       )}
 
       {/* Full-screen lightbox */}
-      {selectedIndex !== null && (
+      {selectedIndex !== null && images[selectedIndex] && (
         <div
           role="dialog"
           aria-modal="true"
