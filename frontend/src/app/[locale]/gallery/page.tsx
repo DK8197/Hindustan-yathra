@@ -56,9 +56,24 @@ export default async function GalleryPage({
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 md:px-12 md:py-16">
-      <h1 className="mb-10 font-display text-3xl font-semibold text-himalaya-900 md:text-4xl">
-        {t('gallery')}
-      </h1>
+
+      <div className="mb-10 text-center">
+        <h1 className="mb-3 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-700 bg-clip-text font-display text-4xl font-bold tracking-tight text-transparent md:text-5xl lg:text-6xl">
+          {t('gallery')}
+        </h1>
+
+        <p className="mx-auto max-w-2xl text-sm leading-7 text-himalaya-700 md:text-base">
+          Relive beautiful moments, rediscover cherished memories, and explore
+          the unforgettable journeys that make every adventure special.
+        </p>
+
+        <div className="mx-auto mt-5 flex items-center justify-center gap-2">
+          <span className="h-px w-10 bg-orange-300" />
+          <span className="h-2 w-2 rounded-full bg-orange-500" />
+          <span className="h-px w-10 bg-orange-300" />
+        </div>
+      </div>
+
 
       <InfiniteGallery
         images={images}

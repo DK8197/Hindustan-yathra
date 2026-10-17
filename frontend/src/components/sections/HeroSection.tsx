@@ -1,6 +1,7 @@
 'use client';
 
-import { memo, type CSSProperties } from 'react';
+import React, { memo, type CSSProperties } from 'react';
+import { useEffect,useState }  from 'react';
 import dynamic from 'next/dynamic';
 import { useReducedMotion } from 'framer-motion';
 import { Search } from 'lucide-react';
@@ -23,6 +24,11 @@ function HeroSectionComponent() {
   const locale = useLocale() as 'en' | 'kn';
   const isKannada = locale === 'kn';
   const shouldReduceMotion = useReducedMotion();
+  const [mounted,setMounted] = useState(false);
+
+  useEffect(()=>{
+    setMounted(true);
+  },[]);
 
   const destinationsPath = getPathname({
     locale,
@@ -79,7 +85,7 @@ function HeroSectionComponent() {
             pointer-events-none
           "
         >
-          {shouldReduceMotion === false && <Hero3D />}
+          {mounted && shouldReduceMotion === false && <Hero3D />}
         </div>
 
         {/* Overlay */}
