@@ -121,76 +121,74 @@ export default async function TourDetailPage({
         }}
       />
 
-      {/* Hero */}
-      <section className="relative min-h-[70svh] w-full overflow-hidden bg-gradient-to-br from-himalaya-800 via-himalaya-700 to-saffron-700 sm:min-h-[65vh]">
-        {heroImage && (
-          <Image
-            src={normalizeImageUrl(heroImage)}
-            alt={tour.title[locale]}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
+      
+{/* Hero */}
+<section className="relative min-h-[70svh] w-full overflow-hidden bg-gradient-to-br from-himalaya-800 via-himalaya-700 to-saffron-700 sm:min-h-[65vh]">
+  {heroImage && (
+    <Image
+      src={normalizeImageUrl(heroImage)}
+      alt={tour.title[locale]}
+      fill
+      priority
+      sizes="100vw"
+      className="object-cover opacity-60"
+    />
+  )}
+
+  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/15" />
+
+  <div className="relative z-10 mx-auto flex min-h-[70svh] max-w-7xl items-end px-4 pb-8 pt-24 sm:min-h-[65vh] sm:px-6 sm:pb-12 md:px-12">
+    <div className="max-w-4xl">
+      <div className="mb-3 inline-flex items-center rounded-full bg-black/40 px-4 py-2 text-sm font-bold text-white backdrop-blur-md sm:mb-4">
+        {tCategory.has(tour.category) ? tCategory(tour.category) : tour.category}
+      </div>
+
+      <h1 className="break-words font-display text-3xl font-bold leading-tight text-white [text-wrap:balance] sm:text-4xl md:text-6xl">
+        {tour.title[locale]}
+      </h1>
+
+      <p className="mt-3 max-w-3xl text-base font-bold leading-relaxed text-white sm:mt-4 sm:text-lg md:text-xl">
+        {tour.summary[locale]}
+      </p>
+
+      <div className="mt-4 flex flex-wrap gap-2 sm:mt-6 sm:gap-3">
+        {tour.destinations?.map((destination: string) => (
+          <span
+            key={destination}
+            className="rounded-full border border-white/20 bg-black/40 px-4 py-2 text-sm font-bold text-white backdrop-blur-md"
+          >
+            {destination}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-5 flex flex-wrap items-center gap-2 text-sm text-white sm:gap-3">
+        <span className="rounded-full border border-white/25 bg-black/50 px-4 py-2 font-bold">
+          {hasPrice
+            ? `${tTour('starting_from')} ₹${tour.priceFrom!.toLocaleString('en-IN')} ${tTour('per_person')}`
+            : tTour('contact_for_price')}
+        </span>
+
+        {(tour.durationDays > 0 || tour.durationNights > 0) && (
+          <span className="rounded-full border border-white/25 bg-black/50 px-4 py-2 font-bold">
+            {tTour('duration', {
+              days: tour.durationDays,
+              nights: tour.durationNights,
+            })}
+          </span>
         )}
+      </div>
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+      <a
+        href="#tour-enquiry"
+        className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-saffron-700 px-6 py-3 font-bold text-white transition hover:bg-saffron-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-himalaya-900"
+      >
+        {tTour('ask_travel_expert')}
+      </a>
+    </div>
+  </div>
+</section>
 
-        <div className="relative z-10 mx-auto flex min-h-[70svh] max-w-7xl items-end px-4 pb-8 pt-24 sm:min-h-[65vh] sm:px-6 sm:pb-12 md:px-12">
-            <div className="max-w-4xl">
-              <div className="mb-3 inline-flex items-center rounded-full bg-white/15 px-4 py-2 text-sm text-white backdrop-blur-md sm:mb-4">
-                {tCategory.has(tour.category) ? tCategory(tour.category) : tour.category}
-              </div>
-
-              <h1 className="break-words font-display text-3xl font-semibold leading-tight text-white [text-wrap:balance] sm:text-4xl md:text-6xl">
-                {tour.title[locale]}
-              </h1>
-
-              <p className="mt-3 max-w-3xl text-base leading-relaxed text-white/90 sm:mt-4 sm:text-lg md:text-xl">
-                {tour.summary[locale]}
-              </p>
-
-              <div className="mt-4 flex flex-wrap gap-2 sm:mt-6 sm:gap-3">
-                {tour.destinations?.map(
-                  (
-                    destination: string
-                  ) => (
-                    <span
-                      key={
-                        destination
-                      }
-                      className="rounded-full bg-white/10 px-4 py-2 text-sm text-white backdrop-blur-md"
-                    >
-                      {
-                        destination
-                      }
-                    </span>
-                  )
-                )}
-              </div>
-
-              <div className="mt-5 flex flex-wrap items-center gap-2 text-sm text-white sm:gap-3">
-                <span className="rounded-full border border-white/20 bg-black/30 px-4 py-2 font-semibold">
-                  {hasPrice
-                    ? `${tTour('starting_from')} ₹${tour.priceFrom!.toLocaleString('en-IN')} ${tTour('per_person')}`
-                    : tTour('contact_for_price')}
-                </span>
-                {(tour.durationDays > 0 || tour.durationNights > 0) && (
-                  <span className="rounded-full border border-white/20 bg-black/30 px-4 py-2">
-                    {tTour('duration', { days: tour.durationDays, nights: tour.durationNights })}
-                  </span>
-                )}
-              </div>
-
-              <a
-                href="#tour-enquiry"
-                className="mt-5 inline-flex min-h-11 items-center justify-center rounded-full bg-saffron-700 px-6 py-3 font-semibold text-white transition hover:bg-saffron-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-himalaya-900"
-              >
-                {tTour('ask_travel_expert')}
-              </a>
-            </div>
-        </div>
-      </section>
 
       {/* Content */}
       <div className="mx-auto grid max-w-7xl gap-8 px-4 pb-28 pt-8 sm:px-6 sm:py-12 md:px-12 lg:grid-cols-3 lg:gap-12">

@@ -117,7 +117,7 @@ export async function getFeaturedToursResult(): Promise<{
         headers: {
           'X-App-Key': process.env.API_SECRET!,
         },
-        next: { revalidate: 3600 },
+        next: { revalidate: 86400  },
       }
     );
 
@@ -148,7 +148,7 @@ export async function getToursByCategory(
       headers: {
           'X-App-Key': process.env.API_SECRET!,
         },
-      next: { revalidate: 3600 }
+      next: { revalidate: 86400 }
     }
   );
 
@@ -175,7 +175,7 @@ export async function lookupTourBySlug(
     const response = await fetch(
       `${API_URL}/api/v1/details/${encodeURIComponent(slug)}`,
       {
-        next: { revalidate: 60 },
+        next: { revalidate: 86400 },
         headers,
       }
     );
@@ -195,7 +195,7 @@ export async function lookupTourBySlug(
     const response = await fetch(
       `${API_URL}/api/v1/details`,
       {
-        next: { revalidate: 60 },
+        next: { revalidate: 86400  },
         headers,
       }
     );
@@ -222,7 +222,7 @@ export async function getAllTours_details(): Promise<Tour[]> {
         headers: {
           'X-App-Key': process.env.API_SECRET!,
         },
-        next: { revalidate: 3600 },
+        next: { revalidate: 86400  },
       }
     );
 

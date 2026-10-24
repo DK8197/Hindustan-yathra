@@ -3,12 +3,12 @@ import createNextIntlPlugin from 'next-intl/plugin';
 const imageCdnUrl =
   process.env.NEXT_PUBLIC_R2_PUBLIC_URL ||
   'https://cdn.hindustanyatra.com';
+
 const imageCdnHostname = new URL(imageCdnUrl).hostname;
 
-const withNextIntl =
-  createNextIntlPlugin(
-    './src/i18n/request.ts'
-  );
+const withNextIntl = createNextIntlPlugin(
+  './src/i18n/request.ts'
+);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -27,19 +27,24 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: imageCdnHostname,
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'hindustanyatra.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.hindustanyatra.com',
+        pathname: '/**',
       },
     ],
-    formats: [
-      'image/avif',
-      'image/webp',
-    ],
+    formats: ['image/avif', 'image/webp'],
   },
 
   experimental: {
-    optimizePackageImports: [
-      'lucide-react',
-      'recharts',
-    ],
+    optimizePackageImports: ['lucide-react', 'recharts'],
   },
 
   async headers() {
@@ -49,8 +54,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Cache-Control',
-            value:
-              'public, max-age=31536000, immutable',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
@@ -58,6 +62,4 @@ const nextConfig = {
   },
 };
 
-export default withNextIntl(
-  nextConfig
-);
+export default withNextIntl(nextConfig);
