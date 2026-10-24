@@ -14,6 +14,7 @@ import {
   Heart,
   Users,
   Building2,
+  Landmark,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
@@ -38,15 +39,16 @@ const categoryIcons: Record<string, typeof Heart> = {
   adventure: Mountain,
   family: Users,
   business: Building2,
+  pilgrimage: Landmark,
+  spiritual: Landmark,
 };
 
 /**
  * Normalize text so searches ignore case, accents, punctuation and spacing.
  * Example: "Char Dham", "char-dham" and "Chardham" normalize consistently.
  *
- * FIX: combining marks (\p{M}) are now kept. Previously every Kannada vowel
- * sign / virama was replaced with a space, which split Kannada words apart
- * and broke Kannada search. Only Latin accent marks (U+0300–U+036F) are stripped.
+ * Combining marks (\p{M}) are kept so Kannada vowel signs survive; only Latin
+ * accent marks (U+0300–U+036F) are stripped.
  */
 function normalizeSearchText(value: string): string {
   return value
@@ -96,7 +98,7 @@ function fuzzyWordMatch(queryWord: string, fieldWords: string[]): boolean {
   if (queryWord.length < 5) return false;
 
   return fieldWords.some((fieldWord) => {
-    if (fieldWord === queryWord || fieldWord.includes(queryWord)) return true;
+    if (fieldWord.includes(queryWord)) return true;
     return editDistance(queryWord, fieldWord) <= 1;
   });
 }
@@ -232,7 +234,7 @@ const REGION_PLACES: Record<Exclude<Region, 'all'>, readonly string[]> = {
   ],
 };
 
-// FIX: normalize aliases once instead of on every tour for every filter run.
+// Normalized once, not per tour per filter run.
 const NORMALIZED_REGION_PLACES = Object.fromEntries(
   (Object.keys(REGION_PLACES) as Exclude<Region, 'all'>[]).map((key) => [
     key,
@@ -240,11 +242,7 @@ const NORMALIZED_REGION_PLACES = Object.fromEntries(
   ]),
 ) as Record<Exclude<Region, 'all'>, string[]>;
 
-/**
- * FIX: match whole words/phrases only. Previously plain substring matching
- * caused false positives ("gir" in "girish", "goa" in "goat", "leh" in "sleh",
- * and a tour region such as "north goa" or "northeast" counting as "north"/"east").
- */
+/** Whole-word/phrase match, so "gir" doesn't match "girish". */
 function containsPhrase(haystack: string, phrase: string): boolean {
   return ` ${haystack} `.includes(` ${phrase} `);
 }
@@ -281,8 +279,7 @@ export default function DestinationsExplorer({
   const tTour = useTranslations('tour');
   const tCategory = useTranslations('categories');
 
-  // The hero form sends ?q=..., so the URL is the primary source of the query;
-  // the initialQuery prop is kept as a fallback.
+  // The hero form sends ?q=...; initialQuery is a fallback.
   const searchParams = useSearchParams();
   const urlQuery = (searchParams.get('q') ?? initialQuery).trim().slice(0, 100);
 
@@ -331,11 +328,7 @@ export default function DestinationsExplorer({
 
   const getCategoryLabel = (category: string) => {
     if (category === 'all') return t('filter_all');
-    try {
-      return tCategory.has(category) ? tCategory(category) : category;
-    } catch {
-      return category;
-    }
+    return tCategory.has(category) ? tCategory(category) : category;
   };
 
   const filteredTours = useMemo(() => {
@@ -387,8 +380,7 @@ export default function DestinationsExplorer({
     return filtered.map(({ tour }) => tour);
   }, [tours, debouncedSearch, tourType, region, selectedCategory, locale]);
 
-  // FIX: featured cards are links, so inactive ("Coming Soon") tours must not
-  // appear there; they were previously clickable in the featured section only.
+  // Featured cards are links, so skip inactive ("Coming Soon") tours.
   const featuredTours = filteredTours.filter((tour) => tour.featured && tour.active);
   const displayedTours = filteredTours.slice(0, visibleCount);
   const hasActiveFilters =
@@ -408,11 +400,9 @@ export default function DestinationsExplorer({
     setTourType('all');
     setRegion('all');
     setSelectedCategory('all');
-    setVisibleCount(INITIAL_COUNT);
   };
 
-  // FIX: fixed locale so server and client render the same string
-  // (toLocaleString() without a locale causes hydration mismatches).
+  // Fixed locale avoids server/client hydration mismatches.
   const renderPrice = (priceFrom: number | null | undefined) =>
     typeof priceFrom === 'number' && priceFrom > 0
       ? `₹${priceFrom.toLocaleString('en-IN')}`
@@ -583,6 +573,8 @@ export default function DestinationsExplorer({
           <div className="grid gap-6 lg:grid-cols-3">
             {featuredTours.slice(0, 3).map((tour) => {
               const image = normalizeImageUrl(tour.heroImage || '');
+              const CategoryIcon =
+                categoryIcons[(tour.category || '').toLowerCase()] || Plane;
 
               return (
                 <Link
@@ -600,8 +592,17 @@ export default function DestinationsExplorer({
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
-                  <div className="absolute left-5 top-5 rounded-full bg-amber-400 px-4 py-2 text-xs font-semibold text-slate-900">
-                    {t('featured_badge')}
+                  <div className="absolute inset-x-5 top-5 flex items-start justify-between gap-2">
+                    <div className="shrink-0 rounded-full bg-amber-400 px-4 py-2 text-xs font-semibold text-slate-900">
+                      {t('featured_badge')}
+                    </div>
+
+                    {tour.category && (
+                      <div className="ml-auto flex min-w-0 items-center gap-1.5 rounded-full bg-white/90 px-3 py-2 text-xs font-semibold capitalize text-slate-900 shadow backdrop-blur">
+                        <CategoryIcon className="h-3.5 w-3.5 shrink-0" />
+                        <span className="truncate">{getCategoryLabel(tour.category)}</span>
+                      </div>
+                    )}
                   </div>
                   <div className="absolute bottom-0 p-6 text-white">
                     <h3 className="text-2xl font-bold">{getTitle(tour, locale)}</h3>
@@ -678,6 +679,8 @@ export default function DestinationsExplorer({
           <div className="grid min-w-0 grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4">
             {displayedTours.map((tour) => {
               const image = normalizeImageUrl(tour.heroImage || '');
+              const CategoryIcon =
+                categoryIcons[(tour.category || '').toLowerCase()] || Plane;
 
               const cardContent = (
                 <>
@@ -692,17 +695,20 @@ export default function DestinationsExplorer({
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
 
-                  {tour.featured && (
-                    <div className="absolute left-4 top-4 rounded-full bg-amber-400 px-3 py-1 text-xs font-semibold text-slate-900">
-                      ⭐ {t('featured_badge')}
-                    </div>
-                  )}
+                  <div className="absolute inset-x-4 top-4 flex items-start justify-between gap-2">
+                    {tour.featured && (
+                      <div className="shrink-0 rounded-full bg-amber-400 px-3 py-1 text-xs font-semibold text-slate-900">
+                        ⭐ {t('featured_badge')}
+                      </div>
+                    )}
 
-                  {!tour.active && (
-                    <div className="absolute right-4 top-4 rounded-full bg-orange-700 px-3 py-1 text-xs font-semibold text-white">
-                      Coming Soon
-                    </div>
-                  )}
+                    {tour.category && (
+                      <div className="ml-auto flex min-w-0 items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold capitalize text-slate-900 shadow backdrop-blur">
+                        <CategoryIcon className="h-3.5 w-3.5 shrink-0" />
+                        <span className="truncate">{getCategoryLabel(tour.category)}</span>
+                      </div>
+                    )}
+                  </div>
 
                   <div className="absolute bottom-0 w-full p-5 text-white">
                     <div className="mb-2 flex flex-wrap gap-2">
@@ -714,17 +720,17 @@ export default function DestinationsExplorer({
                       </span>
                     </div>
 
-                    <h3 className="text-lg font-bold">{getTitle(tour, locale)}</h3>
-                    <p className="mt-2 line-clamp-2 text-sm text-white/90">
-                      {getSummary(tour, locale)}
-                    </p>
+                    <h3 className="line-clamp-2 text-xl font-bold leading-snug">
+                      {getTitle(tour, locale)}
+                    </h3>
 
-                    <div className="mt-4 flex items-center justify-between gap-2">
-                      <span className="rounded-full bg-white/20 px-3 py-1 text-xs capitalize backdrop-blur">
-                        {getCategoryLabel(tour.category || '')}
-                      </span>
-                      {tour.active && (
+                    <div className="mt-4 flex justify-end">
+                      {tour.active ? (
                         <span className="text-sm font-medium">{t('view_journey')} →</span>
+                      ) : (
+                        <span className="rounded-full bg-orange-700 px-3 py-1 text-xs font-semibold text-white">
+                          Coming Soon
+                        </span>
                       )}
                     </div>
                   </div>
