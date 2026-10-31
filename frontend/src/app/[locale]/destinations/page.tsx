@@ -43,17 +43,17 @@ export async function generateMetadata({
 async function getTours(): Promise<{ tours: Tour[]; loadFailed: boolean }> {
   try {
     const res = await fetch(
-      `${API_URL}/api/v1/tours?limit=100`,
-      {
-        cache: 'force-cache',
-        next: {
-          revalidate: 86400,
-        },
-        headers: {
-          'X-App-Key': process.env.API_SECRET!,
-        },
-      }
-    );
+            `${API_URL}/api/v1/tours?limit=100`,
+            {
+              next: {
+                revalidate: 3600,
+                tags: ['tours','featured-tours'],
+              },
+              headers: {
+                'X-App-Key': process.env.API_SECRET!,
+              },
+            }
+          );
 
     if (!res.ok) {
       return { tours: [], loadFailed: true };
