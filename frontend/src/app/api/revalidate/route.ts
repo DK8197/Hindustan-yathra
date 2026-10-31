@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    revalidateTag('tours', 'max');
+    revalidateTag('tours');
 
     return NextResponse.json({
       success: true,
