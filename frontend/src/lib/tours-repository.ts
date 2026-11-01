@@ -1,5 +1,4 @@
 import type { Tour, TourCategory } from '@/types/tour';
-import toursData from '@/data/tours.generated.json';
 
 // This module is the single seam between "data comes from the Excel-driven
 // JSON file" (today) and "data comes from Postgres/Mongo" (production).
@@ -7,12 +6,6 @@ import toursData from '@/data/tours.generated.json';
 // file directly, so migrating the data source later is a one-file change.
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-
-const tours = toursData as unknown as Tour[];
-
-// export async function getAllTours(): Promise<Tour[]> {
-//   return tours.filter((t) => t.active);
-// }
 
 export async function getAllTours(): Promise<Tour[]> {
   const response = await fetch(
@@ -29,10 +22,25 @@ export async function getAllTours(): Promise<Tour[]> {
 }
 
 
-export async function getAllToursAdmin() {
+export interface AdminTourSummary {
+  id: number;
+  slug: string;
+  title?: { en?: string };
+  category?: string;
+  durationDays?: number | null;
+  durationNights?: number | null;
+  priceFrom?: number | null;
+  isDomestic?: boolean;
+  active: boolean;
+}
+
+export async function getAllToursAdmin(): Promise<{
+  items: AdminTourSummary[];
+  pagination: { total: number };
+}> {
   const limit = 100;
   let page = 1;
-  const allTours: any[] = [];
+  const allTours: AdminTourSummary[] = [];
   let total: number | undefined;
 
   while (true) {
@@ -52,25 +60,35 @@ export async function getAllToursAdmin() {
       );
     }
 
-    const data = await response.json();
+    const data: unknown = await response.json();
 
     // Support both paginated and array responses.
     if (Array.isArray(data)) {
-      allTours.push(...data);
+      allTours.push(...(data as AdminTourSummary[]));
       break;
     }
 
-    const items = Array.isArray(data?.items)
-      ? data.items
+    if (!data || typeof data !== 'object') break;
+    const payload = data as {
+      items?: unknown;
+      pagination?: { total?: unknown };
+    };
+
+    const items = Array.isArray(payload.items)
+      ? payload.items as AdminTourSummary[]
       : [];
 
     if (items.length === 0) {
-      total = data?.pagination?.total;
+      total = typeof payload.pagination?.total === 'number'
+        ? payload.pagination.total
+        : undefined;
       break;
     }
 
     allTours.push(...items);
-    total = data?.pagination?.total;
+    total = typeof payload.pagination?.total === 'number'
+      ? payload.pagination.total
+      : undefined;
 
     // Stop when all records reported by the API are fetched.
     if (
@@ -96,10 +114,6 @@ export async function getAllToursAdmin() {
   };
 }
 
-
-// export async function getFeaturedTours(): Promise<Tour[]> {
-//   return tours.filter((t) => t.active && t.featured);
-// }
 
 export async function getFeaturedTours(): Promise<Tour[]> {
   const result = await getFeaturedToursResult();
@@ -133,10 +147,6 @@ export async function getFeaturedToursResult(): Promise<{
     return { tours: [], loadFailed: true };
   }
 }
-
-// export async function getToursByCategory(category: TourCategory): Promise<Tour[]> {
-//   return tours.filter((t) => t.active && t.category === category);
-// }
 
 export async function getToursByCategory(
   category: TourCategory

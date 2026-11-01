@@ -28,7 +28,9 @@ export function LanguageSwitcher() {
   const switchLocale = (newLocale: 'en' | 'kn') => {
     if (newLocale === locale) return;
 
-    const { locale: _locale, ...routeParams } = params;
+    const routeParams = Object.fromEntries(
+      Object.entries(params).filter(([key]) => key !== 'locale')
+    );
 
     router.replace(
       {

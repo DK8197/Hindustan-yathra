@@ -1,18 +1,11 @@
 import Link from 'next/link';
-import { Plus } from 'lucide-react';
-
 import { getAllToursAdmin } from '@/lib/tours-repository';
 import TourStatusButton from '@/components/admin/TourStatusButton';
 import AddTourButton from '@/components/admin/HandleUploads';
 
 export default async function AdminToursPage() {
-  const toursResponse: any = await getAllToursAdmin();
-
-  const tours = Array.isArray(toursResponse)
-    ? toursResponse
-    : toursResponse?.items ?? [];
-
-  const pagination = toursResponse?.pagination;
+  const toursResponse = await getAllToursAdmin();
+  const { items: tours, pagination } = toursResponse;
 
   return (
     <div>
@@ -75,7 +68,7 @@ export default async function AdminToursPage() {
                 </td>
               </tr>
             ) : (
-              tours.map((tour: any) => (
+              tours.map((tour) => (
                 <tr key={tour.id}>
                   <td className="px-4 py-3">
                     <div>

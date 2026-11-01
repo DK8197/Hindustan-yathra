@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { Trash2 } from 'lucide-react';
 
@@ -238,11 +239,16 @@ export default function AdminSocialMediaPage() {
           </p>
 
           {thumbnail && (
-            <img
+            <div className="relative mt-4 h-40 w-full max-w-md overflow-hidden rounded-lg border">
+              <Image
               src={thumbnail}
-              alt="Preview"
-              className="mt-4 h-40 rounded-lg border object-cover"
-            />
+              alt="Thumbnail preview"
+              fill
+              sizes="(max-width: 448px) 100vw, 448px"
+              unoptimized
+              className="object-cover"
+              />
+            </div>
           )}
         </div>
 
@@ -290,9 +296,12 @@ export default function AdminSocialMediaPage() {
                 </td>
 
                 <td className="p-3">
-                  <img
+                  <Image
                     src={link.thumbnail}
-                    alt="Thumbnail"
+                    alt={`${link.platform} video thumbnail`}
+                    width={224}
+                    height={128}
+                    unoptimized
                     className="h-16 w-28 rounded-lg border object-cover"
                   />
                 </td>

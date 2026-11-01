@@ -222,7 +222,7 @@ export function InfiniteGallery({ images }: Props) {
 
       {!hasMore && total > PAGE_SIZE && (
         <p className="mt-8 text-center text-sm text-himalaya-500">
-          You've explored all {total} memories. Every journey leaves a story.
+          You&apos;ve explored all {total} memories. Every journey leaves a story.
         </p>
       )}
 

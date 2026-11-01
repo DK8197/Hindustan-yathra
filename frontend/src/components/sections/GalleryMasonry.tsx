@@ -64,7 +64,7 @@ export function GalleryMasonry() {
       </div>
       <div ref={sentinelRef} className="h-10" />
       {items.length >= ALL_ITEMS.length && (
-        <p className="py-8 text-center text-sm text-gray-400">You've reached the end of the gallery.</p>
+        <p className="py-8 text-center text-sm text-gray-400">You&apos;ve reached the end of the gallery.</p>
       )}
     </div>
   );

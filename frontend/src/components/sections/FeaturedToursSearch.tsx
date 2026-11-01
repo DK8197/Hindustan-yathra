@@ -47,7 +47,7 @@ export function FeaturedToursSearch({
           await searchTours(debouncedQuery, controller.signal);
 
         if (!cancelled) setResults(data);
-      } catch (error) {
+      } catch {
         if (!cancelled) {
           setResults([]);
           setSearchError(true);

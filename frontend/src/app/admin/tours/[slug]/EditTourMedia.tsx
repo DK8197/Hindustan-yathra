@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 interface Props {
   slug: string;
-  jsonData: any;
+  jsonData: unknown;
 }
 
 interface ImageItem {
@@ -16,7 +16,7 @@ interface ImageItem {
 }
 
 function findImages(
-  obj: any,
+  obj: unknown,
   path = ''
 ): ImageItem[] {
   const results: ImageItem[] = [];
