@@ -132,18 +132,11 @@ export default async function RootLayout({
           href={`//${new URL(IMAGE_CDN_BASE_URL).host}`}
         />
 
-        {/* Preload the right hero crop for each viewport. */}
+        {/* The shared landscape hero artwork is used on both mobile and desktop. */}
         <link
           rel="preload"
           as="image"
           href={getCdnImageUrl('images-confidential/hero-desktop.webp')}
-          media="(min-width: 768px)"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href={getCdnImageUrl('images-confidential/hero-mobile.webp')}
-          media="(max-width: 767px)"
         />
       </head>
 

@@ -8,7 +8,7 @@ export async function FeaturedTours({ locale }: { locale: 'en' | 'kn' }) {
 
   return (
     <section id="featured-tours" aria-labelledby="featured-tours-heading" className="w-full px-[clamp(1rem,2.2vw,2rem)] py-16 md:py-24">
-      <h2 id="featured-tours-heading" className="font-display text-2xl font-semibold tracking-tight text-himalaya-900 md:text-4xl">
+      <h2 id="featured-tours-heading" className="text-center font-display text-2xl font-semibold tracking-tight text-himalaya-900 md:text-4xl">
           {t('featured_tours')}
         </h2>
 

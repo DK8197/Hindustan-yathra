@@ -116,9 +116,12 @@ export function FeaturedToursSearch({
           : ''}
       </p>
 
-      <div className="mt-10 grid min-w-0 grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+      <div className="mt-10 flex min-w-0 flex-wrap justify-center gap-5 sm:gap-6">
         {displayedResults.map((tour, i) => (
-          <div key={tour.slug} className={!query.trim() && !showAll && i >= 4 ? 'hidden sm:block' : ''}>
+          <div
+            key={tour.slug}
+            className={`w-full min-w-0 sm:w-[calc(50%_-_0.75rem)] lg:w-[calc(33.333333%_-_1rem)] ${!query.trim() && !showAll && i >= 4 ? 'hidden sm:block' : ''}`}
+          >
             <TourCard tour={tour} index={i} />
           </div>
         ))}

@@ -8,6 +8,10 @@ import { Link, usePathname } from '@/i18n/routing';
 export function FloatingDestinations() {
   const t = useTranslations('nav');
   const pathname = usePathname();
+  const isHomePage = pathname === '/';
+
+  // The hero already provides destination search and exploration actions.
+  if (isHomePage) return null;
 
   // Check if current route is a tour page
   const isTourPage = pathname.includes('/tour');

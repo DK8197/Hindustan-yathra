@@ -1,6 +1,7 @@
 'use client';
 
-import React, { memo, type CSSProperties } from 'react';
+import Image from 'next/image';
+import React, { memo } from 'react';
 import { useEffect,useState }  from 'react';
 import dynamic from 'next/dynamic';
 import { useReducedMotion } from 'framer-motion';
@@ -60,52 +61,20 @@ function HeroSectionComponent() {
           bg-himalaya-900
         "
       >
-        {/* Background Image */}
-        <div
-          style={{
-            '--hero-bg-mobile': `url("${getCdnImageUrl(
-              'images-confidential/hero-mobile.webp'
-            )}")`,
-            '--hero-bg-desktop': `url("${getCdnImageUrl(
-              'images-confidential/hero-desktop.webp'
-            )}")`,
-          } as CSSProperties}
-          className="
-            hero-bg
-            absolute
-            inset-x-0
-            top-0
-            h-[48%]
-            lg:h-[55%]
-            z-0
-          "
+        {/* Use the same CDN artwork on every viewport without cropping its embedded text or portraits. */}
+        <Image
+          src={getCdnImageUrl('images-confidential/hero-desktop.webp')}
+          alt="Hindustan Yathra founders and Karnataka heritage landmarks"
+          width={1672}
+          height={941}
+          sizes="100vw"
+          priority
+          className="block h-auto w-full shrink-0"
         />
 
-        {/* Globe (Shifted further upward) */}
-        <div
-          className="
-            absolute
-            top-0
-            h-[48%]
-            right-[-22%]
-            w-[100%]
-            sm:right-[-12%]
-            sm:w-[82%]
-            lg:right-[-6%]
-            lg:top-0
-            lg:h-[55%]
-            lg:w-[44%]
-            z-10
-            pointer-events-none
-          "
-        >
-          {mounted && shouldReduceMotion === false && <Hero3D />}
-        </div>
-
-        {/* Content */}
-        <div
-          className="relative z-30 mt-auto w-full bg-himalaya-900 px-5 py-7 sm:px-7 sm:py-8 lg:px-8 lg:py-7"
-        >
+        <div className="relative grid flex-1 grid-cols-1 items-center bg-himalaya-900 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
+          {/* Content */}
+          <div className="relative z-10 w-full px-5 py-7 sm:px-7 sm:py-8 lg:px-8 lg:py-10">
           <div
             className="
               mx-auto
@@ -150,7 +119,7 @@ function HeroSectionComponent() {
 
             {/* Interactive Section (Lifted slightly upward via negative translation) */}
             <div className="mt-5 flex max-w-2xl flex-col gap-4">
-              {/* Search (Order 2 on Mobile, Order 1 on Tablet/Desktop) */}
+              {/* Keep the primary destination search first in visual and tab order. */}
               <form
                 id="destination-search-form"
                 name="destination_search"
@@ -158,7 +127,6 @@ function HeroSectionComponent() {
                 method="get"
                 role="search"
                 className={`
-                  order-1
                   flex
                   w-full
                   max-w-2xl
@@ -228,7 +196,7 @@ function HeroSectionComponent() {
                     font-semibold
                     text-white
                     transition
-                    hover:bg-saffron-700
+                    hover:bg-saffron-600
                     focus-visible:outline-none
                     focus-visible:ring-2
                     focus-visible:ring-saffron-700
@@ -280,6 +248,12 @@ function HeroSectionComponent() {
                 </Link>
               </div>
             </div>
+          </div>
+          </div>
+
+          {/* The globe sits in the lower dark panel; on small screens it follows the search. */}
+          <div className="relative h-[min(58vw,18rem)] min-h-[220px] w-full overflow-hidden pointer-events-none sm:h-[min(48vw,22rem)] lg:h-full lg:min-h-[360px]">
+            {mounted && shouldReduceMotion === false && <Hero3D />}
           </div>
         </div>
       </div>
