@@ -12,6 +12,9 @@ import { getPathname, Link } from '@/i18n/routing';
 import { getCdnImageUrl } from '@/lib/image-cdn';
 import { useHeroScrollProgress } from '@/lib/hooks/useHeroScrollProgress';
 
+const HERO_DESKTOP_IMAGE = getCdnImageUrl('images-confidential/hero-desktop.webp');
+const HERO_MOBILE_IMAGE = getCdnImageUrl('images-confidential/hero-mobile.webp');
+
 const Hero3D = dynamic(
   () => import('@/components/3d/Hero3D'),
   {
@@ -61,16 +64,22 @@ function HeroSectionComponent() {
           bg-himalaya-900
         "
       >
-        {/* Use the same CDN artwork on every viewport without cropping its embedded text or portraits. */}
-        <Image
-          src={getCdnImageUrl('images-confidential/hero-desktop.webp')}
-          alt="Hindustan Yathra founders and Karnataka heritage landmarks"
-          width={1672}
-          height={941}
-          sizes="100vw"
-          priority
-          className="block h-auto w-full shrink-0"
-        />
+        <picture className="block h-auto w-full shrink-0">
+          <source
+            media="(max-width: 767px)"
+            srcSet={HERO_MOBILE_IMAGE}
+          />
+          <Image
+            src={HERO_DESKTOP_IMAGE}
+            alt="Hindustan Yathra founders and Karnataka heritage landmarks"
+            width={1672}
+            height={941}
+            sizes="100vw"
+            priority
+            unoptimized
+            className="block h-auto w-full shrink-0"
+          />
+        </picture>
 
         <div className="relative grid flex-1 grid-cols-1 items-center bg-himalaya-900 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
           {/* Content */}

@@ -24,6 +24,9 @@ import { useAppStore } from '@/store/useAppStore';
 
 const EARTH_DAY_TEXTURE_URL = "textures/earth-day-new.webp";
 const EARTH_CLOUDS_TEXTURE_URL = "textures/earth-clouds.webp";
+// Positive values move the globe up. Mobile = viewport width <= 768px.
+const MOBILE_EARTH_VERTICAL_OFFSET = 1.5;
+const DESKTOP_EARTH_VERTICAL_OFFSET = 0;
 
 /* -------------------------------------------------------------------------- */
 /* Shared Resources                                                           */
@@ -121,8 +124,10 @@ function Earth({
         );
 
       const startScale =
-        isMobile ? 1.5 : 2.0;
+        isMobile ? 2.5 : 3;
 
+      earthGroupRef.current.position.y =
+        isMobile ? MOBILE_EARTH_VERTICAL_OFFSET : DESKTOP_EARTH_VERTICAL_OFFSET;
       earthGroupRef.current.scale.setScalar(
         startScale + (6.0 - startScale) * progress
       );
@@ -245,8 +250,8 @@ function Hero3DComponent() {
       <Canvas
         dpr={
           isMobile
-            ? [1, 1.25]
-            : [1, 1.5]
+            ? [1,1.5]
+            : [2,5]
         }
         shadows={false}
         gl={{
