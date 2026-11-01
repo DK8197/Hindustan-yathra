@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, type FormEvent } from 'react';
 import { useTranslations } from 'next-intl';
 import { MessageCircle, Download, PhoneCall } from 'lucide-react';
 import type { Tour } from '@/types/tour';
@@ -15,9 +16,36 @@ export function TourBookingCard({ tour, locale }: { tour: Tour; locale: 'en' | '
   const whatsappMessage = encodeURIComponent(
     t('whatsapp_tour_message', { tour: tour.title[locale] }),
   );
-  const itineraryPdfUrl = process.env.NEXT_PUBLIC_R2_PUBLIC_URL
+  const tContact = useTranslations('contact');
+  const [brochureOpen, setBrochureOpen] = useState(false);
+  const [brochureStatus, setBrochureStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const brochureUrl = process.env.NEXT_PUBLIC_R2_PUBLIC_URL
     ? `${process.env.NEXT_PUBLIC_R2_PUBLIC_URL.replace(/\/+$/, '')}/tours/${tour.slug}/itinerary.pdf`
     : null;
+
+  // The brochure link is only revealed after the lead has been saved.
+  async function handleBrochureSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    setBrochureStatus('submitting');
+
+    try {
+      const res = await fetch('/api/leads/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: String(formData.get('name') ?? '').trim(),
+          phone: String(formData.get('phone') ?? ''),
+          email: String(formData.get('email') ?? ''),
+          destination: tour.title[locale],
+          message: `Brochure download requested for ${tour.title[locale]}`,
+        }),
+      });
+      setBrochureStatus(res.ok ? 'success' : 'error');
+    } catch {
+      setBrochureStatus('error');
+    }
+  }
 
   return (
     <div id="tour-enquiry" className="scroll-mt-24 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
@@ -71,15 +99,104 @@ export function TourBookingCard({ tour, locale }: { tour: Tour; locale: 'en' | '
         </a>
       )}
 
-        {itineraryPdfUrl && <a
-          href={itineraryPdfUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="mt-3 flex w-full items-center justify-center gap-2 rounded-full border py-3 font-medium text-himalaya-800 transition hover:bg-himalaya-50"
-        >
-          <Download size={18} />
-          {t('download_itinerary')}
-        </a>}
+      {brochureUrl && (
+        <div className="mt-3">
+          {brochureStatus === 'success' ? (
+            <div role="status" className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-center">
+              <p className="text-sm text-emerald-900">{t('brochure_ready')}</p>
+              <a
+                href={brochureUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-himalaya-800 px-4 py-3 font-semibold text-white transition hover:bg-himalaya-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-himalaya-600 focus-visible:ring-offset-2"
+              >
+                <Download size={18} />
+                {t('download_brochure')}
+              </a>
+            </div>
+          ) : (
+            <>
+              <button
+                type="button"
+                onClick={() => setBrochureOpen((open) => !open)}
+                aria-expanded={brochureOpen}
+                aria-controls="brochure-form"
+                className="flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-himalaya-200 py-3 font-medium text-himalaya-800 transition hover:bg-himalaya-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-himalaya-600 focus-visible:ring-offset-2"
+              >
+                <Download size={18} />
+                {t('download_brochure')}
+              </button>
+
+              {brochureOpen && (
+                <form
+                  id="brochure-form"
+                  onSubmit={handleBrochureSubmit}
+                  className="mt-3 space-y-3 rounded-2xl border border-slate-200 bg-slate-50 p-4"
+                >
+                  <p className="text-sm text-slate-700">{t('brochure_prompt')}</p>
+                  <div>
+                    <label htmlFor="brochure-name" className="mb-1 block text-sm font-medium text-slate-800">
+                      {tContact('name')}
+                    </label>
+                    <input
+                      id="brochure-name"
+                      name="name"
+                      type="text"
+                      autoComplete="name"
+                      required
+                      minLength={2}
+                      maxLength={100}
+                      className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="brochure-phone" className="mb-1 block text-sm font-medium text-slate-800">
+                      {tContact('phone')}
+                    </label>
+                    <input
+                      id="brochure-phone"
+                      name="phone"
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      required
+                      minLength={10}
+                      maxLength={20}
+                      pattern="[0-9+\(\). \-]{10,20}"
+                      title={tContact('phone_format_hint')}
+                      className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="brochure-email" className="mb-1 block text-sm font-medium text-slate-800">
+                      {tContact('email')}
+                    </label>
+                    <input
+                      id="brochure-email"
+                      name="email"
+                      type="email"
+                      inputMode="email"
+                      autoComplete="email"
+                      required
+                      className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200"
+                    />
+                  </div>
+                  {brochureStatus === 'error' && (
+                    <p role="alert" className="text-sm text-red-700">{t('brochure_error')}</p>
+                  )}
+                  <button
+                    type="submit"
+                    disabled={brochureStatus === 'submitting'}
+                    className="flex min-h-12 w-full items-center justify-center rounded-full bg-saffron-700 px-4 py-3 font-semibold text-white transition hover:bg-saffron-600 disabled:opacity-60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700 focus-visible:ring-offset-2"
+                  >
+                    {brochureStatus === 'submitting' ? tContact('sending') : t('brochure_submit')}
+                  </button>
+                </form>
+              )}
+            </>
+          )}
+        </div>
+      )}
 
       {tour.highlights[locale].length > 0 && (
         <div className="mt-6 border-t pt-4">

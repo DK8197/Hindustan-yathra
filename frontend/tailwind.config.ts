@@ -71,9 +71,50 @@ const config: Config = {
 
         'float-slow':
           'floatSlow 6s ease-in-out infinite',
+
+        'badge-in':
+          'badgeIn 700ms cubic-bezier(0.22, 1, 0.36, 1) both',
+
+        'badge-sheen':
+          'badgeSheen 4.5s ease-in-out 1.2s infinite',
+
+        'fly-in':
+          'flyIn 1100ms cubic-bezier(0.16, 1, 0.3, 1) both',
       },
 
       keyframes: {
+        flyIn: {
+          '0%': {
+            opacity: '0',
+            transform: 'translateY(-7rem) scale(0.96)',
+            filter: 'blur(6px)',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateY(0) scale(1)',
+            filter: 'blur(0)',
+          },
+        },
+        badgeIn: {
+          '0%': {
+            opacity: '0',
+            transform: 'translateY(8px)',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'translateY(0)',
+          },
+        },
+
+        badgeSheen: {
+          '0%,60%': {
+            transform: 'translateX(-120%)',
+          },
+          '100%': {
+            transform: 'translateX(220%)',
+          },
+        },
+
         cloudDrift: {
           '0%': {
             transform:

@@ -205,7 +205,7 @@ export function Navbar() {
           title={name}
           className={
             mobile
-                ? `flex min-h-11 items-center justify-center gap-2 px-2 py-3 text-base font-medium text-slate-300 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 ${hoverClass}`
+                ? `flex min-h-11 items-center justify-center gap-1.5 px-2 py-2 text-sm font-medium text-slate-300 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 sm:gap-2 sm:py-3 sm:text-base ${hoverClass}`
                 : `flex h-10 w-10 items-center justify-center text-slate-300 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 ${hoverClass}`
           }
         >
@@ -237,7 +237,7 @@ export function Navbar() {
               width={220}
               height={80}
               priority
-              className="h-8 w-auto object-contain sm:h-10 md:h-12"
+              className="h-9 w-auto object-contain sm:h-10 md:h-12"
             />
           </Link>
 
@@ -384,18 +384,18 @@ export function Navbar() {
         <div
           id="mobile-primary-navigation"
           aria-label={t('primary_navigation')}
-          className="max-h-[calc(100dvh-4rem)] overflow-y-auto bg-[#060c18] animate-in slide-in-from-top-4 duration-300 lg:hidden"
+          className="max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain bg-[#060c18] animate-in slide-in-from-top-4 duration-300 lg:hidden"
         >
-          <div className="space-y-5 px-4 py-6">
+          <div className="space-y-3 px-4 pt-4 pb-[calc(1rem+env(safe-area-inset-bottom))] sm:space-y-5 sm:py-6">
             {/* 1. INTERACTIVE ACCREDITATIONS */}
-            <section className="space-y-2.5">
+            <section className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5 text-base font-semibold text-amber-300">
+                <span className="flex items-center gap-1.5 text-xs font-semibold text-amber-300 sm:text-base">
                   <ShieldCheck className="h-3.5 w-3.5" />
                   Official Accreditations
                 </span>
 
-                <span className="text-base text-slate-300">
+                <span className="text-xs text-slate-300 sm:text-base">
                   Tap to verify
                 </span>
               </div>
@@ -412,7 +412,7 @@ export function Navbar() {
                         setSelectedBadge(isSelected ? null : badge.id)
                       }
                       aria-expanded={isSelected}
-                      className={`flex min-w-0 flex-col items-start gap-2 p-2.5 text-left transition-colors duration-200 active:scale-[0.98] ${
+                      className={`flex min-w-0 flex-col items-start gap-1.5 p-2 text-left transition-colors duration-200 active:scale-[0.98] sm:gap-2 sm:p-2.5 ${
                         isSelected
                           ? 'bg-white/10 text-white'
                           : 'text-slate-300 hover:bg-white/[0.06] hover:text-white'
@@ -440,11 +440,11 @@ export function Navbar() {
                         />
                       </div>
 
-                      <span className="w-full truncate text-base font-semibold text-white">
+                      <span className="w-full truncate text-xs font-semibold text-white sm:text-base">
                         {badge.label}
                       </span>
 
-                      <span className="text-base text-slate-300">
+                      <span className="text-[0.7rem] text-slate-300 sm:text-base">
                         {badge.sublabel}
                       </span>
                     </button>
@@ -454,23 +454,23 @@ export function Navbar() {
 
               {/* MOBILE ACCREDITATION DETAILS */}
               {activeBadgeData && (
-                <div className="animate-in fade-in zoom-in-95 bg-[#101b29] p-4 duration-200">
+                <div className="animate-in fade-in zoom-in-95 bg-[#101b29] p-3 duration-200 sm:p-4">
                   <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-1.5 text-base font-semibold text-amber-300">
+                    <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-300 sm:text-base">
                       <Sparkles className="h-3.5 w-3.5 text-amber-400" />
                       <span>{activeBadgeData.label}</span>
                     </div>
 
-                    <span className="text-base text-slate-200">
+                    <span className="text-xs text-slate-200 sm:text-base">
                       {activeBadgeData.certNumber}
                     </span>
                   </div>
 
-                  <p className="mt-3 text-base leading-relaxed text-white">
+                  <p className="mt-2 text-sm leading-relaxed text-white sm:mt-3 sm:text-base">
                     {activeBadgeData.description}
                   </p>
 
-                  <div className="mt-4 flex items-center justify-between text-base">
+                  <div className="mt-3 flex items-center justify-between text-xs sm:mt-4 sm:text-base">
                     <span className="flex items-center gap-1 font-medium text-emerald-300">
                       <CheckCircle2 className="h-3 w-3" />
                       Accreditation Details
@@ -491,7 +491,7 @@ export function Navbar() {
             {/* 2. MOBILE NAVIGATION LINKS */}
             <nav
               aria-label={t('primary_navigation')}
-              className="space-y-1 pt-4"
+              className="space-y-0.5 pt-2 sm:space-y-1 sm:pt-4"
             >
               {links.map((link) => {
                 const isActive = pathname === link.href;
@@ -502,7 +502,7 @@ export function Navbar() {
                     href={link.href}
                     onClick={closeMobileMenu}
                     aria-current={isActive ? 'page' : undefined}
-                    className={`flex min-h-11 items-center justify-between px-3 py-3 text-base font-medium tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 ${
+                    className={`flex min-h-11 items-center justify-between px-3 py-2 text-sm font-medium tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 sm:py-3 sm:text-base ${
                       isActive
                         ? 'text-saffron-400'
                         : 'text-slate-200 hover:bg-white/[0.05] hover:text-white'
@@ -524,8 +524,8 @@ export function Navbar() {
             </nav>
 
             {/* 3. MOBILE LANGUAGE SWITCHER */}
-            <div className="flex items-center justify-between gap-4 py-2">
-              <div className="flex items-center gap-2 text-base font-medium text-white">
+            <div className="flex items-center justify-between gap-4 py-1 sm:py-2">
+              <div className="flex items-center gap-2 text-sm font-medium text-white sm:text-base">
                 <Globe className="h-4 w-4 text-saffron-400" />
                 <span>Language / ಭಾಷೆ</span>
               </div>
@@ -536,8 +536,8 @@ export function Navbar() {
             </div>
 
             {/* 4. SOCIAL MEDIA LINKS */}
-            <section className="pt-4">
-              <p className="mb-3 flex items-center gap-2 text-base font-semibold text-amber-300">
+            <section className="pt-2 sm:pt-4">
+              <p className="mb-2 flex items-center gap-2 text-xs font-semibold text-amber-300 sm:mb-3 sm:text-base">
                 <Sparkles className="h-3.5 w-3.5" />
                 Follow Our Journeys
               </p>
