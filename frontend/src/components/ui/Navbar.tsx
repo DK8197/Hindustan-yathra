@@ -205,8 +205,8 @@ export function Navbar() {
           title={name}
           className={
             mobile
-              ? `flex min-h-11 items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-2 py-3 text-xs font-medium text-slate-300 transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${hoverClass}`
-              : `flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] text-slate-300 transition-all duration-200 hover:-translate-y-0.5 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${hoverClass}`
+                ? `flex min-h-11 items-center justify-center gap-2 px-2 py-3 text-base font-medium text-slate-300 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 ${hoverClass}`
+                : `flex h-10 w-10 items-center justify-center text-slate-300 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 ${hoverClass}`
           }
         >
           <Icon
@@ -220,7 +220,7 @@ export function Navbar() {
   );
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-[#07111f]/90 shadow-[0_8px_32px_rgba(2,6,23,0.6)] backdrop-blur-xl">
+    <header className="fixed inset-x-0 top-0 z-50 bg-[#07111f]">
       {/* MAIN NAVBAR */}
       <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between gap-3 px-4 sm:h-[72px] sm:px-6 md:h-20 xl:px-10">
         {/* LEFT: LOGO AND DESKTOP ACCREDITATIONS */}
@@ -245,7 +245,7 @@ export function Navbar() {
           <div
             ref={badgeContainerRef}
             aria-label="Tourism, ISO, and IRCTC certifications"
-            className="hidden shrink-0 items-center gap-2 rounded-full border border-white/15 bg-black/40 px-3 py-1.5 shadow-inner backdrop-blur-md xl:flex"
+            className="hidden shrink-0 items-center gap-3 xl:flex"
           >
             <button
               type="button"
@@ -253,10 +253,10 @@ export function Navbar() {
                 setSelectedBadge(selectedBadge === 'since' ? null : 'since')
               }
               aria-expanded={selectedBadge === 'since'}
-              className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+              className={`flex min-h-11 items-center gap-1.5 py-1 text-base font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 ${
                 selectedBadge === 'since'
-                  ? 'border-amber-400/80 bg-amber-400/20 text-amber-300 shadow-[0_0_10px_rgba(251,191,36,0.3)]'
-                  : 'border-transparent text-slate-300 hover:text-white'
+                  ? 'text-saffron-400'
+                  : 'text-slate-300 hover:text-white'
               }`}
             >
               <Calendar className="h-3.5 w-3.5 text-amber-400" />
@@ -277,10 +277,10 @@ export function Navbar() {
                   aria-label={badge.label}
                   aria-expanded={selectedBadge === badge.id}
                   title={badge.description}
-                  className={`rounded-full border p-1 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                  className={`p-1 transition-opacity duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 ${
                     selectedBadge === badge.id
-                      ? 'border-amber-400/80 bg-amber-400/20 shadow-[0_0_10px_rgba(251,191,36,0.3)]'
-                      : 'border-transparent opacity-80 hover:opacity-100'
+                      ? 'opacity-100 ring-2 ring-saffron-400'
+                      : 'opacity-80 hover:opacity-100'
                   }`}
                 >
                   <Image
@@ -298,7 +298,7 @@ export function Navbar() {
         {/* CENTER: DESKTOP NAVIGATION */}
         <nav
           aria-label={t('primary_navigation')}
-          className="hidden items-center gap-1.5 rounded-full border border-white/10 bg-black/40 p-1.5 backdrop-blur-md lg:flex"
+          className="hidden items-center gap-3 lg:flex"
         >
           {links.map((link) => {
             const isActive = pathname === link.href;
@@ -308,10 +308,10 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 aria-current={isActive ? 'page' : undefined}
-                className={`rounded-full border px-4 py-1.5 text-sm font-medium tracking-wide transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                className={`px-2 py-2 text-base font-medium tracking-wide transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 ${
                   isActive
-                    ? 'border-amber-400/60 bg-amber-400/15 text-amber-300 shadow-[0_0_14px_rgba(251,191,36,0.25)]'
-                    : 'border-transparent text-slate-300 hover:border-white/10 hover:bg-white/10 hover:text-white'
+                    ? 'text-saffron-400'
+                    : 'text-slate-300 hover:text-white'
                 }`}
               >
                 {link.label}
@@ -324,14 +324,14 @@ export function Navbar() {
         <div className="flex shrink-0 items-center gap-2 sm:gap-3">
           {renderSocialLinks()}
 
-          <div className="hidden rounded-xl border border-white/10 bg-black/35 p-1 backdrop-blur-md sm:block">
+          <div className="hidden sm:block">
             <LanguageSwitcher />
           </div>
 
           <button
             ref={menuButtonRef}
             type="button"
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/15 bg-white/[0.05] text-slate-200 shadow-md backdrop-blur-xl transition-all duration-200 hover:border-white/30 hover:bg-white/10 hover:text-white active:scale-95 lg:hidden"
+            className="flex h-11 w-11 items-center justify-center text-slate-200 transition-colors duration-200 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 active:scale-95 lg:hidden"
             onClick={() => setOpen((previous) => !previous)}
             aria-expanded={open}
             aria-controls="mobile-primary-navigation"
@@ -344,26 +344,26 @@ export function Navbar() {
 
       {/* DESKTOP ACCREDITATION POPOVER */}
       {activeBadgeData && (
-        <div className="absolute left-4 top-full z-[60] mt-2 hidden w-80 animate-in fade-in slide-in-from-top-2 duration-200 rounded-2xl border border-amber-400/40 bg-[#060c18]/95 p-4 shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_20px_rgba(245,158,11,0.15)] backdrop-blur-2xl xl:left-56 xl:block">
-          <div className="flex items-center justify-between border-b border-white/10 pb-2.5">
+        <div className="absolute left-4 top-full z-[60] mt-2 hidden w-80 bg-[#060c18] p-5 xl:left-56 xl:block">
+          <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-amber-400" />
-              <span className="text-xs font-bold text-amber-300">
+              <span className="text-base font-bold text-amber-300">
                 {activeBadgeData.label}
               </span>
             </div>
 
-            <span className="rounded bg-white/10 px-2 py-0.5 font-mono text-[10px] text-slate-300">
+            <span className="text-base text-slate-200">
               {activeBadgeData.certNumber}
             </span>
           </div>
 
-          <p className="mt-2.5 text-xs leading-relaxed text-slate-300">
+          <p className="mt-3 text-base leading-relaxed text-white">
             {activeBadgeData.description}
           </p>
 
-          <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-2.5 text-[11px]">
-            <span className="flex items-center gap-1.5 font-medium text-emerald-400">
+          <div className="mt-4 flex items-center justify-between gap-4">
+            <span className="flex items-center gap-1.5 text-base font-medium text-emerald-300">
               <CheckCircle2 className="h-3.5 w-3.5" />
               Verified Accreditation
             </span>
@@ -384,18 +384,18 @@ export function Navbar() {
         <div
           id="mobile-primary-navigation"
           aria-label={t('primary_navigation')}
-          className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-white/10 bg-[#060c18]/95 shadow-[0_25px_60px_rgba(0,0,0,0.9)] backdrop-blur-2xl animate-in slide-in-from-top-4 duration-300 lg:hidden"
+          className="max-h-[calc(100dvh-4rem)] overflow-y-auto bg-[#060c18] animate-in slide-in-from-top-4 duration-300 lg:hidden"
         >
           <div className="space-y-5 px-4 py-6">
             {/* 1. INTERACTIVE ACCREDITATIONS */}
             <section className="space-y-2.5">
               <div className="flex items-center justify-between">
-                <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-amber-400">
+                <span className="flex items-center gap-1.5 text-base font-semibold text-amber-300">
                   <ShieldCheck className="h-3.5 w-3.5" />
                   Official Accreditations
                 </span>
 
-                <span className="text-[10px] font-medium text-slate-400">
+                <span className="text-base text-slate-300">
                   Tap to verify
                 </span>
               </div>
@@ -412,10 +412,10 @@ export function Navbar() {
                         setSelectedBadge(isSelected ? null : badge.id)
                       }
                       aria-expanded={isSelected}
-                      className={`flex min-w-0 flex-col items-start gap-1 rounded-xl border p-2.5 text-left transition-all duration-200 active:scale-[0.98] ${
+                      className={`flex min-w-0 flex-col items-start gap-2 p-2.5 text-left transition-colors duration-200 active:scale-[0.98] ${
                         isSelected
-                          ? 'border-amber-400/70 bg-gradient-to-br from-amber-400/20 to-black/60 shadow-[0_0_15px_rgba(251,191,36,0.2)]'
-                          : 'border-white/10 bg-white/[0.03] hover:border-white/20 hover:bg-white/[0.06]'
+                          ? 'bg-white/10 text-white'
+                          : 'text-slate-300 hover:bg-white/[0.06] hover:text-white'
                       }`}
                     >
                       <div className="flex w-full items-center justify-between">
@@ -434,17 +434,17 @@ export function Navbar() {
                         <span
                           className={`h-1.5 w-1.5 rounded-full ${
                             isSelected
-                              ? 'bg-amber-400 shadow-[0_0_6px_#fbbf24]'
+                              ? 'bg-amber-400'
                               : 'bg-slate-500'
                           }`}
                         />
                       </div>
 
-                      <span className="mt-1 w-full truncate text-xs font-semibold text-white">
+                      <span className="w-full truncate text-base font-semibold text-white">
                         {badge.label}
                       </span>
 
-                      <span className="text-[9px] uppercase tracking-tight text-slate-400">
+                      <span className="text-base text-slate-300">
                         {badge.sublabel}
                       </span>
                     </button>
@@ -454,24 +454,24 @@ export function Navbar() {
 
               {/* MOBILE ACCREDITATION DETAILS */}
               {activeBadgeData && (
-                <div className="animate-in fade-in zoom-in-95 rounded-xl border border-amber-400/40 bg-gradient-to-b from-[#091426]/90 to-black/80 p-3.5 shadow-lg duration-200">
-                  <div className="flex items-center justify-between gap-2 border-b border-white/10 pb-2">
-                    <div className="flex items-center gap-1.5 text-xs font-semibold text-amber-300">
+                <div className="animate-in fade-in zoom-in-95 bg-[#101b29] p-4 duration-200">
+                  <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-1.5 text-base font-semibold text-amber-300">
                       <Sparkles className="h-3.5 w-3.5 text-amber-400" />
                       <span>{activeBadgeData.label}</span>
                     </div>
 
-                    <span className="rounded bg-white/10 px-1.5 py-0.5 font-mono text-[9px] text-slate-300">
+                    <span className="text-base text-slate-200">
                       {activeBadgeData.certNumber}
                     </span>
                   </div>
 
-                  <p className="mt-2 text-xs leading-relaxed text-slate-300">
+                  <p className="mt-3 text-base leading-relaxed text-white">
                     {activeBadgeData.description}
                   </p>
 
-                  <div className="mt-2.5 flex items-center justify-between border-t border-white/10 pt-2 text-[10px]">
-                    <span className="flex items-center gap-1 font-medium text-emerald-400">
+                  <div className="mt-4 flex items-center justify-between text-base">
+                    <span className="flex items-center gap-1 font-medium text-emerald-300">
                       <CheckCircle2 className="h-3 w-3" />
                       Accreditation Details
                     </span>
@@ -491,7 +491,7 @@ export function Navbar() {
             {/* 2. MOBILE NAVIGATION LINKS */}
             <nav
               aria-label={t('primary_navigation')}
-              className="space-y-1 border-t border-white/10 pt-4"
+              className="space-y-1 pt-4"
             >
               {links.map((link) => {
                 const isActive = pathname === link.href;
@@ -502,9 +502,9 @@ export function Navbar() {
                     href={link.href}
                     onClick={closeMobileMenu}
                     aria-current={isActive ? 'page' : undefined}
-                    className={`flex items-center justify-between rounded-xl px-4 py-3 text-sm font-medium tracking-wide transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 ${
+                    className={`flex min-h-11 items-center justify-between px-3 py-3 text-base font-medium tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 ${
                       isActive
-                        ? 'border border-amber-400/40 bg-gradient-to-r from-amber-400/15 to-transparent text-amber-300 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]'
+                        ? 'text-saffron-400'
                         : 'text-slate-200 hover:bg-white/[0.05] hover:text-white'
                     }`}
                   >
@@ -514,7 +514,7 @@ export function Navbar() {
                       aria-hidden="true"
                       className={`h-4 w-4 transition-transform ${
                         isActive
-                          ? 'translate-x-0.5 text-amber-400'
+                          ? 'translate-x-0.5 text-saffron-400'
                           : 'text-slate-600'
                       }`}
                     />
@@ -524,20 +524,20 @@ export function Navbar() {
             </nav>
 
             {/* 3. MOBILE LANGUAGE SWITCHER */}
-            <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] p-3">
-              <div className="flex items-center gap-2 text-xs font-medium text-slate-300">
-                <Globe className="h-4 w-4 text-amber-400" />
+            <div className="flex items-center justify-between gap-4 py-2">
+              <div className="flex items-center gap-2 text-base font-medium text-white">
+                <Globe className="h-4 w-4 text-saffron-400" />
                 <span>Language / ಭಾಷೆ</span>
               </div>
 
-              <div className="rounded-lg border border-white/10 bg-black/40 p-0.5">
+              <div>
                 <LanguageSwitcher />
               </div>
             </div>
 
             {/* 4. SOCIAL MEDIA LINKS */}
-            <section className="border-t border-white/10 pt-4">
-              <p className="mb-3 flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider text-amber-400">
+            <section className="pt-4">
+              <p className="mb-3 flex items-center gap-2 text-base font-semibold text-amber-300">
                 <Sparkles className="h-3.5 w-3.5" />
                 Follow Our Journeys
               </p>

@@ -44,6 +44,11 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: ['/admin', '/api'],
       },
+      {
+        userAgent: 'anthropic-ai',
+        allow: '/',
+        disallow: ['/admin', '/api'],
+      },
 
       // Google AI and search
       {
@@ -80,6 +85,36 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: 'CCBot',
+        allow: '/',
+        disallow: ['/admin', '/api'],
+      },
+      {
+        userAgent: 'Meta-ExternalAgent',
+        allow: '/',
+        disallow: ['/admin', '/api'],
+      },
+      {
+        userAgent: 'Meta-ExternalFetcher',
+        allow: '/',
+        disallow: ['/admin', '/api'],
+      },
+      {
+        userAgent: 'cohere-ai',
+        allow: '/',
+        disallow: ['/admin', '/api'],
+      },
+      {
+        userAgent: 'YouBot',
+        allow: '/',
+        disallow: ['/admin', '/api'],
+      },
+      {
+        userAgent: 'Diffbot',
+        allow: '/',
+        disallow: ['/admin', '/api'],
+      },
+      {
+        userAgent: 'DuckAssistBot',
         allow: '/',
         disallow: ['/admin', '/api'],
       },

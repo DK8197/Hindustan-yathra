@@ -44,17 +44,20 @@ function HeroSectionComponent() {
         relative
         min-h-[calc(100svh-4rem)]
         md:min-h-[calc(100svh-5rem)]
-        lg:min-h-[100svh]
+        lg:min-h-[calc(100svh-5rem)]
         overflow-hidden
       "
     >
       <div
         className="
           relative
+          flex
+          flex-col
           min-h-[calc(100svh-4rem)]
           md:min-h-[calc(100svh-5rem)]
-          lg:min-h-[100svh]
+          lg:min-h-[calc(100svh-5rem)]
           overflow-hidden
+          bg-himalaya-900
         "
       >
         {/* Background Image */}
@@ -70,7 +73,10 @@ function HeroSectionComponent() {
           className="
             hero-bg
             absolute
-            inset-0
+            inset-x-0
+            top-0
+            h-[48%]
+            lg:h-[55%]
             z-0
           "
         />
@@ -79,8 +85,16 @@ function HeroSectionComponent() {
         <div
           className="
             absolute
-            inset-0
-            -translate-y-28 sm:-translate-y-24 md:-translate-y-32 lg:-translate-y-48
+            top-0
+            h-[48%]
+            right-[-22%]
+            w-[100%]
+            sm:right-[-12%]
+            sm:w-[82%]
+            lg:right-[-6%]
+            lg:top-0
+            lg:h-[55%]
+            lg:w-[44%]
             z-10
             pointer-events-none
           "
@@ -88,103 +102,75 @@ function HeroSectionComponent() {
           {mounted && shouldReduceMotion === false && <Hero3D />}
         </div>
 
-        {/* Overlay */}
-        <div
-          className="
-            absolute
-            inset-0
-            z-20
-            bg-gradient-to-b
-            from-black/55
-            via-black/25
-            to-black/75
-          "
-        />
-
         {/* Content */}
         <div
-          className="
-            absolute
-            inset-x-0
-            bottom-0
-            z-30
-            px-4
-            pb-40
-            sm:px-6
-            sm:pb-36
-            md:pb-34
-            lg:pb-28
-          "
+          className="relative z-30 mt-auto w-full bg-himalaya-900 px-5 py-7 sm:px-7 sm:py-8 lg:px-8 lg:py-7"
         >
           <div
             className="
               mx-auto
               w-full
-              max-w-6xl
-              text-center
+              max-w-[1600px]
+              text-left
             "
           >
             {/* Headline */}
             <h1
+              id="home-title"
               className={`
-                mx-auto
-                max-w-6xl
+                max-w-[26ch]
                 ${
                   isKannada
-                    ? 'font-kannada text-[clamp(1.55rem,7.6vw,2.4rem)] leading-[1.3] tracking-normal sm:text-4xl md:text-5xl lg:text-6xl'
-                    : 'font-display text-[clamp(2.25rem,8vw,4rem)] leading-[0.98] tracking-tight sm:text-6xl md:text-6xl lg:text-6xl xl:text-[5.5rem]'
+                    ? 'font-kannada text-[clamp(1.5rem,5.5vw,3.5rem)] leading-[1.25] tracking-normal'
+                    : 'font-display text-[clamp(1.75rem,4.3vw,3.5rem)] leading-[1.02] tracking-tight'
                 }
                 font-semibold
                 text-white
                 [text-wrap:balance]
-                [text-shadow:0_8px_40px_rgba(0,0,0,0.8)]
               `}
             >
-              {/* {t('headline')} */}
+              {t('headline')}
             </h1>
 
             {/* Subheadline */}
             <p
               className={`
-                mx-auto
-                mt-8
-                max-w-3xl
+                mt-5
+                max-w-[48ch]
                 ${
                   isKannada
-                    ? 'font-kannada text-[0.95rem] leading-[1.65] sm:text-lg'
-                    : 'text-base leading-relaxed sm:text-xl md:text-2xl'
+                    ? 'font-kannada text-base leading-relaxed sm:text-lg'
+                    : 'text-base leading-relaxed sm:text-lg'
                 }
-                text-white/90
-                sm:mt-10
+                text-white
               `}
             >
-              {/* {t('subheadline')} */}
+              {t('subheadline')}
             </p>
 
             {/* Interactive Section (Lifted slightly upward via negative translation) */}
-            <div className="flex flex-col -translate-y-20 sm:-translate-y-20 md:-translate-y-20 lg:-translate-y-8">
+            <div className="mt-5 flex max-w-2xl flex-col gap-4">
               {/* Search (Order 2 on Mobile, Order 1 on Tablet/Desktop) */}
               <form
+                id="destination-search-form"
+                name="destination_search"
                 action={destinationsPath}
                 method="get"
                 role="search"
                 className={`
-                  order-2 sm:order-1
-                  mx-auto
-                  mt-4 sm:mt-8
+                  order-1
                   flex
                   w-full
                   max-w-2xl
                   items-center
                   gap-1.5
-                  rounded-2xl
+                  rounded-lg
                   bg-white
-                  p-1.5
+                  p-1
                   text-left
-                  shadow-xl
                   sm:gap-2
-                  sm:rounded-full
-                  sm:p-2
+                  sm:rounded-lg
+                  sm:p-1.5
                   ${isKannada ? 'font-kannada' : ''}
                 `}
               >
@@ -217,7 +203,7 @@ function HeroSectionComponent() {
                     bg-transparent
                     px-1.5
                     py-3
-                    text-sm
+                    text-base
                     text-slate-900
                     outline-none
                     placeholder:text-slate-600
@@ -238,7 +224,7 @@ function HeroSectionComponent() {
                     rounded-full
                     bg-saffron-700
                     px-3
-                    text-sm
+                    text-base
                     font-semibold
                     text-white
                     transition
@@ -255,37 +241,21 @@ function HeroSectionComponent() {
                 </button>
               </form>
 
-              {/* CTAs (Order 1 on Mobile, Order 2 on Tablet/Desktop) */}
+              {/* Secondary routes remain available as plain text links. */}
               <div
-                className="
-                  order-1 sm:order-2
-                  mt-4 sm:mt-8
-                  flex
-                  flex-wrap
-                  justify-center
-                  gap-3
-                  sm:gap-4
-                "
+                className="flex flex-wrap items-center gap-x-7 gap-y-3 text-base font-semibold"
               >
                 <Link
                   href="/destinations"
                   className={`
-                    rounded-full
-                    border
-                    border-white/20
-                    bg-white/15
-                    px-6
-                    py-3
-                    text-sm
-                    font-medium
+                    min-h-11
+                    py-2
                     text-white
-                    backdrop-blur-xl
-                    transition-all
-                    duration-300
-                    hover:bg-white/25
-                    sm:px-8
-                    sm:py-4
-                    sm:text-base
+                    underline
+                    decoration-white/60
+                    underline-offset-4
+                    transition-colors
+                    hover:text-white/80
                     ${isKannada ? 'font-kannada' : ''}
                   `}
                 >
@@ -295,22 +265,14 @@ function HeroSectionComponent() {
                 <Link
                   href="/contact"
                   className={`
-                    rounded-full
-                    border
-                    border-white/20
-                    bg-black/20
-                    px-6
-                    py-3
-                    text-sm
-                    font-medium
+                    min-h-11
+                    py-2
                     text-white
-                    backdrop-blur-xl
-                    transition-all
-                    duration-300
-                    hover:bg-black/30
-                    sm:px-8
-                    sm:py-4
-                    sm:text-base
+                    underline
+                    decoration-white/60
+                    underline-offset-4
+                    transition-colors
+                    hover:text-white/80
                     ${isKannada ? 'font-kannada' : ''}
                   `}
                 >

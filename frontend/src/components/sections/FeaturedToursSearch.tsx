@@ -89,7 +89,7 @@ export function FeaturedToursSearch({
           placeholder={t(
             'search_featured_placeholder'
           )}
-          className="min-h-11 w-full rounded-full border border-slate-300 py-2.5 pl-9 pr-11 text-sm text-slate-900 outline-none placeholder:text-slate-500 focus:border-saffron-700 focus:ring-2 focus:ring-saffron-200"
+          className="min-h-11 w-full rounded-full border border-slate-300 py-2.5 pl-9 pr-11 text-base text-slate-900 outline-none placeholder:text-slate-600 focus:border-saffron-700 focus:ring-2 focus:ring-saffron-200"
         />
 
         {query && (
@@ -105,7 +105,7 @@ export function FeaturedToursSearch({
       </div>
 
       {loading && (
-        <div role="status" aria-live="polite" className="mt-6 text-center text-sm text-gray-600">
+        <div role="status" aria-live="polite" className="mt-6 text-center text-base text-himalaya-900">
           {t('searching')}
         </div>
       )}
@@ -129,7 +129,7 @@ export function FeaturedToursSearch({
             <button
               type="button"
               onClick={() => setShowAll(true)}
-              className="min-h-11 rounded-full bg-saffron-700 px-8 py-3 font-medium text-white shadow-sm transition hover:bg-saffron-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700 focus-visible:ring-offset-2"
+              className="min-h-11 rounded-full bg-saffron-700 px-8 py-3 text-base font-medium text-white transition-colors hover:bg-saffron-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700 focus-visible:ring-offset-2"
             >
               {t('view_more_tours')}
             </button>
@@ -138,7 +138,7 @@ export function FeaturedToursSearch({
 
       {!query.trim() && results.length > 8 && !showAll && (
         <div className="mt-8 hidden justify-center sm:flex">
-          <button type="button" onClick={() => setShowAll(true)} className="rounded-full bg-saffron-700 px-8 py-3 font-medium text-white shadow-sm transition hover:bg-saffron-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700 focus-visible:ring-offset-2">
+          <button type="button" onClick={() => setShowAll(true)} className="min-h-11 rounded-full bg-saffron-700 px-8 py-3 text-base font-medium text-white transition-colors hover:bg-saffron-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700 focus-visible:ring-offset-2">
             {t('view_more_tours')}
           </button>
         </div>

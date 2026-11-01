@@ -119,6 +119,8 @@ export default async function RootLayout({
       className={`${jakarta.variable} ${playfair.variable} ${kannada.variable}`}
     >
       <head>
+        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
         {/* Hero CDN warmup */}
         <link
           rel="preconnect"

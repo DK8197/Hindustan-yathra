@@ -1,0 +1,2241 @@
+{
+ "url": "http://localhost:3000/en",
+ "at": "2026-11-01T07:48:35.728Z",
+ "allow": [],
+ "viewports": [
+  {
+   "width": 1440,
+   "height": 900,
+   "load": "load",
+   "screens": 8,
+   "filled": [
+    0.97,
+    0.71,
+    0.51,
+    0.59,
+    1,
+    0.81,
+    0.44,
+    0.69
+   ],
+   "motion": {
+    "elements": 16,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 16,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "page": {
+     "height": 6657,
+     "screens": 7.4,
+     "words": 1072,
+     "img": 12,
+     "video": 0,
+     "canvas": 1,
+     "svg": 33,
+     "sections": 8,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 9,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Hindustan Yatra - Travel with new experience",
+     "words": 7,
+     "chars": 44,
+     "lines": 2,
+     "size": 56,
+     "vw": 3.9,
+     "font": "Playfair Display",
+     "weight": 600,
+     "tracking": -0.025,
+     "leading": 1.02,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.64,
+     "top": 542,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Hindustan Yatra - Travel with new experience",
+     "words": 7,
+     "lines": 2,
+     "size": 56,
+     "font": "Playfair Display"
+    },
+    "headings": [
+     {
+      "text": "Hindustan Yatra - Travel with new experience",
+      "words": 7,
+      "chars": 44,
+      "lines": 2,
+      "size": 56,
+      "vw": 3.9,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.64,
+      "top": 542,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Featured Tours",
+      "words": 2,
+      "chars": 14,
+      "lines": 1,
+      "size": 36,
+      "vw": 2.5,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.96,
+      "top": 948,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "How to plan a trip with Hindustan Yatra",
+      "words": 8,
+      "chars": 39,
+      "lines": 1,
+      "size": 36,
+      "vw": 2.5,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.71,
+      "top": 2815,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Plan your next trip with a Hubballi travel agency",
+      "words": 9,
+      "chars": 49,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.62,
+      "top": 3155,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Travel planning terms",
+      "words": 3,
+      "chars": 21,
+      "lines": 1,
+      "size": 30,
+      "vw": 2.1,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.71,
+      "top": 3439,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Why Hindustan Yatra",
+      "words": 3,
+      "chars": 19,
+      "lines": 1,
+      "size": 36,
+      "vw": 2.5,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.89,
+      "top": 3771,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Frequently asked questions about Hindustan Yatra",
+      "words": 6,
+      "chars": 48,
+      "lines": 1,
+      "size": 36,
+      "vw": 2.5,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.71,
+      "top": 4299,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Plan Your Journey",
+      "words": 3,
+      "chars": 17,
+      "lines": 1,
+      "size": 36,
+      "vw": 2.5,
+      "font": "Playfair Display",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.82,
+      "top": 5239,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 8,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 1,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Plus Jakarta Sans",
+       "share": 0.88,
+       "mono": false
+      },
+      {
+       "family": "Playfair Display",
+       "share": 0.12,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      14,
+      16,
+      18,
+      30,
+      36,
+      56
+     ],
+     "sizeCount": 6,
+     "notLoaded": [],
+     "body": {
+      "font": "Plus Jakarta Sans",
+      "size": 16,
+      "leading": 1.63,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 17.5
+     },
+     "measureChars": 95,
+     "max": {
+      "size": 56,
+      "vw": 3.9,
+      "font": "Playfair Display",
+      "text": "Hindustan Yatra - Travel with new experi"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.02,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#0c1b28",
+       "top": 80,
+       "hsl": {
+        "h": 208,
+        "s": 0.54,
+        "l": 0.1
+       }
+      },
+      {
+       "color": "#0b1220",
+       "top": 80,
+       "hsl": {
+        "h": 220,
+        "s": 0.49,
+        "l": 0.08
+       }
+      },
+      {
+       "color": "#f0f6fb",
+       "top": 2751,
+       "hsl": {
+        "h": 207,
+        "s": 0.58,
+        "l": 0.96
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 3091,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#f8fafc",
+       "top": 4235,
+       "hsl": {
+        "h": 210,
+        "s": 0.4,
+        "l": 0.98
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#0c1b28",
+       "share": 0.74
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.14
+      },
+      {
+       "color": "#334155",
+       "share": 0.05
+      },
+      {
+       "color": "#1e293b",
+       "share": 0.03
+      },
+      {
+       "color": "#c2410c",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#c2410c",
+      "hsl": {
+       "h": 17,
+       "s": 0.88,
+       "l": 0.4
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 6,
+     "inHero": 3,
+     "radius": "pill",
+     "height": 48,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Find a journey",
+      "Destinations"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 1,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 2,
+     "boxRadius": 16,
+     "squareMedia": 10,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "bg-image",
+      "ratio": 0.5
+     },
+     {
+      "type": "canvas",
+      "ratio": 0.19
+     }
+    ],
+    "nav": {
+     "links": 9,
+     "fixed": true,
+     "height": 80,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "plus jakarta sans",
+     "plus jakarta sans fallback",
+     "playfair display",
+     "playfair display fallback"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 1440,
+     "h": 900
+    },
+    "pageH": 6657,
+    "margins": {
+     "left": 32,
+     "right": 32
+    },
+    "sections": [
+     {
+      "sel": "section.relative.min-h-[calc(100svh-4rem)]",
+      "tag": "section",
+      "top": 80,
+      "height": 820,
+      "words": 30,
+      "media": 2,
+      "middle": 195,
+      "heading": {
+       "text": "Hindustan Yatra - Travel with new experience",
+       "size": 56,
+       "tag": "h1"
+      },
+      "left": 32,
+      "right": 0,
+      "textLeft": 32,
+      "textRight": 766,
+      "fullBleed": true,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#featured-tours.w-full.px-[clamp(1rem,2.2vw,2rem)]",
+      "tag": "section",
+      "top": 852,
+      "height": 1899,
+      "words": 366,
+      "media": 8,
+      "middle": 21,
+      "heading": {
+       "text": "Featured Tours",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 32,
+      "right": 32,
+      "textLeft": 32,
+      "textRight": 32,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#plan-trip.bg-himalaya-50.px-6",
+      "tag": "section",
+      "top": 2751,
+      "height": 340,
+      "words": 79,
+      "media": 0,
+      "middle": 76,
+      "heading": {
+       "text": "How to plan a trip with Hindustan Yatra",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 208,
+      "right": 224,
+      "textLeft": 208,
+      "textRight": 224,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#home-intro.bg-white.px-6",
+      "tag": "section",
+      "top": 3091,
+      "height": 292,
+      "words": 70,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Plan your next trip with a Hubballi travel agency",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 272,
+      "right": 436,
+      "textLeft": 272,
+      "textRight": 436,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#travel-terms.bg-white.px-6",
+      "tag": "section",
+      "top": 3383,
+      "height": 308,
+      "words": 66,
+      "media": 0,
+      "middle": 54,
+      "heading": {
+       "text": "Travel planning terms",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 208,
+      "right": 220,
+      "textLeft": 208,
+      "textRight": 220,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#why-hindustan-yatra.bg-himalaya-50.px-6",
+      "tag": "section",
+      "top": 3691,
+      "height": 544,
+      "words": 128,
+      "media": 0,
+      "middle": 75,
+      "heading": {
+       "text": "Why Hindustan Yatra",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 80,
+      "right": 89,
+      "textLeft": 80,
+      "textRight": 89,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#home-faq.bg-slate-50.px-6",
+      "tag": "section",
+      "top": 4235,
+      "height": 908,
+      "words": 292,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Frequently asked questions about Hindustan Yatra",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 208,
+      "right": 209,
+      "textLeft": 208,
+      "textRight": 209,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#contact.mx-auto.max-w-7xl",
+      "tag": "section",
+      "top": 5143,
+      "height": 976,
+      "words": 38,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Plan Your Journey",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 161,
+      "right": 128,
+      "textLeft": 161,
+      "textRight": 299,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.bg-himalaya-900.px-6",
+      "tag": "footer",
+      "top": 6119,
+      "height": 538,
+      "words": 109,
+      "media": 0,
+      "middle": 234,
+      "heading": {
+       "text": "Hindustan Yatra",
+       "size": 18,
+       "tag": "h3"
+      },
+      "left": 80,
+      "right": 82,
+      "textLeft": 80,
+      "textRight": 82,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Hindustan Yatra - Travel with new experience",
+      "size": 56,
+      "top": 542,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 32,
+      "n": 9
+     },
+     {
+      "x": 208,
+      "n": 8
+     },
+     {
+      "x": 499,
+      "n": 6
+     },
+     {
+      "x": 663,
+      "n": 5
+     },
+     {
+      "x": 965,
+      "n": 4
+     },
+     {
+      "x": 272,
+      "n": 2
+     },
+     {
+      "x": 80,
+      "n": 1
+     }
+    ],
+    "leftBlocks": 35,
+    "bodySize": 16,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0.17,
+    "voidBox": {
+     "x": 720,
+     "y": 540,
+     "w": 600,
+     "h": 360
+    }
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 768,
+   "height": 1024,
+   "load": "load",
+   "screens": 9,
+   "filled": [
+    0.94,
+    0.67,
+    0.84,
+    0.68,
+    0.86,
+    1,
+    0.33,
+    0.81,
+    0.93
+   ],
+   "motion": {
+    "elements": 16,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 16,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "page": {
+     "height": 8653,
+     "screens": 8.5,
+     "words": 1064,
+     "img": 12,
+     "video": 0,
+     "canvas": 1,
+     "svg": 33,
+     "sections": 8,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 9,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Hindustan Yatra - Travel with new experience",
+     "words": 7,
+     "chars": 44,
+     "lines": 2,
+     "size": 33,
+     "vw": 4.3,
+     "font": "Playfair Display",
+     "weight": 600,
+     "tracking": -0.025,
+     "leading": 1.02,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "left",
+     "widthRatio": 0.7,
+     "top": 709,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Hindustan Yatra - Travel with new experience",
+     "words": 7,
+     "lines": 2,
+     "size": 33,
+     "font": "Playfair Display"
+    },
+    "headings": [
+     {
+      "text": "Hindustan Yatra - Travel with new experience",
+      "words": 7,
+      "chars": 44,
+      "lines": 2,
+      "size": 33,
+      "vw": 4.3,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "left",
+      "widthRatio": 0.7,
+      "top": 709,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Featured Tours",
+      "words": 2,
+      "chars": 14,
+      "lines": 1,
+      "size": 36,
+      "vw": 4.7,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.96,
+      "top": 1072,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "How to plan a trip with Hindustan Yatra",
+      "words": 8,
+      "chars": 39,
+      "lines": 1,
+      "size": 36,
+      "vw": 4.7,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 3291,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Plan your next trip with a Hubballi travel agency",
+      "words": 9,
+      "chars": 49,
+      "lines": 1,
+      "size": 30,
+      "vw": 3.9,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 3733,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Travel planning terms",
+      "words": 3,
+      "chars": 21,
+      "lines": 1,
+      "size": 30,
+      "vw": 3.9,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 4045,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Why Hindustan Yatra",
+      "words": 3,
+      "chars": 19,
+      "lines": 1,
+      "size": 36,
+      "vw": 4.7,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 4429,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Frequently asked questions about Hindustan Yatra",
+      "words": 6,
+      "chars": 48,
+      "lines": 2,
+      "size": 36,
+      "vw": 4.7,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 5113,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Plan Your Journey",
+      "words": 3,
+      "chars": 17,
+      "lines": 1,
+      "size": 36,
+      "vw": 4.7,
+      "font": "Playfair Display",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 1.11,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 6457,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 8,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 1,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Plus Jakarta Sans",
+       "share": 0.88,
+       "mono": false
+      },
+      {
+       "family": "Playfair Display",
+       "share": 0.12,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      14,
+      16,
+      18,
+      30,
+      33,
+      36
+     ],
+     "sizeCount": 6,
+     "notLoaded": [],
+     "body": {
+      "font": "Plus Jakarta Sans",
+      "size": 16,
+      "leading": 1.63,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 17.5
+     },
+     "measureChars": 84,
+     "max": {
+      "size": 36,
+      "vw": 4.7,
+      "font": "Playfair Display",
+      "text": "Featured Tours"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.02,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#0c1b28",
+       "top": 80,
+       "hsl": {
+        "h": 208,
+        "s": 0.54,
+        "l": 0.1
+       }
+      },
+      {
+       "color": "#0b1220",
+       "top": 80,
+       "hsl": {
+        "h": 220,
+        "s": 0.49,
+        "l": 0.08
+       }
+      },
+      {
+       "color": "#f0f6fb",
+       "top": 3227,
+       "hsl": {
+        "h": 207,
+        "s": 0.58,
+        "l": 0.96
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 3669,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#f8fafc",
+       "top": 5049,
+       "hsl": {
+        "h": 210,
+        "s": 0.4,
+        "l": 0.98
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#0c1b28",
+       "share": 0.74
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.14
+      },
+      {
+       "color": "#334155",
+       "share": 0.05
+      },
+      {
+       "color": "#1e293b",
+       "share": 0.03
+      },
+      {
+       "color": "#c2410c",
+       "share": 0.02
+      }
+     ],
+     "button": {
+      "bg": "#c2410c",
+      "hsl": {
+       "h": 17,
+       "s": 0.88,
+       "l": 0.4
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 1,
+     "radius": "pill",
+     "height": 48,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Find a journey"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 1,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 2,
+     "boxRadius": 16,
+     "squareMedia": 10,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "bg-image",
+      "ratio": 0.44
+     },
+     {
+      "type": "canvas",
+      "ratio": 0.31
+     }
+    ],
+    "nav": {
+     "links": 1,
+     "fixed": true,
+     "height": 80,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "plus jakarta sans",
+     "plus jakarta sans fallback",
+     "playfair display",
+     "playfair display fallback"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 768,
+     "h": 1024
+    },
+    "pageH": 8653,
+    "margins": {
+     "left": 17,
+     "right": 17
+    },
+    "sections": [
+     {
+      "sel": "section.relative.min-h-[calc(100svh-4rem)]",
+      "tag": "section",
+      "top": 80,
+      "height": 944,
+      "words": 30,
+      "media": 2,
+      "middle": 0,
+      "heading": null,
+      "left": 28,
+      "right": 0,
+      "textLeft": 28,
+      "textRight": 98,
+      "fullBleed": true,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#featured-tours.w-full.px-[clamp(1rem,2.2vw,2rem)]",
+      "tag": "section",
+      "top": 976,
+      "height": 2251,
+      "words": 366,
+      "media": 8,
+      "middle": 0,
+      "heading": {
+       "text": "Featured Tours",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 17,
+      "right": 17,
+      "textLeft": 17,
+      "textRight": 17,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#plan-trip.bg-himalaya-50.px-6",
+      "tag": "section",
+      "top": 3227,
+      "height": 442,
+      "words": 79,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "How to plan a trip with Hindustan Yatra",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 48,
+      "right": 48,
+      "textLeft": 48,
+      "textRight": 48,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#home-intro.bg-white.px-6",
+      "tag": "section",
+      "top": 3669,
+      "height": 320,
+      "words": 70,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Plan your next trip with a Hubballi travel agency",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 48,
+      "right": 63,
+      "textLeft": 48,
+      "textRight": 63,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#travel-terms.bg-white.px-6",
+      "tag": "section",
+      "top": 3989,
+      "height": 360,
+      "words": 66,
+      "media": 0,
+      "middle": 50,
+      "heading": {
+       "text": "Travel planning terms",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 48,
+      "right": 59,
+      "textLeft": 48,
+      "textRight": 59,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#why-hindustan-yatra.bg-himalaya-50.px-6",
+      "tag": "section",
+      "top": 4349,
+      "height": 700,
+      "words": 128,
+      "media": 0,
+      "middle": 21,
+      "heading": {
+       "text": "Why Hindustan Yatra",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 48,
+      "right": 54,
+      "textLeft": 48,
+      "textRight": 54,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#home-faq.bg-slate-50.px-6",
+      "tag": "section",
+      "top": 5049,
+      "height": 1312,
+      "words": 292,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Frequently asked questions about Hindustan Yatra",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 48,
+      "right": 49,
+      "textLeft": 48,
+      "textRight": 49,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#contact.mx-auto.max-w-7xl",
+      "tag": "section",
+      "top": 6361,
+      "height": 1416,
+      "words": 38,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Plan Your Journey",
+       "size": 36,
+       "tag": "h2"
+      },
+      "left": 48,
+      "right": 48,
+      "textLeft": 76,
+      "textRight": 76,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.bg-himalaya-900.px-6",
+      "tag": "footer",
+      "top": 7777,
+      "height": 876,
+      "words": 109,
+      "media": 0,
+      "middle": 82,
+      "heading": {
+       "text": "Hindustan Yatra",
+       "size": 18,
+       "tag": "h3"
+      },
+      "left": 48,
+      "right": 50,
+      "textLeft": 48,
+      "textRight": 50,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Hindustan Yatra - Travel with new experience",
+      "size": 33,
+      "top": 709,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 48,
+      "n": 11
+     },
+     {
+      "x": 17,
+      "n": 9
+     },
+     {
+      "x": 396,
+      "n": 8
+     },
+     {
+      "x": 356,
+      "n": 5
+     },
+     {
+      "x": 28,
+      "n": 2
+     }
+    ],
+    "leftBlocks": 35,
+    "bodySize": 16,
+    "stage": false,
+    "explains": true,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  },
+  {
+   "width": 390,
+   "height": 844,
+   "load": "load",
+   "screens": 12,
+   "filled": [
+    0.89,
+    0.71,
+    0.82,
+    0.77,
+    0.61,
+    0.77,
+    1,
+    1,
+    0.7,
+    0.44,
+    0.93,
+    1
+   ],
+   "motion": {
+    "elements": 11,
+    "css": 0,
+    "transitions": 0,
+    "scripted": 11,
+    "videos": 0,
+    "playingVideos": 0
+   },
+   "metrics": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "page": {
+     "height": 9890,
+     "screens": 11.7,
+     "words": 908,
+     "img": 12,
+     "video": 0,
+     "canvas": 1,
+     "svg": 33,
+     "sections": 8,
+     "horizontalOverflow": 0,
+     "overflowCulprits": [],
+     "uiFragments": 0,
+     "uiAbuse": false,
+     "realPictures": 5,
+     "videoCount": 0,
+     "uiPictures": 0,
+     "pictureSamples": [
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2",
+      "image?url=https%3A%2F%2Fcdn.hindustanyatra.com%2"
+     ],
+     "blendText": 0,
+     "sideScrollers": 0,
+     "brokenImages": [],
+     "emoji": [],
+     "videosNoPoster": 0
+    },
+    "hero": {
+     "text": "Hindustan Yatra - Travel with new experience",
+     "words": 7,
+     "chars": 44,
+     "lines": 2,
+     "size": 28,
+     "vw": 7.2,
+     "font": "Playfair Display",
+     "weight": 600,
+     "tracking": -0.025,
+     "leading": 1.02,
+     "upper": false,
+     "italic": false,
+     "mono": false,
+     "align": "left",
+     "position": "center",
+     "widthRatio": 0.9,
+     "top": 551,
+     "tag": "h1",
+     "kind": "heading"
+    },
+    "h1": {
+     "text": "Hindustan Yatra - Travel with new experience",
+     "words": 7,
+     "lines": 2,
+     "size": 28,
+     "font": "Playfair Display"
+    },
+    "headings": [
+     {
+      "text": "Hindustan Yatra - Travel with new experience",
+      "words": 7,
+      "chars": 44,
+      "lines": 2,
+      "size": 28,
+      "vw": 7.2,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.02,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.9,
+      "top": 551,
+      "tag": "h1",
+      "kind": "heading"
+     },
+     {
+      "text": "Featured Tours",
+      "words": 2,
+      "chars": 14,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": -0.025,
+      "leading": 1.33,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 860,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "How to plan a trip with Hindustan Yatra",
+      "words": 8,
+      "chars": 39,
+      "lines": 2,
+      "size": 30,
+      "vw": 7.7,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 2985,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Plan your next trip with a Hubballi travel agency",
+      "words": 9,
+      "chars": 49,
+      "lines": 2,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.33,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 3641,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Travel planning terms",
+      "words": 3,
+      "chars": 21,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.33,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 4093,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Why Hindustan Yatra",
+      "words": 3,
+      "chars": 19,
+      "lines": 1,
+      "size": 30,
+      "vw": 7.7,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.2,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 4671,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Frequently asked questions about Hindustan Yatra",
+      "words": 6,
+      "chars": 48,
+      "lines": 2,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Playfair Display",
+      "weight": 600,
+      "tracking": 0,
+      "leading": 1.33,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "left",
+      "position": "center",
+      "widthRatio": 0.88,
+      "top": 5765,
+      "tag": "h2",
+      "kind": "heading"
+     },
+     {
+      "text": "Plan Your Journey",
+      "words": 3,
+      "chars": 17,
+      "lines": 1,
+      "size": 24,
+      "vw": 6.2,
+      "font": "Playfair Display",
+      "weight": 700,
+      "tracking": -0.025,
+      "leading": 1.33,
+      "upper": false,
+      "italic": false,
+      "mono": false,
+      "align": "center",
+      "position": "center",
+      "widthRatio": 0.92,
+      "top": 7336,
+      "tag": "h2",
+      "kind": "heading"
+     }
+    ],
+    "headingSummary": {
+     "count": 8,
+     "maxLines": 2,
+     "over2Lines": 0,
+     "statements": 0,
+     "centered": 1,
+     "medianWords": 3,
+     "mixedFontHeadings": 0
+    },
+    "type": {
+     "families": [
+      {
+       "family": "Plus Jakarta Sans",
+       "share": 0.88,
+       "mono": false
+      },
+      {
+       "family": "Playfair Display",
+       "share": 0.12,
+       "mono": false
+      }
+     ],
+     "familyCount": 2,
+     "sizes": [
+      16,
+      18,
+      24,
+      28,
+      30
+     ],
+     "sizeCount": 5,
+     "notLoaded": [],
+     "body": {
+      "font": "Plus Jakarta Sans",
+      "size": 16,
+      "leading": 1.63,
+      "weight": 400,
+      "tracking": 0,
+      "contrast": 17.5
+     },
+     "measureChars": 43,
+     "max": {
+      "size": 30,
+      "vw": 7.7,
+      "font": "Playfair Display",
+      "text": "How to plan a trip with Hindustan Yatra"
+     },
+     "monoShare": 0,
+     "monoProseShare": 0,
+     "monoFamilies": [],
+     "monoSamples": [],
+     "microLabels": 0,
+     "microLabelShare": 0,
+     "microSamples": [],
+     "upperShare": 0,
+     "centerShare": 0.02,
+     "smallText": 0
+    },
+    "eyebrows": [],
+    "numbered": [],
+    "color": {
+     "bodyBg": "#ffffff",
+     "bodyBgHsl": {
+      "h": 0,
+      "s": 0,
+      "l": 1
+     },
+     "dark": false,
+     "sectionBgs": [
+      {
+       "color": "#0c1b28",
+       "top": 64,
+       "hsl": {
+        "h": 208,
+        "s": 0.54,
+        "l": 0.1
+       }
+      },
+      {
+       "color": "#0b1220",
+       "top": 64,
+       "hsl": {
+        "h": 220,
+        "s": 0.49,
+        "l": 0.08
+       }
+      },
+      {
+       "color": "#ffffff",
+       "top": 1010,
+       "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 1
+       }
+      },
+      {
+       "color": "#f0f6fb",
+       "top": 2921,
+       "hsl": {
+        "h": 207,
+        "s": 0.58,
+        "l": 0.96
+       }
+      },
+      {
+       "color": "#f8fafc",
+       "top": 5701,
+       "hsl": {
+        "h": 210,
+        "s": 0.4,
+        "l": 0.98
+       }
+      }
+     ],
+     "textColors": [
+      {
+       "color": "#0c1b28",
+       "share": 0.73
+      },
+      {
+       "color": "#ffffff",
+       "share": 0.16
+      },
+      {
+       "color": "#334155",
+       "share": 0.06
+      },
+      {
+       "color": "#1e293b",
+       "share": 0.02
+      },
+      {
+       "color": "#4b5563",
+       "share": 0.01
+      }
+     ],
+     "button": {
+      "bg": "#c2410c",
+      "hsl": {
+       "h": 17,
+       "s": 0.88,
+       "l": 0.4
+      },
+      "fg": "#ffffff"
+     },
+     "lowContrast": []
+    },
+    "buttons": {
+     "count": 4,
+     "inHero": 1,
+     "radius": "pill",
+     "height": 48,
+     "withShadow": 0,
+     "withGradient": 0,
+     "mono": 0,
+     "upper": 0,
+     "heroLabels": [
+      "Find a journey"
+     ]
+    },
+    "surfaces": {
+     "shadowStatic": 0,
+     "shadowOverlay": 0,
+     "shadowSamples": [],
+     "gradients": 0,
+     "scrims": 0,
+     "gradientSamples": [],
+     "gradientText": 0,
+     "hairlines": 0,
+     "hairlineSamples": [],
+     "outlinedBoxes": 1,
+     "dashed": 0,
+     "blurred": 0,
+     "roundedBoxes": 2,
+     "boxRadius": 16,
+     "squareMedia": 6,
+     "roundedMedia": 0,
+     "mediaRadius": 0,
+     "textShadow": 0,
+     "cardRows": []
+    },
+    "heroMedia": [
+     {
+      "type": "bg-image",
+      "ratio": 0.44
+     },
+     {
+      "type": "canvas",
+      "ratio": 0.35
+     }
+    ],
+    "nav": {
+     "links": 1,
+     "fixed": true,
+     "height": 64,
+     "floatingPill": false,
+     "blur": false
+    },
+    "fontsLoaded": [
+     "plus jakarta sans",
+     "plus jakarta sans fallback",
+     "playfair display",
+     "playfair display fallback"
+    ]
+   },
+   "layout": {
+    "viewport": {
+     "w": 390,
+     "h": 844
+    },
+    "pageH": 9890,
+    "margins": {
+     "left": 16,
+     "right": 16
+    },
+    "sections": [
+     {
+      "sel": "section.relative.min-h-[calc(100svh-4rem)]",
+      "tag": "section",
+      "top": 64,
+      "height": 780,
+      "words": 30,
+      "media": 2,
+      "middle": 0,
+      "heading": {
+       "text": "Hindustan Yatra - Travel with new experience",
+       "size": 28,
+       "tag": "h1"
+      },
+      "left": 20,
+      "right": 24,
+      "textLeft": 20,
+      "textRight": 32,
+      "fullBleed": true,
+      "footer": false,
+      "hero": true,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#featured-tours.w-full.px-[clamp(1rem,2.2vw,2rem)]",
+      "tag": "section",
+      "top": 796,
+      "height": 2125,
+      "words": 187,
+      "media": 4,
+      "middle": 0,
+      "heading": {
+       "text": "Featured Tours",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 16,
+      "right": 16,
+      "textLeft": 16,
+      "textRight": 16,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#plan-trip.bg-himalaya-50.px-6",
+      "tag": "section",
+      "top": 2921,
+      "height": 656,
+      "words": 79,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "How to plan a trip with Hindustan Yatra",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 28,
+      "textLeft": 24,
+      "textRight": 28,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#home-intro.bg-white.px-6",
+      "tag": "section",
+      "top": 3577,
+      "height": 460,
+      "words": 70,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Plan your next trip with a Hubballi travel agency",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 33,
+      "textLeft": 24,
+      "textRight": 33,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#travel-terms.bg-white.px-6",
+      "tag": "section",
+      "top": 4037,
+      "height": 554,
+      "words": 66,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Travel planning terms",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 47,
+      "textLeft": 24,
+      "textRight": 47,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#why-hindustan-yatra.bg-himalaya-50.px-6",
+      "tag": "section",
+      "top": 4591,
+      "height": 1110,
+      "words": 128,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Why Hindustan Yatra",
+       "size": 30,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 31,
+      "textLeft": 24,
+      "textRight": 31,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#home-faq.bg-slate-50.px-6",
+      "tag": "section",
+      "top": 5701,
+      "height": 1555,
+      "words": 292,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Frequently asked questions about Hindustan Yatra",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 24,
+      "right": 25,
+      "textLeft": 24,
+      "textRight": 25,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "section#contact.mx-auto.max-w-7xl",
+      "tag": "section",
+      "top": 7256,
+      "height": 1376,
+      "words": 38,
+      "media": 1,
+      "middle": 0,
+      "heading": {
+       "text": "Plan Your Journey",
+       "size": 24,
+       "tag": "h2"
+      },
+      "left": 16,
+      "right": 16,
+      "textLeft": 31,
+      "textRight": 31,
+      "fullBleed": false,
+      "footer": false,
+      "hero": false,
+      "continues": true,
+      "pinned": false
+     },
+     {
+      "sel": "footer.bg-himalaya-900.px-6",
+      "tag": "footer",
+      "top": 8632,
+      "height": 1258,
+      "words": 109,
+      "media": 0,
+      "middle": 0,
+      "heading": {
+       "text": "Hindustan Yatra",
+       "size": 18,
+       "tag": "h3"
+      },
+      "left": 24,
+      "right": 24,
+      "textLeft": 24,
+      "textRight": 24,
+      "fullBleed": false,
+      "footer": true,
+      "hero": false,
+      "continues": false,
+      "pinned": false
+     }
+    ],
+    "gaps": [],
+    "h1s": [
+     {
+      "text": "Hindustan Yatra - Travel with new experience",
+      "size": 28,
+      "top": 551,
+      "firstScreen": true
+     }
+    ],
+    "edgeText": [],
+    "edges": [
+     {
+      "x": 16,
+      "n": 27
+     }
+    ],
+    "leftBlocks": 27,
+    "bodySize": 16,
+    "stage": false,
+    "explains": false,
+    "slivers": [],
+    "voidShare": 0,
+    "voidBox": null
+   },
+   "app": null,
+   "consoleErrors": []
+  }
+ ],
+ "findings": [
+  {
+   "level": "WARN",
+   "id": "outlined-box",
+   "width": 1440,
+   "message": "1 box(es) drawn with a 1px outline.",
+   "fix": "Prefer a filled surface or no box.",
+   "alsoAt": [
+    768,
+    390
+   ]
+  },
+  {
+   "level": "WARN",
+   "id": "no-footage",
+   "width": 1440,
+   "message": "No video anywhere on the page.",
+   "fix": "Look for one honest clip with scripts/assets.mjs --video (the place, the material, the process) and use it as a muted loop with a poster frame. Defend its absence only if no clip fits the subject."
+  },
+  {
+   "level": "WARN",
+   "id": "measure",
+   "width": 1440,
+   "message": "Longest paragraph runs about 95 characters per line.",
+   "fix": "Cap paragraphs at 45–75 characters (max-width: 60ch)."
+  }
+ ],
+ "images": [
+  {
+   "viewport": "desktop",
+   "width": 1440,
+   "fold": "C:\\Users\\HP\\Downloads\\Projects\\Hindustan Yathra\\frontend\\.taste-skill\\after\\desktop-fold.jpg",
+   "pages": [
+    "C:\\Users\\HP\\Downloads\\Projects\\Hindustan Yathra\\frontend\\.taste-skill\\after\\desktop-page-01.jpg",
+    "C:\\Users\\HP\\Downloads\\Projects\\Hindustan Yathra\\frontend\\.taste-skill\\after\\desktop-page-02.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "tablet",
+   "width": 768,
+   "fold": "C:\\Users\\HP\\Downloads\\Projects\\Hindustan Yathra\\frontend\\.taste-skill\\after\\tablet-fold.jpg",
+   "pages": [
+    "C:\\Users\\HP\\Downloads\\Projects\\Hindustan Yathra\\frontend\\.taste-skill\\after\\tablet-page-01.jpg",
+    "C:\\Users\\HP\\Downloads\\Projects\\Hindustan Yathra\\frontend\\.taste-skill\\after\\tablet-page-02.jpg"
+   ],
+   "film": []
+  },
+  {
+   "viewport": "mobile",
+   "width": 390,
+   "fold": "C:\\Users\\HP\\Downloads\\Projects\\Hindustan Yathra\\frontend\\.taste-skill\\after\\mobile-fold.jpg",
+   "pages": [
+    "C:\\Users\\HP\\Downloads\\Projects\\Hindustan Yathra\\frontend\\.taste-skill\\after\\mobile-page-01.jpg",
+    "C:\\Users\\HP\\Downloads\\Projects\\Hindustan Yathra\\frontend\\.taste-skill\\after\\mobile-page-02.jpg"
+   ],
+   "film": []
+  }
+ ]
+}

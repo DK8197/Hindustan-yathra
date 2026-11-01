@@ -56,7 +56,7 @@ button {
 .hero-bg {
   background-color: #0b1220;
   background-image: var(--hero-bg-mobile);
-  background-position: center;
+  background-position: center 48%;
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -70,6 +70,7 @@ button {
 @media (min-width: 768px) {
   .hero-bg {
     background-image: var(--hero-bg-desktop);
+    background-position: center 68%;
   }
 }
 

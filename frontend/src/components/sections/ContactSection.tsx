@@ -33,7 +33,7 @@ function FormStatus({ status, message }: { status: Status; message: string }) {
       role="status"
       aria-live="polite"
       aria-atomic="true"
-      className={`flex items-start gap-3 rounded-xl border p-4 text-sm ${style}`}
+      className={`flex items-start gap-3 rounded-xl border p-4 text-base ${style}`}
     >
       <Icon
         aria-hidden="true"
@@ -89,11 +89,12 @@ export function ContactSection({
   return (
     <section
       id="contact"
+      aria-labelledby="contact-heading"
       className="mx-auto max-w-7xl scroll-mt-20 px-4 py-16 sm:px-6 sm:py-20 md:px-12"
     >
       <div className="mb-12 text-center">
 
-        <Heading className="mt-4 font-display text-3xl font-bold tracking-tight text-himalaya-900 sm:text-4xl md:text-5xl">
+        <Heading id="contact-heading" className="mt-4 font-display text-2xl font-bold tracking-tight text-himalaya-900 md:text-4xl">
           {tSections('contact')}
         </Heading>
 
@@ -105,32 +106,34 @@ export function ContactSection({
       <div className="grid gap-10 lg:grid-cols-2">
         {/* FORM */}
         <form
+          id="contact-enquiry-form"
+          name="contact_enquiry"
           onSubmit={handleSubmit}
-          className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-8"
+          className="space-y-4 rounded-2xl border border-slate-200 bg-white p-5 sm:p-8"
         >
           <div>
-            <label htmlFor="contact-name" className="mb-1.5 block text-sm font-medium text-slate-800">{t('name')}</label>
-            <input id="contact-name" name="name" autoComplete="name" required minLength={2} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
+            <label htmlFor="contact-name" className="mb-1.5 block text-base font-medium text-slate-800">{t('name')}</label>
+            <input id="contact-name" name="name" type="text" autoComplete="name" required minLength={2} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-base text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
           </div>
 
           <div>
-            <label htmlFor="contact-phone" className="mb-1.5 block text-sm font-medium text-slate-800">{t('phone')}</label>
-            <input id="contact-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" required minLength={10} maxLength={20} pattern="[0-9+(). -]{10,20}" title={t('phone_format_hint')} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
+            <label htmlFor="contact-phone" className="mb-1.5 block text-base font-medium text-slate-800">{t('phone')}</label>
+            <input id="contact-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" required minLength={10} maxLength={20} pattern="[0-9+(). -]{10,20}" title={t('phone_format_hint')} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-base text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
           </div>
 
           <div>
-            <label htmlFor="contact-email" className="mb-1.5 block text-sm font-medium text-slate-800">{t('email')} <span className="font-normal text-slate-500">({t('optional')})</span></label>
-            <input id="contact-email" name="email" type="email" autoComplete="email" className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
+            <label htmlFor="contact-email" className="mb-1.5 block text-base font-medium text-slate-800">{t('email')} <span className="font-normal text-slate-600">({t('optional')})</span></label>
+            <input id="contact-email" name="email" type="email" autoComplete="email" className="w-full rounded-xl border border-slate-300 px-4 py-3 text-base text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
           </div>
 
           <div>
-            <label htmlFor="contact-destination" className="mb-1.5 block text-sm font-medium text-slate-800">{t('destination')} <span className="font-normal text-slate-500">({t('optional')})</span></label>
-            <input id="contact-destination" name="destination" autoComplete="off" defaultValue={initialDestination} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
+            <label htmlFor="contact-destination" className="mb-1.5 block text-base font-medium text-slate-800">{t('destination')} <span className="font-normal text-slate-600">({t('optional')})</span></label>
+            <input id="contact-destination" name="destination" type="text" autoComplete="off" defaultValue={initialDestination} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-base text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
           </div>
 
           <div>
-            <label htmlFor="contact-message" className="mb-1.5 block text-sm font-medium text-slate-800">{t('message')} <span className="font-normal text-slate-500">({t('optional')})</span></label>
-            <textarea id="contact-message" name="message" rows={4} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
+            <label htmlFor="contact-message" className="mb-1.5 block text-base font-medium text-slate-800">{t('message')} <span className="font-normal text-slate-600">({t('optional')})</span></label>
+            <textarea id="contact-message" name="message" rows={4} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-base text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
           </div>
 
           <button
@@ -164,7 +167,7 @@ export function ContactSection({
 
           
 
-          <div className="overflow-hidden rounded-3xl shadow-xl ring-1 ring-black/5">
+          <div className="overflow-hidden rounded-3xl">
             <iframe
               title="Hindustan Yatra Office"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3847.49437530746!2d75.14006667488832!3d15.349689285230303!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb8d7a1d1fdc27f%3A0xda2cb0a266c7d9a9!2sHindustan%20Yatra!5e0!3m2!1sen!2sin!4v1783166349537!5m2!1sen!2sin"

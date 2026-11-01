@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 interface SocialMediaItem {
@@ -32,13 +33,19 @@ function VideoCard({
       aria-label={openLabel}
       className="group block shrink-0 snap-start overflow-hidden rounded-2xl border border-slate-200 bg-white transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700 focus-visible:ring-offset-2"
     >
-      <img
-        src={item.thumbnail}
-        alt=""
-        loading="lazy"
-        className={
-          isInstagram
-            ? `
+      {item.thumbnail && (
+        <Image
+          src={item.thumbnail}
+          alt=""
+          width={340}
+          height={320}
+          sizes={isInstagram
+            ? '(min-width: 1024px) 180px, (min-width: 640px) 165px, 150px'
+            : '(min-width: 1024px) 340px, (min-width: 640px) 320px, 300px'}
+          loading="lazy"
+          className={
+            isInstagram
+              ? `
               h-[260px]
               w-[150px]
               object-cover
@@ -48,8 +55,8 @@ function VideoCard({
 
               lg:h-[320px]
               lg:w-[180px]
-            `
-            : `
+              `
+              : `
               h-[170px]
               w-[300px]
               object-cover
@@ -59,9 +66,10 @@ function VideoCard({
 
               lg:h-[190px]
               lg:w-[340px]
-            `
-        }
-      />
+              `
+          }
+        />
+      )}
     </a>
   );
 }
@@ -107,10 +115,10 @@ export default function SocialMediaFeed({
   }
 
   return (
-    <section className="overflow-hidden bg-white py-20">
+    <section id="travel-stories" aria-labelledby="travel-stories-heading" className="overflow-hidden bg-white py-20">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-14 text-center">
-          <h2 className="font-display text-3xl font-semibold tracking-tight text-himalaya-900 sm:text-4xl">
+          <h2 id="travel-stories-heading" className="font-display text-3xl font-semibold tracking-tight text-himalaya-900 sm:text-4xl">
             {t('social_title')}
           </h2>
 
@@ -121,7 +129,7 @@ export default function SocialMediaFeed({
 
         {instagram.length > 0 && (
           <div>
-            <h3 className="mb-5 text-xl font-semibold text-himalaya-900 sm:text-2xl">
+            <h3 id="instagram-reels-heading" className="mb-5 text-xl font-semibold text-himalaya-900 sm:text-2xl">
               {t('instagram_reels')}
             </h3>
 
@@ -135,7 +143,7 @@ export default function SocialMediaFeed({
 
         {youtube.length > 0 && (
           <div className="mt-16">
-            <h3 className="mb-5 text-xl font-semibold text-himalaya-900 sm:text-2xl">
+            <h3 id="youtube-videos-heading" className="mb-5 text-xl font-semibold text-himalaya-900 sm:text-2xl">
               {t('youtube_videos')}
             </h3>
 

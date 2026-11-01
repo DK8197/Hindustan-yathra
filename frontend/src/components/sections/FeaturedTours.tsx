@@ -7,8 +7,8 @@ export async function FeaturedTours({ locale }: { locale: 'en' | 'kn' }) {
   const t = await getTranslations({ locale, namespace: 'sections' });
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-20 md:px-12">
-        <h2 className="text-center font-display text-4xl font-bold tracking-tight text-transparent bg-gradient-to-r from-himalaya-800 via-saffron-600 to-himalaya-800 bg-clip-text md:text-5xl">
+    <section id="featured-tours" aria-labelledby="featured-tours-heading" className="w-full px-[clamp(1rem,2.2vw,2rem)] py-16 md:py-24">
+      <h2 id="featured-tours-heading" className="font-display text-2xl font-semibold tracking-tight text-himalaya-900 md:text-4xl">
           {t('featured_tours')}
         </h2>
 

@@ -1,26 +1,17 @@
+'use client';
+
+import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 
-import {
-  Award,
-  ShieldCheck,
-  BadgeCheck, // only if your version supports it
-  Train,
-  MapPinned,
-  Users,
-  Briefcase,
-  Headphones,
-  Globe,
-} from 'lucide-react';
-
 const points = [
-  { icon: BadgeCheck, key: 'certified' },
-  { icon: Award, key: 'tourism_recognition' },
-  { icon: Train , key: 'irctc' },
-  { icon: MapPinned, key: 'coverage' },
-  { icon: Users, key: 'local_experts' },
-  { icon: ShieldCheck, key: 'safe_travel' },
-  { icon: Briefcase, key: 'customized' },
-  { icon: Headphones, key: 'support' },
+  'certified',
+  'tourism_recognition',
+  'irctc',
+  'coverage',
+  'local_experts',
+  'safe_travel',
+  'customized',
+  'support',
 ] as const;
 
 
@@ -70,19 +61,26 @@ const copy = {
 
 export function WhyUs({ locale }: { locale: 'en' | 'kn' }) {
   const t = useTranslations('sections');
+  const shouldReduceMotion = useReducedMotion();
 
   return (
-    <section className="bg-himalaya-50 px-6 py-20 md:px-12">
+    <section id="why-hindustan-yatra" aria-labelledby="why-hindustan-yatra-heading" className="bg-himalaya-50 px-6 py-20 md:px-12">
       <div className="mx-auto max-w-7xl">
-        <h2 className="font-display text-3xl font-semibold text-himalaya-900 md:text-4xl">{t('why_us')}</h2>
-        <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {points.map(({ icon: Icon, key }) => (
-            <div key={key} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-black/5">
-              <Icon className="text-saffron-500" size={28} />
-              <p className="mt-4 font-medium text-himalaya-900">{copy[key][locale]}</p>
-            </div>
+        <h2 id="why-hindustan-yatra-heading" className="font-display text-3xl font-semibold text-himalaya-900 md:text-4xl">{t('why_us')}</h2>
+        <ul className="mt-10 grid gap-x-16 gap-y-8 md:grid-cols-2">
+          {points.map((key, index) => (
+            <motion.li
+              key={key}
+              initial={shouldReduceMotion ? false : { opacity: 0.92, y: 18 }}
+              whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.65, delay: index * 0.07 }}
+              className="max-w-[56ch]"
+            >
+              <p className="text-base leading-relaxed text-himalaya-900">{copy[key][locale]}</p>
+            </motion.li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
