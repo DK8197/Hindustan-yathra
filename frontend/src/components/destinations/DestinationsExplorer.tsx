@@ -588,7 +588,7 @@ export default function DestinationsExplorer({
                       alt={getTitle(tour, locale)}
                       fill
                       sizes="(max-width: 1023px) 100vw, 33vw"
-                      className="object-cover transition duration-700 group-hover:scale-110"
+                      className="object-cover transition-transform duration-200 ease-[ease] group-hover:scale-110 motion-reduce:group-hover:scale-100"
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
@@ -690,7 +690,7 @@ export default function DestinationsExplorer({
                       alt={getTitle(tour, locale)}
                       fill
                       sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw"
-                      className="object-cover transition duration-700 group-hover:scale-110"
+                      className="object-cover transition-transform duration-200 ease-[ease] group-hover:scale-110 motion-reduce:group-hover:scale-100"
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
@@ -745,7 +745,7 @@ export default function DestinationsExplorer({
                   <Link
                     key={tour.id}
                     href={{ pathname: '/tour/[slug]', params: { slug: tour.slug } }}
-                    className={`${cardClass} transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl`}
+                    className={`${cardClass} transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl motion-reduce:hover:translate-y-0`}
                   >
                     {cardContent}
                   </Link>

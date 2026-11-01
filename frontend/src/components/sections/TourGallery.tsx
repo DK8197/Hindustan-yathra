@@ -202,7 +202,7 @@ export function TourGallery({
                   fill
                   loading="lazy"
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="object-cover transition-transform duration-200 ease-[ease] group-hover:scale-105 motion-reduce:group-hover:scale-100"
                 />
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-50 transition-opacity duration-300 group-hover:opacity-100" />
@@ -224,7 +224,7 @@ export function TourGallery({
                     type="button"
                     onClick={expandGallery}
                     aria-controls="tour-gallery"
-                    className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-amber-500/30 bg-white px-6 py-3 text-sm font-semibold text-himalaya-900 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-500 hover:bg-amber-50 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+                    className="group inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-amber-500/30 bg-white px-6 py-3 text-sm font-semibold text-himalaya-900 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-500 hover:bg-amber-50 hover:shadow-md motion-reduce:hover:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
                   >
                     <Images className="h-4 w-4 text-amber-600" />
 
@@ -241,7 +241,7 @@ export function TourGallery({
                             : 'photos'
                         }`}
 
-                    <ChevronDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5" />
+                    <ChevronDown className="h-4 w-4 transition-transform group-hover:translate-y-0.5 motion-reduce:group-hover:translate-y-0" />
                   </button>
 
                   <p className="mt-2 text-xs text-slate-400">
@@ -266,7 +266,7 @@ export function TourGallery({
       {/* FULL-SCREEN IMAGE VIEWER */}
       {selectedImage && selectedIndex !== null && (
         <div
-          className="fixed inset-0 z-[100] flex flex-col bg-black/95 backdrop-blur-md"
+          className="lightbox-enter fixed inset-0 z-[100] flex flex-col bg-black/95 backdrop-blur-md"
           role="dialog"
           aria-modal="true"
           aria-label="Full-screen photo viewer"

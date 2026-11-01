@@ -48,10 +48,13 @@ const CLOUD_GEOMETRY =
 /* -------------------------------------------------------------------------- */
 
 function Earth({
-  scale,
+  isMobile,
 }: {
-  scale: number;
+  isMobile: boolean;
 }) {
+  const earthGroupRef =
+    useRef<THREE.Group>(null);
+
   const earthRef =
     useRef<THREE.Mesh>(null);
 
@@ -109,6 +112,22 @@ function Earth({
     );
 
   useFrame((state, delta) => {
+    if (earthGroupRef.current) {
+      const progress =
+        THREE.MathUtils.clamp(
+          useAppStore.getState().heroScrollProgress,
+          0,
+          1
+        );
+
+      const startScale =
+        isMobile ? 1.5 : 2.0;
+
+      earthGroupRef.current.scale.setScalar(
+        startScale + (6.0 - startScale) * progress
+      );
+    }
+
     if (!earthRef.current) {
       return;
     }
@@ -155,7 +174,7 @@ function Earth({
   });
 
   return (
-    <group scale={scale}>
+    <group ref={earthGroupRef}>
       <mesh
         ref={earthRef}
         geometry={EARTH_GEOMETRY}
@@ -178,9 +197,9 @@ const MemoEarth = memo(Earth);
 /* -------------------------------------------------------------------------- */
 
 function Scene({
-  scale,
+  isMobile,
 }: {
-  scale: number;
+  isMobile: boolean;
 }) {
   return (
     <>
@@ -199,7 +218,7 @@ function Scene({
         intensity={2}
       />
 
-      <MemoEarth scale={scale} />
+      <MemoEarth isMobile={isMobile} />
     </>
   );
 }
@@ -211,35 +230,12 @@ const MemoScene = memo(Scene);
 /* -------------------------------------------------------------------------- */
 
 function Hero3DComponent() {
-  const scrollProgress =
-    useAppStore(
-      (state) =>
-        state.heroScrollProgress
-    );
-
   const isMobile =
     typeof window !==
       'undefined' &&
     window.matchMedia(
       '(max-width:768px)'
     ).matches;
-
-  const scale = useMemo(() => {
-      const start =
-        isMobile ? 1.5 : 2.0;
-
-      const end =
-        isMobile ? 6.0 : 6.0;
-
-    return (
-      start +
-      (end - start) *
-        scrollProgress
-    );
-  }, [
-    scrollProgress,
-    isMobile,
-  ]);
 
   return (
     <div
@@ -265,9 +261,7 @@ function Hero3DComponent() {
         }}
       >
         <Suspense fallback={null}>
-          <MemoScene
-            scale={scale}
-          />
+          <MemoScene isMobile={isMobile} />
         </Suspense>
       </Canvas>
     </div>

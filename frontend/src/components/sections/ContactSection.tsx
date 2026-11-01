@@ -33,7 +33,7 @@ function FormStatus({ status, message }: { status: Status; message: string }) {
       role="status"
       aria-live="polite"
       aria-atomic="true"
-      className={`flex items-start gap-3 rounded-xl border p-4 text-base ${style}`}
+      className={`motion-fade-in flex items-start gap-3 rounded-xl border p-4 text-base ${style}`}
     >
       <Icon
         aria-hidden="true"
@@ -118,7 +118,7 @@ export function ContactSection({
 
           <div>
             <label htmlFor="contact-phone" className="mb-1.5 block text-base font-medium text-slate-800">{t('phone')}</label>
-            <input id="contact-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" required minLength={10} maxLength={20} pattern="[0-9+(). -]{10,20}" title={t('phone_format_hint')} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-base text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
+            <input id="contact-phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" required minLength={10} maxLength={20} pattern="[0-9+\(\). \-]{10,20}" title={t('phone_format_hint')} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-base text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
           </div>
 
           <div>
@@ -146,6 +146,7 @@ export function ContactSection({
           </button>
 
           <FormStatus
+            key={status}
             status={status}
             message={status === 'submitting' ? t('status_sending') : status === 'done' ? t('status_success') : t('status_error')}
           />

@@ -76,7 +76,7 @@ export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
         }}
         aria-label="Save tour"
         aria-pressed={saved}
-        className="absolute right-3 top-3 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/90 p-2 transition-transform hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700"
+        className="absolute right-3 top-3 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/90 p-2 transition-transform hover:scale-105 motion-reduce:hover:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700"
       >
         <Heart size={16} className={saved ? 'fill-saffron-500 text-saffron-500' : 'text-himalaya-800'} />
       </button>

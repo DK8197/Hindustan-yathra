@@ -5,9 +5,8 @@ import { useAppStore } from '@/store/useAppStore';
 
 /**
  * Tracks how far the hero section has scrolled past, normalized 0-1,
- * and writes it to the store so Hero3D's camera rig can react — keeps
- * the expensive R3F tree from re-rendering on every scroll tick since
- * only the store subscriber (useFrame) reads the value.
+ * and writes it to the store for Hero3D's R3F frame loop to read
+ * imperatively, avoiding a React subscription to per-frame progress.
  */
 export function useHeroScrollProgress() {
   const ref = useRef<HTMLDivElement>(null);

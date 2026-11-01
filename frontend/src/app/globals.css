@@ -2,11 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
 html {
   scroll-behavior: smooth;
 }
 
-/* Respect motion preferences for transitions and browser scrolling. */
+/* Reduce motion while preserving restrained state feedback. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -14,7 +18,39 @@ html {
   * {
     animation: none !important;
     scroll-behavior: auto !important;
-    transition: none !important;
+    transition-property: color, background-color, border-color, opacity !important;
+    transition-duration: 120ms !important;
+    transition-timing-function: ease !important;
+  }
+}
+
+.motion-fade-in {
+  opacity: 1;
+  transition: opacity 200ms var(--ease-out);
+}
+
+.lightbox-enter {
+  opacity: 1;
+  transition: opacity 250ms var(--ease-out);
+}
+
+.faq-answer {
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    height 200ms var(--ease-out),
+    opacity 200ms var(--ease-out);
+}
+
+.faq-answer[data-open='true'] {
+  opacity: 1;
+}
+
+@starting-style {
+  .motion-fade-in,
+  .lightbox-enter {
+    opacity: 0;
   }
 }
 

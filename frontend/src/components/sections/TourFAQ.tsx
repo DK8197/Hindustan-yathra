@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { ChevronDown } from 'lucide-react';
 import type { FAQItem } from '@/types/tour';
@@ -8,6 +8,32 @@ import type { FAQItem } from '@/types/tour';
 export function TourFAQ({ faqs = [] }: { faqs?: FAQItem[] }) {
   const t = useTranslations('tour');
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const answerRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const answerContentRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+  useLayoutEffect(() => {
+    answerRefs.current.forEach((answer, index) => {
+      if (!answer) return;
+      answer.style.height = openIndex === index
+        ? `${answer.scrollHeight}px`
+        : '0px';
+    });
+  }, [faqs, openIndex]);
+
+  useEffect(() => {
+    if (openIndex === null || typeof ResizeObserver === 'undefined') return;
+
+    const answer = answerRefs.current[openIndex];
+    const content = answerContentRefs.current[openIndex];
+    if (!answer || !content) return;
+
+    const observer = new ResizeObserver(() => {
+      answer.style.height = `${content.scrollHeight}px`;
+    });
+    observer.observe(content);
+
+    return () => observer.disconnect();
+  }, [faqs, openIndex]);
 
   if (!faqs.length) return null;
 
@@ -33,7 +59,24 @@ export function TourFAQ({ faqs = [] }: { faqs?: FAQItem[] }) {
                 className={`shrink-0 transition-transform ${openIndex === i ? 'rotate-180' : ''}`}
               />
             </button>
-            {openIndex === i && <p id={answerId} className="px-5 pb-4 text-sm leading-relaxed text-gray-600">{faq.answer}</p>}
+            <div
+              ref={(element) => {
+                answerRefs.current[i] = element;
+              }}
+              id={answerId}
+              aria-hidden={openIndex !== i}
+              data-open={openIndex === i}
+              className="faq-answer"
+            >
+              <div
+                ref={(element) => {
+                  answerContentRefs.current[i] = element;
+                }}
+                className="px-5 pb-4 text-sm leading-relaxed text-gray-600"
+              >
+                {faq.answer}
+              </div>
+            </div>
           </div>
         )})}
       </div>

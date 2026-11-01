@@ -167,13 +167,13 @@ export function InfiniteGallery({ images }: Props) {
               height={800}
               sizes="(max-width: 639px) 50vw, (max-width: 1023px) 50vw, (max-width: 1279px) 33vw, 25vw"
               loading={i < 8 ? 'eager' : 'lazy'}
-              className="h-auto w-full transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+              className="h-auto w-full transition-transform duration-200 ease-[ease] group-hover:scale-[1.04] motion-reduce:group-hover:scale-100"
             />
 
             {/* Hover overlay */}
             <span className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100" />
 
-            <span className="pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-2 items-center justify-between p-3 text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 sm:p-4">
+            <span className="pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-2 items-center justify-between p-3 text-white opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100 motion-reduce:group-hover:translate-y-2 motion-reduce:group-focus-visible:translate-y-2 sm:p-4">
               <span className="text-xs font-medium sm:text-sm">
                 Memory #{i + 1}
               </span>
@@ -232,7 +232,7 @@ export function InfiniteGallery({ images }: Props) {
           role="dialog"
           aria-modal="true"
           aria-label="Photo viewer"
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-3 backdrop-blur-md sm:p-6"
+          className="lightbox-enter fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-3 backdrop-blur-md sm:p-6"
           onClick={() => setSelectedIndex(null)}
         >
           {/* Top toolbar */}
