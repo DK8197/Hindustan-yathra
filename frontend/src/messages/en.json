@@ -158,6 +158,11 @@
   "contact": {
     "intro": "Tell us what kind of journey you have in mind. Our team will help you plan the details.",
     "optional": "optional",
+    "prompt_title": "Let us plan your journey",
+    "prompt_body": "Share your contact details and our travel experts will get in touch with the best options for you.",
+    "prompt_close": "Close",
+    "prompt_consent": "I agree to be contacted by Hindustan Yatra on this phone number and email (if provided) by call, SMS or WhatsApp about my travel enquiry.",
+    "prompt_full_form": "Prefer the full enquiry form?",
     "sending": "Sending enquiry…",
     "status_sending": "Sending your enquiry. Please wait.",
     "status_success": "Your enquiry has been sent. Our team will contact you soon.",

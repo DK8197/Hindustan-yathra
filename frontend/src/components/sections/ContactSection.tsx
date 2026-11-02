@@ -136,6 +136,16 @@ export function ContactSection({
             <textarea id="contact-message" name="message" rows={4} className="w-full rounded-xl border border-slate-300 px-4 py-3 text-base text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200" />
           </div>
 
+          <label className="flex items-start gap-3 text-base text-slate-700">
+            <input
+              type="checkbox"
+              name="consent"
+              required
+              className="mt-0.5 h-5 w-5 shrink-0 rounded border-slate-400 accent-saffron-700"
+            />
+            <span>{t('prompt_consent')}</span>
+          </label>
+
           <button
             disabled={status === 'submitting'}
             type="submit"

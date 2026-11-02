@@ -9,6 +9,7 @@ import { QueryProvider } from '@/lib/query-provider';
 import { Navbar } from '@/components/ui/Navbar';
 import { Footer } from '@/components/ui/Footer';
 import { FloatingContact } from '@/components/floatintContact/FloatintContact';
+import { ContactPrompt } from '@/components/ui/ContactPrompt';
 import { FloatingDestinations } from '@/components/floatingDestinations/floatintDestinations';
 
 export const dynamic = 'force-static';
@@ -120,6 +121,7 @@ export default async function LocaleLayout({
 
           {/* Bottom Right: WhatsApp / Call Floating Action */}
           <FloatingContact />
+          <ContactPrompt />
         </div>
       </QueryProvider>
     </NextIntlClientProvider>

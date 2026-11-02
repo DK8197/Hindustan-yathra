@@ -38,7 +38,7 @@ export function TourBookingCard({ tour, locale }: { tour: Tour; locale: 'en' | '
           phone: String(formData.get('phone') ?? ''),
           email: String(formData.get('email') ?? ''),
           destination: tour.title[locale],
-          message: `Brochure download requested for ${tour.title[locale]}`,
+          message: `Brochure download requested for ${tour.title[locale]} (consent given)`,
         }),
       });
       setBrochureStatus(res.ok ? 'success' : 'error');
@@ -181,6 +181,15 @@ export function TourBookingCard({ tour, locale }: { tour: Tour; locale: 'en' | '
                       className="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-slate-900 outline-none transition focus:border-saffron-600 focus:ring-2 focus:ring-saffron-200"
                     />
                   </div>
+                  <label className="flex items-start gap-3 text-sm text-slate-700">
+                    <input
+                      type="checkbox"
+                      name="consent"
+                      required
+                      className="mt-0.5 h-5 w-5 shrink-0 rounded border-slate-400 accent-saffron-700"
+                    />
+                    <span>{tContact('prompt_consent')}</span>
+                  </label>
                   {brochureStatus === 'error' && (
                     <p role="alert" className="text-sm text-red-700">{t('brochure_error')}</p>
                   )}
