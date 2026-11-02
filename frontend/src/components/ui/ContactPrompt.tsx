@@ -6,7 +6,7 @@ import { LoaderCircle, Send, X } from 'lucide-react';
 import { Link, usePathname } from '@/i18n/routing';
 import { useAppStore } from '@/store/useAppStore';
 
-const PROMPT_DELAY_MS = 1;
+const PROMPT_DELAY_MS = 4000;
 const DISMISS_KEY = 'hy-contact-prompt-done';
 
 type Status = 'idle' | 'submitting' | 'done' | 'error';
