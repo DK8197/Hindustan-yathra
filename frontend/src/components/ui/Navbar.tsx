@@ -66,7 +66,11 @@ export function Navbar() {
     if (!policiesOpen) return;
 
     const onPointerDown = (event: MouseEvent) => {
-      if (!policiesRef.current?.contains(event.target as Node)) {
+      const target = event.target as Element;
+      // The mobile drawer manages its own policies accordion; closing it on
+      // mousedown would unmount the links before their click fires.
+      if (target.closest?.('#mobile-primary-navigation')) return;
+      if (!policiesRef.current?.contains(target)) {
         setPoliciesOpen(false);
       }
     };
@@ -149,9 +153,11 @@ export function Navbar() {
   // Close the accreditation popover when clicking outside.
   useEffect(() => {
     const handleOutside = (event: MouseEvent) => {
+      const target = event.target as Element;
+      if (target.closest?.('#mobile-primary-navigation')) return;
       if (
         badgeContainerRef.current &&
-        !badgeContainerRef.current.contains(event.target as Node)
+        !badgeContainerRef.current.contains(target)
       ) {
         setSelectedBadge(null);
       }
