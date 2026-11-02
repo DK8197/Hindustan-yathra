@@ -78,11 +78,18 @@ const config: Config = {
         'badge-sheen':
           'badgeSheen 4.5s ease-in-out 1.2s infinite',
 
+        'rise-in':
+          'riseIn 320ms cubic-bezier(0.23, 1, 0.32, 1) both',
+
         'fly-in':
           'flyIn 1100ms cubic-bezier(0.16, 1, 0.3, 1) both',
       },
 
       keyframes: {
+        riseIn: {
+          '0%': { opacity: '0', transform: 'translateY(10px) scale(0.98)' },
+          '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+        },
         flyIn: {
           '0%': {
             opacity: '0',

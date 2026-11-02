@@ -16,14 +16,18 @@
     "open_menu": "Open navigation menu",
     "close_menu": "Close navigation menu",
     "primary_navigation": "Primary navigation",
+    "policies": "Policies",
+    "group_tour_terms": "Group Tour Terms",
+    "cancellation_policy": "Cancellation Policy",
+    "privacy_policy": "Privacy Policy",
     "language": "Choose language"
   },
   "accessibility": {
     "skip_to_content": "Skip to main content"
   },
   "hero": {
-    "headline": "Hindustan Yatra - Travel with new experience",
-    "subheadline": "Trusted travel partner, Since 2018. Authorized by Ministry of Tourism, Government of India.",
+    "headline": "Travel with new experience",
+    "subheadline": "Trusted travel partner, Since 2018. Authorized by Ministry of Tourism",
     "cta_explore": "Explore Tours",
     "cta_customize": "Build My Trip",
     "scroll_hint": "Discover what lies ahead",
@@ -185,9 +189,28 @@
     "quick_links": "Quick Links",
     "tour_categories": "Tour Categories",
     "contact_us": "Contact Us",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "privacy_policy": "Privacy Policy",
+    "cancellation_policy": "Cancellation Policy",
+    "group_tour_terms": "Group Tour Terms And Conditions"
   },
   "destinations": {
+    "custom": {
+      "eyebrow": "Domestic Group & Customised Luxury",
+      "heading": "Shape the journey around you",
+      "subheading": "Pick a route to pre-fill your enquiry, then adjust the details to suit your group, dates and comfort level. Our travel experts will reply with a tailored plan.",
+      "category_label": "Tour type",
+      "category_domestic": "Domestic",
+      "category_island": "Island Special",
+      "days": "{count} Days",
+      "departing": "From {city}",
+      "custom_title": "Something different in mind?",
+      "custom_body": "Describe your own trip and we will design it for you.",
+      "custom_message": "Hello, I would like a customised tour package. Destinations: \nNumber of travellers: \nPreferred travel dates: \nHotel category and special requirements: \nPlease share a suggested itinerary and pricing.",
+      "form_title": "Your enquiry",
+      "form_hint": "Select a tour on the left to fill this in automatically. You can edit the message before sending.",
+      "message_placeholder": "Choose a tour or describe the trip you have in mind"
+    },
     "title": "Popular Destinations",
     "description": "Explore domestic and international tour packages with Hindustan Yatra.",
     "heading": "Explore",
@@ -200,6 +223,9 @@
     "filter_all": "All tours",
     "filter_domestic": "India",
     "filter_international": "International",
+    "filter_custom": "Custom & Luxury",
+    "filter_type_label": "Tour type",
+    "filter_region_label": "Region",
     "regions": {
       "all": "All India",
       "north": "North",

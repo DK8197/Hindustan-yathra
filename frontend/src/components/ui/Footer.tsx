@@ -33,6 +33,9 @@ export function Footer() {
             <li><Link className="underline-offset-4 hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400" href="/destinations">{tNav('destinations')}</Link></li>
             <li><Link className="underline-offset-4 hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400" href="/gallery">{tNav('gallery')}</Link></li>
             <li><Link className="underline-offset-4 hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400" href="/contact">{tNav('contact')}</Link></li>
+            <li><Link className="underline-offset-4 hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400" href="/privacy-policy">{t('privacy_policy')}</Link></li>
+            <li><Link className="underline-offset-4 hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400" href="/cancellation-policy">{t('cancellation_policy')}</Link></li>
+            <li><Link className="underline-offset-4 hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400" href="/group-tour-terms">{t('group_tour_terms')}</Link></li>
           </ul>
         </div>
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
@@ -17,6 +17,7 @@ import {
   Landmark,
   ChevronLeft,
   ChevronRight,
+  X,
 } from 'lucide-react';
 import { normalizeImageUrl } from '@/lib/image-cdn';
 import type { Tour } from '@/types/tour';
@@ -26,9 +27,10 @@ type Props = {
   locale: 'en' | 'kn';
   initialQuery?: string;
   loadFailed?: boolean;
+  customSection?: ReactNode;
 };
 
-type TourType = 'all' | 'domestic' | 'international';
+type TourType = 'all' | 'domestic' | 'international' | 'custom';
 type Region = 'all' | 'north' | 'south' | 'east' | 'west';
 
 const INITIAL_COUNT = 8;
@@ -274,6 +276,7 @@ export default function DestinationsExplorer({
   locale,
   initialQuery = '',
   loadFailed = false,
+  customSection,
 }: Props) {
   const t = useTranslations('destinations');
   const tTour = useTranslations('tour');
@@ -412,89 +415,135 @@ export default function DestinationsExplorer({
     <div className="space-y-16">
       {/* Search and filters */}
       <section className="relative z-20 -mt-16">
-        <div className="overflow-hidden rounded-[32px] border border-orange-200 bg-orange-50/90 shadow-[0_20px_80px_rgba(0,0,0,0.08)] backdrop-blur-xl">
-          <div className="p-6 lg:p-8">
-            <div className="mb-6 flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-100">
-                <Search className="h-6 w-6 text-orange-600" />
+        <div className="overflow-hidden rounded-[32px] border border-orange-200/80 bg-gradient-to-b from-orange-50/95 to-white/90 shadow-[0_24px_80px_-24px_rgba(124,45,18,0.25)] backdrop-blur-xl">
+          <div className="space-y-5 p-5 sm:p-6 lg:p-8">
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-orange-100 ring-1 ring-orange-200">
+                <Search aria-hidden="true" className="h-5 w-5 text-orange-700" />
               </div>
-              <div>
-                <h3 className="text-xl font-bold text-orange-900">
+              <div className="min-w-0">
+                <h3 className="text-lg font-bold text-orange-900 sm:text-xl">
                   {t('search_title')}
                 </h3>
-                <p className="text-sm text-orange-700">{t('search_subtitle')}</p>
+                <p className="text-sm text-orange-800/80">{t('search_subtitle')}</p>
               </div>
             </div>
 
-            <label htmlFor="destination-search" className="sr-only">
-              {t('search_label')}
-            </label>
-            <input
-              id="destination-search"
-              type="search"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              placeholder={t('search_placeholder')}
-              autoComplete="off"
-              className="mb-6 w-full rounded-2xl border border-orange-200 bg-white px-5 py-4 text-slate-900 outline-none transition focus:border-orange-500 focus:ring-4 focus:ring-orange-100"
-            />
+            {tourType !== 'custom' && (
+              <div className="relative">
+                <label htmlFor="destination-search" className="sr-only">
+                  {t('search_label')}
+                </label>
+                <Search
+                  aria-hidden="true"
+                  className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-orange-500"
+                />
+                <input
+                  id="destination-search"
+                  type="search"
+                  value={search}
+                  onChange={(event) => setSearch(event.target.value)}
+                  placeholder={t('search_placeholder')}
+                  autoComplete="off"
+                  className="w-full rounded-2xl border border-orange-200 bg-white py-4 pl-12 pr-12 text-base text-slate-900 shadow-sm outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-slate-400 focus:border-orange-500 focus:ring-4 focus:ring-orange-100 [&::-webkit-search-cancel-button]:hidden"
+                />
+                {search && (
+                  <button
+                    type="button"
+                    aria-label={t('clear_filters')}
+                    onClick={() => {
+                      setSearch('');
+                      setDebouncedSearch('');
+                    }}
+                    className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-slate-500 transition-[transform,background-color] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-600 [@media(hover:hover)]:hover:bg-orange-100 [@media(hover:hover)]:hover:text-orange-800"
+                  >
+                    <X aria-hidden="true" className="h-4 w-4" />
+                  </button>
+                )}
+              </div>
+            )}
 
-            <div className="flex flex-wrap gap-3">
-              {(
-                [
-                  { value: 'all', label: t('filter_all') },
-                  { value: 'domestic', label: t('filter_domestic') },
-                  { value: 'international', label: t('filter_international') },
-                ] as { value: TourType; label: string }[]
-              ).map((item) => (
-                <button
-                  key={item.value}
-                  type="button"
-                  aria-pressed={tourType === item.value}
-                  onClick={() => {
-                    setTourType(item.value);
-                    setRegion('all');
-                  }}
-                  className={`min-h-11 rounded-full px-5 py-3 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2 ${
-                    tourType === item.value
-                      ? 'bg-orange-700 text-white'
-                      : 'bg-orange-100 text-orange-800 hover:bg-orange-200'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-
-            {tourType === 'domestic' && (
-              <div className="mt-4 flex flex-wrap gap-3">
-                {[
-                  { value: 'all', label: t('regions.all') },
-                  { value: 'north', label: t('regions.north') },
-                  { value: 'south', label: t('regions.south') },
-                  { value: 'east', label: t('regions.east') },
-                  { value: 'west', label: t('regions.west') },
-                ].map((item) => (
+            <div
+              role="group"
+              aria-label={t('filter_type_label')}
+              className="-mx-1 overflow-x-auto px-1 py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              <div className="inline-flex min-w-full gap-1 rounded-full border border-orange-200 bg-orange-100/70 p-1 sm:min-w-0">
+                {(
+                  [
+                    { value: 'all', label: t('filter_all') },
+                    { value: 'domestic', label: t('filter_domestic') },
+                    { value: 'international', label: t('filter_international') },
+                    { value: 'custom', label: t('filter_custom') },
+                  ] as { value: TourType; label: string }[]
+                ).map((item) => (
                   <button
                     key={item.value}
                     type="button"
-                    aria-pressed={region === item.value}
-                    onClick={() => setRegion(item.value as Region)}
-                    className={`min-h-11 rounded-full px-5 py-3 text-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2 ${
-                      region === item.value
-                        ? 'bg-blue-600 text-white'
-                        : 'bg-blue-50 text-blue-800 hover:bg-blue-100'
+                    aria-pressed={tourType === item.value}
+                    onClick={() => {
+                      setTourType(item.value);
+                      setRegion('all');
+                    }}
+                    className={`min-h-11 flex-1 whitespace-nowrap rounded-full px-5 text-sm font-semibold transition-[transform,background-color,color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-700 motion-reduce:transition-none motion-reduce:active:scale-100 sm:flex-none ${
+                      tourType === item.value
+                        ? 'bg-orange-700 text-white shadow-[0_6px_16px_-6px_rgba(154,52,18,0.7)]'
+                        : 'text-orange-900 [@media(hover:hover)]:hover:bg-white/70'
                     }`}
                   >
                     {item.label}
                   </button>
                 ))}
               </div>
-            )}
+            </div>
+
+            <div
+              className={`grid transition-[grid-template-rows,opacity] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none ${
+                tourType === 'domestic'
+                  ? 'grid-rows-[1fr] opacity-100'
+                  : 'grid-rows-[0fr] opacity-0'
+              }`}
+              aria-hidden={tourType !== 'domestic'}
+            >
+              <div className="overflow-hidden">
+                <div
+                  role="group"
+                  aria-label={t('filter_region_label')}
+                  className="flex flex-wrap gap-2 pt-1"
+                >
+                  {[
+                    { value: 'all', label: t('regions.all') },
+                    { value: 'north', label: t('regions.north') },
+                    { value: 'south', label: t('regions.south') },
+                    { value: 'east', label: t('regions.east') },
+                    { value: 'west', label: t('regions.west') },
+                  ].map((item) => (
+                    <button
+                      key={item.value}
+                      type="button"
+                      tabIndex={tourType === 'domestic' ? 0 : -1}
+                      aria-pressed={region === item.value}
+                      onClick={() => setRegion(item.value as Region)}
+                      className={`min-h-11 rounded-full border px-4 text-sm font-medium transition-[transform,background-color,border-color,color] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 motion-reduce:transition-none motion-reduce:active:scale-100 ${
+                        region === item.value
+                          ? 'border-blue-600 bg-blue-600 text-white'
+                          : 'border-blue-100 bg-blue-50 text-blue-900 [@media(hover:hover)]:hover:border-blue-200 [@media(hover:hover)]:hover:bg-blue-100'
+                      }`}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
+      {tourType === 'custom' ? (
+        customSection
+      ) : (
+      <>
       {/* Categories */}
       <section>
         <div className="mb-8">
@@ -799,6 +848,8 @@ export default function DestinationsExplorer({
           </div>
         </div>
       </section>
+      </>
+      )}
     </div>
   );
 }

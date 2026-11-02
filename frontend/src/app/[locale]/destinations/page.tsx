@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react';
 import { getTranslations } from 'next-intl/server';
 import { getPathname } from '@/i18n/routing';
 import DestinationsExplorer from '@/components/destinations/DestinationsExplorer';
+import { CustomTourSection } from '@/components/destinations/CustomTourSection';
 import type { Tour } from '@/types/tour';
 import { getCdnImageUrl } from '@/lib/image-cdn';
 
@@ -142,6 +143,7 @@ export default async function DestinationsPage({
           locale={locale}
           initialQuery={q || ''}
           loadFailed={loadFailed}
+          customSection={<CustomTourSection />}
         />
       </div>
     </div>

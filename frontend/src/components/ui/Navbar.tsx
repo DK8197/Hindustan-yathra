@@ -11,6 +11,7 @@ import {
   Calendar,
   Globe,
   ChevronRight,
+  ChevronDown,
   ShieldCheck,
   Facebook,
   Instagram,
@@ -36,10 +37,12 @@ export function Navbar() {
   const pathname = usePathname();
 
   const [open, setOpen] = useState(false);
+  const [policiesOpen, setPoliciesOpen] = useState(false);
   const [selectedBadge, setSelectedBadge] = useState<BadgeId | null>(null);
 
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const badgeContainerRef = useRef<HTMLDivElement>(null);
+  const policiesRef = useRef<HTMLDivElement>(null);
 
   const setUser = useAppStore((s) => s.setUser);
 
@@ -50,6 +53,34 @@ export function Navbar() {
     { href: '/contact', label: t('contact') },
     { href: '/about', label: t('about') },
   ] as const;
+
+  const policyLinks = [
+    { href: '/group-tour-terms', label: t('group_tour_terms') },
+    { href: '/cancellation-policy', label: t('cancellation_policy') },
+    { href: '/privacy-policy', label: t('privacy_policy') },
+  ] as const;
+  const policyActive = policyLinks.some((link) => link.href === pathname);
+
+  // Close the desktop policies menu on outside click or Escape.
+  useEffect(() => {
+    if (!policiesOpen) return;
+
+    const onPointerDown = (event: MouseEvent) => {
+      if (!policiesRef.current?.contains(event.target as Node)) {
+        setPoliciesOpen(false);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setPoliciesOpen(false);
+    };
+
+    document.addEventListener('mousedown', onPointerDown);
+    window.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown);
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [policiesOpen]);
 
   // Replace these placeholders with your official social media URLs.
   const socialLinks = [
@@ -185,6 +216,7 @@ export function Navbar() {
 
   const closeMobileMenu = () => {
     setOpen(false);
+    setPoliciesOpen(false);
   };
 
   const renderSocialLinks = (mobile = false) => (
@@ -318,6 +350,49 @@ export function Navbar() {
               </Link>
             );
           })}
+
+          <div ref={policiesRef} className="relative">
+            <button
+              type="button"
+              onClick={() => setPoliciesOpen((previous) => !previous)}
+              aria-expanded={policiesOpen}
+              aria-haspopup="true"
+              aria-controls="desktop-policies-menu"
+              className={`flex items-center gap-1 px-2 py-2 text-base font-medium tracking-wide transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 ${
+                policyActive ? 'text-saffron-400' : 'text-slate-300 hover:text-white'
+              }`}
+            >
+              {t('policies')}
+              <ChevronDown
+                aria-hidden="true"
+                className={`h-4 w-4 transition-transform duration-200 ${policiesOpen ? 'rotate-180' : ''}`}
+              />
+            </button>
+
+            {policiesOpen && (
+              <ul
+                id="desktop-policies-menu"
+                className="motion-fade-in absolute right-0 top-full z-50 mt-2 w-60 overflow-hidden rounded-xl border border-white/10 bg-himalaya-900/95 py-1 shadow-xl backdrop-blur-xl"
+              >
+                {policyLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      onClick={() => setPoliciesOpen(false)}
+                      aria-current={pathname === link.href ? 'page' : undefined}
+                      className={`block px-4 py-3 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-saffron-400 ${
+                        pathname === link.href
+                          ? 'text-saffron-400'
+                          : 'text-slate-200 hover:bg-white/[0.06] hover:text-white'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </nav>
 
         {/* RIGHT: SOCIAL LINKS, LANGUAGE AND MOBILE MENU */}
@@ -521,6 +596,41 @@ export function Navbar() {
                   </Link>
                 );
               })}
+
+              <button
+                type="button"
+                onClick={() => setPoliciesOpen((previous) => !previous)}
+                aria-expanded={policiesOpen}
+                aria-controls="mobile-policies-menu"
+                className={`flex min-h-11 w-full items-center justify-between px-3 py-2 text-sm font-medium tracking-wide transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 sm:py-3 sm:text-base ${
+                  policyActive ? 'text-saffron-400' : 'text-slate-200 hover:bg-white/[0.05] hover:text-white'
+                }`}
+              >
+                <span>{t('policies')}</span>
+                <ChevronDown
+                  aria-hidden="true"
+                  className={`h-4 w-4 transition-transform duration-200 ${policiesOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+              {policiesOpen && (
+                <div id="mobile-policies-menu" className="motion-fade-in ml-3 border-l border-white/10">
+                  {policyLinks.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      onClick={closeMobileMenu}
+                      aria-current={pathname === link.href ? 'page' : undefined}
+                      className={`flex min-h-11 items-center px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 ${
+                        pathname === link.href
+                          ? 'text-saffron-400'
+                          : 'text-slate-300 hover:bg-white/[0.05] hover:text-white'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
             </nav>
 
             {/* 3. MOBILE LANGUAGE SWITCHER */}
