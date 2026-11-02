@@ -26,8 +26,8 @@
     "skip_to_content": "Skip to main content"
   },
   "hero": {
-    "headline": "Travel with new experience",
-    "subheadline": "Trusted travel partner, Since 2018. Authorized by Ministry of Tourism",
+    "headline": "..Travel with new experience",
+    "subheadline": "Trusted travel partner, Since 2018. Recognised by Department of Karnataka Tourism",
     "cta_explore": "Explore Tours",
     "cta_customize": "Build My Trip",
     "scroll_hint": "Discover what lies ahead",
@@ -53,7 +53,7 @@
     "cta_title": "Where would you like your next journey to lead?",
     "cta_description": "Share the places and experiences you have in mind. Our team can help you shape the journey.",
     "cta_button": "Explore journeys",
-    "google_reviews_title": "Rated highly by our travellers",
+    "google_reviews_title": "Thousands of Happy Travellers. A Reputation Built on Trust.",
     "google_reviews_description": "Our Google rating is 4.9 out of 5. Visit Google to read the latest reviews directly.",
     "google_rating_accessible": "Google rating: {rating} out of 5",
     "read_google_reviews": "Read reviews on Google",

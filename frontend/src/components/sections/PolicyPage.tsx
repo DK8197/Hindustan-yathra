@@ -3,13 +3,16 @@ import { POLICY_CONTACT, type PolicyDocument } from '@/lib/policy-content';
 
 export function PolicyPage({ doc }: { doc: PolicyDocument }) {
   return (
-    <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
-      <header className="mb-10">
-        <h1 className="font-display text-3xl font-bold tracking-tight text-himalaya-900 md:text-4xl">
+    <>
+    <header className="border-b border-sky-200/60 bg-gradient-to-b from-sky-200 via-sky-100 to-sky-50">
+      <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
+        <h1 className="text-balance font-display text-4xl font-semibold leading-[1.05] tracking-[-0.03em] text-sky-950 sm:text-5xl">
           {doc.title}
         </h1>
-        <p className="mt-4 text-base leading-relaxed text-slate-700">{doc.intro}</p>
-      </header>
+        <p className="mt-4 text-base leading-relaxed text-sky-900/80">{doc.intro}</p>
+      </div>
+    </header>
+    <article className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
 
       <nav
         aria-label={`${doc.title} contents`}
@@ -83,5 +86,6 @@ export function PolicyPage({ doc }: { doc: PolicyDocument }) {
         </p>
       </footer>
     </article>
+    </>
   );
 }

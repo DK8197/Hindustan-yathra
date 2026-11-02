@@ -44,7 +44,7 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <div aria-label={t('language')} role="group" className="flex items-center gap-1 rounded-full border border-white/20 bg-white/10 p-1">
+    <div aria-label={t('language')} role="group"     className="flex items-center gap-1 rounded-full border border-sky-200/80 bg-white/60 p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.9)]">
       {locales.map(({ code, label }) => {
         const isActive = locale === code;
 
@@ -55,10 +55,10 @@ export function LanguageSwitcher() {
             disabled={isActive}
             aria-current={isActive ? 'page' : undefined}
             onClick={() => switchLocale(code)}
-            className={`rounded-full px-3 py-1 text-sm font-medium transition ${
+                className={`rounded-full px-3 py-1 text-sm font-medium transition-[color,background-color,transform] duration-150 ease-out active:scale-[0.97] ${
               isActive
-                ? 'min-h-11 cursor-default bg-white px-3 text-himalaya-800'
-                : 'min-h-11 px-3 text-white/90 hover:bg-white/10 hover:text-white'
+                    ? 'min-h-11 cursor-default bg-white px-3 text-sky-900 shadow-sm'
+                    : 'min-h-11 px-3 text-slate-600 hover:bg-white/70 hover:text-sky-900'
             } disabled:pointer-events-none`}
           >
             {label}

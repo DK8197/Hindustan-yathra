@@ -90,19 +90,25 @@ export function ContactSection({
     <section
       id="contact"
       aria-labelledby="contact-heading"
-      className="mx-auto max-w-7xl scroll-mt-20 px-4 py-16 sm:px-6 sm:py-20 md:px-12"
+      className="scroll-mt-20"
     >
-      <div className="mb-12 text-center">
-
-        <Heading id="contact-heading" className="mt-4 font-display text-2xl font-bold tracking-tight text-himalaya-900 md:text-4xl">
+      <div
+        className={
+          headingLevel === 'h1'
+            ? 'border-b border-sky-200/60 bg-gradient-to-b from-sky-200 via-sky-100 to-sky-50 px-4 py-12 text-center sm:px-6 sm:py-16'
+            : 'mx-auto max-w-7xl px-4 pt-16 text-center sm:px-6 sm:pt-20 md:px-12'
+        }
+      >
+        <Heading id="contact-heading" className="text-balance font-display text-4xl font-semibold leading-[1.05] tracking-[-0.03em] text-sky-950 sm:text-5xl">
           {tSections('contact')}
         </Heading>
 
-        <p className="mx-auto mt-4 max-w-2xl text-gray-600">
+        <p className="mx-auto mt-4 max-w-2xl text-sky-900/80">
           {t('intro')}
         </p>
       </div>
 
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 md:px-12">
       <div className="grid gap-10 lg:grid-cols-2">
         {/* FORM */}
         <form
@@ -188,6 +194,7 @@ export function ContactSection({
             />
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

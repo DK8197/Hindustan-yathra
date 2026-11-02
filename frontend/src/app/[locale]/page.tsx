@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getPathname } from '@/i18n/routing';
 
+import GoogleReviewSummary from '@/components/about/GoogleReviewSummary';
 import { HeroSection } from '@/components/sections/HeroSection';
 import { FeaturedTours } from '@/components/sections/FeaturedTours';
 import { WhyUs } from '@/components/sections/WhyUs';
@@ -364,6 +365,8 @@ export default async function HomePage({
             bg-background
           "
         >
+          <GoogleReviewSummary />
+
           <FeaturedTours locale={locale} />
 
           <section id="plan-trip" aria-labelledby="plan-trip-heading" className="bg-himalaya-50 px-6 py-16 md:px-12">

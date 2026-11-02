@@ -78,7 +78,7 @@ export function ContactPrompt() {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[90] flex items-end justify-center bg-black/50 p-4 pb-[max(1rem,env(safe-area-inset-bottom))] sm:items-center">
+    <div className="fixed inset-0 z-[90] flex items-center justify-center bg-black/50 p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
       <div
         ref={dialogRef}
         role="dialog"

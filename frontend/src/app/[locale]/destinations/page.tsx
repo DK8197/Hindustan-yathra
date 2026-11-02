@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import type { CSSProperties } from 'react';
 import { getTranslations } from 'next-intl/server';
+import { getCdnImageUrl } from '@/lib/image-cdn';
 import { getPathname } from '@/i18n/routing';
 import DestinationsExplorer from '@/components/destinations/DestinationsExplorer';
 import { CustomTourSection } from '@/components/destinations/CustomTourSection';
 import type { Tour } from '@/types/tour';
-import { getCdnImageUrl } from '@/lib/image-cdn';
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL ??
@@ -88,9 +88,9 @@ export default async function DestinationsPage({
 
   return (
     <div className="pb-24">
-      <section className="relative isolate overflow-hidden bg-himalaya-900">
+      <section className="relative isolate overflow-hidden border-b border-sky-200/60 bg-sky-100">
         <div
-          className="hero-bg absolute inset-0 opacity-30"
+          className="hero-bg absolute inset-0 opacity-40"
           style={{
             '--hero-bg-mobile': `url("${getCdnImageUrl('images-confidential/hero-mobile.webp')}")`,
             '--hero-bg-desktop': `url("${getCdnImageUrl('images-confidential/hero-desktop.webp')}")`,
@@ -98,42 +98,43 @@ export default async function DestinationsPage({
           aria-hidden="true"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-r from-[#07111f]/90 via-[#07111f]/55 to-[#07111f]/25"
+          className="absolute inset-0 bg-gradient-to-r from-sky-100/95 via-sky-100/70 to-sky-100/20"
           aria-hidden="true"
         />
         <div
-          className="absolute inset-0 bg-gradient-to-t from-himalaya-900 via-transparent to-himalaya-900/20"
+          className="absolute inset-0 bg-gradient-to-t from-sky-50 via-transparent to-sky-200/40"
           aria-hidden="true"
         />
-
-        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-12 sm:px-6 sm:pb-28 sm:pt-14 md:px-12 md:pb-32 md:pt-16">
-          <div className="max-w-3xl">
-            <h1 className="text-balance font-display text-4xl font-semibold leading-[1.04] tracking-[-0.035em] text-white sm:text-6xl md:text-7xl">
+        <div className="relative mx-auto max-w-7xl px-5 pb-6 pt-4 sm:px-6 sm:pb-6 sm:pt-5 md:px-12 md:pb-8 md:pt-5">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between md:gap-10">
+            <div className="max-w-3xl">
+            <h1 className="text-balance font-display text-4xl font-semibold leading-[1.04] tracking-[-0.035em] text-sky-950 sm:text-4xl md:text-5xl">
               {t('heading')}
-              <span className="mt-1 block text-saffron-300">
+              <span className="mt-1 block text-saffron-600">
                 {t('headingHighlight')}
               </span>
             </h1>
 
-            <p className="mt-5 max-w-xl text-base leading-7 text-white/75 sm:text-lg sm:leading-8 md:mt-6">
+            <p className="mt-3 max-w-xl text-base leading-7 text-sky-900/80 sm:text-lg sm:leading-8 md:mt-3">
               {t('subheading')}
             </p>
+            </div>
 
-            <div className="mt-9 flex flex-wrap gap-x-7 gap-y-5 sm:mt-10 sm:gap-x-9">
-              <div className="border-l border-white/20 pl-5 first:border-l-0 first:pl-0">
-                <div className="tabular-nums text-3xl font-semibold tracking-tight text-white">
+            <div className="flex shrink-0 flex-wrap gap-x-7 gap-y-3 sm:gap-x-9">
+              <div className="border-l border-sky-900/20 pl-5 first:border-l-0 first:pl-0">
+                <div className="tabular-nums text-3xl font-semibold tracking-tight text-sky-950">
                   {tours.length}
                 </div>
-                <div className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-white/60">
+                <div className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-sky-900/70">
                   {t('stats.tours')}
                 </div>
               </div>
 
-              <div className="border-l border-white/20 pl-5">
-                <div className="tabular-nums text-3xl font-semibold tracking-tight text-white">
+              <div className="border-l border-sky-900/20 pl-5">
+                <div className="tabular-nums text-3xl font-semibold tracking-tight text-sky-950">
                   {new Set(tours.flatMap((tour) => tour.destinations || [])).size}
                 </div>
-                <div className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-white/60">
+                <div className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-sky-900/70">
                   {t('stats.destinations')}
                 </div>
               </div>

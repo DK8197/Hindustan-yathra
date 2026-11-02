@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { getLocale } from 'next-intl/server';
 import {
+  Cabin,
+  Dancing_Script,
   Noto_Sans_Kannada,
   Plus_Jakarta_Sans,
   Playfair_Display,
@@ -8,6 +10,21 @@ import {
 
 import './globals.css';
 import { getCdnImageUrl, IMAGE_CDN_BASE_URL } from '@/lib/image-cdn';
+
+// Closest open-source matches to the brochure lettering: bold humanist sans + calligraphic script.
+const brochureHead = Cabin({
+  subsets: ['latin'],
+  weight: ['600', '700'],
+  display: 'swap',
+  variable: '--font-brochure-head',
+});
+
+const brochureScript = Dancing_Script({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  display: 'swap',
+  variable: '--font-brochure-script',
+});
 
 const jakarta = Plus_Jakarta_Sans({
   subsets: ['latin'],
@@ -116,7 +133,7 @@ export default async function RootLayout({
     <html
       lang={locale}
       suppressHydrationWarning
-      className={`${jakarta.variable} ${playfair.variable} ${kannada.variable}`}
+      className={`${jakarta.variable} ${playfair.variable} ${kannada.variable} ${brochureHead.variable} ${brochureScript.variable}`}
     >
       <head>
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
