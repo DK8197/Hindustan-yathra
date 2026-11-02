@@ -392,11 +392,6 @@ export default function DestinationsExplorer({
     region !== 'all' ||
     selectedCategory !== 'all';
 
-  const destinationCount = useMemo(
-    () => new Set(tours.flatMap((tour) => tour.destinations || [])).size,
-    [tours],
-  );
-
   const clearFilters = () => {
     setSearch('');
     setDebouncedSearch('');
@@ -412,20 +407,20 @@ export default function DestinationsExplorer({
       : tTour('contact_for_price');
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-20 md:space-y-24">
       {/* Search and filters */}
-      <section className="relative z-20 -mt-16">
-        <div className="overflow-hidden rounded-[32px] border border-orange-200/80 bg-gradient-to-b from-orange-50/95 to-white/90 shadow-[0_24px_80px_-24px_rgba(124,45,18,0.25)] backdrop-blur-xl">
-          <div className="space-y-5 p-5 sm:p-6 lg:p-8">
+      <section className="relative z-20 -mt-12 md:-mt-16">
+        <div className="overflow-hidden rounded-[28px] border border-white/80 bg-white/[0.96] shadow-[0_24px_72px_-36px_rgba(12,27,40,0.42)] ring-1 ring-slate-900/[0.04] backdrop-blur-xl">
+          <div className="space-y-5 p-5 sm:space-y-6 sm:p-7 lg:p-8">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-orange-100 ring-1 ring-orange-200">
-                <Search aria-hidden="true" className="h-5 w-5 text-orange-700" />
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-saffron-50 ring-1 ring-saffron-100">
+                <Search aria-hidden="true" className="h-5 w-5 text-saffron-700" />
               </div>
               <div className="min-w-0">
-                <h3 className="text-lg font-bold text-orange-900 sm:text-xl">
+                <h3 className="text-lg font-semibold tracking-tight text-himalaya-900 sm:text-xl">
                   {t('search_title')}
                 </h3>
-                <p className="text-sm text-orange-800/80">{t('search_subtitle')}</p>
+                <p className="mt-0.5 text-sm text-slate-500">{t('search_subtitle')}</p>
               </div>
             </div>
 
@@ -436,7 +431,7 @@ export default function DestinationsExplorer({
                 </label>
                 <Search
                   aria-hidden="true"
-                  className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-orange-500"
+                  className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400"
                 />
                 <input
                   id="destination-search"
@@ -445,7 +440,7 @@ export default function DestinationsExplorer({
                   onChange={(event) => setSearch(event.target.value)}
                   placeholder={t('search_placeholder')}
                   autoComplete="off"
-                  className="w-full rounded-2xl border border-orange-200 bg-white py-4 pl-12 pr-12 text-base text-slate-900 shadow-sm outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-slate-400 focus:border-orange-500 focus:ring-4 focus:ring-orange-100 [&::-webkit-search-cancel-button]:hidden"
+                  className="w-full rounded-2xl border border-slate-200 bg-slate-50/70 py-4 pl-12 pr-12 text-base text-slate-900 outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-slate-400 focus:border-saffron-500 focus:bg-white focus:ring-4 focus:ring-saffron-100 [&::-webkit-search-cancel-button]:hidden"
                 />
                 {search && (
                   <button
@@ -455,7 +450,7 @@ export default function DestinationsExplorer({
                       setSearch('');
                       setDebouncedSearch('');
                     }}
-                    className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-slate-500 transition-[transform,background-color] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-600 [@media(hover:hover)]:hover:bg-orange-100 [@media(hover:hover)]:hover:text-orange-800"
+                    className="absolute right-2 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-slate-500 transition-[transform,background-color,color] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-600 [@media(hover:hover)]:hover:bg-slate-100 [@media(hover:hover)]:hover:text-slate-800"
                   >
                     <X aria-hidden="true" className="h-4 w-4" />
                   </button>
@@ -468,7 +463,7 @@ export default function DestinationsExplorer({
               aria-label={t('filter_type_label')}
               className="-mx-1 overflow-x-auto px-1 py-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
-              <div className="inline-flex min-w-full gap-1 rounded-full border border-orange-200 bg-orange-100/70 p-1 sm:min-w-0">
+              <div className="inline-flex min-w-full gap-1 rounded-full border border-slate-200/80 bg-slate-100/75 p-1 sm:min-w-0">
                 {(
                   [
                     { value: 'all', label: t('filter_all') },
@@ -485,10 +480,10 @@ export default function DestinationsExplorer({
                       setTourType(item.value);
                       setRegion('all');
                     }}
-                    className={`min-h-11 flex-1 whitespace-nowrap rounded-full px-5 text-sm font-semibold transition-[transform,background-color,color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-700 motion-reduce:transition-none motion-reduce:active:scale-100 sm:flex-none ${
+                    className={`min-h-11 flex-1 whitespace-nowrap rounded-full px-5 text-sm font-semibold transition-[transform,background-color,color,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-himalaya-600 motion-reduce:transition-none motion-reduce:active:scale-100 sm:flex-none ${
                       tourType === item.value
-                        ? 'bg-orange-700 text-white shadow-[0_6px_16px_-6px_rgba(154,52,18,0.7)]'
-                        : 'text-orange-900 [@media(hover:hover)]:hover:bg-white/70'
+                        ? 'bg-himalaya-900 text-white shadow-[0_6px_16px_-6px_rgba(12,27,40,0.55)]'
+                        : 'text-slate-700 [@media(hover:hover)]:hover:bg-white [@media(hover:hover)]:hover:text-himalaya-900'
                     }`}
                   >
                     {item.label}
@@ -526,8 +521,8 @@ export default function DestinationsExplorer({
                       onClick={() => setRegion(item.value as Region)}
                       className={`min-h-11 rounded-full border px-4 text-sm font-medium transition-[transform,background-color,border-color,color] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 motion-reduce:transition-none motion-reduce:active:scale-100 ${
                         region === item.value
-                          ? 'border-blue-600 bg-blue-600 text-white'
-                          : 'border-blue-100 bg-blue-50 text-blue-900 [@media(hover:hover)]:hover:border-blue-200 [@media(hover:hover)]:hover:bg-blue-100'
+                          ? 'border-himalaya-900 bg-himalaya-900 text-white'
+                          : 'border-slate-200 bg-white text-slate-700 [@media(hover:hover)]:hover:border-himalaya-200 [@media(hover:hover)]:hover:bg-himalaya-50'
                       }`}
                     >
                       {item.label}
@@ -547,7 +542,7 @@ export default function DestinationsExplorer({
       {/* Categories */}
       <section>
         <div className="mb-8">
-          <h2 className="bg-gradient-to-r from-himalaya-800 via-saffron-600 to-himalaya-800 bg-clip-text text-3xl font-bold tracking-tight text-transparent md:text-5xl">
+          <h2 className="font-display text-3xl font-semibold tracking-tight text-himalaya-900 md:text-4xl">
             {t('categories_title')}
           </h2>
           <p className="mt-2 text-slate-500">{t('categories_subtitle')}</p>
@@ -558,7 +553,7 @@ export default function DestinationsExplorer({
             type="button"
             aria-label="Scroll categories left"
             onClick={() => scrollCategories(-1)}
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-blue-300 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition-[transform,border-color,color,box-shadow] duration-150 active:scale-[0.97] hover:border-himalaya-300 hover:text-himalaya-900 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-himalaya-600 md:flex"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -585,10 +580,10 @@ export default function DestinationsExplorer({
                       inline: 'center',
                     });
                   }}
-                  className={`flex min-h-11 shrink-0 snap-start items-center gap-2 whitespace-nowrap rounded-2xl border px-4 py-3 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2 sm:gap-3 sm:px-5 ${
+                  className={`flex min-h-11 shrink-0 snap-start items-center gap-2 whitespace-nowrap rounded-full border px-4 py-3 transition-[transform,background-color,border-color,color,box-shadow] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-himalaya-700 focus-visible:ring-offset-2 sm:gap-3 sm:px-5 ${
                     selectedCategory === category
-                      ? 'border-blue-600 bg-blue-600 text-white shadow-lg'
-                      : 'border-slate-200 bg-white hover:border-blue-200 hover:shadow-md'
+                      ? 'border-himalaya-900 bg-himalaya-900 text-white shadow-[0_8px_20px_-12px_rgba(12,27,40,0.7)]'
+                      : 'border-slate-200 bg-white text-slate-700 hover:border-himalaya-200 hover:text-himalaya-900 hover:shadow-sm'
                   }`}
                 >
                   <Icon className="h-4 w-4" />
@@ -602,7 +597,7 @@ export default function DestinationsExplorer({
             type="button"
             aria-label="Scroll categories right"
             onClick={() => scrollCategories(1)}
-            className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-blue-300 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
+            className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition-[transform,border-color,color,box-shadow] duration-150 active:scale-[0.97] hover:border-himalaya-300 hover:text-himalaya-900 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-himalaya-600 md:flex"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -614,7 +609,7 @@ export default function DestinationsExplorer({
         <section>
           <div className="mb-8 flex items-center gap-3">
             <Star className="h-6 w-6 fill-amber-400 text-amber-400" />
-            <h2 className="bg-gradient-to-r from-himalaya-800 via-saffron-600 to-himalaya-800 bg-clip-text text-3xl font-bold tracking-tight text-transparent md:text-5xl">
+            <h2 className="font-display text-3xl font-semibold tracking-tight text-himalaya-900 md:text-4xl">
               {t('featured_title')}
             </h2>
           </div>
@@ -629,7 +624,7 @@ export default function DestinationsExplorer({
                 <Link
                   key={tour.id}
                   href={{ pathname: '/tour/[slug]', params: { slug: tour.slug } }}
-                  className="group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[32px] bg-himalaya-800"
+                  className="group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[24px] bg-himalaya-800 shadow-[0_20px_45px_-30px_rgba(12,27,40,0.8)] ring-1 ring-black/5 transition-[transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1 hover:shadow-[0_28px_56px_-32px_rgba(12,27,40,0.75)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                 >
                   {image && (
                     <Image
@@ -637,7 +632,7 @@ export default function DestinationsExplorer({
                       alt={getTitle(tour, locale)}
                       fill
                       sizes="(max-width: 1023px) 100vw, 33vw"
-                      className="object-cover transition-transform duration-200 ease-[ease] group-hover:scale-110 motion-reduce:group-hover:scale-100"
+                      className="object-cover transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 motion-reduce:group-hover:scale-100"
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
@@ -653,7 +648,7 @@ export default function DestinationsExplorer({
                       </div>
                     )}
                   </div>
-                  <div className="absolute bottom-0 p-6 text-white">
+                  <div className="absolute bottom-0 w-full p-5 text-white sm:p-6">
                     <h3 className="text-2xl font-bold">{getTitle(tour, locale)}</h3>
                     <p className="mt-3 line-clamp-2 text-white/90">{getSummary(tour, locale)}</p>
                     <div className="mt-4 flex flex-wrap gap-2">
@@ -679,7 +674,7 @@ export default function DestinationsExplorer({
       <section>
         <div className="mb-8 flex items-center justify-between gap-4">
           <div>
-            <h2 className="bg-gradient-to-r from-himalaya-800 via-saffron-600 to-himalaya-800 bg-clip-text text-3xl font-bold tracking-tight text-transparent md:text-5xl">
+            <h2 className="font-display text-3xl font-semibold tracking-tight text-himalaya-900 md:text-4xl">
               {t('explore_title')}
             </h2>
             <p className="mt-2 text-slate-500" aria-live="polite">
@@ -696,7 +691,7 @@ export default function DestinationsExplorer({
         </div>
 
         {displayedTours.length === 0 ? (
-          <div className="rounded-[32px] border border-slate-200 bg-white py-20 text-center">
+          <div className="rounded-[28px] border border-slate-200/80 bg-white px-5 py-20 text-center shadow-[0_18px_48px_-40px_rgba(12,27,40,0.45)] sm:px-8">
             <h3 className="text-2xl font-bold text-slate-900">
               {loadFailed ? t('load_error_title') : t('empty_title')}
             </h3>
@@ -739,7 +734,7 @@ export default function DestinationsExplorer({
                       alt={getTitle(tour, locale)}
                       fill
                       sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw"
-                      className="object-cover transition-transform duration-200 ease-[ease] group-hover:scale-110 motion-reduce:group-hover:scale-100"
+                      className="object-cover transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 motion-reduce:group-hover:scale-100"
                     />
                   )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
@@ -787,14 +782,14 @@ export default function DestinationsExplorer({
               );
 
               const cardClass =
-                'group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[32px] bg-himalaya-800 shadow-lg';
+                'group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[24px] bg-himalaya-800 shadow-[0_20px_45px_-30px_rgba(12,27,40,0.8)] ring-1 ring-black/5';
 
               if (tour.active) {
                 return (
                   <Link
                     key={tour.id}
                     href={{ pathname: '/tour/[slug]', params: { slug: tour.slug } }}
-                    className={`${cardClass} transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl motion-reduce:hover:translate-y-0`}
+                    className={`${cardClass} transition-[transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1 hover:shadow-[0_28px_56px_-32px_rgba(12,27,40,0.75)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 motion-reduce:transition-none motion-reduce:hover:translate-y-0`}
                   >
                     {cardContent}
                   </Link>
@@ -815,7 +810,7 @@ export default function DestinationsExplorer({
             <button
               type="button"
               onClick={() => setVisibleCount((previous) => previous + PAGE_SIZE)}
-              className="rounded-full bg-blue-600 px-8 py-4 font-semibold text-white shadow-lg transition hover:bg-blue-700 hover:shadow-xl"
+              className="min-h-12 rounded-full bg-himalaya-900 px-7 py-3.5 font-semibold text-white shadow-[0_12px_28px_-16px_rgba(12,27,40,0.8)] transition-[transform,background-color,box-shadow] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] hover:bg-himalaya-800 hover:shadow-lg active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-500 motion-reduce:transition-none motion-reduce:active:scale-100"
             >
               {t('view_more')}
             </button>
@@ -827,7 +822,7 @@ export default function DestinationsExplorer({
             <button
               type="button"
               onClick={() => setVisibleCount(INITIAL_COUNT)}
-              className="rounded-full border border-slate-300 bg-white px-8 py-4 font-semibold text-slate-700 transition hover:bg-slate-50"
+              className="min-h-12 rounded-full border border-slate-200 bg-white px-7 py-3.5 font-semibold text-slate-700 transition-[transform,border-color,background-color] duration-150 active:scale-[0.98] hover:border-slate-300 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-himalaya-600 motion-reduce:transition-none motion-reduce:active:scale-100"
             >
               {t('show_less')}
             </button>
@@ -835,19 +830,6 @@ export default function DestinationsExplorer({
         )}
       </section>
 
-      {/* Travel statistics */}
-      <section className="rounded-3xl bg-himalaya-900 p-6 text-white sm:p-8 md:p-10">
-        <div className="grid gap-6 sm:grid-cols-2">
-          <div>
-            <div className="text-4xl font-bold">{tours.length}</div>
-            <div className="mt-2 text-white/80">{t('stats.tours')}</div>
-          </div>
-          <div>
-            <div className="text-4xl font-bold">{destinationCount}</div>
-            <div className="mt-2 text-white/80">{t('stats.destinations')}</div>
-          </div>
-        </div>
-      </section>
       </>
       )}
     </div>

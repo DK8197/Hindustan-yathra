@@ -252,7 +252,7 @@ export function Navbar() {
   );
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 bg-[#07111f]">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.08] bg-[#07111f]/85 shadow-[0_8px_32px_-18px_rgba(0,0,0,0.8)] backdrop-blur-xl">
       {/* MAIN NAVBAR */}
       <div className="mx-auto flex h-16 max-w-[1600px] items-center justify-between gap-3 px-4 sm:h-[72px] sm:px-6 md:h-20 xl:px-10">
         {/* LEFT: LOGO AND DESKTOP ACCREDITATIONS */}

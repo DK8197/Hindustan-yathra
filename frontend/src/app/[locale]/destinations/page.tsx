@@ -87,57 +87,62 @@ export default async function DestinationsPage({
   });
 
   return (
-    <div className="pb-20">
-      <section className="relative overflow-hidden bg-himalaya-900">
+    <div className="pb-24">
+      <section className="relative isolate overflow-hidden bg-himalaya-900">
         <div
-          className="hero-bg absolute inset-0 opacity-15"
+          className="hero-bg absolute inset-0 opacity-30"
           style={{
             '--hero-bg-mobile': `url("${getCdnImageUrl('images-confidential/hero-mobile.webp')}")`,
             '--hero-bg-desktop': `url("${getCdnImageUrl('images-confidential/hero-desktop.webp')}")`,
           } as CSSProperties}
           aria-hidden="true"
         />
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-[#07111f]/90 via-[#07111f]/55 to-[#07111f]/25"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-himalaya-900 via-transparent to-himalaya-900/20"
+          aria-hidden="true"
+        />
 
-        <div className="relative mx-auto max-w-7xl px-4 pb-24 pt-10 sm:px-6 sm:pb-28 md:px-12">
+        <div className="relative mx-auto max-w-7xl px-5 pb-24 pt-12 sm:px-6 sm:pb-28 sm:pt-14 md:px-12 md:pb-32 md:pt-16">
           <div className="max-w-3xl">
-            <h1 className="font-display text-4xl font-bold leading-tight text-white sm:text-5xl md:text-7xl">
+            <h1 className="text-balance font-display text-4xl font-semibold leading-[1.04] tracking-[-0.035em] text-white sm:text-6xl md:text-7xl">
               {t('heading')}
-              <span className="block text-saffron-300">
+              <span className="mt-1 block text-saffron-300">
                 {t('headingHighlight')}
               </span>
             </h1>
 
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-slate-200 sm:text-lg md:mt-6 md:text-xl">
+            <p className="mt-5 max-w-xl text-base leading-7 text-white/75 sm:text-lg sm:leading-8 md:mt-6">
               {t('subheading')}
             </p>
 
-            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-5 sm:mt-10">
-              <div>
-                <div className="text-3xl font-bold text-white">
+            <div className="mt-9 flex flex-wrap gap-x-7 gap-y-5 sm:mt-10 sm:gap-x-9">
+              <div className="border-l border-white/20 pl-5 first:border-l-0 first:pl-0">
+                <div className="tabular-nums text-3xl font-semibold tracking-tight text-white">
                   {tours.length}
                 </div>
-
-                <div className="text-blue-200">
+                <div className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-white/60">
                   {t('stats.tours')}
                 </div>
               </div>
 
-              <div>
-                <div className="text-3xl font-bold text-white">
+              <div className="border-l border-white/20 pl-5">
+                <div className="tabular-nums text-3xl font-semibold tracking-tight text-white">
                   {new Set(tours.flatMap((tour) => tour.destinations || [])).size}
                 </div>
-
-                <div className="text-blue-200">
+                <div className="mt-1 text-[11px] font-medium uppercase tracking-[0.16em] text-white/60">
                   {t('stats.destinations')}
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <DestinationsExplorer
           tours={tours}
           locale={locale}
