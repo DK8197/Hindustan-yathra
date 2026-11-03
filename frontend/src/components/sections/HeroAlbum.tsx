@@ -8,20 +8,39 @@ const SLIDE_INTERVAL_MS = 5000;
 
 // Placeholder CDN images; replace with the real album list.
 export const DESKTOP_SLIDES = [
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award_function.jpeg', title: 'Andaman Islands', note: 'Turquoise shores & coral reefs' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub1.jpeg', title: 'Kashi', note: 'Ghats, aarti & ancient lanes' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub2.jpeg', title: 'Karnataka', note: 'Heritage that stays with you' },
-  { src: 'https://picsum.photos/seed/hy-album-4/640/800', title: 'Recognised Journeys', note: 'Trusted by travellers since 2018' },
-  { src: 'https://picsum.photos/seed/hy-album-5/640/800', title: 'Our Founders', note: 'The people behind every yathra' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award_function.jpeg', title: 'Founder and Co founder recognized for Premji puraskar', note: 'Turquoise shores & coral reefs' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub1.jpeg', title: 'Hindustan yatra Newspaper publications', note: 'Ghats, aarti & ancient lanes' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub2.jpeg', title: 'Hindustan yatra Newspaper publications', note: 'Heritage that stays with you' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/premji_achievers.jpeg', title: 'Founder recognized as Premji achievers', note: 'Trusted by travellers since 2018' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award10.jpeg', title: 'Vigama 2023', note: 'The people behind every yathra' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award2.jpeg', title: 'Falicitation ceremony', note: 'The people behind every yathra' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award3.jpeg', title: 'Falicitation ceremony', note: 'Turquoise shores & coral reefs' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award4.jpeg', title: 'World Tourism day', note: 'Ghats, aarti & ancient lanes' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award6.jpeg', title: 'World Tourism day', note: 'Heritage that stays with you' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award7.jpeg', title: 'Karnataka Arts COllege Darwad', note: 'Trusted by travellers since 2018' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award8.jpeg', title: 'Vigama 2023', note: 'The people behind every yathra' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award9.jpeg', title: 'Vigama 2023', note: 'The people behind every yathra' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/office.jpeg', title: 'Our new office', note: 'The people behind every yathra' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/digambara_swamy.jpeg', title: 'with blessings of the Digambara Swamy', note: 'The people behind every yathra' },
+
 ] as const;
 
 // Separate placeholder list for the mobile hero.
 export const MOBILE_SLIDES = [
-  { src: 'https://picsum.photos/seed/hy-mobile-1/640/800', title: 'Hampi', note: 'Ruins of an empire' },
-  { src: 'https://picsum.photos/seed/hy-mobile-2/640/800', title: 'Varanasi', note: 'Dawn on the ghats' },
-  { src: 'https://picsum.photos/seed/hy-mobile-3/640/800', title: 'Mysuru', note: 'Palaces and festivals' },
-  { src: 'https://picsum.photos/seed/hy-mobile-4/640/800', title: 'Kerala', note: 'Backwater mornings' },
-  { src: 'https://picsum.photos/seed/hy-mobile-5/640/800', title: 'Ladakh', note: 'High passes, open skies' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award_function.jpeg', title: 'Founder and Co founder recognized for Premji puraskar', note: 'Turquoise shores & coral reefs' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub1.jpeg', title: 'Hindustan yatra Newspaper publications', note: 'Ghats, aarti & ancient lanes' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub2.jpeg', title: 'Hindustan yatra Newspaper publications', note: 'Heritage that stays with you' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/premji_achievers.jpeg', title: 'Founder recognized as Premji achievers', note: 'Trusted by travellers since 2018' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award10.jpeg', title: 'Vigama 2023', note: 'The people behind every yathra' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award2.jpeg', title: 'Falicitation ceremony', note: 'The people behind every yathra' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award3.jpeg', title: 'Falicitation ceremony', note: 'Turquoise shores & coral reefs' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award4.jpeg', title: 'World Tourism day', note: 'Ghats, aarti & ancient lanes' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award6.jpeg', title: 'World Tourism day', note: 'Heritage that stays with you' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award7.jpeg', title: 'Karnataka Arts COllege Darwad', note: 'Trusted by travellers since 2018' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award8.jpeg', title: 'Vigama 2023', note: 'The people behind every yathra' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award9.jpeg', title: 'Vigama 2023', note: 'The people behind every yathra' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/office.jpeg', title: 'Our new office', note: 'The people behind every yathra' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/digambara_swamy.jpeg', title: 'with blessings of the Digambara Swamy', note: 'The people behind every yathra' },
 ] as const;
 
 type Orientation = 'portrait' | 'landscape';
@@ -88,7 +107,7 @@ function HeroAlbumComponent({ slides, display = 'desktop' }: HeroAlbumProps) {
       style={
         {
           '--u': isMobile
-            ? 'clamp(7px, min(3vw, 1.7svh), 10.5px,10px)'
+            ? 'clamp(7px, min(3vw, 1.7svh), 10.5px)'
             : 'clamp(9px, min(1.45vw, calc((100svh - 6.5rem - 19.75vw) / 22)), 24px)',
         } as CSSProperties
       }

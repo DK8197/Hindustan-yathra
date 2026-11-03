@@ -15,13 +15,6 @@ import { useHeroScrollProgress } from '@/lib/hooks/useHeroScrollProgress';
 
 const HERO_DESKTOP_IMAGE = getCdnImageUrl('images-confidential/hero-desktop.webp');
 
-const Hero3D = dynamic(
-  () => import('@/components/3d/Hero3D'),
-  {
-    ssr: false,
-    loading: () => null,
-  }
-);
 
 function HeroSectionComponent() {
   const t = useTranslations('hero');
