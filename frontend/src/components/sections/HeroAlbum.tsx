@@ -8,9 +8,9 @@ const SLIDE_INTERVAL_MS = 5000;
 
 // Placeholder CDN images; replace with the real album list.
 export const DESKTOP_SLIDES = [
-  { src: 'https://picsum.photos/seed/hy-album-1/640/800', title: 'Andaman Islands', note: 'Turquoise shores & coral reefs' },
-  { src: 'https://picsum.photos/seed/hy-album-2/640/800', title: 'Kashi', note: 'Ghats, aarti & ancient lanes' },
-  { src: 'https://picsum.photos/seed/hy-album-3/640/800', title: 'Karnataka', note: 'Heritage that stays with you' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award_function.jpeg', title: 'Andaman Islands', note: 'Turquoise shores & coral reefs' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub1.jpeg', title: 'Kashi', note: 'Ghats, aarti & ancient lanes' },
+  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub2.jpeg', title: 'Karnataka', note: 'Heritage that stays with you' },
   { src: 'https://picsum.photos/seed/hy-album-4/640/800', title: 'Recognised Journeys', note: 'Trusted by travellers since 2018' },
   { src: 'https://picsum.photos/seed/hy-album-5/640/800', title: 'Our Founders', note: 'The people behind every yathra' },
 ] as const;
@@ -28,8 +28,8 @@ type Orientation = 'portrait' | 'landscape';
 
 // Frame sizes in rem; the frame adapts to each photo's natural aspect ratio.
 const FRAME_SIZES: Record<Orientation, { w: number; h: number }> = {
-  portrait: { w: 15, h: 22 },
-  landscape: { w: 22, h: 16 },
+  portrait: { w: 17, h: 30 },
+  landscape: { w: 25, h: 18 },
 };
 
 const EASE_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
@@ -82,14 +82,14 @@ function HeroAlbumComponent({ slides, display = 'desktop' }: HeroAlbumProps) {
       aria-label="Photo album"
       className={
         isMobile
-          ? 'relative z-10 flex w-full min-w-0 items-center justify-center lg:hidden'
-          : 'relative z-10 hidden w-full min-w-0 items-center justify-center px-2 lg:flex'
+          ? ' relative z-10 flex w-full min-w-0 items-center justify-center pt-6 lg:hidden'
+          : 'relative z-10 hidden w-full min-w-0 items-center justify-center px-2 lg:mb-12 lg:flex'
       }
       style={
         {
           '--u': isMobile
-            ? 'clamp(7px, min(3vw, 1.7svh), 10.5px)'
-            : 'clamp(6px, min(0.95vw, calc((100svh - 8rem - 19.75vw) / 26)), 16px)',
+            ? 'clamp(7px, min(3vw, 1.7svh), 10.5px,10px)'
+            : 'clamp(9px, min(1.45vw, calc((100svh - 6.5rem - 19.75vw) / 22)), 24px)',
         } as CSSProperties
       }
       onPointerEnter={(event) => event.pointerType === 'mouse' && setPaused(true)}
@@ -97,10 +97,10 @@ function HeroAlbumComponent({ slides, display = 'desktop' }: HeroAlbumProps) {
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      <div className="flex w-full max-w-full flex-col items-center gap-3 lg:gap-5">
+      <div className="flex w-full max-w-full flex-col items-center gap-2 lg:gap-1">
         <div
           className="relative w-full touch-pan-y select-none [perspective:1200px]"
-          style={{ height: 'calc(24 * var(--u))' }}
+          style={{ height: 'calc(27 * var(--u))' }}
           onPointerDown={(event) => {
             swipeStart.current = { x: event.clientX, t: event.timeStamp };
           }}
@@ -128,17 +128,18 @@ function HeroAlbumComponent({ slides, display = 'desktop' }: HeroAlbumProps) {
               const size = base;
               const transform = shouldReduceMotion
                 ? 'none'
-                : `translate3d(${offset * 42}%, 0, ${-distance * 140}px) rotateY(${-offset * 26}deg) scale(${1 - distance * 0.06})`;
+                : `translate3d(${offset * 42}%, 0, ${-distance * 140}px) rotateY(${-offset * 26}deg) scale(${isActive ? 1 : 0.78})`;
 
               return (
                 <figure
                   key={slide.src}
                   aria-hidden={!isActive}
                   aria-label={`${index + 1} of ${slides.length}: ${slide.title}`}
-                  className="absolute inset-y-0 left-1/2 m-auto origin-center overflow-hidden rounded-[1.75rem] border-2 border-sky-900 bg-gradient-to-b from-sky-100/95 to-sky-300/75 p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_24px_48px_-20px_rgba(2,132,199,0.55)] backdrop-blur-xl will-change-transform"
+                  className="absolute inset-y-0 left-1/2 m-auto flex flex-col origin-center overflow-hidden  top-0 rounded-[1.75rem] border-2 border-sky-900 bg-gradient-to-b from-sky-100/95 to-sky-300/75 p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_24px_48px_-20px_rgba(2,132,199,0.55)] backdrop-blur-xl will-change-transform"
                   style={{
                                       width: `calc(${size.w} * var(--u))`,
                                       height: `calc(${size.h} * var(--u))`,
+                                      bottom: '32px',
                                       marginLeft: `calc(${-size.w / 2} * var(--u))`,
                                       transform,
                     opacity: distance > 1 ? 0 : isActive ? 1 : 0.55,
@@ -147,26 +148,28 @@ function HeroAlbumComponent({ slides, display = 'desktop' }: HeroAlbumProps) {
                     transition: `transform 700ms ${EASE_OUT}, opacity 500ms ${EASE_OUT}`,
                   }}
                 >
-                  <div className="relative w-full overflow-hidden rounded-[1.25rem]" style={{ height: 'calc(100% - 5 * var(--u))' }}>
-                    <Image
-                      src={slide.src}
-                      alt={isActive ? slide.title : ''}
-                      fill
-                      sizes="352px"
-                      onLoad={(event) => handleImageLoad(slide.src, event.currentTarget)}
-                      unoptimized
-                      priority={index === 0}
-                      className="object-cover"
-                    />
-                    <div
-                      aria-hidden="true"
-                      className="absolute inset-0 bg-gradient-to-t from-sky-950/25 via-transparent to-white/10"
-                    />
-                  </div>
-                  <figcaption className="px-2 pt-3 text-sky-950">
-                    <p className="text-sm font-semibold leading-tight">{slide.title}</p>
-                    <p className="mt-0.5 truncate text-xs text-sky-900/70">{slide.note}</p>
-                  </figcaption>
+ <div className="relative w-full flex-1 min-h-0 overflow-hidden rounded-[1.25rem]">
+  <Image
+    src={slide.src}
+    alt={isActive ? slide.title : ''}
+    fill
+    sizes="(min-width: 1024px) 450px, 100vw"
+    onLoad={(event) => handleImageLoad(slide.src, event.currentTarget)}
+    unoptimized
+    priority={index === 0}
+    className="object-cover"
+  />
+  <div
+    aria-hidden="true"
+    className="absolute inset-0 bg-gradient-to-t from-sky-950/25 via-transparent to-white/10"
+  />
+</div>
+
+<figcaption className="shrink-0 px-2 pt-2 pb-1 text-sky-950">
+  <p className="line-clamp-2 text-sm font-semibold leading-snug">
+    {slide.title}
+  </p>
+</figcaption>
                 </figure>
               );
             })}

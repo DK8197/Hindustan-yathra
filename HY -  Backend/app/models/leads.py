@@ -10,7 +10,9 @@ class Lead(db.Model):
     email= db.Column(db.String(255), nullable=False)
     phone_number = db.Column(db.String(20), nullable=False)
     destination = db.Column(db.String(255), nullable=False)
-    message = db.Column(db.String(20), nullable=False)
+    MESSAGE_MAX_LENGTH = 2000
+
+    message = db.Column(db.String(MESSAGE_MAX_LENGTH), nullable=False)
     created_at = db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
     handled = db.Column(db.Boolean,nullable=False,default=False)
     

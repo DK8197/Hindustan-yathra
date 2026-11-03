@@ -59,8 +59,8 @@ function HeroSectionComponent() {
           flex-col
           min-h-[calc(100svh-4rem)]
           md:min-h-[calc(100svh-5rem)]
-          lg:h-[calc(100svh-5rem)]
-          lg:min-h-[32rem]
+          lg:h-[100svh]
+          lg:min-h-[0rem]
           overflow-hidden
           bg-gradient-to-b
           from-sky-100
@@ -82,12 +82,9 @@ function HeroSectionComponent() {
           />
         </div>
 
-        <div className="relative grid min-h-0 flex-1 grid-cols-1 max-md:flex max-md:flex-col max-md:items-stretch max-md:justify-start items-center lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.3fr)_minmax(0,0.8fr)] lg:gap-x-6 xl:gap-x-10">
-                  {/* Desktop-only album, left of the copy. */}
-                  <HeroAlbum slides={DESKTOP_SLIDES} />
-
+        <div className="relative grid min-h-0 flex-1 grid-cols-1 lg:-translate-y-8 max-md:flex max-md:flex-col max-md:items-stretch max-md:justify-start items-center lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1.1fr)] lg:gap-x-0 xl:gap-x-3">
                   {/* Content */}
-          <div className="relative z-10 w-full px-5 py-5 max-md:flex max-md:pb-2 max-md:pt-5 sm:px-7 sm:py-8 lg:px-8 lg:py-6">
+          <div className="relative z-10 w-full px-5 py-5 max-md:flex max-md:pb-2 max-md:pt-5 sm:px-7 sm:py-8 lg:px-12 lg:py-3 xl:px-16">
           <div
             className="
               mx-auto
@@ -106,7 +103,7 @@ function HeroSectionComponent() {
                 ${
                   isKannada
                     ? 'font-kannada text-sky-950 text-[clamp(1.5rem,5.5vw,3.5rem)] leading-[1.25] tracking-normal max-md:text-[clamp(1.75rem,7.5vw,2.25rem)]'
-                    : 'font-[family-name:var(--font-brochure-script)] text-[clamp(2rem,4.8vw,3.9rem)] font-bold italic leading-[1.1] tracking-normal text-emerald-600 lg:whitespace-nowrap lg:text-[clamp(1.5rem,2.9vw,3.5rem)] max-md:text-[clamp(2.25rem,10vw,2.75rem)] max-md:leading-[1.1]'
+                    : 'font-[family-name:var(--font-brochure-script)] text-[clamp(2rem,4.8vw,3.9rem)] font-bold italic leading-[1.1] tracking-normal text-emerald-600 lg:whitespace-nowrap lg:text-[clamp(1.75rem,min(3.4vw,calc((100svh-5rem-19.75vw)*0.17)),4.5rem)] lg:leading-[1.05] max-md:text-[clamp(2.25rem,10vw,2.75rem)] max-md:leading-[1.1]'
                 }
                 font-semibold
                 [text-wrap:balance]
@@ -122,8 +119,9 @@ function HeroSectionComponent() {
             {/* Subheadline */}
             <p
               className={`
-                mt-5
+                mt-3
                 max-w-[48ch]
+                lg:mt-3
                 max-md:mt-3
                 max-md:self-center
                 max-md:text-center
@@ -132,7 +130,7 @@ function HeroSectionComponent() {
                 ${
                   isKannada
                     ? 'font-kannada text-base leading-relaxed sm:text-lg'
-                    : 'text-base leading-relaxed max-md:leading-snug sm:text-base lg:text-[0.95rem]'
+                    : 'text-base leading-relaxed max-md:leading-snug sm:text-base lg:text-[clamp(0.85rem,min(1.15vw,calc((100svh-5rem-19.75vw)*0.05)),1.3rem)]'
                 }
                 text-sky-950
               `}
@@ -141,7 +139,7 @@ function HeroSectionComponent() {
             </p>
 
             {/* Interactive Section (Lifted slightly upward via negative translation) */}
-            <div className="mt-5 flex max-w-2xl flex-col gap-4 max-md:contents">
+            <div className="mt-4 flex max-w-2xl flex-col gap-2 lg:mt-3 lg:gap-3 max-md:contents">
               {/* Keep the primary destination search first in visual and tab order. */}
               <form
                 id="destination-search-form"
@@ -299,6 +297,8 @@ function HeroSectionComponent() {
           </div>
           </div>
 
+          <HeroAlbum slides={DESKTOP_SLIDES} />
+
           <div className="px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-1 lg:hidden">
             <HeroAlbum slides={MOBILE_SLIDES} display="mobile" />
           </div>
@@ -306,9 +306,9 @@ function HeroSectionComponent() {
           {/* The globe sits beside the copy from md upward. */}
           <div className="relative z-10 rounded-t-[2rem] bg-transparent pt-0 max-md:hidden md:contents">
             {/* The globe sits beside the copy from md upward; it is omitted on phones. */}
-            <div className="relative h-[min(48vw,22rem)] min-h-[220px] w-full overflow-hidden pointer-events-none lg:self-center lg:h-[min(100%,36rem)] lg:min-h-[240px]">
+            {/* <div className="relative h-[min(48vw,22rem)] min-h-[220px] w-full overflow-hidden pointer-events-none lg:self-center lg:h-[min(100%,36rem)] lg:min-h-[240px]">
               {mounted && shouldReduceMotion === false && <Hero3D />}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
