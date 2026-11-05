@@ -13,3 +13,4 @@ Artifacts/
 !.github/
 !.github/workflows/
 !.github/workflows/backend-cloud-run.yml
+graphify-out/

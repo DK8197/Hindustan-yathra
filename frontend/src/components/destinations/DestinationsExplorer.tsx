@@ -200,9 +200,8 @@ const REGION_PLACES: Record<Exclude<Region, 'all'>, readonly string[]> = {
     'ayodhya', 'prayagraj', 'lucknow',
   ],
   south: [
-    'andhra', 'telangana', 'karnataka', 'kerala', 'tamil nadu', 'puducherry',
-    'pondicherry', 'lakshadweep', 'andaman', 'bengaluru', 'bangalore', 'mysuru',
-    'mysore', 'hampi', 'badami', 'pattadakal', 'vijayapura', 'hubballi', 'hubli',
+    'andhra', 'telangana', 'kerala', 'tamil nadu', 'puducherry',
+    'pondicherry', 'lakshadweep', 'andaman', 'hampi', 
     'dharwad', 'murudeshwar', 'udupi', 'gokarna', 'coorg', 'kodagu',
     'chikmagalur', 'mangaluru', 'mangalore', 'sringeri', 'dharmasthala',
     'tirupati', 'tirumala', 'srisailam', 'vijayawada', 'visakhapatnam', 'vizag',
