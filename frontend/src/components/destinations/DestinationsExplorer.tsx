@@ -329,6 +329,7 @@ export default function DestinationsExplorer({
   );
 
   const getCategoryLabel = (category: string) => {
+    if (category === 'international') return null;
     if (category === 'all') return t('filter_all');
     return tCategory.has(category) ? tCategory(category) : category;
   };
