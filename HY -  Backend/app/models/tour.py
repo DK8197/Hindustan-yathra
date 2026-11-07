@@ -1,5 +1,5 @@
 from app import db
-from sqlalchemy.dialects.mysql import JSON
+from sqlalchemy import JSON
 from datetime import datetime
 
 

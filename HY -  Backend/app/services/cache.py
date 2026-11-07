@@ -1,16 +1,32 @@
 import os
 import redis
+from app import InMemoryStore
 
-redis_client = redis.Redis(
-    host=os.getenv("REDIS_HOST"),
-    port=os.getenv("REDIS_PORT"),
-    db=os.getenv("REDIS_DB"),
-    decode_responses=True
-)
+redis_url = os.getenv("REDIS_URL")
+try:
+    if redis_url:
+        redis_client = redis.Redis.from_url(redis_url, decode_responses=True)
+    else:
+        redis_client = redis.Redis(
+            host=os.getenv("REDIS_HOST", "localhost"),
+            port=int(os.getenv("REDIS_PORT", 6379)),
+            db=int(os.getenv("REDIS_DB", 0)),
+            decode_responses=True
+        )
+    redis_client.ping()
+except Exception:
+    redis_client = InMemoryStore()
+
 
 def cache_get(key: str):
-    return redis_client.get(key)
+    try:
+        return redis_client.get(key)
+    except Exception:
+        return None
 
 
 def cache_set(key: str, value: str, ttl: int = 900):
-    redis_client.setex(key, ttl, value)
+    try:
+        redis_client.setex(key, ttl, value)
+    except Exception:
+        pass

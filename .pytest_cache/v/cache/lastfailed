@@ -1,4 +1,5 @@
 {
   "HY -  Backend/tests/test_auth.py": true,
-  "HY -  Backend/tests/test_health.py": true
+  "HY -  Backend/tests/test_health.py": true,
+  "HY -  Backend/tests/test_leads.py": true
 }

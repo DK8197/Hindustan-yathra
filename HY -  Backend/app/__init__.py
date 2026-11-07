@@ -29,47 +29,79 @@ load_dotenv()
 app = Flask(__name__)
 db = SQLAlchemy()
 migrate = Migrate()
-limiter = Limiter(key_func=get_remote_address, default_limits=["200 per day", "50 per hour"])
-redis_client = Redis.from_url(os.getenv("REDIS_URL", "redis://localhost:6379/0"), decode_responses=True)
+
+redis_url = os.getenv("REDIS_URL")
+rate_limit_url = os.getenv("RATE_LIMIT_STORAGE_URL") or redis_url
+
 try:
+    if redis_url:
+        redis_client = Redis.from_url(redis_url, decode_responses=True)
+    else:
+        redis_client = Redis.from_url("redis://localhost:6379/0", decode_responses=True)
     redis_client.ping()
 except Exception:
     redis_client = InMemoryStore()
 
+if rate_limit_url and not os.getenv("TESTING"):
+    limiter = Limiter(key_func=get_remote_address, default_limits=["200 per day", "50 per hour"], storage_uri=rate_limit_url)
+else:
+    limiter = Limiter(key_func=get_remote_address, default_limits=["200 per day", "50 per hour"])
 
-def create_app():
+
+def normalize_database_url(url: str | None) -> str:
+    if not url:
+        return "sqlite:///hindustanyatra.db"
+    url = url.strip()
+    if url.startswith("postgres://"):
+        return "postgresql+psycopg://" + url[len("postgres://"):]
+    if url.startswith("postgresql://"):
+        return "postgresql+psycopg://" + url[len("postgresql://"):]
+    return url
+
+
+def create_app(test_config=None):
     app = Flask(__name__)
+    is_testing = os.getenv("TESTING", "").lower() in ("true", "1")
+    if is_testing:
+        raw_db_uri = os.getenv("SQLALCHEMY_DATABASE_URI") or "sqlite:///:memory:"
+    else:
+        raw_db_uri = os.getenv("DATABASE_URL") or os.getenv("SQLALCHEMY_DATABASE_URI")
+    db_uri = normalize_database_url(raw_db_uri)
+
     app.config.from_mapping(
+        TESTING=is_testing,
         SECRET_KEY=os.getenv("SECRET_KEY", "dev-secret"),
         JWT_SECRET_KEY=os.getenv("JWT_SECRET_KEY", "dev-secret"),
-        SQLALCHEMY_DATABASE_URI=os.getenv("SQLALCHEMY_DATABASE_URI", "mysql+pymysql://root:root@localhost:3306/hindustanyatra"),
+        SQLALCHEMY_DATABASE_URI=db_uri,
         SQLALCHEMY_TRACK_MODIFICATIONS=False,
+        SQLALCHEMY_ENGINE_OPTIONS={
+            "pool_pre_ping": True,
+            "pool_recycle": 300,
+        },
         REDIS_URL=os.getenv("REDIS_URL", "redis://localhost:6379/0"),
         UPLOAD_FOLDER=os.getenv("UPLOAD_FOLDER", "/tmp/hindustanyathra/uploads"),
         JSON_SORT_KEYS=False,
     )
 
-    SECRET=os.environ.get('API_SECRET')
+    if test_config:
+        app.config.update(test_config)
+
+    SECRET = os.environ.get('API_SECRET')
     
     @app.before_request
     def verify_app():
-        print(
-        request.method,
-        request.path,
-        request.headers.get("X-App-Key")
-        )
-
+        if app.config.get("TESTING"):
+            return None
         if request.method == "OPTIONS":
-            return "",204
+            return "", 204
+        if request.path == "/health":
+            return None
 
-
-        if request.headers.get("X-App-Key") != SECRET:
+        if SECRET and request.headers.get("X-App-Key") != SECRET:
             abort(403)
 
-    CORS(app,resources={r"/api/*": {"origins": ['*'],"allow_headers": ["Content-Type","Authorization","X-App-Key",],}},)
+    CORS(app, resources={r"/api/*": {"origins": ['*'], "allow_headers": ["Content-Type", "Authorization", "X-App-Key"]}})
 
-    # CORS(app, resources={r"/api/*": {"origins": "*"}})
-    # CORS(app,resources={r"/api/*": {"origins": ["https://hindustanyatra.com","https://www.hindustanyatra.com","https://hindustan-yathra.vercel.app","http://localhost:3000",],"allow_headers": ["Content-Type","Authorization","X-App-Key",],}},)
     db.init_app(app)
     migrate.init_app(app, db)
     limiter.init_app(app)
@@ -80,7 +112,10 @@ def create_app():
     from app.models.social_media import SocialMediaLink
 
     with app.app_context():
-        db.create_all()
+        try:
+            db.create_all()
+        except Exception as e:
+            app.logger.warning(f"db.create_all() encountered: {e}")
     
 
     app.config["JWT_TOKEN_LOCATION"] = ["cookies"]

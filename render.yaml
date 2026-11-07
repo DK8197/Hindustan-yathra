@@ -1,0 +1,42 @@
+services:
+  - type: web
+    name: hindustan-yatra-backend
+    env: python
+    plan: free
+    rootDir: HY -  Backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn wsgi:app
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: FLASK_APP
+        value: wsgi.py
+      - key: FLASK_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false # Set in Render to your Neon connection URL
+      - key: REDIS_URL
+        sync: false # Set in Render to your Redis Cloud URL
+      - key: RATE_LIMIT_STORAGE_URL
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
+      - key: API_SECRET
+        sync: false
+      - key: R2_ACCOUNT_ID
+        sync: false
+      - key: R2_ACCESS_KEY_ID
+        sync: false
+      - key: R2_SECRET_ACCESS_KEY
+        sync: false
+      - key: R2_BUCKET
+        value: hindustan-yathra-assets
+      - key: R2_PUBLIC_URL
+        value: https://cdn.hindustanyathra.com
+      - key: ADMIN_MOBILE
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
