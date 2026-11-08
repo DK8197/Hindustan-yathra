@@ -61,8 +61,8 @@ function HeroSectionComponent() {
           to-white
         "
       >
-        {/* Same banner as desktop; on phones it is cropped to a fixed height and rounded like a native sheet header. */}
-        <div className="relative h-[clamp(6.5rem,16svh,8.5rem)] shrink-0 overflow-hidden max-md:rounded-b-[1.75rem] max-md:shadow-[0_14px_32px_-18px_rgba(2,132,199,0.55)] md:h-auto">
+        {/* Same banner as desktop; on phones and tablets it is cropped and rounded like a native sheet header. */}
+        <div className="relative h-[clamp(6.5rem,16svh,8.5rem)] shrink-0 overflow-hidden max-lg:rounded-b-[1.75rem] max-lg:shadow-[0_14px_32px_-18px_rgba(2,132,199,0.55)] md:h-[clamp(8rem,18svh,11rem)] lg:h-auto">
           <Image
             src={HERO_DESKTOP_IMAGE}
             alt="Hindustan Yathra founders and Karnataka heritage landmarks"
@@ -71,21 +71,21 @@ function HeroSectionComponent() {
             sizes="100vw"
             priority
             unoptimized
-            className="block h-full w-full object-cover object-[50%_45%] md:h-auto"
+            className="block h-full w-full object-cover object-[50%_45%] lg:h-auto"
           />
         </div>
 
-        <div className="relative grid min-h-0 flex-1 grid-cols-1 lg:-translate-y-8 max-md:flex max-md:flex-col max-md:items-stretch max-md:justify-start items-center lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1.1fr)] lg:gap-x-0 xl:gap-x-3">
+        <div className="relative grid min-h-0 flex-1 grid-cols-1 lg:-translate-y-8 max-lg:flex max-lg:flex-col max-lg:items-stretch max-lg:justify-start items-center lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1.1fr)] lg:gap-x-0 xl:gap-x-3">
                   {/* Content */}
-          <div className="relative z-10 w-full px-5 py-5 max-md:flex max-md:pb-2 max-md:pt-5 sm:px-7 sm:py-8 lg:px-12 lg:py-3 xl:px-16">
+          <div className="relative z-10 w-full px-5 py-5 max-lg:flex max-lg:pb-2 max-lg:pt-5 sm:px-7 sm:py-8 md:px-10 lg:px-12 lg:py-3 xl:px-16">
           <div
             className="
               mx-auto
               w-full
               max-w-[1600px]
               text-left
-              max-md:flex
-              max-md:flex-col
+              max-lg:flex
+              max-lg:flex-col
             "
           >
             {/* Headline */}
@@ -95,15 +95,15 @@ function HeroSectionComponent() {
                 max-w-[26ch]
                 ${
                   isKannada
-                    ? 'font-kannada text-sky-950 text-[clamp(1.5rem,5.5vw,3.5rem)] leading-[1.25] tracking-normal max-md:text-[clamp(1.75rem,7.5vw,2.25rem)]'
-                    : 'font-[family-name:var(--font-brochure-script)] text-[clamp(2rem,4.8vw,3.9rem)] font-bold italic leading-[1.1] tracking-normal text-emerald-600 lg:whitespace-nowrap lg:text-[clamp(1.75rem,min(3.4vw,calc((100svh-5rem-19.75vw)*0.17)),4.5rem)] lg:leading-[1.05] max-md:text-[clamp(2.25rem,10vw,2.75rem)] max-md:leading-[1.1]'
+                    ? 'font-kannada text-sky-950 text-[clamp(1.5rem,5.5vw,3.5rem)] leading-[1.25] tracking-normal max-lg:text-[clamp(1.75rem,7.5vw,2.25rem)]'
+                    : 'font-[family-name:var(--font-brochure-script)] text-[clamp(2rem,4.8vw,3.9rem)] font-bold italic leading-[1.1] tracking-normal text-emerald-600 lg:whitespace-nowrap lg:text-[clamp(1.75rem,min(3.4vw,calc((100svh-5rem-19.75vw)*0.17)),4.5rem)] lg:leading-[1.05] max-lg:text-[clamp(2.25rem,6vw,3rem)] max-lg:leading-[1.1]'
                 }
                 font-semibold
                 [text-wrap:balance]
-                max-md:self-center
-                max-md:text-center
-                max-md:animate-fly-in
-                max-md:[animation-delay:0ms]
+                max-lg:self-center
+                max-lg:text-center
+                max-lg:animate-fly-in
+                max-lg:[animation-delay:0ms]
               `}
             >
               {t('headline')}
@@ -115,15 +115,15 @@ function HeroSectionComponent() {
                 mt-3
                 max-w-[48ch]
                 lg:mt-3
-                max-md:mt-3
-                max-md:self-center
-                max-md:text-center
-                max-md:animate-fly-in
-                max-md:[animation-delay:60ms]
+                max-lg:mt-3
+                max-lg:self-center
+                max-lg:text-center
+                max-lg:animate-fly-in
+                max-lg:[animation-delay:60ms]
                 ${
                   isKannada
                     ? 'font-kannada text-base leading-relaxed sm:text-lg'
-                    : 'text-base leading-relaxed max-md:leading-snug sm:text-base lg:text-[clamp(0.85rem,min(1.15vw,calc((100svh-5rem-19.75vw)*0.05)),1.3rem)]'
+                    : 'text-base leading-relaxed max-lg:leading-snug sm:text-base md:text-lg lg:text-[clamp(0.85rem,min(1.15vw,calc((100svh-5rem-19.75vw)*0.05)),1.3rem)]'
                 }
                 text-sky-950
               `}
@@ -132,7 +132,7 @@ function HeroSectionComponent() {
             </p>
 
             {/* Interactive Section (Lifted slightly upward via negative translation) */}
-            <div className="mt-4 flex max-w-2xl flex-col gap-2 lg:mt-3 lg:gap-3 max-md:contents">
+            <div className="mt-4 flex max-w-2xl flex-col gap-2 lg:mt-3 lg:gap-3 max-lg:contents">
               {/* Keep the primary destination search first in visual and tab order. */}
               <form
                 id="destination-search-form"
@@ -150,11 +150,11 @@ function HeroSectionComponent() {
                   bg-white
                   p-1
                   text-left
-                  max-md:mt-4
-                  max-md:rounded-full
-                  max-md:p-1.5
-                  max-md:animate-fly-in
-                  max-md:[animation-delay:120ms]
+                  max-lg:mt-4
+                  max-lg:rounded-full
+                  max-lg:p-1.5
+                  max-lg:animate-fly-in
+                  max-lg:[animation-delay:120ms]
                   border
                   border-sky-200
                   shadow-[0_12px_32px_-16px_rgba(2,132,199,0.35)]
@@ -218,12 +218,12 @@ function HeroSectionComponent() {
                     text-base
                     font-semibold
                     text-white
-                    max-md:flex
-                    max-md:h-11
-                    max-md:w-11
-                    max-md:items-center
-                    max-md:justify-center
-                    max-md:px-0
+                    max-lg:flex
+                    max-lg:h-11
+                    max-lg:w-11
+                    max-lg:items-center
+                    max-lg:justify-center
+                    max-lg:px-0
                     transition-[transform,background-color]
                     duration-150
                     ease-out
@@ -237,14 +237,14 @@ function HeroSectionComponent() {
                     ${isKannada ? 'font-kannada' : ''}
                   `}
                 >
-                  <span className="max-md:sr-only">{t('search_cta')}</span>
-                  <ArrowRight aria-hidden="true" className="hidden h-5 w-5 max-md:block" />
+                  <span className="max-lg:sr-only">{t('search_cta')}</span>
+                  <ArrowRight aria-hidden="true" className="hidden h-5 w-5 max-lg:block" />
                 </button>
               </form>
 
               {/* Secondary routes remain available as plain text links. */}
               <div
-                className="flex flex-wrap items-center gap-x-7 gap-y-3 text-base font-semibold max-md:mt-2 max-md:justify-center max-md:gap-x-6 max-md:animate-fly-in max-md:[animation-delay:180ms]"
+                className="flex flex-wrap items-center gap-x-7 gap-y-3 text-base font-semibold max-lg:mt-2 max-lg:justify-center max-lg:gap-x-6 max-lg:animate-fly-in max-lg:[animation-delay:180ms]"
               >
                 <Link
                   href="/destinations"
@@ -292,7 +292,7 @@ function HeroSectionComponent() {
 
           <HeroAlbum slides={DESKTOP_SLIDES} />
 
-          <div className="px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-1 lg:hidden">
+          <div className="px-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] pt-1 sm:px-7 md:px-10 md:pb-6 lg:hidden">
             <HeroAlbum slides={MOBILE_SLIDES} display="mobile" />
           </div>
 

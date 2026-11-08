@@ -2,8 +2,10 @@
 
 import { useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { CheckCircle2, LoaderCircle, MapPin, Send, Sparkles } from 'lucide-react';
+import { CheckCircle2, LoaderCircle, MapPin, MessageCircle, Send, Sparkles } from 'lucide-react';
 import { customTours, type CustomTourCategory } from '@/data/custom-tours';
+
+const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '919060085635';
 
 type Status = 'idle' | 'submitting' | 'done' | 'error';
 
@@ -273,18 +275,32 @@ export function CustomTourSection() {
             <span>{tContact('prompt_consent')}</span>
           </label>
 
-          <button
-            type="submit"
-            disabled={status === 'submitting'}
-            className={`flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-saffron-700 px-5 py-3 font-semibold text-white shadow-[0_10px_24px_-12px_rgba(180,83,9,0.7)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 [@media(hover:hover)]:hover:bg-saffron-600 ${pressClass}`}
-          >
-            {status === 'submitting' ? (
-              <LoaderCircle aria-hidden="true" className="h-5 w-5 animate-spin" />
-            ) : (
-              <Send aria-hidden="true" className="h-5 w-5" />
-            )}
-            {status === 'submitting' ? tContact('sending') : tContact('submit')}
-          </button>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <button
+              type="submit"
+              disabled={status === 'submitting'}
+              className={`flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full bg-saffron-700 px-5 py-3 font-semibold text-white shadow-[0_10px_24px_-12px_rgba(180,83,9,0.7)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60 [@media(hover:hover)]:hover:bg-saffron-600 ${pressClass}`}
+            >
+              {status === 'submitting' ? (
+                <LoaderCircle aria-hidden="true" className="h-5 w-5 animate-spin" />
+              ) : (
+                <Send aria-hidden="true" className="h-5 w-5" />
+              )}
+              {status === 'submitting' ? tContact('sending') : tContact('submit')}
+            </button>
+
+            <a
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+                message || (destination ? `Hello Hindustan Yatra, I would like to enquire about ${destination}.` : 'Hello Hindustan Yatra, I would like to plan a custom tour.')
+              )}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full border border-emerald-600 bg-emerald-50 px-5 py-3 font-semibold text-emerald-800 transition-colors hover:bg-emerald-600 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2 ${pressClass}`}
+            >
+              <MessageCircle aria-hidden="true" className="h-5 w-5 text-emerald-600 group-hover:text-white" />
+              {tContact('whatsapp')}
+            </a>
+          </div>
 
           <div aria-live="polite">
             {status === 'done' && (

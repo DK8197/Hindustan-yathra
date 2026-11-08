@@ -107,7 +107,7 @@ function HeroAlbumComponent({ slides, display = 'desktop' }: HeroAlbumProps) {
       style={
         {
           '--u': isMobile
-            ? 'clamp(7px, min(3vw, 1.7svh), 10.5px)'
+            ? 'clamp(7px, min(2.5vw, 2svh), 15px)'
             : 'clamp(9px, min(1.45vw, calc((100svh - 6.5rem - 19.75vw) / 22)), 24px)',
         } as CSSProperties
       }
