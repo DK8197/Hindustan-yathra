@@ -35,6 +35,7 @@ def create_tour():
 
 
 @details_bp.get("/<string:tour_id>")
+@limiter.limit("120 per minute")
 def get_tour(tour_id):
     tour = Tour.query.filter_by(slug=tour_id).first_or_404()
     return jsonify(tour.to_dict())

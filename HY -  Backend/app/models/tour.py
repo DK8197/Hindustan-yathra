@@ -105,8 +105,14 @@ class Tour(db.Model):
             if self.duration_nights is not None:
                 data.setdefault("durationNights", self.duration_nights)
             data.setdefault("isDomestic", self.is_domestic)
-            if not data.get("heroImage") and data.get("hero_image"):
-                data["heroImage"] = data["hero_image"]
+            if not data.get("heroImage"):
+                if data.get("hero_image"):
+                    data["heroImage"] = data["hero_image"]
+                elif isinstance(data.get("seo"), dict) and data["seo"].get("ogImage"):
+                    data["heroImage"] = data["seo"]["ogImage"]
+                elif isinstance(data.get("gallery"), list) and len(data["gallery"]) > 0:
+                    first = data["gallery"][0]
+                    data["heroImage"] = first if isinstance(first, str) else (first.get("url") if isinstance(first, dict) else None)
 
         return data
 

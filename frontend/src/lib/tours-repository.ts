@@ -197,10 +197,10 @@ export async function lookupTourBySlug(
 
   let primaryTour: Record<string, unknown> | null = null;
 
-  // 1. Fetch tour by slug from /api/v1/details/<slug>
+  // 1. Fetch tour by slug from /api/v1/tours/slug/<slug>
   try {
     const response = await fetch(
-      `${API_URL}/api/v1/details/${encodeURIComponent(slug)}`,
+      `${API_URL}/api/v1/tours/slug/${encodeURIComponent(slug)}`,
       {
         next: { revalidate: 86400 },
         headers,
@@ -214,11 +214,36 @@ export async function lookupTourBySlug(
     // continue to fallback
   }
 
-  // 2. If primaryTour doesn't have an itinerary or was not found, check the /details index
+  // 2. Fallback to /api/v1/details/<slug> if itinerary is missing or tour was not found
   const hasItinerary =
     primaryTour && Array.isArray(primaryTour.itinerary) && primaryTour.itinerary.length > 0;
 
   if (!hasItinerary) {
+    try {
+      const response = await fetch(
+        `${API_URL}/api/v1/details/${encodeURIComponent(slug)}`,
+        {
+          next: { revalidate: 86400 },
+          headers,
+        }
+      );
+
+      if (response.ok) {
+        const detailsData = parseTourPayload(await response.json());
+        if (detailsData) {
+          primaryTour = { ...(primaryTour || {}), ...detailsData };
+        }
+      }
+    } catch {
+      // continue to fallback
+    }
+  }
+
+  // 3. Fallback to /api/v1/details index list if still missing itinerary
+  const hasItineraryAfterDetails =
+    primaryTour && Array.isArray(primaryTour.itinerary) && primaryTour.itinerary.length > 0;
+
+  if (!hasItineraryAfterDetails) {
     try {
       const response = await fetch(
         `${API_URL}/api/v1/details`,
@@ -249,25 +274,6 @@ export async function lookupTourBySlug(
       }
     } catch {
       // continue
-    }
-  }
-
-  // 3. Fallback to /api/v1/tours/slug/<slug>
-  if (!primaryTour) {
-    try {
-      const response = await fetch(
-        `${API_URL}/api/v1/tours/slug/${encodeURIComponent(slug)}`,
-        {
-          next: { revalidate: 86400 },
-          headers,
-        }
-      );
-
-      if (response.ok) {
-        primaryTour = parseTourPayload(await response.json());
-      }
-    } catch {
-      // ignore
     }
   }
 

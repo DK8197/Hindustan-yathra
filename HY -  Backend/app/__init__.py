@@ -46,9 +46,15 @@ except Exception:
     redis_client = InMemoryStore()
 
 if rate_limit_url and not os.getenv("TESTING"):
-    limiter = Limiter(key_func=get_remote_address, default_limits=["200 per day", "50 per hour"], storage_uri=rate_limit_url)
+    limiter = Limiter(key_func=get_remote_address, default_limits=["5000 per day", "1000 per hour"], storage_uri=rate_limit_url)
 else:
-    limiter = Limiter(key_func=get_remote_address, default_limits=["200 per day", "50 per hour"])
+    limiter = Limiter(key_func=get_remote_address, default_limits=["5000 per day", "1000 per hour"])
+
+
+@limiter.request_filter
+def exempt_trusted_requests():
+    secret = os.getenv("API_SECRET")
+    return bool(secret and request.headers.get("X-App-Key") == secret)
 
 
 def normalize_database_url(url: str | None) -> str:
