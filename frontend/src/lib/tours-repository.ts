@@ -1,9 +1,6 @@
 import type { Tour, TourCategory } from '@/types/tour';
 
-// This module is the single seam between "data comes from the Excel-driven
-// JSON file" (today) and "data comes from Postgres/Mongo" (production).
-// Every page and API route should import from here, never from the JSON
-// file directly, so migrating the data source later is a one-file change.
+// Tour repository: connects directly to the backend API for all tour data.
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
 
@@ -164,10 +161,6 @@ export async function getToursByCategory(
 
   return response.json();
 }
-
-// export async function getTourBySlug(slug: string): Promise<Tour | undefined> {
-//   return tours.find((t) => t.slug === slug && t.active);
-// }
 
 export type TourLookupResult =
   | { status: 'found'; tour: Tour }
