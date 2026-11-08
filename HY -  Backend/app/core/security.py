@@ -1,9 +1,13 @@
 import os
 import secrets
+import warnings
 from datetime import datetime, timedelta, timezone
 
 import jwt
 from flask import request
+
+if hasattr(jwt, "InsecureKeyLengthWarning"):
+    warnings.filterwarnings("ignore", category=jwt.InsecureKeyLengthWarning)
 
 
 def create_token(subject: int, token_type: str):

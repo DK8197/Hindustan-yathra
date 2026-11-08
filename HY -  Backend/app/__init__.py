@@ -24,6 +24,9 @@ class InMemoryStore:
     def delete(self, key):
         self._data.pop(key, None)
 
+    def ping(self):
+        return True
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -154,6 +157,39 @@ def create_app(test_config=None):
 
     @app.get("/health")
     def health():
-        return {"status": "ok"}
+        import time
+        from sqlalchemy import text
+
+        services = {}
+        all_healthy = True
+
+        # Check Database Health (Neon PostgreSQL / SQLAlchemy)
+        try:
+            t0 = time.time()
+            db.session.execute(text("SELECT 1"))
+            db_latency = round((time.time() - t0) * 1000, 2)
+            services["database"] = {"status": "ok", "latency_ms": db_latency}
+        except Exception as e:
+            all_healthy = False
+            services["database"] = {"status": "unhealthy", "error": str(e)}
+
+        # Check Redis Health (Memory Store)
+        try:
+            t0 = time.time()
+            if hasattr(redis_client, "ping") and redis_client.ping():
+                redis_latency = round((time.time() - t0) * 1000, 2)
+                services["redis"] = {"status": "ok", "latency_ms": redis_latency}
+            else:
+                all_healthy = False
+                services["redis"] = {"status": "unhealthy", "error": "ping returned falsy"}
+        except Exception as e:
+            all_healthy = False
+            services["redis"] = {"status": "unhealthy", "error": str(e)}
+
+        status_code = 200 if all_healthy else 503
+        return {
+            "status": "ok" if all_healthy else "degraded",
+            "services": services,
+        }, status_code
 
     return app
