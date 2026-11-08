@@ -85,7 +85,30 @@ class Tour(db.Model):
     )
 
     def to_dict(self):
-        return self.json_data
+        data = self.json_data or {}
+        if isinstance(data, str):
+            import json
+            try:
+                data = json.loads(data)
+            except Exception:
+                data = {}
+
+        if isinstance(data, dict):
+            data = dict(data)
+            data.setdefault("id", self.slug or str(self.id))
+            data.setdefault("slug", self.slug)
+            data.setdefault("category", self.category)
+            if self.price_from is not None:
+                data.setdefault("priceFrom", self.price_from)
+            if self.duration_days is not None:
+                data.setdefault("durationDays", self.duration_days)
+            if self.duration_nights is not None:
+                data.setdefault("durationNights", self.duration_nights)
+            data.setdefault("isDomestic", self.is_domestic)
+            if not data.get("heroImage") and data.get("hero_image"):
+                data["heroImage"] = data["hero_image"]
+
+        return data
 
     @classmethod
     def from_json(cls, data):

@@ -167,6 +167,27 @@ export type TourLookupResult =
   | { status: 'not-found' }
   | { status: 'unavailable' };
 
+function parseTourPayload(input: unknown): Record<string, unknown> | null {
+  let data = input;
+  if (typeof data === 'string') {
+    try {
+      data = JSON.parse(data);
+    } catch {
+      return null;
+    }
+  }
+  if (data && typeof data === 'object' && !Array.isArray(data)) {
+    const rec = { ...(data as Record<string, unknown>) };
+    if ('slug' in rec) {
+      if (!rec.heroImage && typeof rec.hero_image === 'string') {
+        rec.heroImage = rec.hero_image;
+      }
+      return rec;
+    }
+  }
+  return null;
+}
+
 export async function lookupTourBySlug(
   slug: string
 ): Promise<TourLookupResult> {
@@ -174,6 +195,9 @@ export async function lookupTourBySlug(
     'X-App-Key': process.env.API_SECRET!,
   };
 
+  let primaryTour: Record<string, unknown> | null = null;
+
+  // 1. Fetch tour by slug from /api/v1/details/<slug>
   try {
     const response = await fetch(
       `${API_URL}/api/v1/details/${encodeURIComponent(slug)}`,
@@ -184,70 +208,74 @@ export async function lookupTourBySlug(
     );
 
     if (response.ok) {
-      const data: unknown = await response.json();
-      if (data && typeof data === 'object' && 'slug' in data) {
-        const tourData = data as Record<string, unknown>;
-        if (!tourData.heroImage && typeof tourData.hero_image === 'string') {
-          tourData.heroImage = tourData.hero_image;
+      primaryTour = parseTourPayload(await response.json());
+    }
+  } catch {
+    // continue to fallback
+  }
+
+  // 2. If primaryTour doesn't have an itinerary or was not found, check the /details index
+  const hasItinerary =
+    primaryTour && Array.isArray(primaryTour.itinerary) && primaryTour.itinerary.length > 0;
+
+  if (!hasItinerary) {
+    try {
+      const response = await fetch(
+        `${API_URL}/api/v1/details`,
+        {
+          next: { revalidate: 86400 },
+          headers,
         }
-        return { status: 'found', tour: tourData as unknown as Tour };
-      }
-    }
-  } catch {
-    // Try the tours slug or active-tour index below; transient detail-endpoint failures
-    // should not immediately turn a known tour URL into a permanent 404.
-  }
+      );
 
-  try {
-    const response = await fetch(
-      `${API_URL}/api/v1/tours/slug/${encodeURIComponent(slug)}`,
-      {
-        next: { revalidate: 86400 },
-        headers,
-      }
-    );
-
-    if (response.ok) {
-      const data: unknown = await response.json();
-      if (data && typeof data === 'object' && 'slug' in data) {
-        const tourData = data as Record<string, unknown>;
-        if (!tourData.heroImage && typeof tourData.hero_image === 'string') {
-          tourData.heroImage = tourData.hero_image;
+      if (response.ok) {
+        let listData: unknown = await response.json();
+        if (typeof listData === 'string') {
+          try {
+            listData = JSON.parse(listData);
+          } catch {
+            // ignore
+          }
         }
-        return { status: 'found', tour: tourData as unknown as Tour };
+        if (Array.isArray(listData)) {
+          const matched = listData
+            .map(parseTourPayload)
+            .find((item) => item?.slug === slug);
+
+          if (matched) {
+            primaryTour = { ...(primaryTour || {}), ...matched };
+          }
+        }
       }
+    } catch {
+      // continue
     }
-  } catch {
-    // Fall back to all details list
   }
 
-  try {
-    const response = await fetch(
-      `${API_URL}/api/v1/details`,
-      {
-        next: { revalidate: 86400  },
-        headers,
+  // 3. Fallback to /api/v1/tours/slug/<slug>
+  if (!primaryTour) {
+    try {
+      const response = await fetch(
+        `${API_URL}/api/v1/tours/slug/${encodeURIComponent(slug)}`,
+        {
+          next: { revalidate: 86400 },
+          headers,
+        }
+      );
+
+      if (response.ok) {
+        primaryTour = parseTourPayload(await response.json());
       }
-    );
-
-    if (!response.ok) {
-      return { status: 'unavailable' };
+    } catch {
+      // ignore
     }
-
-    const data: unknown = await response.json();
-    if (!Array.isArray(data)) return { status: 'unavailable' };
-
-    const rawTour = (data as Record<string, unknown>[]).find((item) => item.slug === slug);
-    if (rawTour) {
-      if (!rawTour.heroImage && typeof rawTour.hero_image === 'string') {
-        rawTour.heroImage = rawTour.hero_image;
-      }
-      return { status: 'found', tour: rawTour as unknown as Tour };
-    }
-    return { status: 'not-found' };
-  } catch {
-    return { status: 'unavailable' };
   }
+
+  if (primaryTour && primaryTour.slug) {
+    return { status: 'found', tour: primaryTour as unknown as Tour };
+  }
+
+  return { status: 'unavailable' };
 }
 
 export async function getAllTours_details(): Promise<Tour[]> {

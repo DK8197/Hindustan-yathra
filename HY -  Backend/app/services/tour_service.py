@@ -27,11 +27,16 @@ def serialize_tour(tour):
         "heroImage": data.get("heroImage"),
         "destinations": data.get("destinations", []),
 
-        # Optional fields for future UI enhancements
+        # Detail fields
         "highlights": data.get("highlights", {}),
+        "inclusions": data.get("inclusions", {}),
+        "exclusions": data.get("exclusions", {}),
+        "itinerary": data.get("itinerary", []),
+        "faqs": data.get("faqs", []),
         "gallery": data.get("gallery", []),
         "reviews": data.get("reviews", []),
         "seo": data.get("seo", {}),
+        "mapCenter": data.get("mapCenter"),
     }
 
 
@@ -148,6 +153,17 @@ def get_tour_by_slug(slug):
         )
         .first_or_404()
     )
+
+    full_data = tour.to_dict() if hasattr(tour, 'to_dict') else (tour.json_data or {})
+    if isinstance(full_data, dict) and full_data:
+        full_data.setdefault("id", tour.id)
+        full_data.setdefault("slug", tour.slug)
+        full_data.setdefault("category", tour.category)
+        full_data.setdefault("priceFrom", tour.price_from)
+        full_data.setdefault("durationDays", tour.duration_days)
+        full_data.setdefault("durationNights", tour.duration_nights)
+        full_data.setdefault("isDomestic", tour.is_domestic)
+        return full_data
 
     return serialize_tour(tour)
 
