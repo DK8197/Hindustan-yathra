@@ -99,7 +99,7 @@ export function FeaturedToursSearch({
           placeholder={t(
             'search_featured_placeholder'
           )}
-          className="min-h-11 w-full rounded-full border border-slate-300 py-2.5 pl-9 pr-11 text-base text-slate-900 outline-none placeholder:text-slate-600 focus:border-saffron-700 focus:ring-2 focus:ring-saffron-200"
+          className="min-h-11 w-full rounded-full border border-sky-200 py-2.5 pl-9 pr-11 text-base text-slate-900 outline-none placeholder:text-slate-600 focus:border-sky-500 focus:ring-2 focus:ring-sky-100"
         />
 
         {query && (
@@ -107,7 +107,7 @@ export function FeaturedToursSearch({
             type="button"
             onClick={() => setQuery('')}
             aria-label={t('clear_search')}
-            className="absolute right-1 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-slate-600 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700"
+            className="absolute right-1 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-slate-600 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-600"
           >
             <X size={16} aria-hidden="true" />
           </button>

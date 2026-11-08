@@ -30,16 +30,17 @@ export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
           : { duration: 0.5, delay: Math.min(index * 0.08, 0.35), ease: [0.16, 1, 0.3, 1] }
       }
       whileHover={shouldReduceMotion ? undefined : { y: -4 }}
-      className="group relative min-w-0 overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-3.5 transition-colors duration-200 hover:border-slate-300"
+      className="group relative min-w-0 overflow-hidden rounded-2xl border border-sky-200/90 bg-white p-3.5 transition-[border-color,transform] duration-200 hover:border-sky-400"
       data-ui
     >
       <Link href={{ pathname: '/tour/[slug]', params: { slug: tour.slug } }} className="block min-w-0">
-        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-slate-100">
+        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl border border-sky-100 bg-slate-100">
           {normalizeImageUrl(tour.heroImage) && (
             <Image
               src={normalizeImageUrl(tour.heroImage)}
               alt={tour.title[locale]}
               fill
+              unoptimized
               sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
               className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             />
@@ -47,7 +48,7 @@ export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
         </div>
 
         <div className="min-w-0 px-1 py-4">
-          <p className="text-xs font-semibold text-saffron-700">
+          <p className="text-xs font-semibold text-sky-700">
             {tCategories.has(tour.category)
               ? tCategories(tour.category)
               : tour.category}
@@ -63,12 +64,12 @@ export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
               {hasPrice ? (
                 <>
                   <div className="text-[11px] text-slate-400">{t('starting_from')}</div>
-                  <div className="break-words text-base font-bold text-saffron-700">
+                  <div className="break-words text-base font-bold text-sky-950">
                     ₹{tour.priceFrom!.toLocaleString('en-IN')} <span className="text-xs font-normal text-slate-500">{t('per_person')}</span>
                   </div>
                 </>
               ) : (
-                <div className="text-sm font-semibold text-saffron-700">{t('contact_for_price')}</div>
+                <div className="text-sm font-semibold text-sky-800">{t('contact_for_price')}</div>
               )}
             </div>
           </div>
@@ -85,9 +86,9 @@ export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
         }}
         aria-label="Save tour"
         aria-pressed={saved}
-        className="absolute right-6 top-6 flex min-h-10 min-w-10 items-center justify-center rounded-full bg-white/95 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700"
+        className="absolute right-6 top-6 flex min-h-10 min-w-10 items-center justify-center rounded-full border border-sky-100 bg-white/95 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
       >
-        <Heart size={16} className={saved ? 'fill-saffron-500 text-saffron-500' : 'text-slate-700'} />
+        <Heart size={16} className={saved ? 'fill-sky-600 text-sky-600' : 'text-slate-700'} />
       </motion.button>
     </motion.div>
   );

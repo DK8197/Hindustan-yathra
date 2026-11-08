@@ -123,13 +123,14 @@ export default async function TourDetailPage({
 
       
 {/* Hero */}
-<section className="relative min-h-[70svh] w-full overflow-hidden bg-gradient-to-br from-himalaya-800 via-himalaya-700 to-saffron-700 sm:min-h-[65vh]">
+<section className="relative min-h-[70svh] w-full overflow-hidden bg-gradient-to-br from-himalaya-950 via-himalaya-800 to-sky-900 sm:min-h-[65vh]">
   {heroImage && (
     <Image
       src={normalizeImageUrl(heroImage)}
       alt={tour.title[locale]}
       fill
       priority
+      unoptimized
       sizes="100vw"
       className="object-cover opacity-60"
     />

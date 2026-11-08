@@ -23,7 +23,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70" />
 
       {/* Decorative glow */}
-      <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-orange-500/10 blur-3xl" />
+      <div className="absolute left-1/2 top-0 h-[500px] w-[500px] -translate-x-1/2 rounded-full bg-sky-500/15 blur-3xl" />
 
       {/* Content */}
       <div className="relative mx-auto flex min-h-[75vh] max-w-7xl items-center justify-center px-6 py-24 text-center md:min-h-[85vh]">

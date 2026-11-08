@@ -240,9 +240,9 @@
     "semantic_hash": "ba64ff7d54714a8f64db89b1003207d8"
   },
   "frontend/next.config.mjs": {
-    "mtime": 1794081782.5673752,
-    "seen": 1794081897.227917,
-    "ast_hash": "ea7ac50fb54571c129ae1ed4229570a3",
+    "mtime": 1794125285.503272,
+    "seen": 1794125405.56832,
+    "ast_hash": "d84d86819f9f3effd051f58873119618",
     "semantic_hash": ""
   },
   "frontend/package.json": {
@@ -330,10 +330,10 @@
     "semantic_hash": ""
   },
   "frontend/src/app/[locale]/tour/[slug]/page.tsx": {
-    "mtime": 1792837480.06,
-    "seen": 1793506897.7534435,
-    "ast_hash": "4c2ddf5b81f80f89950752859371d73b",
-    "semantic_hash": "4c2ddf5b81f80f89950752859371d73b"
+    "mtime": 1794125298.892764,
+    "seen": 1794125405.578389,
+    "ast_hash": "2996bf8cb0f726f9ac073bffd64fcaaf",
+    "semantic_hash": ""
   },
   "frontend/src/app/admin/banners/page.tsx": {
     "mtime": 1793530368.1304297,
@@ -552,10 +552,10 @@
     "semantic_hash": ""
   },
   "frontend/src/components/about/Hero.tsx": {
-    "mtime": 1790886196.1540794,
-    "seen": 1793506897.7535055,
-    "ast_hash": "72e5ea77fc30b1f6f35b856e719c867a",
-    "semantic_hash": "72e5ea77fc30b1f6f35b856e719c867a"
+    "mtime": 1794124585.9090044,
+    "seen": 1794125405.5941308,
+    "ast_hash": "9cf10adcf1d108904ea46969ea7c90a2",
+    "semantic_hash": ""
   },
   "frontend/src/components/about/Leadership.tsx": {
     "mtime": 1785308956.1332352,
@@ -588,9 +588,9 @@
     "semantic_hash": "7063d4eb1a7d0f17878a47f575b73369"
   },
   "frontend/src/components/destinations/DestinationsExplorer.tsx": {
-    "mtime": 1793902683.9404702,
-    "seen": 1794080692.6724849,
-    "ast_hash": "ad752bf9d8b5a0bd7e430f5ca228fcef",
+    "mtime": 1794125321.205675,
+    "seen": 1794125405.59632,
+    "ast_hash": "e827f875dac224735d1babab0184d9e1",
     "semantic_hash": ""
   },
   "frontend/src/components/floatingDestinations/floatintDestinations.tsx": {
@@ -624,9 +624,9 @@
     "semantic_hash": ""
   },
   "frontend/src/components/sections/FeaturedToursSearch.tsx": {
-    "mtime": 1794122834.0140584,
-    "seen": 1794122868.6462016,
-    "ast_hash": "f620b6a9f1997e1959fe09787e133547",
+    "mtime": 1794124587.6606617,
+    "seen": 1794125405.5981612,
+    "ast_hash": "80e5291b00de45acba93c94bff54bfd9",
     "semantic_hash": ""
   },
   "frontend/src/components/sections/GalleryMasonry.tsx": {
@@ -660,9 +660,9 @@
     "semantic_hash": ""
   },
   "frontend/src/components/sections/TourGallery.tsx": {
-    "mtime": 1793523706.587766,
-    "seen": 1793901580.5513783,
-    "ast_hash": "bd4d5623000351abb97e696d16376563",
+    "mtime": 1794125339.4833221,
+    "seen": 1794125405.6010296,
+    "ast_hash": "16c0628888626b7c0eafbeace90c7977",
     "semantic_hash": ""
   },
   "frontend/src/components/sections/TourInclusionsExclusions.tsx": {
@@ -708,9 +708,9 @@
     "semantic_hash": ""
   },
   "frontend/src/components/ui/TourCard.tsx": {
-    "mtime": 1794122834.095742,
-    "seen": 1794122868.6528144,
-    "ast_hash": "31319640513bb76f2da56732145352d6",
+    "mtime": 1794125294.3815122,
+    "seen": 1794125405.6052988,
+    "ast_hash": "d485ef5f8e2a2fc46f9a6933d13efbc1",
     "semantic_hash": ""
   },
   "frontend/src/data/destinations.json": {
@@ -768,10 +768,10 @@
     "semantic_hash": "405c5037dfb676688493433fd9fd2fcd"
   },
   "frontend/src/lib/image-cdn.ts": {
-    "mtime": 1790886368.3417213,
-    "seen": 1793506897.7535589,
-    "ast_hash": "cf8b809bc077c0a156d253cf529fa152",
-    "semantic_hash": "cf8b809bc077c0a156d253cf529fa152"
+    "mtime": 1794125277.317111,
+    "seen": 1794125405.6094818,
+    "ast_hash": "d7f57ad4e45c82e901a0bfae0a2b78b9",
+    "semantic_hash": ""
   },
   "frontend/src/lib/otp-store.ts": {
     "mtime": 1782910628.0,

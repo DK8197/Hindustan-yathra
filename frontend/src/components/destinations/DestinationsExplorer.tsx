@@ -624,13 +624,14 @@ export default function DestinationsExplorer({
                 <Link
                   key={tour.id}
                   href={{ pathname: '/tour/[slug]', params: { slug: tour.slug } }}
-                  className="group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[24px] bg-himalaya-800 shadow-[0_20px_45px_-30px_rgba(12,27,40,0.8)] ring-1 ring-black/5 transition-[transform,box-shadow] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1 hover:shadow-[0_28px_56px_-32px_rgba(12,27,40,0.75)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-400 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
+                  className="group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[24px] border border-sky-400/25 bg-himalaya-800 shadow-[0_20px_45px_-30px_rgba(12,27,40,0.8)] ring-1 ring-sky-300/10 transition-[transform,box-shadow,border-color] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] hover:-translate-y-1 hover:border-sky-400/50 hover:shadow-[0_28px_56px_-32px_rgba(12,27,40,0.75)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
                 >
                   {image && (
                     <Image
                       src={image}
                       alt={getTitle(tour, locale)}
                       fill
+                      unoptimized
                       sizes="(max-width: 1023px) 100vw, 33vw"
                       className="object-cover transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 motion-reduce:group-hover:scale-100"
                     />
@@ -733,6 +734,7 @@ export default function DestinationsExplorer({
                       src={image}
                       alt={getTitle(tour, locale)}
                       fill
+                      unoptimized
                       sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw"
                       className="object-cover transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 motion-reduce:group-hover:scale-100"
                     />
@@ -782,7 +784,7 @@ export default function DestinationsExplorer({
               );
 
               const cardClass =
-                'group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[24px] bg-himalaya-800 shadow-[0_20px_45px_-30px_rgba(12,27,40,0.8)] ring-1 ring-black/5';
+                'group relative h-[min(26rem,calc(100svh-8rem))] min-h-[20rem] min-w-0 overflow-hidden rounded-[24px] border border-sky-400/25 bg-himalaya-800 shadow-[0_20px_45px_-30px_rgba(12,27,40,0.8)] ring-1 ring-sky-300/10';
 
               if (tour.active) {
                 return (

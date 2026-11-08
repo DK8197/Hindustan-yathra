@@ -1,8 +1,16 @@
-const configuredCdnUrl = process.env.NEXT_PUBLIC_R2_PUBLIC_URL;
+const configuredCdnUrl = process.env.NEXT_PUBLIC_R2_PUBLIC_URL?.replace(/['"]/g, '').trim();
 
-export const IMAGE_CDN_BASE_URL = (
-  configuredCdnUrl || 'https://cdn.hindustanyatra.com'
-).replace(/\/+$/, '');
+// Avoid defunct legacy domain instabotai.online even if set in legacy Vercel dashboard environment variables
+const rawCdnUrl =
+  configuredCdnUrl && !configuredCdnUrl.includes('instabotai.online')
+    ? configuredCdnUrl
+    : 'https://cdn.hindustanyatra.com';
+
+const normalizedBase = rawCdnUrl.startsWith('http')
+  ? rawCdnUrl
+  : `https://${rawCdnUrl}`;
+
+export const IMAGE_CDN_BASE_URL = normalizedBase.replace(/\/+$/, '');
 
 const legacyCdnHosts = new Set([
   'cdn.instabotai.online',

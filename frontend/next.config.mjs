@@ -5,11 +5,15 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+const imageCdnEnv = process.env.NEXT_PUBLIC_R2_PUBLIC_URL?.replace(/['"]/g, '').trim();
 const imageCdnUrl =
-  process.env.NEXT_PUBLIC_R2_PUBLIC_URL ||
-  'https://cdn.hindustanyatra.com';
+  imageCdnEnv && !imageCdnEnv.includes('instabotai.online')
+    ? imageCdnEnv
+    : 'https://cdn.hindustanyatra.com';
 
-const imageCdnHostname = new URL(imageCdnUrl).hostname;
+const imageCdnHostname = imageCdnUrl.startsWith('http')
+  ? new URL(imageCdnUrl).hostname
+  : imageCdnUrl;
 
 const withNextIntl = createNextIntlPlugin(
   './src/i18n/request.ts'
@@ -32,6 +36,21 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'cdn.hindustanyatra.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.instabotai.online',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.hindustanyathra.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: imageCdnHostname,
         pathname: '/**',
       },
@@ -43,6 +62,11 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'www.hindustanyatra.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'hindustan-yathra.onrender.com',
         pathname: '/**',
       },
     ],
