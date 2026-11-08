@@ -2,9 +2,6 @@
 
 import Image from 'next/image';
 import React, { memo } from 'react';
-import { useEffect,useState }  from 'react';
-import dynamic from 'next/dynamic';
-import { useReducedMotion } from 'framer-motion';
 import { ArrowRight, Search } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 
@@ -20,12 +17,6 @@ function HeroSectionComponent() {
   const t = useTranslations('hero');
   const locale = useLocale() as 'en' | 'kn';
   const isKannada = locale === 'kn';
-  const shouldReduceMotion = useReducedMotion();
-  const [mounted,setMounted] = useState(false);
-
-  useEffect(()=>{
-    setMounted(true);
-  },[]);
 
   const destinationsPath = getPathname({
     locale,

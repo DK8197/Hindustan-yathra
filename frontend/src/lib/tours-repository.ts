@@ -186,11 +186,11 @@ export async function lookupTourBySlug(
     if (response.ok) {
       const data: unknown = await response.json();
       if (data && typeof data === 'object' && 'slug' in data) {
-        const tourData = data as Record<string, any>;
-        if (!tourData.heroImage && tourData.hero_image) {
+        const tourData = data as Record<string, unknown>;
+        if (!tourData.heroImage && typeof tourData.hero_image === 'string') {
           tourData.heroImage = tourData.hero_image;
         }
-        return { status: 'found', tour: tourData as Tour };
+        return { status: 'found', tour: tourData as unknown as Tour };
       }
     }
   } catch {
@@ -210,11 +210,11 @@ export async function lookupTourBySlug(
     if (response.ok) {
       const data: unknown = await response.json();
       if (data && typeof data === 'object' && 'slug' in data) {
-        const tourData = data as Record<string, any>;
-        if (!tourData.heroImage && tourData.hero_image) {
+        const tourData = data as Record<string, unknown>;
+        if (!tourData.heroImage && typeof tourData.hero_image === 'string') {
           tourData.heroImage = tourData.hero_image;
         }
-        return { status: 'found', tour: tourData as Tour };
+        return { status: 'found', tour: tourData as unknown as Tour };
       }
     }
   } catch {
@@ -237,12 +237,12 @@ export async function lookupTourBySlug(
     const data: unknown = await response.json();
     if (!Array.isArray(data)) return { status: 'unavailable' };
 
-    const rawTour = (data as Record<string, any>[]).find((item) => item.slug === slug);
+    const rawTour = (data as Record<string, unknown>[]).find((item) => item.slug === slug);
     if (rawTour) {
-      if (!rawTour.heroImage && rawTour.hero_image) {
+      if (!rawTour.heroImage && typeof rawTour.hero_image === 'string') {
         rawTour.heroImage = rawTour.hero_image;
       }
-      return { status: 'found', tour: rawTour as Tour };
+      return { status: 'found', tour: rawTour as unknown as Tour };
     }
     return { status: 'not-found' };
   } catch {

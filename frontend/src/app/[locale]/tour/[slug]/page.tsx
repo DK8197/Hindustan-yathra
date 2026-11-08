@@ -24,17 +24,34 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
-function resolveHeroImageUrl(tour: Tour | Record<string, any>): string {
+function resolveHeroImageUrl(tour: Tour | Record<string, unknown>): string {
   if (!tour) return '';
 
+  const rec = tour as Record<string, unknown>;
+
+  const heroImage = typeof rec.heroImage === 'string' ? rec.heroImage.trim() : '';
+  const hero_image = typeof rec.hero_image === 'string' ? rec.hero_image.trim() : '';
+  const heroImageUrl = typeof rec.heroImageUrl === 'string' ? rec.heroImageUrl.trim() : '';
+  const image = typeof rec.image === 'string' ? rec.image.trim() : '';
+  const ogImage =
+    typeof (rec.seo as Record<string, unknown> | undefined)?.ogImage === 'string'
+      ? ((rec.seo as Record<string, unknown>).ogImage as string).trim()
+      : '';
+  const galleryItem = Array.isArray(rec.gallery) ? rec.gallery[0] : null;
+  const galleryUrl =
+    typeof galleryItem === 'string'
+      ? galleryItem.trim()
+      : typeof (galleryItem as Record<string, unknown> | null)?.url === 'string'
+        ? ((galleryItem as Record<string, unknown>).url as string).trim()
+        : '';
+
   const candidate =
-    (typeof tour.heroImage === 'string' && tour.heroImage.trim()) ||
-    (typeof (tour as any).hero_image === 'string' && (tour as any).hero_image.trim()) ||
-    (typeof (tour as any).heroImageUrl === 'string' && (tour as any).heroImageUrl.trim()) ||
-    (typeof (tour as any).image === 'string' && (tour as any).image.trim()) ||
-    (typeof tour.seo?.ogImage === 'string' && tour.seo.ogImage.trim()) ||
-    (typeof tour.gallery?.[0] === 'string' ? (tour.gallery[0] as string).trim() : '') ||
-    (typeof tour.gallery?.[0]?.url === 'string' ? tour.gallery[0].url.trim() : '') ||
+    heroImage ||
+    hero_image ||
+    heroImageUrl ||
+    image ||
+    ogImage ||
+    galleryUrl ||
     '';
 
   if (!candidate) return '';
