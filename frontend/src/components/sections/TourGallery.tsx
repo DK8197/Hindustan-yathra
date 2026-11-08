@@ -200,7 +200,6 @@ export function TourGallery({
                   src={normalizeImageUrl(image.url)}
                   alt={image.alt || `Gallery image ${index + 1}`}
                   fill
-                  unoptimized
                   loading="lazy"
                   sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   className="object-cover transition-transform duration-200 ease-[ease] group-hover:scale-105 motion-reduce:group-hover:scale-100"
@@ -324,7 +323,6 @@ export function TourGallery({
                 }
                 fill
                 priority
-                unoptimized
                 sizes="100vw"
                 className="object-contain"
               />

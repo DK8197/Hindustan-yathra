@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { lookupTourBySlug, getAllTourSlugs } from '@/lib/tours-repository';
+import type { Tour } from '@/types/tour';
 import { normalizeImageUrl } from '@/lib/image-cdn';
 import { getTranslations } from 'next-intl/server';
 import { getPathname, Link } from '@/i18n/routing';
@@ -23,6 +24,39 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
+function resolveHeroImageUrl(tour: Tour | Record<string, any>): string {
+  if (!tour) return '';
+
+  const candidate =
+    (typeof tour.heroImage === 'string' && tour.heroImage.trim()) ||
+    (typeof (tour as any).hero_image === 'string' && (tour as any).hero_image.trim()) ||
+    (typeof (tour as any).heroImageUrl === 'string' && (tour as any).heroImageUrl.trim()) ||
+    (typeof (tour as any).image === 'string' && (tour as any).image.trim()) ||
+    (typeof tour.seo?.ogImage === 'string' && tour.seo.ogImage.trim()) ||
+    (typeof tour.gallery?.[0] === 'string' ? (tour.gallery[0] as string).trim() : '') ||
+    (typeof tour.gallery?.[0]?.url === 'string' ? tour.gallery[0].url.trim() : '') ||
+    '';
+
+  if (!candidate) return '';
+
+  // Handle potential JSON-stringified URLs like '["https://..."]'
+  if (candidate.startsWith('[') || candidate.startsWith('{')) {
+    try {
+      const parsed = JSON.parse(candidate);
+      if (Array.isArray(parsed) && typeof parsed[0] === 'string') {
+        return normalizeImageUrl(parsed[0].trim());
+      }
+      if (parsed && typeof parsed.url === 'string') {
+        return normalizeImageUrl(parsed.url.trim());
+      }
+    } catch {
+      // not JSON, fallback to candidate
+    }
+  }
+
+  return normalizeImageUrl(candidate);
+}
+
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { locale, slug } = await params;
   const result = await lookupTourBySlug(slug);
@@ -30,10 +64,11 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const { tour } = result;
 
   const href = { pathname: '/tour/[slug]', params: { slug } } as const;
+  const ogImageUrl = resolveHeroImageUrl(tour) || normalizeImageUrl(tour.seo?.ogImage || '');
 
   return {
-    title: tour.seo.title[locale],
-    description: tour.seo.description[locale],
+    title: tour.seo?.title?.[locale] || tour.title?.[locale] || '',
+    description: tour.seo?.description?.[locale] || tour.summary?.[locale] || '',
     alternates: {
       canonical: `https://hindustanyatra.com${getPathname({ locale, href })}`,
       languages: {
@@ -42,9 +77,9 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
       },
     },
     openGraph: {
-      title: tour.seo.title[locale],
-      description: tour.seo.description[locale],
-      images: [normalizeImageUrl(tour.seo.ogImage)],
+      title: tour.seo?.title?.[locale] || tour.title?.[locale] || '',
+      description: tour.seo?.description?.[locale] || tour.summary?.[locale] || '',
+      images: ogImageUrl ? [ogImageUrl] : [],
     },
   };
 }
@@ -89,9 +124,7 @@ export default async function TourDetailPage({
   const { tour } = result;
 
   const hasPrice = typeof tour.priceFrom === 'number' && Number.isFinite(tour.priceFrom) && tour.priceFrom > 0;
-  const heroImage = typeof tour.heroImage === 'string' && tour.heroImage.trim()
-    ? tour.heroImage.trim()
-    : null;
+  const heroImageUrl = resolveHeroImageUrl(tour);
 
   return (
     <>
@@ -124,13 +157,12 @@ export default async function TourDetailPage({
       
 {/* Hero */}
 <section className="relative min-h-[70svh] w-full overflow-hidden bg-gradient-to-br from-himalaya-950 via-himalaya-800 to-sky-900 sm:min-h-[65vh]">
-  {heroImage && (
+  {heroImageUrl && (
     <Image
-      src={normalizeImageUrl(heroImage)}
-      alt={tour.title[locale]}
+      src={heroImageUrl}
+      alt={tour.title?.[locale] || ''}
       fill
       priority
-      unoptimized
       sizes="100vw"
       className="object-cover opacity-60"
     />

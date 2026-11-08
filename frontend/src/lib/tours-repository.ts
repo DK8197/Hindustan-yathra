@@ -186,12 +186,39 @@ export async function lookupTourBySlug(
     if (response.ok) {
       const data: unknown = await response.json();
       if (data && typeof data === 'object' && 'slug' in data) {
-        return { status: 'found', tour: data as Tour };
+        const tourData = data as Record<string, any>;
+        if (!tourData.heroImage && tourData.hero_image) {
+          tourData.heroImage = tourData.hero_image;
+        }
+        return { status: 'found', tour: tourData as Tour };
       }
     }
   } catch {
-    // Try the active-tour index below; transient detail-endpoint failures
+    // Try the tours slug or active-tour index below; transient detail-endpoint failures
     // should not immediately turn a known tour URL into a permanent 404.
+  }
+
+  try {
+    const response = await fetch(
+      `${API_URL}/api/v1/tours/slug/${encodeURIComponent(slug)}`,
+      {
+        next: { revalidate: 86400 },
+        headers,
+      }
+    );
+
+    if (response.ok) {
+      const data: unknown = await response.json();
+      if (data && typeof data === 'object' && 'slug' in data) {
+        const tourData = data as Record<string, any>;
+        if (!tourData.heroImage && tourData.hero_image) {
+          tourData.heroImage = tourData.hero_image;
+        }
+        return { status: 'found', tour: tourData as Tour };
+      }
+    }
+  } catch {
+    // Fall back to all details list
   }
 
   try {
@@ -210,8 +237,14 @@ export async function lookupTourBySlug(
     const data: unknown = await response.json();
     if (!Array.isArray(data)) return { status: 'unavailable' };
 
-    const tour = (data as Tour[]).find((item) => item.slug === slug);
-    return tour ? { status: 'found', tour } : { status: 'not-found' };
+    const rawTour = (data as Record<string, any>[]).find((item) => item.slug === slug);
+    if (rawTour) {
+      if (!rawTour.heroImage && rawTour.hero_image) {
+        rawTour.heroImage = rawTour.hero_image;
+      }
+      return { status: 'found', tour: rawTour as Tour };
+    }
+    return { status: 'not-found' };
   } catch {
     return { status: 'unavailable' };
   }
