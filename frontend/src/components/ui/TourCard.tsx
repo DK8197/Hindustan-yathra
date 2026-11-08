@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useLocale, useTranslations } from 'next-intl';
@@ -10,7 +11,13 @@ import type { AppLocale } from '@/i18n/routing';
 import { useAppStore } from '@/store/useAppStore';
 import { normalizeImageUrl } from '@/lib/image-cdn';
 
-export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
+interface TourCardProps {
+  tour: Tour;
+  index?: number;
+  priority?: boolean;
+}
+
+function TourCardBase({ tour, index = 0, priority = false }: TourCardProps) {
   const locale = useLocale() as AppLocale;
   const t = useTranslations('tour');
   const tCategories = useTranslations('categories');
@@ -30,7 +37,7 @@ export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
           : { duration: 0.5, delay: Math.min(index * 0.08, 0.35), ease: [0.16, 1, 0.3, 1] }
       }
       whileHover={shouldReduceMotion ? undefined : { y: -4 }}
-      className="group relative min-w-0 overflow-hidden rounded-2xl border border-sky-200/90 bg-white p-3.5 transition-[border-color,transform] duration-200 hover:border-sky-400"
+      className="group relative min-w-0 overflow-hidden rounded-2xl border border-sky-200/90 bg-white p-3.5 transition-colors duration-200 hover:border-sky-400"
       data-ui
     >
       <Link href={{ pathname: '/tour/[slug]', params: { slug: tour.slug } }} className="block min-w-0">
@@ -40,7 +47,7 @@ export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
               src={normalizeImageUrl(tour.heroImage)}
               alt={tour.title[locale]}
               fill
-              unoptimized
+              priority={priority}
               sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
               className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             />
@@ -93,3 +100,13 @@ export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
     </motion.div>
   );
 }
+
+export const TourCard = memo(TourCardBase, (prev, next) => {
+  return (
+    prev.tour.slug === next.tour.slug &&
+    prev.tour.priceFrom === next.tour.priceFrom &&
+    prev.tour.heroImage === next.tour.heroImage &&
+    prev.index === next.index &&
+    prev.priority === next.priority
+  );
+});

@@ -105,59 +105,40 @@ function fuzzyWordMatch(queryWord: string, fieldWords: string[]): boolean {
   });
 }
 
-/**
- * Higher scores mean better matches. All searchable fields are localized where
- * applicable, while destination names and region metadata are searched too.
- */
-function getSearchScore(
-  query: string,
-  title: string,
-  summary: string,
-  destinations: string[],
-  category: string,
-  region: string,
+interface IndexedTourData {
+  compactTitle: string;
+  compactSummary: string;
+  compactDestinations: string;
+  compactCategory: string;
+  compactRegion: string;
+  allWords: string[];
+  titleWords: string[];
+  destinationWords: string[];
+  otherWords: string[];
+}
+
+function getPrecomputedSearchScore(
+  normalizedQuery: string,
+  compactQuery: string,
+  queryWords: string[],
+  data: IndexedTourData,
 ): number {
-  const normalizedQuery = normalizeSearchText(query);
   if (!normalizedQuery) return 1;
 
-  const compactQuery = normalizedQuery.replace(/\s/g, '');
-  const queryWords = normalizedQuery.split(' ').filter(Boolean);
-
-  const fields = {
-    title: normalizeSearchText(title),
-    summary: normalizeSearchText(summary),
-    destinations: normalizeSearchText(destinations.join(' ')),
-    category: normalizeSearchText(category),
-    region: normalizeSearchText(region),
-  };
-
-  const compactFields = {
-    title: compactSearchText(title),
-    summary: compactSearchText(summary),
-    destinations: compactSearchText(destinations.join(' ')),
-    category: compactSearchText(category),
-    region: compactSearchText(region),
-  };
-
   // Exact title and title-prefix matches should rank highest.
-  if (compactFields.title === compactQuery) return 100;
-  if (compactFields.title.startsWith(compactQuery)) return 90;
-  if (compactFields.title.includes(compactQuery)) return 80;
+  if (data.compactTitle === compactQuery) return 100;
+  if (data.compactTitle.startsWith(compactQuery)) return 90;
+  if (data.compactTitle.includes(compactQuery)) return 80;
 
   // Prefer destination, category and region matches over summary-only matches.
-  if (compactFields.destinations.includes(compactQuery)) return 75;
-  if (compactFields.category.includes(compactQuery)) return 65;
-  if (compactFields.region.includes(compactQuery)) return 60;
-  if (compactFields.summary.includes(compactQuery)) return 45;
-
-  const allWords = Object.values(fields)
-    .join(' ')
-    .split(' ')
-    .filter(Boolean);
+  if (data.compactDestinations.includes(compactQuery)) return 75;
+  if (data.compactCategory.includes(compactQuery)) return 65;
+  if (data.compactRegion.includes(compactQuery)) return 60;
+  if (data.compactSummary.includes(compactQuery)) return 45;
 
   // Every query word must be found somewhere across the searchable fields.
   const allQueryWordsMatch = queryWords.every((word) =>
-    allWords.some(
+    data.allWords.some(
       (fieldWord) =>
         fieldWord.includes(word) ||
         (word.length >= 5 && editDistance(word, fieldWord) <= 1),
@@ -167,22 +148,10 @@ function getSearchScore(
   if (allQueryWordsMatch) return 35;
 
   // Fuzzy fallback for a small typo in a title or destination.
-  const titleWords = fields.title.split(' ').filter(Boolean);
-  const destinationWords = fields.destinations.split(' ').filter(Boolean);
-  const otherWords = [
-    ...fields.category.split(' '),
-    ...fields.region.split(' '),
-    ...fields.summary.split(' '),
-  ].filter(Boolean);
+  if (queryWords.every((word) => fuzzyWordMatch(word, data.titleWords))) return 30;
+  if (queryWords.every((word) => fuzzyWordMatch(word, data.destinationWords))) return 28;
 
-  if (queryWords.every((word) => fuzzyWordMatch(word, titleWords))) return 30;
-  if (queryWords.every((word) => fuzzyWordMatch(word, destinationWords))) return 28;
-
-  if (
-    queryWords.every((word) =>
-      fuzzyWordMatch(word, [...titleWords, ...destinationWords, ...otherWords]),
-    )
-  ) {
+  if (queryWords.every((word) => fuzzyWordMatch(word, data.otherWords))) {
     return 20;
   }
 
@@ -334,25 +303,75 @@ export default function DestinationsExplorer({
     return tCategory.has(category) ? tCategory(category) : category;
   };
 
-  const filteredTours = useMemo(() => {
-    const query = debouncedSearch.trim();
+  const indexedTours = useMemo(() => {
+    return tours.map((tour, index) => {
+      const title = getTitle(tour, locale);
+      const summary = getSummary(tour, locale);
+      const destinations = tour.destinations || [];
+      const category = tour.category || '';
+      const region = tour.region || '';
 
-    let filtered = tours
-      .map((tour, index) => ({
+      const fields = {
+        title: normalizeSearchText(title),
+        summary: normalizeSearchText(summary),
+        destinations: normalizeSearchText(destinations.join(' ')),
+        category: normalizeSearchText(category),
+        region: normalizeSearchText(region),
+      };
+
+      const titleWords = fields.title.split(' ').filter(Boolean);
+      const destinationWords = fields.destinations.split(' ').filter(Boolean);
+      const otherWords = [
+        ...fields.category.split(' '),
+        ...fields.region.split(' '),
+        ...fields.summary.split(' '),
+      ].filter(Boolean);
+
+      const allWords = Object.values(fields)
+        .join(' ')
+        .split(' ')
+        .filter(Boolean);
+
+      const indexedData: IndexedTourData = {
+        compactTitle: compactSearchText(title),
+        compactSummary: compactSearchText(summary),
+        compactDestinations: compactSearchText(destinations.join(' ')),
+        compactCategory: compactSearchText(category),
+        compactRegion: compactSearchText(region),
+        allWords,
+        titleWords,
+        destinationWords,
+        otherWords: [...titleWords, ...destinationWords, ...otherWords],
+      };
+
+      return {
         tour,
         index,
-        score: query
-          ? getSearchScore(
-              query,
-              getTitle(tour, locale),
-              getSummary(tour, locale),
-              tour.destinations || [],
-              tour.category || '',
-              tour.region || '',
+        indexedData,
+      };
+    });
+  }, [tours, locale]);
+
+  const filteredTours = useMemo(() => {
+    const rawQuery = debouncedSearch.trim();
+    const normalizedQuery = normalizeSearchText(rawQuery);
+    const compactQuery = normalizedQuery.replace(/\s/g, '');
+    const queryWords = normalizedQuery.split(' ').filter(Boolean);
+
+    let filtered = indexedTours
+      .map(({ tour, index, indexedData }) => ({
+        tour,
+        index,
+        score: rawQuery
+          ? getPrecomputedSearchScore(
+              normalizedQuery,
+              compactQuery,
+              queryWords,
+              indexedData,
             )
           : 0,
       }))
-      .filter(({ score }) => !query || score > 0);
+      .filter(({ score }) => !rawQuery || score > 0);
 
     if (tourType === 'domestic') {
       filtered = filtered.filter(({ tour }) => tour.isDomestic);
@@ -381,7 +400,7 @@ export default function DestinationsExplorer({
     });
 
     return filtered.map(({ tour }) => tour);
-  }, [tours, debouncedSearch, tourType, region, selectedCategory, locale]);
+  }, [indexedTours, debouncedSearch, tourType, region, selectedCategory]);
 
   // Featured cards are links, so skip inactive ("Coming Soon") tours.
   const featuredTours = filteredTours.filter((tour) => tour.featured && tour.active);
@@ -631,7 +650,6 @@ export default function DestinationsExplorer({
                       src={image}
                       alt={getTitle(tour, locale)}
                       fill
-                      unoptimized
                       sizes="(max-width: 1023px) 100vw, 33vw"
                       className="object-cover transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 motion-reduce:group-hover:scale-100"
                     />
@@ -643,7 +661,7 @@ export default function DestinationsExplorer({
                     </div>
 
                     {tour.category && (
-                      <div className="ml-auto flex min-w-0 items-center gap-1.5 rounded-full bg-white/90 px-3 py-2 text-xs font-semibold capitalize text-slate-900 shadow backdrop-blur">
+                      <div className="ml-auto flex min-w-0 items-center gap-1.5 rounded-full bg-white/95 px-3 py-2 text-xs font-semibold capitalize text-slate-900 shadow-sm">
                         <CategoryIcon className="h-3.5 w-3.5 shrink-0" />
                         <span className="truncate">{getCategoryLabel(tour.category)}</span>
                       </div>
@@ -653,13 +671,13 @@ export default function DestinationsExplorer({
                     <h3 className="text-2xl font-bold">{getTitle(tour, locale)}</h3>
                     <p className="mt-3 line-clamp-2 text-white/90">{getSummary(tour, locale)}</p>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      <span className="rounded-full bg-white/20 px-3 py-1 text-xs backdrop-blur">
+                      <span className="rounded-full bg-black/40 border border-white/15 px-3 py-1 text-xs">
                         {renderPrice(tour.priceFrom)}
                       </span>
-                      <span className="rounded-full bg-white/20 px-3 py-1 text-xs backdrop-blur">
+                      <span className="rounded-full bg-black/40 border border-white/15 px-3 py-1 text-xs">
                         {tour.durationDays}D / {tour.durationNights}N
                       </span>
-                      <span className="rounded-full bg-white/20 px-3 py-1 text-xs backdrop-blur">
+                      <span className="rounded-full bg-black/40 border border-white/15 px-3 py-1 text-xs">
                         {tour.isDomestic ? t('filter_domestic') : t('filter_international')}
                       </span>
                     </div>
@@ -734,7 +752,6 @@ export default function DestinationsExplorer({
                       src={image}
                       alt={getTitle(tour, locale)}
                       fill
-                      unoptimized
                       sizes="(max-width: 639px) 100vw, (max-width: 1279px) 50vw, 25vw"
                       className="object-cover transition-transform duration-300 ease-[cubic-bezier(0.23,1,0.32,1)] group-hover:scale-105 motion-reduce:group-hover:scale-100"
                     />
@@ -749,7 +766,7 @@ export default function DestinationsExplorer({
                     )}
 
                     {tour.category && (
-                      <div className="ml-auto flex min-w-0 items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold capitalize text-slate-900 shadow backdrop-blur">
+                      <div className="ml-auto flex min-w-0 items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold capitalize text-slate-900 shadow-sm">
                         <CategoryIcon className="h-3.5 w-3.5 shrink-0" />
                         <span className="truncate">{getCategoryLabel(tour.category)}</span>
                       </div>
@@ -758,10 +775,10 @@ export default function DestinationsExplorer({
 
                   <div className="absolute bottom-0 w-full p-5 text-white">
                     <div className="mb-2 flex flex-wrap gap-2">
-                      <span className="rounded-full bg-white/20 px-2 py-1 text-[11px] backdrop-blur">
+                      <span className="rounded-full bg-black/40 border border-white/15 px-2 py-1 text-[11px]">
                         {renderPrice(tour.priceFrom)}
                       </span>
-                      <span className="rounded-full bg-white/20 px-2 py-1 text-[11px] backdrop-blur">
+                      <span className="rounded-full bg-black/40 border border-white/15 px-2 py-1 text-[11px]">
                         {tour.durationDays}D / {tour.durationNights}N
                       </span>
                     </div>

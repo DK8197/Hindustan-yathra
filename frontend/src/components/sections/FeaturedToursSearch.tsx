@@ -132,7 +132,7 @@ export function FeaturedToursSearch({
             key={tour.slug}
             className={`w-full min-w-0 sm:w-[calc(50%_-_0.75rem)] lg:w-[calc(33.333333%_-_1rem)] ${!query.trim() && !showAll && i >= 4 ? 'hidden sm:block' : ''}`}
           >
-            <TourCard tour={tour} index={i} />
+            <TourCard tour={tour} index={i} priority={i === 0} />
           </div>
         ))}
       </div>
