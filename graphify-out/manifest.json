@@ -12,8 +12,8 @@
     "semantic_hash": "33469591e6ec64c6af25041042c50f9d"
   },
   "HY -  Backend/app/__init__.py": {
-    "mtime": 1794113335.4466183,
-    "seen": 1794113618.1206672,
+    "mtime": 1794113669.693405,
+    "seen": 1794119214.8758767,
     "ast_hash": "cc6356970c30055afd71e2462d1d54a9",
     "semantic_hash": ""
   },
@@ -546,9 +546,9 @@
     "semantic_hash": "21353f69466654682d4abdb33c01869c"
   },
   "frontend/src/components/about/GoogleReviewSummary.tsx": {
-    "mtime": 1793651741.4166727,
-    "seen": 1793901580.5501802,
-    "ast_hash": "149c1f49ffa42327e36a92665c938e3e",
+    "mtime": 1794123479.5877304,
+    "seen": 1794123481.2742834,
+    "ast_hash": "91b85333f7b851e4812c62b940163623",
     "semantic_hash": ""
   },
   "frontend/src/components/about/Hero.tsx": {
@@ -618,15 +618,15 @@
     "semantic_hash": ""
   },
   "frontend/src/components/sections/FeaturedTours.tsx": {
-    "mtime": 1793527369.2655497,
-    "seen": 1793901580.5513623,
-    "ast_hash": "2f1a6343db1a6972a19225338d0368b0",
+    "mtime": 1794122833.8580558,
+    "seen": 1794122868.6461983,
+    "ast_hash": "b3824b217b8b7f76a6247ab6b9433c7b",
     "semantic_hash": ""
   },
   "frontend/src/components/sections/FeaturedToursSearch.tsx": {
-    "mtime": 1793530044.0993576,
-    "seen": 1793901580.5513642,
-    "ast_hash": "b890205604a22f4fe0a451092da75cf4",
+    "mtime": 1794122834.0140584,
+    "seen": 1794122868.6462016,
+    "ast_hash": "f620b6a9f1997e1959fe09787e133547",
     "semantic_hash": ""
   },
   "frontend/src/components/sections/GalleryMasonry.tsx": {
@@ -636,9 +636,9 @@
     "semantic_hash": ""
   },
   "frontend/src/components/sections/HeroSection.tsx": {
-    "mtime": 1793708401.5236516,
-    "seen": 1793901580.5513692,
-    "ast_hash": "9fb75da4bdf091382dec9b70b87d1df6",
+    "mtime": 1794121343.7406893,
+    "seen": 1794121344.9327662,
+    "ast_hash": "02e0e65bfa059c4d4814e745a00f3bc0",
     "semantic_hash": ""
   },
   "frontend/src/components/sections/SocialMediaFeed.tsx": {
@@ -708,9 +708,9 @@
     "semantic_hash": ""
   },
   "frontend/src/components/ui/TourCard.tsx": {
-    "mtime": 1793522138.040727,
-    "seen": 1793901580.552019,
-    "ast_hash": "e0eeb2754802cb5e97eb74805a1689c1",
+    "mtime": 1794122834.095742,
+    "seen": 1794122868.6528144,
+    "ast_hash": "31319640513bb76f2da56732145352d6",
     "semantic_hash": ""
   },
   "frontend/src/data/destinations.json": {
@@ -816,15 +816,15 @@
     "semantic_hash": ""
   },
   "frontend/src/messages/en.json": {
-    "mtime": 1793651723.6650813,
-    "seen": 1793901580.5545287,
-    "ast_hash": "21d1fd1cc0e9b99387e94dc1638df51c",
+    "mtime": 1794123018.8150873,
+    "seen": 1794123481.3200707,
+    "ast_hash": "90f1bf3bd5928f0eacb3e3ebcdee4af8",
     "semantic_hash": ""
   },
   "frontend/src/messages/kn.json": {
-    "mtime": 1793651310.1515758,
-    "seen": 1793901580.554531,
-    "ast_hash": "7e495b3947a84178080b3352ee46e39b",
+    "mtime": 1794123327.3229508,
+    "seen": 1794123481.3200762,
+    "ast_hash": "50afa68c905e59ee91e6a728eef4bca8",
     "semantic_hash": ""
   },
   "frontend/src/middleware.ts": {
@@ -1194,15 +1194,15 @@
     "semantic_hash": ""
   },
   "frontend/src/components/destinations/CustomTourSection.tsx": {
-    "mtime": 1793607380.1875567,
-    "seen": 1793901580.551349,
-    "ast_hash": "100a41fc5da05419fbd677ea5d03ee7e",
+    "mtime": 1794120292.8965442,
+    "seen": 1794120836.085951,
+    "ast_hash": "c6586bd32a56e8e0d2258fc3578e8f72",
     "semantic_hash": ""
   },
   "frontend/src/components/sections/HeroAlbum.tsx": {
-    "mtime": 1793708134.2287734,
-    "seen": 1793901580.5513675,
-    "ast_hash": "865532a27ff1f0d743eb8a4435c85d2d",
+    "mtime": 1794121095.9794614,
+    "seen": 1794121100.8904257,
+    "ast_hash": "e7f6f684d269d841d657054a05a76e0f",
     "semantic_hash": ""
   },
   "frontend/src/components/sections/PolicyPage.tsx": {
@@ -1473,6 +1473,18 @@
     "mtime": 1794081971.55114,
     "seen": 1794113618.191871,
     "ast_hash": "dbaeb150a7c7633374a7429c189f3690",
+    "semantic_hash": ""
+  },
+  "HY -  Backend/seed_tours.py": {
+    "mtime": 1794119999.6414902,
+    "seen": 1794120200.1444123,
+    "ast_hash": "b1bae7dc3cbc33aada224587a2cfce24",
+    "semantic_hash": ""
+  },
+  "frontend/src/data/google-reviews.ts": {
+    "mtime": 1794122160.8375082,
+    "seen": 1794122297.6649635,
+    "ast_hash": "87f93c18a25bdae1c34bfcc027c6c9cd",
     "semantic_hash": ""
   },
   "frontend/package-lock.json": {

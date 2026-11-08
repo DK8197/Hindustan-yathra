@@ -21,65 +21,74 @@ export function TourCard({ tour, index = 0 }: { tour: Tour; index?: number }) {
 
   return (
     <motion.div
-      initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
       whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={shouldReduceMotion ? { duration: 0 } : { duration: 0.5, delay: index * 0.05 }}
-      className="group relative min-w-0 overflow-hidden bg-white"
+      viewport={{ once: true, margin: '-40px' }}
+      transition={
+        shouldReduceMotion
+          ? { duration: 0 }
+          : { duration: 0.5, delay: Math.min(index * 0.08, 0.35), ease: [0.16, 1, 0.3, 1] }
+      }
+      whileHover={shouldReduceMotion ? undefined : { y: -4 }}
+      className="group relative min-w-0 overflow-hidden rounded-2xl border border-slate-200/90 bg-white p-3.5 transition-colors duration-200 hover:border-slate-300"
+      data-ui
     >
       <Link href={{ pathname: '/tour/[slug]', params: { slug: tour.slug } }} className="block min-w-0">
-        <div className="relative aspect-[16/10] w-full overflow-hidden bg-himalaya-800">
+        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-slate-100">
           {normalizeImageUrl(tour.heroImage) && (
             <Image
               src={normalizeImageUrl(tour.heroImage)}
               alt={tour.title[locale]}
               fill
               sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
-              className="object-cover"
+              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             />
           )}
         </div>
 
-        <div className="min-w-0 py-5">
-          <p className="text-base font-medium text-himalaya-700">
+        <div className="min-w-0 px-1 py-4">
+          <p className="text-xs font-semibold text-saffron-700">
             {tCategories.has(tour.category)
               ? tCategories(tour.category)
               : tour.category}
           </p>
-          <h3 id={`tour-${tour.slug}-heading`} className="mt-2 line-clamp-2 break-words font-display text-lg font-semibold leading-snug text-himalaya-900">{tour.title[locale]}</h3>
-          <p className="mt-2 line-clamp-2 text-base leading-relaxed text-himalaya-900">{tour.summary[locale]}</p>
+          <h3 id={`tour-${tour.slug}-heading`} className="mt-1.5 line-clamp-2 break-words font-display text-lg font-semibold leading-snug text-slate-900 transition-colors group-hover:text-himalaya-900">{tour.title[locale]}</h3>
+          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-slate-600">{tour.summary[locale]}</p>
 
-          <div className="mt-4 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
-            <span className="flex shrink-0 items-center gap-1 text-base text-himalaya-700">
+          <div className="mt-4 flex flex-wrap items-center justify-between pt-2 gap-x-3 gap-y-2">
+            <span className="flex shrink-0 items-center gap-1.5 text-xs font-medium text-slate-500">
               <Clock size={14} aria-hidden="true" /> {t('duration_compact', { days: tour.durationDays, nights: tour.durationNights })}
             </span>
             <div className="min-w-0 text-right">
               {hasPrice ? (
                 <>
-                  <div className="text-base text-himalaya-700">{t('starting_from')}</div>
-                  <div className="break-words font-semibold text-saffron-700">
-                    ₹{tour.priceFrom!.toLocaleString('en-IN')} <span className="text-base font-normal text-himalaya-700">{t('per_person')}</span>
+                  <div className="text-[11px] text-slate-400">{t('starting_from')}</div>
+                  <div className="break-words text-base font-bold text-saffron-700">
+                    ₹{tour.priceFrom!.toLocaleString('en-IN')} <span className="text-xs font-normal text-slate-500">{t('per_person')}</span>
                   </div>
                 </>
               ) : (
-                <div className="font-semibold text-saffron-700">{t('contact_for_price')}</div>
+                <div className="text-sm font-semibold text-saffron-700">{t('contact_for_price')}</div>
               )}
             </div>
           </div>
         </div>
       </Link>
 
-      <button
+      <motion.button
+        whileTap={{ scale: 0.88 }}
+        whileHover={{ scale: 1.08 }}
+        transition={{ type: 'spring', stiffness: 400, damping: 25 }}
         onClick={(e) => {
           e.preventDefault();
           toggleSaved(tour.slug);
         }}
         aria-label="Save tour"
         aria-pressed={saved}
-        className="absolute right-3 top-3 flex min-h-11 min-w-11 items-center justify-center rounded-full bg-white/90 p-2 transition-transform hover:scale-105 motion-reduce:hover:scale-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700"
+        className="absolute right-6 top-6 flex min-h-10 min-w-10 items-center justify-center rounded-full bg-white/95 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-saffron-700"
       >
-        <Heart size={16} className={saved ? 'fill-saffron-500 text-saffron-500' : 'text-himalaya-800'} />
-      </button>
+        <Heart size={16} className={saved ? 'fill-saffron-500 text-saffron-500' : 'text-slate-700'} />
+      </motion.button>
     </motion.div>
   );
 }

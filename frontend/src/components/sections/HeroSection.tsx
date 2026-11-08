@@ -55,14 +55,11 @@ function HeroSectionComponent() {
           lg:h-[100svh]
           lg:min-h-[0rem]
           overflow-hidden
-          bg-gradient-to-b
-          from-sky-100
-          via-sky-50
-          to-white
+          bg-sky-50/60
         "
       >
         {/* Same banner as desktop; on phones and tablets it is cropped and rounded like a native sheet header. */}
-        <div className="relative h-[clamp(6.5rem,16svh,8.5rem)] shrink-0 overflow-hidden max-lg:rounded-b-[1.75rem] max-lg:shadow-[0_14px_32px_-18px_rgba(2,132,199,0.55)] md:h-[clamp(8rem,18svh,11rem)] lg:h-auto">
+        <div className="relative h-[clamp(6.5rem,16svh,8.5rem)] shrink-0 overflow-hidden max-lg:rounded-b-[1.75rem] md:h-[clamp(8rem,18svh,11rem)] lg:h-auto">
           <Image
             src={HERO_DESKTOP_IMAGE}
             alt="Hindustan Yathra founders and Karnataka heritage landmarks"
@@ -95,10 +92,9 @@ function HeroSectionComponent() {
                 max-w-[26ch]
                 ${
                   isKannada
-                    ? 'font-kannada text-sky-950 text-[clamp(1.5rem,5.5vw,3.5rem)] leading-[1.25] tracking-normal max-lg:text-[clamp(1.75rem,7.5vw,2.25rem)]'
+                    ? 'font-kannada text-emerald-600 font-bold italic tracking-normal text-[clamp(2rem,4.8vw,3.9rem)] leading-[1.15] lg:whitespace-nowrap lg:text-[clamp(1.75rem,min(3.4vw,calc((100svh-5rem-19.75vw)*0.17)),4.5rem)] lg:leading-[1.1] max-lg:text-[clamp(2.25rem,6vw,3rem)] max-lg:leading-[1.15]'
                     : 'font-[family-name:var(--font-brochure-script)] text-[clamp(2rem,4.8vw,3.9rem)] font-bold italic leading-[1.1] tracking-normal text-emerald-600 lg:whitespace-nowrap lg:text-[clamp(1.75rem,min(3.4vw,calc((100svh-5rem-19.75vw)*0.17)),4.5rem)] lg:leading-[1.05] max-lg:text-[clamp(2.25rem,6vw,3rem)] max-lg:leading-[1.1]'
                 }
-                font-semibold
                 [text-wrap:balance]
                 max-lg:self-center
                 max-lg:text-center

@@ -1,23 +1,23 @@
 # Graph Report - Hindustan Yathra  (2026-11-08)
 
 ## Corpus Check
-- 212 files · ~423,037 words
+- 214 files · ~424,722 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 12 file(s) not represented in the graph (top: .css 5, (none) 3, .db 1)
 
 ## Summary
-- 1413 nodes · 2385 edges · 136 communities (94 shown, 42 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 76 edges (avg confidence: 0.89)
+- 1421 nodes · 2407 edges · 137 communities (95 shown, 42 thin omitted)
+- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 77 edges (avg confidence: 0.89)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `11d20c03`
+- Built from commit: `e11f5140`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
-- next-intl
-- TourCard.tsx
+- tour/[slug]/page.tsx
+- getPathname
 - Localization and Destinations
 - Backend Authentication Flow
 - Project Guidance and Architecture
@@ -31,41 +31,41 @@
 - routing.ts
 - Backend Tour Catalog
 - dependencies
-- [locale]/destinations/page.tsx
+- rules.mjs
 - getPathname
 - Backend CI Workflow
 - Social Media API
 - tours-repository.ts
 - assets.mjs
-- Tour
-- Backend Route Handlers
+- seed_tours.py
+- flask
 - Production Compose and Nginx
 - InMemoryStore
-- Tour Media Editing
-- types/auth.ts
+- fonts.ts
+- middleware.ts
 - draw.mjs
 - 6. Recipes
 - inspect.mjs
 - Social Links Administration
 - Frontend Build Scripts
 - S3 Image Upload API
-- lucide-react
+- [locale]/destinations/page.tsx
 - services
-- GalleryMasonry.tsx
+- TourCard.tsx
 - next.config.mjs
 - Tailwind Design Tokens
 - Social API Proxy
-- Frontend Typography
+- @react-three/drei@^10.7.7
 - Tour Request Schema
 - React Dependency Overrides
-- verify-otp/route.ts
+- @tanstack/react-query
 - charts.js
-- xlsx
+- zustand
 - Class Name Utilities
-- app-draw.mjs
+- EditTourMedia.tsx
 - Imagery
 - Lead
-- gallery/page.tsx
+- ExcelUploader.tsx
 - The run
 - package.json
 - TypeScript Toolchain
@@ -104,11 +104,11 @@
 - 2. The run for an app screen
 - Critique — judging the render
 - cdp.mjs
-- rules.mjs
-- parse-excel.ts
+- tours/page.tsx
+- tour.ts
 - Animation implementation plans
+- gallery/page.tsx
 - 001 — Decouple hero scroll motion from React renders
-- recharts@^2.15.4
 - 002 — Preserve useful feedback in reduced-motion mode
 - leads/page.tsx
 - tasteskill v2 (`design-taste-frontend`)
@@ -133,19 +133,20 @@
 - workspace
 - 8. Forms and settings
 - extends
-- admin/layout.tsx
 - 003 — Shorten browse-card image hover motion
+- SocialMediaFeed.tsx
 - react-dom@18.3.1
-- @react-three/drei@^10.7.7
-- three@^0.185.1
-- @tanstack/react-query
+- GalleryMasonry.tsx
+- leads/route.ts
+- bookings/page.tsx
+- recharts@^2.15.4
 
 ## God Nodes (most connected - your core abstractions)
 1. `next` - 54 edges
 2. `next-intl` - 44 edges
 3. `getOne()` - 31 edges
-4. `Tour` - 28 edges
-5. `react` - 28 edges
+4. `Tour` - 30 edges
+5. `react` - 29 edges
 6. `lucide-react` - 27 edges
 7. `Link` - 27 edges
 8. `getPathname` - 24 edges
@@ -161,8 +162,8 @@
   plans/003-shorten-browse-card-hover-motion.md → frontend/src/components/sections/TourGallery.tsx
 - `6.4 Marks` --references--> `short()`  [INFERRED]
   frontend/.agents/skills/design-taste-frontend/references/app-screens.md → frontend/.agents/skills/design-taste-frontend/scripts/assets.mjs
-- `uploadImage()` --indirect_call--> `slug()`  [INFERRED]
-  frontend/src/app/admin/tours/[slug]/EditTourMedia.tsx → frontend/.agents/skills/design-taste-frontend/scripts/assets.mjs
+- `Excel Tour Content Pipeline` --conceptually_related_to--> `Excel Upload Endpoint`  [INFERRED]
+  frontend/README.md → HY -  Backend/docs/api.md
 
 ## Import Cycles
 - 3-file cycle: `HY -  Backend/app/__init__.py -> HY -  Backend/app/blueprints/leads.py -> HY -  Backend/app/services/leads.py -> HY -  Backend/app/__init__.py`
@@ -187,22 +188,22 @@
 - **Travel Brand and Trust Marks** — frontend_public_images_hindustan_yathra_logo_hindustan_yathra_brand_mark, frontend_public_images_irctc_logo_irctc_mark, frontend_public_images_iso_certified_company_iso_badge, frontend_public_images_karnataka_state_tourism_logo_karnataka_tourism_mark, frontend_public_images_logo_since_2018_brand_tenure [EXTRACTED 1.00]
 - **Destination and Tour Artwork** — frontend_public_images_kashi_varanasi_ghats, frontend_public_images_tours_andaman_andaman_hero_andaman_island_coast, frontend_public_images_tours_bali_1_ulu_watu_sunset_route, frontend_public_images_tours_bali_hero_bali_honeymoon_escape, frontend_public_images_tours_chardham_1_kedarnath_at_dawn, frontend_public_images_tours_chardham_2_badrinath_road, frontend_public_images_tours_chardham_hero_chardham_yatra_route [EXTRACTED 1.00]
 
-## Communities (136 total, 42 thin omitted)
+## Communities (137 total, 42 thin omitted)
 
-### Community 0 - "next-intl"
-Cohesion: 0.13
+### Community 0 - "tour/[slug]/page.tsx"
+Cohesion: 0.12
 Nodes (21): dynamicParams, generateMetadata(), Params, revalidate, TourDetailPage(), TourBookingCard(), TourFAQ(), NormalizedGalleryImage (+13 more)
 
-### Community 1 - "TourCard.tsx"
-Cohesion: 0.25
-Nodes (10): ProfilePage(), SavedToursPage(), Status, TourCard(), fetchJson(), useAllTours(), useFeaturedTours(), useToursByCategory() (+2 more)
+### Community 1 - "getPathname"
+Cohesion: 0.17
+Nodes (15): CancellationPolicyPage(), generateMetadata(), Params, GroupTourTermsPage(), Params, generateMetadata(), Params, PrivacyPolicyPage() (+7 more)
 
 ### Community 2 - "Localization and Destinations"
 Cohesion: 0.21
 Nodes (16): categoryIcons, compactSearchText(), containsPhrase(), DestinationsExplorer(), editDistance(), fuzzyWordMatch(), getSearchScore(), getSummary() (+8 more)
 
 ### Community 3 - "Backend Authentication Flow"
-Cohesion: 0.17
+Cohesion: 0.15
 Nodes (9): _get_phone(), login(), me(), refresh(), verify(), create_token(), generate_csrf_token(), BaseModel (+1 more)
 
 ### Community 4 - "Project Guidance and Architecture"
@@ -210,8 +211,8 @@ Cohesion: 0.09
 Nodes (22): Project Scope and Repository Guidance, Excel Tour Content Pipeline, Next.js Travel Frontend Scaffold, JSON Tour Data Source, English and Kannada Routing, OTP and JWT Authentication, React Three Fiber Hero, SEO and Accessibility Foundation (+14 more)
 
 ### Community 6 - "Flask App Configuration"
-Cohesion: 0.09
-Nodes (6): upload_excel(), create_app(), normalize_database_url(), setup_test_db(), test_login_flow(), test_health_endpoint()
+Cohesion: 0.13
+Nodes (7): login(), logout(), create_app(), normalize_database_url(), setup_test_db(), test_login_flow(), test_health_endpoint()
 
 ### Community 7 - "MySQL Compose Services"
 Cohesion: 0.08
@@ -226,32 +227,32 @@ Cohesion: 0.15
 Nodes (11): get_leads(), get_tour(), list_tours(), update_handled_status(), update_status(), update_tour_media(), upload_tour(), import_tour_excel() (+3 more)
 
 ### Community 10 - "Frontend Auth API"
-Cohesion: 0.21
-Nodes (7): bodySchema, GET(), bodySchema, AUTH_COOKIE, requireAdmin(), sessionCookieOptions, verifySession()
+Cohesion: 0.12
+Nodes (14): zod@^3.23.8, bodySchema, GET(), bodySchema, bodySchema, AUTH_COOKIE, requireAdmin(), sessionCookieOptions (+6 more)
 
 ### Community 11 - "Frontend Package Configuration"
 Cohesion: 0.15
 Nodes (18): devDependencies, eslint@^8.57.0, eslint-config-next@15.5.19, tsx@^4.19.0, @types/jsonwebtoken@^9.0.6, @types/node@^22.5.4, @types/react@^18.3.5, @types/react-dom@^18.3.0 (+10 more)
 
 ### Community 12 - "routing.ts"
-Cohesion: 0.11
-Nodes (23): DashboardLayout(), dynamic, LocaleLayout(), revalidate, FloatingDestinations(), FloatingContact(), ContactPrompt(), Footer() (+15 more)
+Cohesion: 0.13
+Nodes (21): DashboardLayout(), dynamic, LocaleLayout(), revalidate, FloatingDestinations(), FloatingContact(), ContactPrompt(), Status (+13 more)
 
 ### Community 13 - "Backend Tour Catalog"
-Cohesion: 0.26
-Nodes (14): categories(), featured_tours(), list_tours(), related_tours(), tour_by_slug(), tours_by_category(), get_tours_admin(), get_categories() (+6 more)
+Cohesion: 0.15
+Nodes (19): list_destinations(), create_tour(), get_tour(), list_tours(), categories(), featured_tours(), list_tours(), related_tours() (+11 more)
 
 ### Community 14 - "dependencies"
-Cohesion: 0.12
-Nodes (17): dependencies, framer-motion@^11.18.2, jsonwebtoken@^9.0.2, lucide-react@^0.436.0, mysql2@^3.11.3, next@15.5.19, next-intl@^4.13.2, postcss@^8.4.41 (+9 more)
+Cohesion: 0.11
+Nodes (18): dependencies, framer-motion@^11.18.2, jsonwebtoken@^9.0.2, lucide-react@^0.436.0, mysql2@^3.11.3, next@15.5.19, next-intl@^4.13.2, postcss@^8.4.41 (+10 more)
 
-### Community 15 - "[locale]/destinations/page.tsx"
-Cohesion: 0.13
-Nodes (15): brochureHead, brochureScript, jakarta, kannada, metadata, playfair, RootLayout(), DestinationsPage() (+7 more)
+### Community 15 - "rules.mjs"
+Cohesion: 0.31
+Nodes (8): APP_SKIP, colourFamily(), hexToHsl(), inRange(), judge(), judgeApp(), judgeLayout(), RULE_IDS
 
 ### Community 16 - "getPathname"
-Cohesion: 0.06
-Nodes (44): AboutPage(), generateMetadata(), CancellationPolicyPage(), generateMetadata(), Params, ContactPage(), generateMetadata(), Params (+36 more)
+Cohesion: 0.09
+Nodes (30): AboutPage(), generateMetadata(), ContactPage(), generateMetadata(), Params, generateMetadata(), generateMetadata(), generateMetadata() (+22 more)
 
 ### Community 17 - "Backend CI Workflow"
 Cohesion: 0.14
@@ -262,36 +263,36 @@ Cohesion: 0.26
 Nodes (6): add_link(), delete_link(), get_links(), get_social_links(), update_link(), SocialMediaLink
 
 ### Community 19 - "tours-repository.ts"
-Cohesion: 0.12
-Nodes (22): AdminToursPage(), GET(), generateStaticParams(), revalidate, sitemap(), AddTourButton(), Props, TourStatusButton() (+14 more)
+Cohesion: 0.20
+Nodes (14): GET(), generateStaticParams(), revalidate, sitemap(), FeaturedTours(), AdminTourSummary, getAllTours(), getAllTours_details() (+6 more)
 
 ### Community 20 - "assets.mjs"
 Cohesion: 0.07
-Nodes (85): AIC_FIELDS, AIC_HEADERS, applyThumb(), ARCHIVE_LICENCE, args, argv, base(), clock() (+77 more)
+Nodes (84): AIC_FIELDS, AIC_HEADERS, applyThumb(), ARCHIVE_LICENCE, args, argv, base(), clock() (+76 more)
 
-### Community 21 - "Tour"
-Cohesion: 0.17
-Nodes (7): list_destinations(), search(), create_tour(), get_tour(), list_tours(), Tour, search_tours()
+### Community 21 - "seed_tours.py"
+Cohesion: 0.33
+Nodes (3): search(), search_tours(), seed()
 
-### Community 22 - "Backend Route Handlers"
-Cohesion: 0.14
-Nodes (5): login(), logout(), dashboard(), create_booking(), list_testimonials()
+### Community 22 - "flask"
+Cohesion: 0.10
+Nodes (4): dashboard(), create_booking(), upload_excel(), list_testimonials()
 
 ### Community 23 - "Production Compose and Nginx"
 Cohesion: 0.17
 Nodes (11): FLASK_ENV, image, ports, volumes, services, nginx, web, version (+3 more)
 
-### Community 25 - "Tour Media Editing"
-Cohesion: 0.27
-Nodes (8): EditTourMedia(), uploadImage(), uploadItinerary(), findImages(), ImageItem, Props, PageProps, TourEditPage()
+### Community 25 - "fonts.ts"
+Cohesion: 0.50
+Nodes (3): fraunces, inter, notoSansKannada
 
-### Community 26 - "types/auth.ts"
-Cohesion: 0.40
-Nodes (4): Booking, JwtPayload, Lead, User
+### Community 26 - "middleware.ts"
+Cohesion: 0.67
+Nodes (3): config, intlMiddleware, middleware()
 
 ### Community 27 - "draw.mjs"
-Cohesion: 0.10
-Nodes (41): adjustments(), argv, assetQueries(), ASSETS_PATH, briefStop(), briefWords(), deal(), dealHero() (+33 more)
+Cohesion: 0.05
+Nodes (63): adjustments(), argv, assetQueries(), ASSETS_PATH, briefStop(), briefWords(), deal(), dealHero() (+55 more)
 
 ### Community 28 - "6. Recipes"
 Cohesion: 0.06
@@ -313,13 +314,17 @@ Nodes (6): scripts, build, dev, lint, parse:excel, start
 Cohesion: 0.40
 Nodes (3): @aws-sdk/client-s3@^3.1085.0, s3, @aws-sdk/client-s3
 
-### Community 33 - "lucide-react"
-Cohesion: 0.13
-Nodes (10): SocialLink, mockBookings, ExcelUploader(), ExcelUploaderProps, UploadResult, Status, CustomTour, CustomTourCategory (+2 more)
+### Community 33 - "[locale]/destinations/page.tsx"
+Cohesion: 0.11
+Nodes (17): brochureHead, brochureScript, jakarta, kannada, metadata, playfair, RootLayout(), DestinationsPage() (+9 more)
 
 ### Community 34 - "services"
 Cohesion: 0.13
 Nodes (14): generateValue, key, sync, value, services, buildCommand, env, envVars (+6 more)
+
+### Community 35 - "TourCard.tsx"
+Cohesion: 0.27
+Nodes (10): ProfilePage(), SavedToursPage(), TourCard(), AppLocale, fetchJson(), useAllTours(), useFeaturedTours(), useToursByCategory() (+2 more)
 
 ### Community 36 - "next.config.mjs"
 Cohesion: 0.25
@@ -333,29 +338,21 @@ Nodes (3): tailwindcss@^3.4.10, config, tailwindcss
 Cohesion: 0.83
 Nodes (3): GET(), headers(), POST()
 
-### Community 39 - "Frontend Typography"
-Cohesion: 0.50
-Nodes (3): fraunces, inter, notoSansKannada
-
 ### Community 41 - "React Dependency Overrides"
 Cohesion: 0.67
 Nodes (3): overrides, react, react-dom
-
-### Community 44 - "verify-otp/route.ts"
-Cohesion: 0.29
-Nodes (3): bodySchema, leadSchema, zod
 
 ### Community 45 - "charts.js"
 Cohesion: 0.21
 Nodes (24): axes(), bars(), dayHeads(), diverging(), frame(), hits(), kindStyle(), lane() (+16 more)
 
-### Community 49 - "xlsx"
+### Community 49 - "zustand"
 Cohesion: 0.33
-Nodes (4): autoprefixer@^10.4.20, xlsx@^0.18.5, autoprefixer, xlsx
+Nodes (4): autoprefixer@^10.4.20, zustand@^4.5.7, autoprefixer, zustand
 
-### Community 51 - "app-draw.mjs"
-Cohesion: 0.11
-Nodes (22): argv, deal(), dealScreen(), dealShell(), dealStyle(), fontLink(), HERE, kebab() (+14 more)
+### Community 51 - "EditTourMedia.tsx"
+Cohesion: 0.23
+Nodes (10): slug(), EditTourMedia(), uploadImage(), uploadItinerary(), findImages(), ImageItem, Props, PageProps (+2 more)
 
 ### Community 52 - "Imagery"
 Cohesion: 0.09
@@ -365,9 +362,9 @@ Nodes (22): 10. Markup and credits, 11. Video, 12. Where pictures and footage go
 Cohesion: 0.16
 Nodes (9): create_lead(), Lead, _clean(), lead_insertion(), client(), test_database_failure_is_reported(), test_lead_is_saved_with_long_message(), test_missing_required_fields_are_rejected() (+1 more)
 
-### Community 54 - "gallery/page.tsx"
-Cohesion: 0.33
-Nodes (6): GalleryPage(), Params, InfiniteGallery(), Props, getAllGalleryImages(), s3
+### Community 54 - "ExcelUploader.tsx"
+Cohesion: 0.40
+Nodes (3): ExcelUploader(), ExcelUploaderProps, UploadResult
 
 ### Community 55 - "The run"
 Cohesion: 0.11
@@ -382,8 +379,8 @@ Cohesion: 0.12
 Nodes (15): 10. The 25 highest-scored sites and their ideas, 11. How the skill was tested, 12. The October 2026 study: 100 Sites of the Day, 13. The app-screen study, 1. Method and its limits, 2. Scores, 3. Where the idea comes from, 4. Headlines (+7 more)
 
 ### Community 78 - "HeroSection.tsx"
-Cohesion: 0.19
-Nodes (13): DESKTOP_SLIDES, FRAME_SIZES, HeroAlbum, HeroAlbumComponent(), HeroAlbumProps, MOBILE_SLIDES, Orientation, Slide (+5 more)
+Cohesion: 0.20
+Nodes (12): DESKTOP_SLIDES, FRAME_SIZES, HeroAlbum, HeroAlbumComponent(), HeroAlbumProps, MOBILE_SLIDES, Orientation, Slide (+4 more)
 
 ### Community 80 - "Page"
 Cohesion: 0.25
@@ -434,8 +431,8 @@ Cohesion: 0.20
 Nodes (9): 1. Write the argument first, 2. The two-line headline, 3. Headline shapes that work, 4. Supporting line, body, buttons, 5. Proof without inventing it, 6. Things that read as generated, 7. Micro-typography, Contents (+1 more)
 
 ### Community 94 - "react"
-Cohesion: 0.38
-Nodes (6): FeaturedToursSearch(), performSearch(), useDebouncedValue(), searchTours(), Tour, react
+Cohesion: 0.27
+Nodes (8): SocialLink, FeaturedToursSearch(), performSearch(), SPRING_SNAPPY, useDebouncedValue(), searchTours(), Tour, react
 
 ### Community 95 - "2. The run for an app screen"
 Cohesion: 0.22
@@ -449,11 +446,11 @@ Nodes (8): 1. How to look, 2. The score, 3. Caps, 4. Writing the critique, 5. Wh
 Cohesion: 0.28
 Nodes (3): alive(), findChrome(), sweepProfiles()
 
-### Community 100 - "rules.mjs"
-Cohesion: 0.31
-Nodes (8): APP_SKIP, colourFamily(), hexToHsl(), inRange(), judge(), judgeApp(), judgeLayout(), RULE_IDS
+### Community 100 - "tours/page.tsx"
+Cohesion: 0.27
+Nodes (8): AdminToursPage(), AddTourButton(), Props, TourStatusButton(), handleActivate(), handleClick(), handleDeactivate(), getAllToursAdmin()
 
-### Community 101 - "parse-excel.ts"
+### Community 101 - "tour.ts"
 Cohesion: 0.36
 Nodes (8): buildTours(), main(), OUTPUT_PATH, parseOptionalPrice(), readSheet(), Row, splitList(), toBool()
 
@@ -461,7 +458,11 @@ Nodes (8): buildTours(), main(), OUTPUT_PATH, parseOptionalPrice(), readSheet(),
 Cohesion: 0.22
 Nodes (5): Additional audited UX opportunities implemented, Animation implementation plans, Dependencies, Overall status, Recommended execution order
 
-### Community 103 - "001 — Decouple hero scroll motion from React renders"
+### Community 103 - "gallery/page.tsx"
+Cohesion: 0.33
+Nodes (6): GalleryPage(), Params, InfiniteGallery(), Props, getAllGalleryImages(), s3
+
+### Community 104 - "001 — Decouple hero scroll motion from React renders"
 Cohesion: 0.22
 Nodes (9): 001 — Decouple hero scroll motion from React renders, Accessibility, Boundaries, Performance considerations, Problem, Repo conventions to follow, Steps, Target (+1 more)
 
@@ -561,9 +562,13 @@ Nodes (4): 8.1 Fields, 8.2 Settings layout, 8.3 Buttons, 8. Forms and settings
 Cohesion: 0.50
 Nodes (3): extends, next/core-web-vitals, next/typescript
 
-### Community 130 - "003 — Shorten browse-card image hover motion"
+### Community 129 - "003 — Shorten browse-card image hover motion"
 Cohesion: 0.22
 Nodes (9): 003 — Shorten browse-card image hover motion, Accessibility, Boundaries, Performance considerations, Problem, Repo conventions to follow, Steps, Target (+1 more)
+
+### Community 130 - "SocialMediaFeed.tsx"
+Cohesion: 0.47
+Nodes (5): Props, SocialMediaFeed(), SocialMediaItem, StoryRail(), VideoCard()
 
 ## Ambiguous Edges - Review These
 - `PostgreSQL Architecture Description` → `Cloud SQL for MySQL`  [AMBIGUOUS]
@@ -571,22 +576,22 @@ Nodes (9): 003 — Shorten browse-card image hover motion, Accessibility, Bounda
 
 ## Knowledge Gaps
 - **25 isolated node(s):** `next/core-web-vitals`, `next/typescript`, `English and Kannada Routing`, `React Three Fiber Hero`, `SEO and Accessibility Foundation` (+20 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 682 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 684 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **42 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `next` connect `Admin Session and Auth Routes` to `next-intl`, `admin/layout.tsx`, `Localization and Destinations`, `TourCard.tsx`, `Frontend Auth API`, `Frontend Package Configuration`, `routing.ts`, `dependencies`, `[locale]/destinations/page.tsx`, `getPathname`, `tours-repository.ts`, `Tour Media Editing`, `lucide-react`, `GalleryMasonry.tsx`, `Social API Proxy`, `Frontend Typography`, `[id]/route.ts`, `verify-otp/route.ts`, `gallery/page.tsx`, `HeroSection.tsx`, `leads/page.tsx`?**
-  _High betweenness centrality (0.081) - this node is a cross-community bridge._
-- **Are the 15 inferred relationships involving `Tour` (e.g. with `get_tour()` and `update_status()`) actually correct?**
-  _`Tour` has 15 INFERRED edges - model-reasoned connections that need verification._
+- **Why does `next` connect `Admin Session and Auth Routes` to `tour/[slug]/page.tsx`, `getPathname`, `Localization and Destinations`, `SocialMediaFeed.tsx`, `GalleryMasonry.tsx`, `leads/route.ts`, `Frontend Auth API`, `Frontend Package Configuration`, `routing.ts`, `dependencies`, `getPathname`, `tours-repository.ts`, `fonts.ts`, `middleware.ts`, `[locale]/destinations/page.tsx`, `TourCard.tsx`, `Social API Proxy`, `[id]/route.ts`, `EditTourMedia.tsx`, `HeroSection.tsx`, `react`, `tours/page.tsx`, `gallery/page.tsx`, `leads/page.tsx`?**
+  _High betweenness centrality (0.077) - this node is a cross-community bridge._
+- **Are the 16 inferred relationships involving `Tour` (e.g. with `get_tour()` and `update_status()`) actually correct?**
+  _`Tour` has 16 INFERRED edges - model-reasoned connections that need verification._
 - **What connects `next/core-web-vitals`, `next/typescript`, `English and Kannada Routing` to the rest of the system?**
   _25 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `next-intl` be split into smaller, more focused modules?**
-  _Cohesion score 0.12701612903225806 - nodes in this community are weakly interconnected._
+- **Should `tour/[slug]/page.tsx` be split into smaller, more focused modules?**
+  _Cohesion score 0.12473118279569892 - nodes in this community are weakly interconnected._
 - **Why does `short()` connect `assets.mjs` to `6. Charts`?**
-  _High betweenness centrality (0.047) - this node is a cross-community bridge._
+  _High betweenness centrality (0.046) - this node is a cross-community bridge._
 - **Should `Project Guidance and Architecture` be split into smaller, more focused modules?**
   _Cohesion score 0.09333333333333334 - nodes in this community are weakly interconnected._
 

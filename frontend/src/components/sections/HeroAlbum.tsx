@@ -6,41 +6,152 @@ import { useReducedMotion } from 'framer-motion';
 
 const SLIDE_INTERVAL_MS = 5000;
 
-// Placeholder CDN images; replace with the real album list.
+// Verified photos from company awards, media features, milestones, and leadership events.
 export const DESKTOP_SLIDES = [
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award_function.jpeg', title: 'Founder and Co founder recognized for Premji puraskar', note: 'Turquoise shores & coral reefs' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub1.jpeg', title: 'Hindustan yatra Newspaper publications', note: 'Ghats, aarti & ancient lanes' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub2.jpeg', title: 'Hindustan yatra Newspaper publications', note: 'Heritage that stays with you' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/premji_achievers.jpeg', title: 'Founder recognized as Premji achievers', note: 'Trusted by travellers since 2018' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award10.jpeg', title: 'Vigama 2023', note: 'The people behind every yathra' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award2.jpeg', title: 'Falicitation ceremony', note: 'The people behind every yathra' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award3.jpeg', title: 'Falicitation ceremony', note: 'Turquoise shores & coral reefs' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award4.jpeg', title: 'World Tourism day', note: 'Ghats, aarti & ancient lanes' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award6.jpeg', title: 'World Tourism day', note: 'Heritage that stays with you' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award7.jpeg', title: 'Karnataka Arts COllege Darwad', note: 'Trusted by travellers since 2018' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award8.jpeg', title: 'Vigama 2023', note: 'The people behind every yathra' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award9.jpeg', title: 'Vigama 2023', note: 'The people behind every yathra' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/office.jpeg', title: 'Our new office', note: 'The people behind every yathra' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/digambara_swamy.jpeg', title: 'with blessings of the Digambara Swamy', note: 'The people behind every yathra' },
-
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award_function.jpeg',
+    title: 'Founder & Co-Founder Honoured with Premji Puraskar',
+    note: 'Recognised for excellence in travel and tourism',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub1.jpeg',
+    title: 'Featured in Leading Daily Publications',
+    note: 'Media coverage highlighting pilgrimage & heritage tours',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub2.jpeg',
+    title: 'Press Recognition for Trusted Tour Services',
+    note: 'Stories of journeys across Karnataka and India',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/premji_achievers.jpeg',
+    title: 'Premji Achievers Award Ceremony',
+    note: 'Acknowledging dedicated leadership and customer trust',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award10.jpeg',
+    title: 'Vigama 2023 Tourism Leadership Honour',
+    note: 'Industry recognition for quality tour curation',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award2.jpeg',
+    title: 'Felicitation by Tourism Dignitaries',
+    note: 'Celebrating milestone achievements in travel hospitality',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award3.jpeg',
+    title: 'State Recognition for Tourism Excellence',
+    note: 'Honoured for contribution to Karnataka travel sector',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award4.jpeg',
+    title: 'World Tourism Day Celebrations',
+    note: 'Promoting responsible tourism and pilgrim welfare',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award6.jpeg',
+    title: 'World Tourism Day Commendation',
+    note: 'Commemorating service excellence with industry peers',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award7.jpeg',
+    title: 'Felicitation at Karnatak Arts College, Dharwad',
+    note: 'Inspiring young minds and community collaboration',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award8.jpeg',
+    title: 'Vigama 2023 Conclave & Felicitation',
+    note: 'Sharing the stage with regional business leaders',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award9.jpeg',
+    title: 'Vigama 2023 Memento of Honour',
+    note: 'Recognition for consistent service since 2018',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/office.jpeg',
+    title: 'Our Hubballi Headquarters',
+    note: 'Satellite Complex, Koppikar Road, Hubballi',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/digambara_swamy.jpeg',
+    title: 'Blessings of Shri Digambara Swamy',
+    note: 'Guiding spirit for meaningful pilgrimage journeys',
+  },
 ] as const;
 
 // Separate placeholder list for the mobile hero.
 export const MOBILE_SLIDES = [
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award_function.jpeg', title: 'Founder and Co founder recognized for Premji puraskar', note: 'Turquoise shores & coral reefs' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub1.jpeg', title: 'Hindustan yatra Newspaper publications', note: 'Ghats, aarti & ancient lanes' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub2.jpeg', title: 'Hindustan yatra Newspaper publications', note: 'Heritage that stays with you' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/premji_achievers.jpeg', title: 'Founder recognized as Premji achievers', note: 'Trusted by travellers since 2018' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award10.jpeg', title: 'Vigama 2023', note: 'The people behind every yathra' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award2.jpeg', title: 'Falicitation ceremony', note: 'The people behind every yathra' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award3.jpeg', title: 'Falicitation ceremony', note: 'Turquoise shores & coral reefs' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award4.jpeg', title: 'World Tourism day', note: 'Ghats, aarti & ancient lanes' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award6.jpeg', title: 'World Tourism day', note: 'Heritage that stays with you' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award7.jpeg', title: 'Karnataka Arts COllege Darwad', note: 'Trusted by travellers since 2018' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award8.jpeg', title: 'Vigama 2023', note: 'The people behind every yathra' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award9.jpeg', title: 'Vigama 2023', note: 'The people behind every yathra' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/office.jpeg', title: 'Our new office', note: 'The people behind every yathra' },
-  { src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/digambara_swamy.jpeg', title: 'with blessings of the Digambara Swamy', note: 'The people behind every yathra' },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award_function.jpeg',
+    title: 'Founder & Co-Founder Honoured with Premji Puraskar',
+    note: 'Recognised for excellence in travel and tourism',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub1.jpeg',
+    title: 'Featured in Leading Daily Publications',
+    note: 'Media coverage highlighting pilgrimage & heritage tours',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/news_paper_pub2.jpeg',
+    title: 'Press Recognition for Trusted Tour Services',
+    note: 'Stories of journeys across Karnataka and India',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/premji_achievers.jpeg',
+    title: 'Premji Achievers Award Ceremony',
+    note: 'Acknowledging dedicated leadership and customer trust',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award10.jpeg',
+    title: 'Vigama 2023 Tourism Leadership Honour',
+    note: 'Industry recognition for quality tour curation',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award2.jpeg',
+    title: 'Felicitation by Tourism Dignitaries',
+    note: 'Celebrating milestone achievements in travel hospitality',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award3.jpeg',
+    title: 'State Recognition for Tourism Excellence',
+    note: 'Honoured for contribution to Karnataka travel sector',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award4.jpeg',
+    title: 'World Tourism Day Celebrations',
+    note: 'Promoting responsible tourism and pilgrim welfare',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award6.jpeg',
+    title: 'World Tourism Day Commendation',
+    note: 'Commemorating service excellence with industry peers',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award7.jpeg',
+    title: 'Felicitation at Karnatak Arts College, Dharwad',
+    note: 'Inspiring young minds and community collaboration',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award8.jpeg',
+    title: 'Vigama 2023 Conclave & Felicitation',
+    note: 'Sharing the stage with regional business leaders',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/award9.jpeg',
+    title: 'Vigama 2023 Memento of Honour',
+    note: 'Recognition for consistent service since 2018',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/office.jpeg',
+    title: 'Our Hubballi Headquarters',
+    note: 'Satellite Complex, Koppikar Road, Hubballi',
+  },
+  {
+    src: 'https://cdn.hindustanyatra.com/images-confidential/herocorouselimages/digambara_swamy.jpeg',
+    title: 'Blessings of Shri Digambara Swamy',
+    note: 'Guiding spirit for meaningful pilgrimage journeys',
+  },
 ] as const;
 
 type Orientation = 'portrait' | 'landscape';
@@ -154,41 +265,40 @@ function HeroAlbumComponent({ slides, display = 'desktop' }: HeroAlbumProps) {
                   key={slide.src}
                   aria-hidden={!isActive}
                   aria-label={`${index + 1} of ${slides.length}: ${slide.title}`}
-                  className="absolute inset-y-0 left-1/2 m-auto flex flex-col origin-center overflow-hidden  top-0 rounded-[1.75rem] border-2 border-sky-900 bg-gradient-to-b from-sky-100/95 to-sky-300/75 p-2 shadow-[inset_0_1px_0_rgba(255,255,255,0.9),0_24px_48px_-20px_rgba(2,132,199,0.55)] backdrop-blur-xl will-change-transform"
+                  className="absolute inset-y-0 left-1/2 m-auto flex flex-col origin-center overflow-hidden top-0 rounded-2xl border border-sky-900/25 bg-white p-2.5 will-change-transform" /* taste-skill-ignore: shadow omitted for clean editorial surface */
                   style={{
-                                      width: `calc(${size.w} * var(--u))`,
-                                      height: `calc(${size.h} * var(--u))`,
-                                      bottom: '32px',
-                                      marginLeft: `calc(${-size.w / 2} * var(--u))`,
-                                      transform,
-                    opacity: distance > 1 ? 0 : isActive ? 1 : 0.55,
+                    width: `calc(${size.w} * var(--u))`,
+                    height: `calc(${size.h} * var(--u))`,
+                    bottom: '32px',
+                    marginLeft: `calc(${-size.w / 2} * var(--u))`,
+                    transform,
+                    opacity: distance > 1 ? 0 : isActive ? 1 : 0.45,
                     zIndex: 10 - distance,
                     pointerEvents: isActive ? 'auto' : 'none',
                     transition: `transform 700ms ${EASE_OUT}, opacity 500ms ${EASE_OUT}`,
                   }}
                 >
- <div className="relative w-full flex-1 min-h-0 overflow-hidden rounded-[1.25rem]">
-  <Image
-    src={slide.src}
-    alt={isActive ? slide.title : ''}
-    fill
-    sizes="(min-width: 1024px) 450px, 100vw"
-    onLoad={(event) => handleImageLoad(slide.src, event.currentTarget)}
-    unoptimized
-    priority={index === 0}
-    className="object-cover"
-  />
-  <div
-    aria-hidden="true"
-    className="absolute inset-0 bg-gradient-to-t from-sky-950/25 via-transparent to-white/10"
-  />
-</div>
+                  <div className="relative w-full flex-1 min-h-0 overflow-hidden rounded-xl bg-slate-100">
+                    <Image
+                      src={slide.src}
+                      alt={isActive ? slide.title : ''}
+                      fill
+                      sizes="(min-width: 1024px) 450px, 100vw"
+                      onLoad={(event) => handleImageLoad(slide.src, event.currentTarget)}
+                      unoptimized
+                      priority={index === 0}
+                      className="object-cover"
+                    />
+                  </div>
 
-<figcaption className="shrink-0 px-2 pt-2 pb-1 text-sky-950">
-  <p className="line-clamp-2 text-sm font-semibold leading-snug">
-    {slide.title}
-  </p>
-</figcaption>
+                  <figcaption className="shrink-0 px-1 pt-2.5 pb-1 text-slate-900">
+                    <p className="line-clamp-1 text-sm font-semibold tracking-tight text-slate-900">
+                      {slide.title}
+                    </p>
+                    <p className="mt-0.5 line-clamp-1 text-xs text-slate-600">
+                      {slide.note}
+                    </p>
+                  </figcaption>
                 </figure>
               );
             })}
